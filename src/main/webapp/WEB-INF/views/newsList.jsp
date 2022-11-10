@@ -17,8 +17,8 @@
     <hr>
     <ul class="list-group">
 		<c:forEach var="news" items="${newslist}" varStatus="status">
-		  <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"><a href="news.nhn?action=getNews&aid=${news.aid}" class="text-decoration-none">[${status.count}] ${news.title}, ${news.regDate}</a>
-		  <a href="news.nhn?action=deleteNews&aid=${news.aid}"><span class="badge bg-secondary">&times;</span></a>
+		  <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"><a href="/news/getNews?aid=${news.aid}" class="text-decoration-none">[${status.count}] ${news.title}, ${news.regDate}</a>
+		  <a href="delete/${news.aid}"><span class="badge bg-secondary">&times;</span></a>
 		  </li>
 		</c:forEach> 
 	</ul>
@@ -38,7 +38,7 @@
 	<div class="collapse" id="addForm">
 	  <div class="card card-body">
 		<form method="post" 
-		      action="news/add" 
+		      action="/news/add" 
 		      enctype="multipart/form-data">
 			<label class="form-label">제목</label>
 			<input type="text" name="title" class="form-control">
