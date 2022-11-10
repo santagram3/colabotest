@@ -38,7 +38,7 @@
 	<div class="collapse" id="addForm">
 	  <div class="card card-body">
 		<form method="post" 
-		      action="/jwbook1/news.nhn?action=addNews" 
+		      action="news/add" 
 		      enctype="multipart/form-data">
 			<label class="form-label">제목</label>
 			<input type="text" name="title" class="form-control">

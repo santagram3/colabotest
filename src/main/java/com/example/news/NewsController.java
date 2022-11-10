@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,7 +39,6 @@ public class NewsController extends HttpServlet {
 	}
 
 	@PostMapping("/add")
-	
 	public String addNews(@ModelAttribute News news , Model m ,@RequestParam("file") MultipartFile file  ) {
 		
 		try {
@@ -62,40 +62,19 @@ public class NewsController extends HttpServlet {
 		
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	public String deleteNews(HttpServletRequest request) {
-		int aid = Integer.parseInt(request.getParameter("aid"));
-		try {
-			dao.delNews(aid);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			ctx.log("뉴스 삭제 과정에서 문제 발생!!");
-			request.setAttribute("error", "뉴스가 정상적으로 삭제되지 않았습니다!!");
-			return listNews(request);
-		}
-		return "redirect:/news.nhn?action=listNews";
-	}
 
-	public String listNews(HttpServletRequest request) {
-		List<News> list;
+	@GetMapping("/list")
+	public String listNews(Model m) {
+		
 		try {
-			list = dao.getAll();
-			request.setAttribute("newslist", list);
+			List<News> newslist = dao.getAll();
+			m.addAttribute("newslist",newslist);
 		} catch (Exception e) {
 			e.printStackTrace();
-			ctx.log("뉴스 목록 생성과정에서 문제발생!!!!!");
-			request.setAttribute("error", "뉴스 목록이 정상적으로 처리되지 않았습니다!!");
+			logger.info("뉴스 불러오기 과정에서 문제가 발생!");
+			m.addAttribute("error","뉴스가 정상적으로 불러오지 않았습니다.");
 		}
-
+		
 		return "/newsList.jsp";
 	}
 
@@ -106,7 +85,7 @@ public class NewsController extends HttpServlet {
 			request.setAttribute("news", n);
 		} catch (SQLException e) {
 			e.printStackTrace();
-			ctx.log("뉴스를 가져오는 과정에서 문제 발생!!");
+			
 			request.setAttribute("error", "뉴스를 정상적으로 가져오지 못했습니다!!");
 		}
 
@@ -114,19 +93,6 @@ public class NewsController extends HttpServlet {
 
 	}
 
-// multipart 헤더에서 파일이름 추출 
-	private String getFilename(Part part) {
-		String fileName = null;
-		// 파일이름이 들어있는 헤더 영역을 가지고 옴
-		String header = part.getHeader("content-disposition");
-		// part.getHeader -> form-data; name="img"; filename="사진5.jpg"
-		System.out.println("Header => " + header);
 
-		// 파일 이름이 들어있는 속성 부분의 시작위치를 가져와 쌍따옴표 사이의 값 부분만 가지고옴
-		int start = header.indexOf("filename=");
-		fileName = header.substring(start + 10, header.length() - 1);
-		ctx.log("파일명:" + fileName);
-		return fileName;
-	}
 
 }
