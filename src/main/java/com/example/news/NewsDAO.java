@@ -141,7 +141,7 @@ public void addNews(News n) throws Exception {
 		Connection conn = open();
 		List<Comment> commentlist = new ArrayList<>();
 		
-		String sql = "select commentAid,nickname,commentContent,commentDate from comments where aid=?";
+		String sql = "select commentAid,nickname,commentContent,commentDate from comments where aid=? order by commentDate";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, aid);
 		ResultSet rs = pstmt.executeQuery();
@@ -198,10 +198,10 @@ public void addNews(News n) throws Exception {
 		
 	}
 
-/*	public int getAidInComments(int commentAid) throws SQLException {
+	public int getAidInComments(int commentAid) throws SQLException {
 		Connection conn = open();
 		
-		int i=0;
+		Comment c = new Comment();
 		String sql = "select aid from comments where commentAid=?";
 	
 		PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -212,12 +212,26 @@ public void addNews(News n) throws Exception {
 		
 		try(conn; pstmt; rs) {
 			
-			i.setaid(rs.getInt("aid"));
-			
-			return i;
+			c.setaid(rs.getInt("aid"));
+			System.out.println(c.getaid());
+			return c.getaid();
 		}
 		
 	}
-	*/
+
+	public void updateComments(int commentAid, String nickname, String commentContent) throws SQLException {
+		Connection conn = open();
+		
+		String sql = "update comments set commentContent=?, commentDate=sysdate where commentAid=?";
+		
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		
+		try(conn; pstmt;) {
+			pstmt.setString(1, commentContent);
+			pstmt.setInt(2, commentAid);
+			pstmt.executeUpdate();
+		}
+	}
+	
 	
 }

@@ -100,6 +100,8 @@ public class NewsController extends HttpServlet {
 	      News n = null;
 	      Comment c = null;
 	      try {
+	    	  //aid값을 조건으로 News테이블과 Comment테이블에서 데이터 가져오고 
+	    	  //댓글은 리스트로 forEach 돌려서 띄울거니까 데이터들 List 배열로 담아서 commentlist에 저장
 	         n = dao.getNews(aid);
 	         c = dao.getComments(aid);
 	         List<Comment> commentlist = dao.getAllComment(aid);
@@ -108,7 +110,7 @@ public class NewsController extends HttpServlet {
 	         e.printStackTrace();
 	      }
 	      
-	      model.addAttribute("news",n);			//news정보 news에 담음
+	      model.addAttribute("news",n);			//news정보 news에 담음		-> news.title news.img라고 사용가능
 	      model.addAttribute("comments",c);		//댓글 정보 comments에 담음
 	      
 	      return "newsView";
@@ -162,8 +164,10 @@ public class NewsController extends HttpServlet {
 		
 	@PostMapping("/addcomment/{aid}")
 	public String addComment(@PathVariable int aid, @ModelAttribute Comment comment) {
+		//입력한 get~값들을 String으로 변환 -> dao에 보낼때 이쁘게 보내려고
 		String nickname = comment.getNickname();
 		String commentContent = comment.getCommentContent();
+		//데이터가 잘 담겼는지 확인
 		System.out.println("닉네임: "+nickname);
 		System.out.println("댓글 내용: "+commentContent);
 		try {
@@ -172,21 +176,33 @@ public class NewsController extends HttpServlet {
 			e.printStackTrace();
 	         logger.warn("댓글 등록 과정에서 문제 발생!!");
 		}
-	
+	//댓글 추가하고 원래 있던 페이지 게시글 번호로 리턴
 	return "redirect:/news/getNews?aid={aid}";
 }
 	
 	@GetMapping("/deleteComment/{commentAid}")
-	   public String deleteComments(@PathVariable int commentAid) {
+	   public String deleteComments(@PathVariable int commentAid) throws SQLException {
 		System.out.println("123123");
-	      try {
-//	    	 int aid = dao.getAidInComments(commentAid);
-	         dao.delComments(commentAid);
-	      }catch(Exception e) {
-	         e.printStackTrace();
-	         logger.warn("댓글 삭제 과정에서 문제 발생!!");
-	      }
-	      return "redirect:/news/getNews?aid={aid}";
+	      
+	    	int i = dao.getAidInComments(commentAid);
+	    	System.out.println("게시글번호: "+i);
+	        dao.delComments(commentAid);
+	     	        	      
+	      return "redirect:/news/getNews?aid="+i;
 	   }
+	
+	@PostMapping("updateComment/{commentAid}")
+		public String updateComments(@PathVariable int commentAid, @ModelAttribute Comment comment) throws SQLException {
+		
+		String nickname = comment.getNickname();
+		String commentContent = comment.getCommentContent();
+		
+		dao.updateComments(commentAid, nickname, commentContent);
+		
+		int i = dao.getAidInComments(commentAid);
+		System.out.println("게시글번호: "+i);
+		
+		return "redirect:/news/getNews?aid="+i;
+	}
 	
 }
