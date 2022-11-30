@@ -21,7 +21,8 @@
 			<label class="form-label">이미지</label>
 			<input type="file" name="file" class="form-control" value="${news.img}">
 			<label class="form-label">기사내용</label>
-			<input name="content" value='${news.content}'>
+			<textarea cols="50" rows="5" name="content" class="form-control">${news.content}</textarea>
+			
 			
 			<button type="submit" class="btn btn-success mt-3">저장</button>
 		</form>

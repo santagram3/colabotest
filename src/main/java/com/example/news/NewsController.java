@@ -24,10 +24,10 @@ import oracle.net.aso.c;
 
 @Controller
 @RequestMapping("/news")
-public class NewsController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+public class NewsController {
 
 	private NewsDAO dao;
+
 
 	// 이거 임포트 안되서 앞에 붙어버림
 	private final org.slf4j.Logger logger = LoggerFactory.getLogger(this.getClass());

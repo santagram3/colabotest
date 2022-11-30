@@ -31,7 +31,7 @@ public class NewsDAO {
 		Connection conn = open();
 		List<News> newsList = new ArrayList<>();
 		
-		String sql = "select aid, title, regdate as cdate from news";
+		String sql = "select aid, title, regdate as cdate from news order by regdate";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		ResultSet rs = pstmt.executeQuery();
 		
