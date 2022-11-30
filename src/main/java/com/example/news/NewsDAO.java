@@ -100,4 +100,124 @@ public void addNews(News n) throws Exception {
 			}
 		}
 	}
+
+	public void updateNews(int aid, String title, String img, String content) throws SQLException {
+		Connection conn = open();
+		System.out.println("121212");
+		System.out.println(title);
+		System.out.println(img);
+		System.out.println(content);
+		
+		String sql ="update news set title=?, img=?, regdate=sysdate, content=? where aid=?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		
+		try(conn; pstmt) {
+			pstmt.setString(1, title);
+			pstmt.setString(2, img);
+			pstmt.setString(3, content);
+			pstmt.setInt(4, aid);
+			pstmt.executeUpdate();
+		}
+		
+	}
+	
+
+	public void addCom(int aid, String nickname, String commentContent) throws SQLException {
+		Connection conn = open();
+		
+		String sql ="insert into comments(commentAid,nickname,commentContent,commentDate,aid)"
+				  + " values(com_seq.nextval,?,?,sysdate,?)";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		
+		try(conn; pstmt) {
+			pstmt.setString(1, nickname);
+			pstmt.setString(2, commentContent);
+			pstmt.setInt(3, aid);
+			pstmt.executeUpdate();
+		}		
+	}
+	
+	public List<Comment> getAllComment(int aid) throws Exception {
+		Connection conn = open();
+		List<Comment> commentlist = new ArrayList<>();
+		
+		String sql = "select commentAid,nickname,commentContent,commentDate from comments where aid=?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, aid);
+		ResultSet rs = pstmt.executeQuery();
+		
+		try(conn; pstmt; rs) {
+			while(rs.next()) {
+				Comment c = new Comment();
+				c.setCommentAid(rs.getInt("commentAid"));
+				c.setNickname(rs.getString("nickname"));
+				c.setCommentContent(rs.getString("commentContent"));
+				c.setCommentDate(rs.getString("commentDate")); 
+				
+				commentlist.add(c);
+			}
+			return commentlist;			
+		}
+	}
+
+	public Comment getComments(int aid) throws SQLException {
+		Connection conn = open();
+		
+		Comment c = new Comment();
+		String sql = "select commentAid, nickname, commentContent, commentDate, aid from comments where aid=?";
+	
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, aid);
+		ResultSet rs = pstmt.executeQuery();
+		
+		rs.next();
+		
+		try(conn; pstmt; rs) {
+			c.setCommentAid(rs.getInt("commentAid"));
+			c.setNickname(rs.getString("nickname"));
+			c.setCommentContent(rs.getString("commentContent"));
+			c.setCommentDate(rs.getString("commentDate"));
+			c.setaid(rs.getInt("aid"));
+			
+			return c;
+		}
+	}
+
+	public void delComments(int commentAid) throws SQLException {
+		Connection conn = open();
+		
+		String sql = "delete from comments where commentAid=?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		
+		try(conn; pstmt) {
+			pstmt.setInt(1, commentAid);
+			if(pstmt.executeUpdate() == 0) {
+				throw new SQLException("DB에러");
+			}
+		}
+		
+	}
+
+/*	public int getAidInComments(int commentAid) throws SQLException {
+		Connection conn = open();
+		
+		int i=0;
+		String sql = "select aid from comments where commentAid=?";
+	
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, commentAid);
+		ResultSet rs = pstmt.executeQuery();
+		
+		rs.next();
+		
+		try(conn; pstmt; rs) {
+			
+			i.setaid(rs.getInt("aid"));
+			
+			return i;
+		}
+		
+	}
+	*/
+	
 }

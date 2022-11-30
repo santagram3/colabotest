@@ -1,6 +1,7 @@
 package com.example.news;
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import oracle.net.aso.c;
 
 @Controller
 @RequestMapping("/news")
@@ -91,22 +94,22 @@ public class NewsController extends HttpServlet {
 	}
 
 	@GetMapping("/getNews")
-	   public String getNews(@RequestParam("aid") int aid, Model model) {
+	   public String getNews(@RequestParam("aid") int aid, Model model, Model model1, Model  model2) {
 		
 		///getNews?aid=123
 	      News n = null;
+	      Comment c = null;
 	      try {
 	         n = dao.getNews(aid);
-	         System.out.println("\n\n\n");
-	         System.out.println(n.getImg());
-	         System.out.println(n.getContent());
-	         System.out.println(n.getTitle());
-	         System.out.println("\n\n\n");
-	      } catch (SQLException e) {
+	         c = dao.getComments(aid);
+	         List<Comment> commentlist = dao.getAllComment(aid);
+	         model2.addAttribute("commentlist",commentlist);
+	      } catch (Exception e) {
 	         e.printStackTrace();
 	      }
 	      
-	      model.addAttribute("news",n);
+	      model.addAttribute("news",n);			//news정보 news에 담음
+	      model.addAttribute("comments",c);		//댓글 정보 comments에 담음
 	      
 	      return "newsView";
 
@@ -125,6 +128,65 @@ public class NewsController extends HttpServlet {
 	      }
 	      return "redirect:/news/list";
 	   }
+	
+	
+	@GetMapping("/update/{aid}")
+	   public String updatePage(@PathVariable int aid, Model m) throws SQLException {
+			News news= dao.getNews(aid);
+			
+			m.addAttribute("news" ,news);			
+	      return "newsUpdate";
+	   }
+	
+	@PostMapping("/update/{aid}")
+	public String updateNews(@PathVariable int aid, @ModelAttribute News news, @RequestParam("file") MultipartFile file) throws SQLException, IllegalStateException, IOException {
+		String title = news.getTitle();
+		String img = news.getImg();
+		String content = news.getContent();
+		File dest = new File(fdir+"/"+file.getOriginalFilename());
+		System.out.println("fdir : "+ fdir);
+		System.out.println("dest : "+ dest);
+		// 파일 저장 
+		file.transferTo(dest);
+		img ="/img/"+dest.getName();
+		try {			
+			dao.updateNews(aid, title, img, content);
+	      }catch(SQLException e) {
+	         e.printStackTrace();
+	         logger.warn("뉴스 수정 과정에서 문제 발생!!");
+	      }
+	      return "redirect:/news/list";
+	}
 
-
+	
+		
+	@PostMapping("/addcomment/{aid}")
+	public String addComment(@PathVariable int aid, @ModelAttribute Comment comment) {
+		String nickname = comment.getNickname();
+		String commentContent = comment.getCommentContent();
+		System.out.println("닉네임: "+nickname);
+		System.out.println("댓글 내용: "+commentContent);
+		try {
+			dao.addCom(aid, nickname, commentContent);
+		}catch(Exception e) {
+			e.printStackTrace();
+	         logger.warn("댓글 등록 과정에서 문제 발생!!");
+		}
+	
+	return "redirect:/news/getNews?aid={aid}";
+}
+	
+	@GetMapping("/deleteComment/{commentAid}")
+	   public String deleteComments(@PathVariable int commentAid) {
+		System.out.println("123123");
+	      try {
+//	    	 int aid = dao.getAidInComments(commentAid);
+	         dao.delComments(commentAid);
+	      }catch(Exception e) {
+	         e.printStackTrace();
+	         logger.warn("댓글 삭제 과정에서 문제 발생!!");
+	      }
+	      return "redirect:/news/getNews?aid={aid}";
+	   }
+	
 }
