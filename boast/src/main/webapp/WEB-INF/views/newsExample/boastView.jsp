@@ -23,8 +23,8 @@
 	    </div>
     </div>
     <hr>
-    <a href="javascript:history.back()" class="btn btn-primary"><< Back</a>
-    <a href="/boast/modify/${boast.bNoSP}" class="btn btn-primary"><< 수정하기</a>
+    <a href="javascript:history.back()" class="btn btn-primary"> Back</a>
+    <a href="/boast/modify/${boast.bNoSP}" class="btn btn-primary">수정하기</a>
     
     </div>
     </body>

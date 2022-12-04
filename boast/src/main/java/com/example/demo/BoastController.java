@@ -94,7 +94,7 @@ public class BoastController {
 	}
 
 	@GetMapping("/getBoast")
-	   public String getBoast(@RequestParam("bNoSP") int bNoSP, Model model, Model model1, Model  model2) {
+	   public String getBoast(@RequestParam("aid") int aid, Model model, Model model1, Model  model2) {
 		
 		//getNews?aid=123
 	      Boast b = null;
@@ -102,24 +102,24 @@ public class BoastController {
 	      try {
 	    	  //aid값을 조건으로 News테이블과 Comment테이블에서 데이터 가져오고 
 	    	  //댓글은 리스트로 forEach 돌려서 띄울거니까 데이터들 List 배열로 담아서 commentlist에 저장
-	         b = dao.getBoast(bNoSP);
-	         c = dao.getComments(bNoSP);
+	         b = dao.getBoast(aid);
+	         c = dao.getComments(aid);
 	         List<Comment> commentlist = dao.getAllComment(aid);
-	      //   model2.addAttribute("commentlist",commentlist);
+	         model2.addAttribute("commentlist",commentlist);
 	      } catch (Exception e) {
 	         e.printStackTrace();
 	      }
 	      
 	      model.addAttribute("boast",b);			//news정보 news에 담음		-> news.title news.img라고 사용가능
-	    //  model.addAttribute("comments",c);		//댓글 정보 comments에 담음
+	      model.addAttribute("comments",c);		//댓글 정보 comments에 담음
 	      
 	      return "boastView";
 
 	   }
-}
+
 	
 	@GetMapping("/delete/{bNoSP}")
-	   public String deleteNews(@PathVariable int bNoSP, Model m) {
+	   public String deleteBoast(@PathVariable int bNoSP, Model m) {
 	      // localhost:8989/news/delete/
 		System.out.println("123123");
 	      try {
@@ -133,32 +133,32 @@ public class BoastController {
 	   }
 	
 	
-	@GetMapping("/update/{aid}")
-	   public String updatePage(@PathVariable int aid, Model m) throws SQLException {
-			News news= dao.getNews(aid);
+	@GetMapping("/update/{bNoSP}")
+	   public String updatePage(@PathVariable int bNoSP, Model m) throws SQLException {
+			Boast boast= dao.getBoast(bNoSP);
 			
-			m.addAttribute("news" ,news);			
-	      return "newsUpdate";
+			m.addAttribute("boast" ,boast);			
+	      return "boastUpdate";
 	   }
 	
-	@PostMapping("/update/{aid}")
-	public String updateNews(@PathVariable int aid, @ModelAttribute News news, @RequestParam("file") MultipartFile file) throws SQLException, IllegalStateException, IOException {
-		String title = news.getTitle();
-		String img = news.getImg();
-		String content = news.getContent();
+	@PostMapping("/update/{bNoSP}")
+	public String updateNews(@PathVariable int bNoSP, @ModelAttribute Boast boast, @RequestParam("file") MultipartFile file) throws SQLException, IllegalStateException, IOException {
+		String bTitle = boast.getbTitle();
+		String bImage = boast.getbImage();
+		String bContent = boast.getbContent();
 		File dest = new File(fdir+"/"+file.getOriginalFilename());
 		System.out.println("fdir : "+ fdir);
 		System.out.println("dest : "+ dest);
 		// 파일 저장 
 		file.transferTo(dest);
-		img ="/img/"+dest.getName();
+		bImage ="/img/"+dest.getName();
 		try {			
-			dao.updateNews(aid, title, img, content);
+			dao.updateBoast(bNoSP, bTitle, bImage, bContent);
 	      }catch(SQLException e) {
 	         e.printStackTrace();
-	         logger.warn("뉴스 수정 과정에서 문제 발생!!");
+	         logger.warn("글 수정 과정에서 문제 발생!!");
 	      }
-	      return "redirect:/news/list";
+	      return "redirect:/boast/list";
 	}
 
 	
@@ -178,7 +178,7 @@ public class BoastController {
 	         logger.warn("댓글 등록 과정에서 문제 발생!!");
 		}
 	//댓글 추가하고 원래 있던 페이지 게시글 번호로 리턴
-	return "redirect:/news/getNews?aid={aid}";
+	return "redirect:/boast/getBoast?aid={aid}";
 }
 	
 	@GetMapping("/deleteComment/{commentAid}")
@@ -189,7 +189,7 @@ public class BoastController {
 	    	System.out.println("게시글번호: "+i);
 	        dao.delComments(commentAid);
 	     	        	      
-	      return "redirect:/news/getNews?aid="+i;
+	      return "redirect:/boast/getBoast?aid="+i;
 	   }
 	
 	@PostMapping("updateComment/{commentAid}")
@@ -203,7 +203,7 @@ public class BoastController {
 		int i = dao.getAidInComments(commentAid);
 		System.out.println("게시글번호: "+i);
 		
-		return "redirect:/news/getNews?aid="+i;
+		return "redirect:/boast/getBoast?aid="+i;
 	}
 	
 }

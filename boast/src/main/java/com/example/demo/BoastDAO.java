@@ -83,15 +83,15 @@ public void addBoast(Boast b) throws Exception {
 			pstmt.executeUpdate();
 		}
 	}
-/*	
-	public void delNews(int aid) throws SQLException {
+	
+	public void delBoast(int bNoSP) throws SQLException {
 		Connection conn = open();
 		
-		String sql = "delete from news where aid=?";
+		String sql = "delete from BoastTable where bNoSP=?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		
 		try(conn; pstmt) {
-			pstmt.setInt(1, aid);
+			pstmt.setInt(1, bNoSP);
 			// 삭제된 뉴스 기사가 없을 경우
 			if(pstmt.executeUpdate() == 0) {
 				throw new SQLException("DB에러");
@@ -99,27 +99,26 @@ public void addBoast(Boast b) throws Exception {
 		}
 	}
 
-	public void updateNews(int aid, String title, String img, String content) throws SQLException {
+	public void updateBoast(int bNoSP, String bTitle, String bImage, String bContent) throws SQLException {
 		Connection conn = open();
 		System.out.println("121212");
-		System.out.println(title);
-		System.out.println(img);
-		System.out.println(content);
+		System.out.println(bTitle);
+		System.out.println(bImage);
+		System.out.println(bContent);
 		
-		String sql ="update news set title=?, img=?, regdate=sysdate, content=? where aid=?";
+		String sql ="update BoastTable set bTitle=?, bImage=?, bDate=sysdate, bContent=? where bNoSP=?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		
 		try(conn; pstmt) {
-			pstmt.setString(1, title);
-			pstmt.setString(2, img);
-			pstmt.setString(3, content);
-			pstmt.setInt(4, aid);
+			pstmt.setString(1, bTitle);
+			pstmt.setString(2, bImage);
+			pstmt.setString(3, bContent);
+			pstmt.setInt(4, bNoSP);
 			pstmt.executeUpdate();
 		}
 		
 	}
 	
-*/
 	public void addCom(int aid, String nickname, String commentContent) throws SQLException {
 		Connection conn = open();
 		
