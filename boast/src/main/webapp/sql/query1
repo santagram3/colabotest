@@ -1,0 +1,4 @@
+select * from news;
+delete from news where aid=3;
+create sequence com_seq;
+select * from comments;
