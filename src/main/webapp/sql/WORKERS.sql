@@ -206,9 +206,6 @@ ADD CONSTRAINTS BoastImg_FK FOREIGN KEY (bImageNoF)--BoastImage의 bNoSP가 fore
 REFERENCES BoastTable(bNoSP);
    
 
-
-create sequence BoastReply_sequence;   
-   
 create TABLE BoastReply (
 
    bReplyNoSP NUMBER primary key , -- 댓글테이블 글번호
@@ -222,22 +219,18 @@ ALTER TABLE Reply
 ADD CONSTRAINTS bReply_FK FOREIGN KEY (bReplyNoF)--BoastTable의 bNoSP를 참조하는 foreign key bReplyNoF
 REFERENCES BoastTable(bNoSP);
 
-
 create TABLE BoastReplyReport(
-   
    bReplyReportNoS NUMBER NOT NULL,--댓글신고테이블의 글번호 -sequence
    bReplyReportNoF NUMBER NOT NULL,--댓글테이블의 글번호 -foreign
    bReplyNo NUMBER NOT NULL,--댓글번호
    bReplyWriter VARCHAR2(30) NOT NULL,--댓글작성자
    bReplyReportReporter VARCHAR2(30) NOT NULL,--댓글신고 작성자(신고자)
    bReplyReportContent CLOB NOT NULL--댓글신고사유
-
 );
    
 ALTER TABLE BoastReplyReport
 ADD CONSTRAINTS bReplyReport_FK FOREIGN KEY (bReplyReportNoF)--BoastReply의 bReplyNoSP를 참조하는 foreign key bReplyReportNoF
 REFERENCES BoastReply(bReplyNoSP);
-
 
 --drop table BoastTable;
 --drop table BoastReport;
