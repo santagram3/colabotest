@@ -94,17 +94,17 @@ public class BoastController {
 	}
 
 	@GetMapping("/getBoast")
-	   public String getBoast(@RequestParam("aid") int aid, Model model, Model model1, Model  model2) {
+	   public String getBoast(@RequestParam("bNoSP") int bNoSP, Model model, Model model1, Model  model2) {
 		
-		//getNews?aid=123
+		//getBoast?bNoSP=123
 	      Boast b = null;
 	      Comment c = null;
 	      try {
-	    	  //aid값을 조건으로 News테이블과 Comment테이블에서 데이터 가져오고 
+	    	  //aid값을 조건으로 Boast테이블과 Comment테이블에서 데이터 가져오고 
 	    	  //댓글은 리스트로 forEach 돌려서 띄울거니까 데이터들 List 배열로 담아서 commentlist에 저장
-	         b = dao.getBoast(aid);
-	         c = dao.getComments(aid);
-	         List<Comment> commentlist = dao.getAllComment(aid);
+	         b = dao.getBoast(bNoSP);
+	         //c = dao.getComments(aid);
+	         List<Comment> commentlist = dao.getAllComment(bNoSP);
 	         model2.addAttribute("commentlist",commentlist);
 	      } catch (Exception e) {
 	         e.printStackTrace();
@@ -116,7 +116,28 @@ public class BoastController {
 	      return "boastView";
 
 	   }
-
+	
+	
+		/*getboast 글번호 aid버전
+		 * @GetMapping("/getBoast") public String getBoast(@RequestParam("aid") int aid,
+		 * Model model, Model model1, Model model2) {
+		 * 
+		 * //getNews?aid=123 Boast b = null; Comment c = null; try { //aid값을 조건으로
+		 * News테이블과 Comment테이블에서 데이터 가져오고 //댓글은 리스트로 forEach 돌려서 띄울거니까 데이터들 List 배열로 담아서
+		 * commentlist에 저장 b = dao.getBoast(aid); c = dao.getComments(aid);
+		 * List<Comment> commentlist = dao.getAllComment(aid);
+		 * model2.addAttribute("commentlist",commentlist); } catch (Exception e) {
+		 * e.printStackTrace(); }
+		 * 
+		 * model.addAttribute("boast",b); //news정보 news에 담음 -> news.title news.img라고
+		 * 사용가능 model.addAttribute("comments",c); //댓글 정보 comments에 담음
+		 * 
+		 * return "boastView";
+		 * 
+		 * }
+		 */
+	
+	
 	
 	@GetMapping("/delete/{bNoSP}")
 	   public String deleteBoast(@PathVariable int bNoSP, Model m) {
@@ -129,19 +150,19 @@ public class BoastController {
 	         logger.warn("글 삭제 과정에서 문제 발생!!");
 	         m.addAttribute("error","글이 정상적으로 삭제되지 않았습니다!!");
 	      }
-	      return "redirect:/b/list";
+	      return "redirect:/boast/list";
 	   }
 	
 	
-	@GetMapping("/update/{bNoSP}")
+	@GetMapping("/modify/{bNoSP}")
 	   public String updatePage(@PathVariable int bNoSP, Model m) throws SQLException {
 			Boast boast= dao.getBoast(bNoSP);
 			
 			m.addAttribute("boast" ,boast);			
-	      return "boastUpdate";
+	      return "boastModify";
 	   }
 	
-	@PostMapping("/update/{bNoSP}")
+	@PostMapping("/modify/{bNoSP}")
 	public String updateNews(@PathVariable int bNoSP, @ModelAttribute Boast boast, @RequestParam("file") MultipartFile file) throws SQLException, IllegalStateException, IOException {
 		String bTitle = boast.getbTitle();
 		String bImage = boast.getbImage();

@@ -171,6 +171,24 @@ create table BoastTable(
    bDate DATE default sysdate NOT NULL--글작성일자
    );   
    
+
+create table comments(
+	commentAid number primary key,
+	nickname VARCHAR2(50) NOT NULL,
+	commentContent VARCHAR2(3000) NOT NULL,
+	commentDate date default sysdate,
+	aid number NOT NULL,
+	foreign key (aid) references news(aid) on delete cascade
+	
+);
+
+ALTER TABLE comments
+ADD CONSTRAINTS bcomments_FK FOREIGN KEY (aid)--BoastTable의 bNoSP를 참조하는 foreign key aid
+REFERENCES BoastTable(bNoSP);
+
+/** foreign key 할 때 BoastTable의  **/
+
+
 create TABLE BoastReport(
    bReportNoS NUMBER NOT NULL,--신고테이블글번호-sequence
    bReportNoF NUMBER NOT NULL,--게시판글번호-foreign
@@ -206,8 +224,6 @@ ADD CONSTRAINTS BoastImg_FK FOREIGN KEY (bImageNoF)--BoastImage의 bNoSP가 fore
 REFERENCES BoastTable(bNoSP);
    
 
-
-create sequence BoastReply_sequence;   
    
 create TABLE BoastReply (
 
@@ -218,7 +234,7 @@ create TABLE BoastReply (
    bReplyDate DATE default sysdate NOT NULL--댓글 작성일자
 );
 
-ALTER TABLE Reply
+ALTER TABLE BoastReply
 ADD CONSTRAINTS bReply_FK FOREIGN KEY (bReplyNoF)--BoastTable의 bNoSP를 참조하는 foreign key bReplyNoF
 REFERENCES BoastTable(bNoSP);
 
@@ -246,11 +262,14 @@ REFERENCES BoastReply(bReplyNoSP);
 --drop table BoastStar;
 --drop table BoastImage;
 
+select * from BoastTable
+select * from BoastImage
+select * from BoastStar
+select * from BoastReply
+select * from BoastReport
+select * from BoastReplyReport
 
-
-
-
-
+commit
 
 
 

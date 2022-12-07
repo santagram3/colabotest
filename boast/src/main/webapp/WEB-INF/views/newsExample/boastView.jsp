@@ -9,6 +9,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 <title>공부 자랑하기</title>
 </head>
+<header>
+<%@ include file ="../header/header.jsp" %>
+</header>
    <body>
    <div class="container w-75 mt-5 mx-auto">
     <h2>글 번호 : ${boast.bNoSP}</h2>

@@ -31,7 +31,7 @@ public class BoastDAO {
 		Connection conn = open();
 		List<Boast> newsList = new ArrayList<>();
 		
-		String sql = "select bNoSP, bTitle, bDate as cdate from BoastTable order by regdate";
+		String sql = "select bNoSP, bTitle, bDate as cdate from BoastTable order by bDate";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		ResultSet rs = pstmt.executeQuery();
 		
@@ -52,14 +52,14 @@ public class BoastDAO {
 		Connection conn = open();
 		
 		Boast b = new Boast();
-		String sql = "select bNoSP, bTitle, bImage, bDate as cdate from BoastTable where bNoSP=?";
+		String sql = "select bNoSP as aid, bTitle, bImage, bDate as cdate from BoastTable where bNoSP=?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		ResultSet rs = pstmt.executeQuery();
 		pstmt.setInt(1, bNoSP);
 		rs.next();
 		
 		try(conn; pstmt; rs) {
-			b.setbNoSP(rs.getInt("bNoSP"));
+			b.setbNoSP(rs.getInt("aid"));
 			b.setbTitle(rs.getString("bTitle"));
 			b.setbImage(rs.getString("bImage"));
 			b.setbDate(rs.getString("cdate"));
