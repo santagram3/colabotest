@@ -29,7 +29,7 @@ public class BoastDAO {
 	
 	public List<Boast> getAll() throws Exception {
 		Connection conn = open();
-		List<Boast> newsList = new ArrayList<>();
+		List<Boast> boastList = new ArrayList<>();
 		
 		String sql = "select bNoSP, bTitle, bDate as cdate from BoastTable order by bDate";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -42,9 +42,9 @@ public class BoastDAO {
 				b.setbTitle(rs.getString("bTitle"));
 				b.setbDate(rs.getString("cdate")); 
 				
-				newsList.add(b);
+				boastList.add(b);
 			}
-			return newsList;			
+			return boastList;			
 		}
 	}
 	
