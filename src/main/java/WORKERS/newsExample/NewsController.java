@@ -30,8 +30,7 @@ public class NewsController extends HttpServlet {
 	private final org.slf4j.Logger logger = LoggerFactory.getLogger(this.getClass());
 	//application.properties 에서 news.imgdir 를 가져오려면 
 	// @Value 어노테이션으로 가져온다 
-	@Value("${news.imgdir}")
-	String fdir;
+	String fdir = "news.imgdir=C:/JSPWorkSpace/FP_WORKERS/src/main/resources/static/img/" ;
 	
 	@Autowired
 	public NewsController(NewsDAO dao) {
