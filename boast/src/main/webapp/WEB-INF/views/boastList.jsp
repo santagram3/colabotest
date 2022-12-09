@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
@@ -17,23 +18,7 @@
    <div class="container w-75 mt-5 mx-auto">
     <h2>자랑글 목록</h2>
     <hr>
-    <ul class="list-group">
-		<c:forEach var="boast" items="${boastlist}" varStatus="status">
-		  <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-		  <a href="/boast/getBoast?bNoSP=${boast.bNoSP}" class="text-decoration-none">
-		 [${status.count}] ${boast.bTitle}, ${boast.bDate}</a>
-		  <a href="/boast/delete/${boast.bNoSP}"><span class="badge bg-secondary">&times;</span></a>
-		  </li>
-		</c:forEach> 
-	</ul>
-	<hr>
-	<c:if test="${error != null}">
-		<div class="alert alert-danger alert-dismissible fade show mt-3">
-				에러 발생: ${error}
-			<button type="button" class="btn-close" 
-			        data-bs-dismiss="alert"></button>
-		</div>
-	</c:if>
+   
 	<button class="btn btn-outline-info mb-3" type="button" 
 	        data-bs-toggle="collapse" 
 	        data-bs-target="#addForm" 

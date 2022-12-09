@@ -5,16 +5,16 @@ public class BoastDTO {
 	private int bNoSP;
 	private String bTitle;
 	private String bWriter;
-	private int bContent;
-	private int bDate;
-	private int bImage;
+	private String bContent;
+	private String bDate;
+	private String bImage;
 	
 	public BoastDTO() {
 		
 	}
 
 	
-	public BoastDTO(int bNoSP, String bTitle, String bWriter, int bContent, int bDate, int bImage) {
+	public BoastDTO(int bNoSP, String bTitle, String bWriter, String bContent, String bDate, String bImage) {
 		super();
 		this.bNoSP = bNoSP;
 		this.bTitle = bTitle;
@@ -48,27 +48,27 @@ public class BoastDTO {
 		this.bWriter = bWriter;
 	}
 
-	public int getbContent() {
+	public String getbContent() {
 		return bContent;
 	}
 
-	public void setbContent(int bContent) {
+	public void setbContent(String bContent) {
 		this.bContent = bContent;
 	}
 
-	public int getbDate() {
+	public String getbDate() {
 		return bDate;
 	}
 
-	public void setbDate(int bDate) {
+	public void setbDate(String bDate) {
 		this.bDate = bDate;
 	}
 
-	public int getbImage() {
+	public String getbImage() {
 		return bImage;
 	}
 
-	public void setbImage(int bImage) {
+	public void setbImage(String bImage) {
 		this.bImage = bImage;
 	}
 	

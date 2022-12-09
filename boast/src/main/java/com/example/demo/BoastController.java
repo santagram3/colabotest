@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-//import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServlet;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +41,7 @@ public class BoastController {
 	}
 
 	@PostMapping("/add")
-	public String addBoast(@ModelAttribute Boast boast , Model m ,@RequestParam("file") MultipartFile file  ) {
+	public String addBoast(@ModelAttribute BoastDTO boast , Model m ,@RequestParam("file") MultipartFile file  ) {
 		
 		System.out.println("\n==========1\n");
 		try {
@@ -66,7 +66,7 @@ public class BoastController {
 			System.out.println("fdir+dest.getName() : "+fdir+dest.getName());
 			System.out.println("dest.getName() : "+ dest.getName());
 			dao.addBoast(boast);
-		
+
 		} catch (Exception e) {
 			System.out.println("\n==========3\n");
 			e.printStackTrace();
@@ -82,8 +82,11 @@ public class BoastController {
 	public String listBoast(Model m) {
 			System.out.println("\n\n===================\n\n");
 		try {
-			List<Boast> boastlist = dao.getAll();
+			List<BoastDTO> boastlist = dao.getAll();
+			
 			m.addAttribute("boastlist",boastlist);
+			
+			System.out.println("\n\n===================A\n\n");
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.info("자랑글 불러오기 과정에서 문제가 발생!");
@@ -95,24 +98,29 @@ public class BoastController {
 
 	@GetMapping("/getBoast")
 	   public String getBoast(@RequestParam("bNoSP") int bNoSP, Model model, Model model1, Model  model2) {
-		
+		System.out.println("\n\n===================B\n\n");
 		//getBoast?bNoSP=123
-	      Boast b = null;
+	      BoastDTO b = null;
 	      Comment c = null;
 	      try {
 	    	  //aid값을 조건으로 Boast테이블과 Comment테이블에서 데이터 가져오고 
 	    	  //댓글은 리스트로 forEach 돌려서 띄울거니까 데이터들 List 배열로 담아서 commentlist에 저장
 	         b = dao.getBoast(bNoSP);
-	         //c = dao.getComments(aid);
+	         c = dao.getComments(bNoSP);
+	         System.out.println("\n\n===================C\n\n");
 	         List<Comment> commentlist = dao.getAllComment(bNoSP);
+	         System.out.println("\n\n===================D\n\n");
 	         model2.addAttribute("commentlist",commentlist);
+	         System.out.println("\n\n===================E\n\n");
 	      } catch (Exception e) {
 	         e.printStackTrace();
+	         
 	      }
-	      
+	      System.out.println("\n\n===================F\n\n");
 	      model.addAttribute("boast",b);			//news정보 news에 담음		-> news.title news.img라고 사용가능
+	      System.out.println("\n\n===================G\n\n");
 	      model.addAttribute("comments",c);		//댓글 정보 comments에 담음
-	      
+	      System.out.println("\n\n===================H\n\n");
 	      return "boastView";
 
 	   }
@@ -156,14 +164,14 @@ public class BoastController {
 	
 	@GetMapping("/modify/{bNoSP}")
 	   public String updatePage(@PathVariable int bNoSP, Model m) throws SQLException {
-			Boast boast= dao.getBoast(bNoSP);
+			BoastDTO boast= dao.getBoast(bNoSP);
 			
 			m.addAttribute("boast" ,boast);			
 	      return "boastModify";
 	   }
 	
 	@PostMapping("/modify/{bNoSP}")
-	public String updateNews(@PathVariable int bNoSP, @ModelAttribute Boast boast, @RequestParam("file") MultipartFile file) throws SQLException, IllegalStateException, IOException {
+	public String updateNews(@PathVariable int bNoSP, @ModelAttribute BoastDTO boast, @RequestParam("file") MultipartFile file) throws SQLException, IllegalStateException, IOException {
 		String bTitle = boast.getbTitle();
 		String bImage = boast.getbImage();
 		String bContent = boast.getbContent();

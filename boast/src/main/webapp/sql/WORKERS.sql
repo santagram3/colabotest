@@ -214,13 +214,18 @@ REFERENCES BoastTable(bNoSP);
    
 -- 자랑글 이미지 
 CREATE TABLE BoastImage(
-   bImageNoF NUMBER NOT NULL,--BoastTable의 글번호-foreign
+   bNoSP NUMBER NOT NULL,--BoastTable의 글번호-foreign
    bImage CLOB NOT NULL--이미지이름
    
 )
-   
+
+alter table BoastImage drop column bImageNoF
+alter table BoastImage add bNoSP Number NOT NULL;
+select * from BoastImage
+
+
 ALTER TABLE BoastImage
-ADD CONSTRAINTS BoastImg_FK FOREIGN KEY (bImageNoF)--BoastImage의 bNoSP가 foreign키 
+ADD CONSTRAINTS BoastImage_FK FOREIGN KEY (bNoSP)--BoastImage의 bNoSP가 foreign키 
 REFERENCES BoastTable(bNoSP);
    
 
@@ -268,7 +273,7 @@ select * from BoastStar
 select * from BoastReply
 select * from BoastReport
 select * from BoastReplyReport
-
+select * from COMMENTS
 commit
 
 

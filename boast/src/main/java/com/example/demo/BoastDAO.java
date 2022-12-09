@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Component // 빈등록 하는거에요 
 public class BoastDAO {
-	final String JDBC_DRIVER = "oracle.jdbc.driver.OracleDriver";
+	final String JDBC_DRIVER = "oracle.jdbc.driver.OracleDriver";	
 	final String JDBC_URL = "jdbc:oracle:thin:@localhost:1521:xe";
 	
 	// DB 연결을 가져오는 메서드, DBCP를 사용하는 것이 좋음
@@ -27,20 +27,20 @@ public class BoastDAO {
 		return conn;
 	}
 	
-	public List<Boast> getAll() throws Exception {
+	public List<BoastDTO> getAll() throws Exception {
 		Connection conn = open();
-		List<Boast> boastList = new ArrayList<>();
+		List<BoastDTO> boastList = new ArrayList<>();
 		
-		String sql = "select bNoSP, bTitle, bDate as cdate from BoastTable order by bDate";
+		String sql = "select bNoSP, bTitle, bDate from BoastTable order by bDate";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		ResultSet rs = pstmt.executeQuery();
 		
 		try(conn; pstmt; rs) {
 			while(rs.next()) {
-				Boast b = new Boast();
+				BoastDTO b = new BoastDTO();
 				b.setbNoSP(rs.getInt("bNoSP"));
 				b.setbTitle(rs.getString("bTitle"));
-				b.setbDate(rs.getString("cdate")); 
+				b.setbDate(rs.getString("bDate")); 
 				
 				boastList.add(b);
 			}
@@ -48,39 +48,64 @@ public class BoastDAO {
 		}
 	}
 	
-	public Boast getBoast(int bNoSP) throws SQLException {
+	public BoastDTO getBoast(int bNoSP) throws SQLException {
 		Connection conn = open();
 		
-		Boast b = new Boast();
-		String sql = "select bNoSP as aid, bTitle, bImage, bDate as cdate from BoastTable where bNoSP=?";
+		BoastDTO b = new BoastDTO();
+		String sql = "select bNoSP, bTitle, bImage, bDate from BoastTable where bNoSP=?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		ResultSet rs = pstmt.executeQuery();
 		pstmt.setInt(1, bNoSP);
 		rs.next();
 		
 		try(conn; pstmt; rs) {
-			b.setbNoSP(rs.getInt("aid"));
+			b.setbNoSP(rs.getInt("bNoSP"));
 			b.setbTitle(rs.getString("bTitle"));
 			b.setbImage(rs.getString("bImage"));
-			b.setbDate(rs.getString("cdate"));
+			b.setbDate(rs.getString("bDate"));
 			b.setbContent(rs.getString("bContent"));
 			pstmt.executeQuery();
 			return b;
 		}
 	}
 	
-public void addBoast(Boast b) throws Exception {
+public void addBoast(BoastDTO b) throws Exception {
 		Connection conn = open();
+		String getSeq = "select BoastTable_sequence.nextval from dual";
 		
-		String sql ="insert into news(bNoSP,bTitle,bimage,bDate,bContent) "
-				  + " values(new_seq.nextval,?,?,sysdate,?)";
+		PreparedStatement pstmt0 = conn.prepareStatement(getSeq);
+		ResultSet rs = pstmt0.executeQuery();
+		rs.next();
+		int seq = rs.getInt(1);
+		System.out.println("\n==========x\n");
+		
+		
+		String sql ="insert into BoastTable(bNoSP,bTitle,bDate,bContent) "
+				  + " values(?,?,sysdate,?)";
+		
+		String sql2 ="insert into BoastImage(bNoSP,bImage) "
+				  + " values(?,?)";
+		System.out.println("\n==========y\n");
 		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1,seq);
+		pstmt.setString(2,b.getbTitle());
+		pstmt.setString(3,b.getbContent());
+		System.out.println("\n==========z\n");
+		PreparedStatement pstmt2 = conn.prepareStatement(sql2);
+		pstmt2.setInt(1,seq);
+		pstmt2.setString(2,b.getbImage());
 		
-		try(conn; pstmt) {
-			pstmt.setString(1, b.getbTitle());
-			pstmt.setString(2, b.getbImage());
+		
+		System.out.println("\n==========w\n");
+		try(conn; pstmt; pstmt2) {
+			pstmt.setInt(1, b.getbNoSP());
+			pstmt.setString(2, b.getbTitle());
 			pstmt.setString(3, b.getbContent());
+			pstmt2.setInt(1, b.getbNoSP());
+			pstmt2.setString(2, b.getbImage());
+			
 			pstmt.executeUpdate();
+			pstmt2.executeUpdate();
 		}
 	}
 	
