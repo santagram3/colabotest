@@ -13,7 +13,6 @@ import org.springframework.context.annotation.Configuration;
 
 
 @Configuration
-
 public class DataBaseConfig {
 	
 	@Value("${spring.datasource.driver-class-name}")  // 1
@@ -28,12 +27,11 @@ public class DataBaseConfig {
 		@Bean
 		public DataSource dataSource() {
 			HikariConfig hikariConfig = new HikariConfig();
-			
 			hikariConfig.setDriverClassName(driver);
 			hikariConfig.setJdbcUrl(url);
 			hikariConfig.setUsername(username);
 			hikariConfig.setPassword(password);
-
+			
 			return new HikariDataSource(hikariConfig); // 4
 	    }
 

@@ -5,7 +5,7 @@
      
 <mapper namespace="WORKERS.mypage.repository.UserMapper">
  
-    <resultMap id="user"  type="WORKERS.mypage.model.User">
+    <resultMap id="user" type="WORKERS.mypage.model.User">
         <result property="userEmail"  column="userEmail" /> 
         <result property="userPw" column="userPw"/>   
         <result property="nickName" column="nickName"/>      

@@ -43,8 +43,8 @@ public class MyPageController {
 		System.out.println("user.getSelfIntroduce() = "+user.getSelfIntroduce());
 		
 		// 아이디 중복 체크 ! 
-		//String id = userService.findUserIdService(user.getUserEmail());
-		//if(id==null) {}
+		String id = userService.findUserIdService(user.getUserEmail());
+		if(id==null) {}
 		
 		// 비밀번호 확인 ! 
 		
