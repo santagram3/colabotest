@@ -2,6 +2,7 @@ package WORKERS.mypage.model;
 
 import java.sql.Date;
 
+
 public class User {
 	
 	private String userEmail;

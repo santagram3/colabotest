@@ -67,19 +67,22 @@
 			<artifactId>jstl</artifactId>
 		</dependency>
 		
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+		<dependency>
+  		  <groupId>org.projectlombok</groupId>
+   		  <artifactId>lombok</artifactId>
+   		  <version>1.18.24</version>
+   		  <scope>provided</scope>
+		</dependency>
 
 
 
-	<dependency>
-		<groupId>com.example</groupId>
-		<artifactId>news_study</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-	</dependency>
-	<dependency>
-		<groupId>com.example</groupId>
-		<artifactId>workers</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-	</dependency>
+
+		<dependency>
+			<groupId>com.example</groupId>
+			<artifactId>news_study</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<build>

@@ -46,7 +46,12 @@ create table userTable(
    userGrade varchar2(10) default '1', -- 1은 일반유저 2는 구인공고 하는사람 3은 어드민  
    selfIntroduce varchar2(200) not null -- 간단한 자기소개 100자로 작성 하시오  
 )
+
+
 select * from userTable;
+select count(*) from userTable where userEmail = '123@123';
+
+
 -- 프로필 이미지 - 프사 
 create table profileImg (
    userEmail varchar2(30) not null , -- 아이디겸 이메일 

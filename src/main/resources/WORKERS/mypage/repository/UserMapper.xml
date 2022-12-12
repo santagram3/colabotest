@@ -2,10 +2,10 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- 
+     
 <mapper namespace="WORKERS.mypage.repository.UserMapper">
  
-    <resultMap id="result" type="WORKERS.mypage.model.User">
+    <resultMap id="user"  type="WORKERS.mypage.model.User">
         <result property="userEmail"  column="userEmail" /> 
         <result property="userPw" column="userPw"/>   
         <result property="nickName" column="nickName"/>      
@@ -13,24 +13,26 @@
         <result property="userGrade" column="userGrade"/>   
         <result property="selfIntroduce" column="selfIntroduce"/>  
     </resultMap>
+
+    <!-- 유저 아이디 가져오기! -->
+    <select id="findUserId" parameterType="string" >
+    	select userEmail from userTable where userEamil = #{userEmail}
+    </select>
    
- 
-    <select id="getAll" resultMap="result">
-        select aid, title, regdate as cdate from news
+ 	<!-- 그 사람 정보 가져옴  -->
+    <select id="findUser" resultMap="user">
+        select * from userTable where userEmail = #{userEmail}
     </select>
- 
-    <select id="getNews" parameterType="int" resultMap="result">
-       select aid, title, img, regdate as cdate, content 
-         from news where aid=#{aid}
-    </select>
- 
+    
+    <!-- 이메일로 검색하면 1 or 2 나옴  -->
+    <select id="findUserInt" resultType="int">
+ 		select count(*) from userTable where userEmail = #{userEmail}
+ 	</select>
+    
+ 	<!-- 회원가입 시켜줌 -->
     <insert id="signUpUser">
        insert into userTable(userEmail,userPw,nickName,birthday,selfIntroduce)
 	    values(#{userEmail},#{userPw},#{nickName},#{birthday},#{selfIntroduce})
     </insert>
- 
-<!--  
-    <delete id="delete" parameterType="int">
-       delete from news where aid=#{aid}
-    </delete> -->
+
 </mapper>
