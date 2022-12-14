@@ -11,6 +11,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="/resources/header/css/header.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -79,7 +80,7 @@
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static1" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <!-- 로그인 폼 태그 -->
-        <form action="/login/result" method="post">
+        <form action="/login/login" method="post">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">

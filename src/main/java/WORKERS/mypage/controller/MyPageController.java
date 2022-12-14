@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import WORKERS.mypage.model.User;
 import WORKERS.mypage.repository.UserMapper;
@@ -16,13 +17,10 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequestMapping("/mypage")
+@RequiredArgsConstructor
 public class MyPageController {
 	
-	private UserService userService;
-
-	public MyPageController(UserService userService) {
-		this.userService = userService ;
-	}
+	private final UserService userService;
 	
 	
 	@GetMapping("/UserSignUp")
@@ -33,7 +31,7 @@ public class MyPageController {
 	}
 	
 	@PostMapping("/UserSignUp")
-	public ResponseEntity<String> PostUserSignUp1(@ModelAttribute User user) throws Exception {
+	public String PostUserSignUp1(@ModelAttribute User user) throws Exception {
 		// 값이 잘 들어오는지 확인! 
 		System.out.println("=========================================");
 		System.out.println("user.getUserEmail() = "+user.getUserEmail());
@@ -42,39 +40,33 @@ public class MyPageController {
 		System.out.println("user.getNickName() = "+user.getBirthday());
 		System.out.println("user.getSelfIntroduce() = "+user.getSelfIntroduce());
 		
-		// 아이디 중복 체크 ! 
-		String id = userService.findUserIdService(user.getUserEmail());
-		if(id==null) {}
-		
-		// 비밀번호 확인 ! 
-		
-		// db에 등록 
-		
-		// 회원가입 완료 .. // 로그인 화면으로 이동 
-		
-		System.out.println("/PostUserSignUp");
-		// 서비스 안에 메소드 사용 ! 
+		// 아이디가 없다는 뜻 // 그러므로 회원 가입 가능 ! 
 		userService.trimInfo(user);
 		
-		return null ;
+		// 가입 했으니까 돌아가 ! 
+		return "/header/header" ;
 	}
 	
-	@PostMapping("/UserSignUp1")
-	public String PostUserSignUp(@ModelAttribute User user) throws Exception {
+	// 이메일 있는지 없는지 비동기로 처리하는 메소드 
+	@GetMapping("/eamilcheck") 
+	@ResponseBody // 비동기 처리하는 어노테이션 
+	public String eamilcheck(String userEmail) throws Exception {
+		System.out.println("/eamilcheck");
+		System.out.println(userEmail);
+		System.out.println("=============");
+		String id = userService.findUserIdService(userEmail);
 		
-		System.out.println("user.getUserEmail() = "+user.getUserEmail());
-		System.out.println("user.getUserPw() = "+user.getUserPw());
-		System.out.println("user.getUserEmail() = "+user.getNickName());
-		System.out.println("user.getNickName() = "+user.getBirthday());
-		System.out.println("user.getSelfIntroduce() = "+user.getSelfIntroduce());
+		System.out.println( "id = " + id);
 		
-		
-		System.out.println("/PostUserSignUp");
-		// 서비스 안에 메소드 사용 ! 
-		userService.trimInfo(user);
-		
-		return "redirect:/test/header";
+		if(userEmail.equals(id)) {
+			// 아이디가 있다는 뜻  
+			return "double";
+		}else {
+			return "onlyone"; 
+		}
+	
 	}
+	
 	
 	
 	@GetMapping("/CompanySignUp1")
