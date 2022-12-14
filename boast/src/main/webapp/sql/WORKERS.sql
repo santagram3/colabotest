@@ -159,18 +159,25 @@ select * from CompanyPostingImg ; --00
 create sequence BoastTable_sequence;
 create sequence BoastReport_sequence;
 create sequence BoastReply_sequence;  
+create sequence BoastImage_sequence;
 
 
--- 공부 자랑 글 테이블 
-create table BoastTable(
-   
-   bNoSP NUMBER PRIMARY KEY,--글번호 시퀀스
-   bTitle VARCHAR2(100) NOT NULL,--글제목
-   bWriter VARCHAR2(30) NOT NULL,--글작성자 -usertable의 userEmail과 같은 값
-   bContent CLOB NOT NULL,--글내용 / 이미지는 BoastImg이미지테이블참조
-   bDate DATE default sysdate NOT NULL--글작성일자
-   );   
-   
+drop table BoastTable;
+drop table BoastReport;
+drop table BoastReply;
+drop table BoastReplyReport;
+drop table BoastStar;
+drop table BoastImage;
+drop table comments;
+
+select * from BoastTable
+select * from BoastImage
+select * from BoastStar
+select * from BoastReply
+select * from BoastReport
+select * from BoastReplyReport
+select * from COMMENTS
+commit
 
 create table comments(
 	commentAid number primary key,
@@ -189,6 +196,22 @@ REFERENCES BoastTable(bNoSP);
 /** foreign key 할 때 BoastTable의  **/
 
 
+-- 공부 자랑 글 테이블 
+create table BoastTable(
+   
+   bNoSP NUMBER PRIMARY KEY,--글번호 시퀀스
+   bTitle VARCHAR2(100) NOT NULL,--글제목
+   bWriter VARCHAR2(50) NOT NULL,--글작성자 -usertable의 userEmail과 같은 값
+   bContent CLOB NOT NULL,--글내용 / 이미지는 BoastImg이미지테이블참조
+   bDate DATE default sysdate NOT NULL--글작성일자
+   );  
+   commit
+alter table BoastTable modify bWriter varchar2(50);
+   
+ALTER TABLE BoastTable
+ADD CONSTRAINTS bWriter_FK FOREIGN KEY (bWriter)--BoastTable의 bNoSP를 참조하는 foreign key bWriter
+REFERENCES userTable(userEmail);
+
 create TABLE BoastReport(
    bReportNoS NUMBER NOT NULL,--신고테이블글번호-sequence
    bReportNoF NUMBER NOT NULL,--게시판글번호-foreign
@@ -197,7 +220,9 @@ create TABLE BoastReport(
    bReportContent CLOB NOT NULL--신고테이블의 신고내용
 
 );
-   
+
+alter table BoastReport modify bWriter varchar2(50);
+
 ALTER TABLE BoastReport
 ADD CONSTRAINTS bReport_FK FOREIGN KEY (bReportNoF)--BoastTable의 bNoSP를 참조하는 foreign key bReportNoF
 REFERENCES BoastTable(bNoSP);
@@ -215,8 +240,8 @@ REFERENCES BoastTable(bNoSP);
 -- 자랑글 이미지 
 CREATE TABLE BoastImage(
    bNoSP NUMBER NOT NULL,--BoastTable의 글번호-foreign
-   bImage CLOB NOT NULL--이미지이름
-   
+   bImage CLOB NOT NULL,--이미지이름 
+   bImaseSeq NUMBER NOT NULL
 )
 
 alter table BoastImage drop column bImageNoF
@@ -238,6 +263,7 @@ create TABLE BoastReply (
    bReplyContent CLOB NOT NULL, -- 댓글 내용 
    bReplyDate DATE default sysdate NOT NULL--댓글 작성일자
 );
+alter table BoastReply modify bReplyWriter varchar2(50);
 
 ALTER TABLE BoastReply
 ADD CONSTRAINTS bReply_FK FOREIGN KEY (bReplyNoF)--BoastTable의 bNoSP를 참조하는 foreign key bReplyNoF
@@ -254,27 +280,13 @@ create TABLE BoastReplyReport(
    bReplyReportContent CLOB NOT NULL--댓글신고사유
 
 );
-   
+alter table BoastReplyReport modify bReplyWriter varchar2(50);
+alter table BoastReplyReport modify bReplyReportReporter varchar2(50);
+
 ALTER TABLE BoastReplyReport
 ADD CONSTRAINTS bReplyReport_FK FOREIGN KEY (bReplyReportNoF)--BoastReply의 bReplyNoSP를 참조하는 foreign key bReplyReportNoF
 REFERENCES BoastReply(bReplyNoSP);
 
-
---drop table BoastTable;
---drop table BoastReport;
---drop table BoastReply;
---drop table BoastReplyReport;
---drop table BoastStar;
---drop table BoastImage;
-
-select * from BoastTable
-select * from BoastImage
-select * from BoastStar
-select * from BoastReply
-select * from BoastReport
-select * from BoastReplyReport
-select * from COMMENTS
-commit
 
 
 

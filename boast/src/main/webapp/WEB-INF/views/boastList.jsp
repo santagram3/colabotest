@@ -31,6 +31,7 @@
 		      enctype="multipart/form-data">
 			<label class="form-label">제목</label>
 			<input type="text" name="bTitle" class="form-control">
+			<!-- <input type="hidden" name="bWriter" value="jjy"> -->
 			<label class="form-label">이미지</label>
 			<input type="file" name="file" class="form-control">
 			<label class="form-label">글내용</label>

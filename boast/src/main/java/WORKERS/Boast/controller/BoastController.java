@@ -1,11 +1,9 @@
-package com.example.demo;
+package WORKERS.Boast.controller;
 
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-
-import javax.servlet.http.HttpServlet;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +18,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import WORKERS.Boast.dto.BoastDTO;
+import WORKERS.Boast.mapper.BoastMapper;
+import WORKERS.Boast.model.Boast;
+
 //import oracle.net.aso.c;
 
 @Controller
 @RequestMapping("/boast")
 public class BoastController {
 
-	private BoastDAO dao;
+	private BoastMapper boastMapper;
 
 
 	// 이거 임포트 안되서 앞에 붙어버림
@@ -36,12 +38,12 @@ public class BoastController {
 	String fdir;
 	
 	@Autowired
-	public BoastController(BoastDAO dao) {
-		this.dao=dao;
+	public BoastController(BoastMapper boastMapper) {
+		this.boastMapper=boastMapper;
 	}
 
 	@PostMapping("/add")
-	public String addBoast(@ModelAttribute BoastDTO boast , Model m ,@RequestParam("file") MultipartFile file  ) {
+	public String addBoast(@ModelAttribute Boast boast , Model m ,@RequestParam("file") MultipartFile file  ) {
 		
 		System.out.println("\n==========1\n");
 		try {
@@ -56,7 +58,7 @@ public class BoastController {
 			// 1번 
 			//news.setImg(fdir+dest.getName());
 			// 2번 
-			boast.setbImage("/img/"+dest.getName()); // 이게 정답 .. 
+		//	boast.setbImage("/img/"+dest.getName()); // 이게 정답 .. 
 			// 3번 
 			//news.setImg("img/"+dest.getName());
 			// 3번 
@@ -65,7 +67,7 @@ public class BoastController {
 			//news.setImg(fdir+dest.getName());
 			System.out.println("fdir+dest.getName() : "+fdir+dest.getName());
 			System.out.println("dest.getName() : "+ dest.getName());
-			dao.addBoast(boast);
+		//	boastMapper.BoastMapper(boast);
 
 		} catch (Exception e) {
 			System.out.println("\n==========3\n");
@@ -79,23 +81,29 @@ public class BoastController {
 
 
 	@GetMapping("/list")
-	public String listBoast(Model m) {
-			System.out.println("\n\n===================\n\n");
-		try {
-			List<BoastDTO> boastlist = dao.getAll();
+	public String listBoast(Model m) throws Exception {
 			
+	
+		try {	
+
+			System.out.println("\n\n===================A1\n\n");
+			List<BoastDTO> boastlist = boastMapper.getAll();
+
+			System.out.println("\n\n===================A2\n\n");
 			m.addAttribute("boastlist",boastlist);
 			
-			System.out.println("\n\n===================A\n\n");
-		} catch (Exception e) {
-			e.printStackTrace();
-			logger.info("자랑글 불러오기 과정에서 문제가 발생!");
-			m.addAttribute("error","자랑글이 정상적으로 불러오지 않았습니다.");
-		}
+			System.out.println("\n\n===================A3\n\n");
+	} catch (Exception e) {
+		e.printStackTrace();
+		logger.info("자랑글 불러오기 과정에서 문제가 발생!");
+		m.addAttribute("error","자랑글이 정상적으로 불러오지 않았습니다.");
+	}
+	
 		
 		return "boastList";//boastList jsp를 의미
 	}
-
+}
+/*
 	@GetMapping("/getBoast")
 	   public String getBoast(@RequestParam("bNoSP") int bNoSP, Model model, Model model1, Model  model2) {
 		System.out.println("\n\n===================B\n\n");
@@ -146,7 +154,7 @@ public class BoastController {
 		 */
 	
 	
-	
+/*
 	@GetMapping("/delete/{bNoSP}")
 	   public String deleteBoast(@PathVariable int bNoSP, Model m) {
 	      // localhost:8989/news/delete/
@@ -171,7 +179,7 @@ public class BoastController {
 	   }
 	
 	@PostMapping("/modify/{bNoSP}")
-	public String updateNews(@PathVariable int bNoSP, @ModelAttribute BoastDTO boast, @RequestParam("file") MultipartFile file) throws SQLException, IllegalStateException, IOException {
+	public String updateBoast(@PathVariable int bNoSP, @ModelAttribute BoastDTO boast, @RequestParam("file") MultipartFile file) throws SQLException, IllegalStateException, IOException {
 		String bTitle = boast.getbTitle();
 		String bImage = boast.getbImage();
 		String bContent = boast.getbContent();
@@ -236,4 +244,4 @@ public class BoastController {
 	}
 	
 }
-	
+*/
