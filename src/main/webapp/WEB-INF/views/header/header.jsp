@@ -38,6 +38,12 @@
                     </button>
                 </div>
             </c:if>
+            <c:if test="${loginUser != null}">
+                <div>
+                    <a href="">${loginUser.nickName}님 환영합니다.</a>
+                    <a href="">로그아웃 하기</a>
+                </div>
+            </c:if>
         </div>
     </div>
 
@@ -96,8 +102,8 @@
                         <div class="mb-3 row">
                             <label for="staticEmail" class="col-sm-2 col-form-label">userEmail</label>
                             <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext" id="staticEmail"
-                                    value="workers@workers.com" name="userEmail">
+                                <input type="text" class="form-control-plaintext" id="staticEmail"
+                                 placeholder="workers@workers.com" name="userEmail">
                             </div>
                         </div>
                         <div class="mb-3 row">

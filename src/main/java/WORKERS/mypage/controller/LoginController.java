@@ -31,22 +31,23 @@ public class LoginController {
 		
 	String answer =	userService.loginSessionService(loginDTO, session);
 	
+	
 	if(answer =="loginSuccess") {
 		System.out.println("loginSuccess");
 		// 로그인 성공 
 		model.addAttribute(answer,"loginSuccess"); 
-		return "/header/header";
+		return "redirect:/test/header";
 	}else if(answer =="pwFail") {
 		
 		// 비밀번호 틀림 
 		System.out.println("pwFail");
 		model.addAttribute(answer,"pwFail"); 
-		return "/header/header";
+		return "redirect:/test/header";
 	}else {
 		// 아이디 없음 ! 
 		System.out.println("noId");
 		model.addAttribute(answer,"noId"); 
-		return "/header/header";
+		return "redirect:/test/header";
 		}
 	}
 	

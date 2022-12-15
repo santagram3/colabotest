@@ -63,7 +63,7 @@ public class UserService {
 	 
 	 // 찾은 유저가 있다면 ? 
 	 if(user !=null) {
-		 
+		 System.out.println("x");
 		 // 비밀번호 비교 해야지 비교해서 맞으면 ?  
 		 if(loginDTO.getUserPw().equals(userMapper.findPw(loginEmail))) {
 			 session.setAttribute("loginUser", user);
@@ -73,6 +73,7 @@ public class UserService {
 		 }
 		 return "pwFail";
 	 } else {
+		 System.out.println("y");
 		 // 아이디 없음 
 		 return "noId"; 
 	 }
