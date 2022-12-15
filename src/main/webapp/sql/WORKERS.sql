@@ -36,7 +36,6 @@ drop table companyUser ;
 drop table qnaReport ;
 drop table qReplyReport ; 
 
-
 -- 사용자 테이블 
 create table userTable(
    userEmail varchar2(50) not null primary key , -- 아이디겸 이메일 

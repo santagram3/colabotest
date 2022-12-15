@@ -4,6 +4,7 @@
 <%-- <c:set var="path" value="${pageContext.request.contextPath}"/> --%>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,20 +25,23 @@
                 <a href="">공부 자랑하기</a>
                 <a href="">스터디 구하기</a>
             </div>
-            <div class="menuRight">
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                    로그인
-                </button>
-                     <!-- Button trigger modal -->
-                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <c:if test="${loginUser == null}">
+                <div class="menuRight">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#staticBackdrop">
+                        로그인
+                    </button>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         회원가입 버튼
                     </button>
-            </div>
+                </div>
+            </c:if>
         </div>
     </div>
 
-    
+
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -51,7 +55,8 @@
                     <button type="button" class="btn btn-outline-info" onclick="CompanySignUp1()">기업회원 가입하기</button>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="MainPage()">뒤로가기</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        onclick="MainPage()">뒤로가기</button>
                 </div>
             </div>
         </div>
@@ -61,21 +66,21 @@
     <script>
         function UserSignUp() {
             console.log("======/mypage/UserSignUp==============");
-            location.href="/mypage/UserSignUp";
+            location.href = "/mypage/UserSignUp";
         }
 
         function CompanySignUp1() {
             alert("/mypage/CompanySignUp1 눌렸다");
             console.log("=========/mypage/CompanySignUp1===========");
-            location.href="/mypage/CompanySignUp1";
+            location.href = "/mypage/CompanySignUp1";
         }
 
         function MainPage() {
-            location.href="/test/header";
+            location.href = "/test/header";
         }
     </script>
 
-   
+
     <!-- 로그인 Modal -->
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static1" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -88,10 +93,19 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <label for="email">userEmail</label>
-                        <input type="text" name="userEmail"><br>
-                        <label for="password">userPw</label>
-                        <input type="password" name="userPw">
+                        <div class="mb-3 row">
+                            <label for="staticEmail" class="col-sm-2 col-form-label">userEmail</label>
+                            <div class="col-sm-10">
+                                <input type="text" readonly class="form-control-plaintext" id="staticEmail"
+                                    value="workers@workers.com" name="userEmail">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">userPassword</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="inputPassword" name="userPw">
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn bn-secondary" data-bs-dismiss="modal">뒤로 가기</button>
