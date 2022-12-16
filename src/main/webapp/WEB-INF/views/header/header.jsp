@@ -21,7 +21,7 @@
         <div class="headerMenu">
             <div class="menuLeft">
                 <a href="">Q & A</a>
-                <a href="">구인공고</a>
+                <a href="/jobposting/list">구인공고</a>
                 <a href="">공부 자랑하기</a>
                 <a href="">스터디 구하기</a>
             </div>

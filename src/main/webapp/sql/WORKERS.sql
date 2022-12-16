@@ -152,6 +152,9 @@ create table CompanyPostingTable(
 	cAddress varchar2(50) not null  -- 회사 주소 
 )
 select * from CompanyPostingTable; --00 
+create sequence CompanyPostingTable_sequence;
+
+insert into CompanyPostingTable values (1,'1번구인공고','작성자1','첫번째구인공고입니다.',sysdate,'2022-12-31','서울시');
 
 -- 구인공고 이미지 
 create table CompanyPostingImg (

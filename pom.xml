@@ -76,13 +76,6 @@
 		</dependency>
 
 
-
-
-		<dependency>
-			<groupId>com.example</groupId>
-			<artifactId>news_study</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
 	</dependencies>
 
 	<build>
