@@ -54,6 +54,12 @@ public class CompanyPosting {
 		this.cAddress = cAddress;
 	}
 	
+	@Override
+	public String toString() {
+		return "CompanyPosting [cno=" + cno + ", cTitle=" + cTitle + ", cWriter=" + cWriter + ", cContent=" + cContent
+				+ ", cDate=" + cDate + ", cDueDate=" + cDueDate + ", cAddress=" + cAddress + "]";
+	}
+	
 	
 
 }

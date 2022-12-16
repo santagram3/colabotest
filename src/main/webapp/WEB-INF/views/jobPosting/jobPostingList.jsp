@@ -161,14 +161,15 @@ pageEncoding="UTF-8"%>
 			
 			<!-- 구인공고 리스트 제목/내용에 '작성일 12월12일 ~ 마감일 12월13일' 띄울 것 같아요. 뭘 올리지..?  -->
 					<ol class="list-group list-group-numbered">
-					<c:forEach var="job" items="${jobpostinglist}" varStatus="status"></c:forEach>
+					<c:forEach var="jp" items="${jobpostinglist}" varStatus="status">
 					  <li class="list-group-item d-flex justify-content-between align-items-start">
 					    <div class="ms-2 me-auto">
-					      <div class="fw-bold">제목</div>
-					      어떤 내용
+					      <a href = "">${status.count}, ${jp.cTitle}, ${jp.cWriter},</a>
+					      ${jp.cDate}, ${jp.cDueDate}
 					    </div>
 					    <span class="badge bg-primary rounded-pill">채용중</span>
 					  </li>
+					  </c:forEach>
 					 </ol>
 			
 	<!--

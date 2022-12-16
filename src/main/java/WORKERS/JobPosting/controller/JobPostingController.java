@@ -2,6 +2,7 @@ package WORKERS.JobPosting.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +22,8 @@ import lombok.RequiredArgsConstructor;
 public class JobPostingController {
 	
 	//구인공고 서비스 호출
-	JobPostingService jobpostingservice = new JobPostingService();
+	@Autowired
+	private JobPostingService jobpostingservice;// = new JobPostingService();
 	
 	//구인공고 리스트
 	@GetMapping("/list")
@@ -33,8 +35,8 @@ public class JobPostingController {
 		List<CompanyPosting> jobpostinglist = jobpostingservice.getJobPostingList();
 		System.out.println("1");
 		model.addAttribute("jobpostinglist",jobpostinglist);
-		System.out.println("2");
-		return "/jobPosting/aaa";
+		System.out.println(jobpostinglist.toString());
+		return "/jobPosting/jobPostingList";
 	}
 	
 	//구인공고 등록
