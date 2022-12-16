@@ -11,6 +11,8 @@ public interface JobPostingMapper {
 	
 	// id = JobPostingList
 	List<CompanyPosting> JobPostingList() throws Exception;
+
+	void AddJobPosting() throws Exception;
 	
 
 

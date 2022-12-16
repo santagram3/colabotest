@@ -21,7 +21,7 @@ public class JobPostingService {
 	private JobPostingMapper jobPostingMapper;
 
 	public List<CompanyPosting> getJobPostingList() throws Exception{
-		System.out.println("서비스 도착");
+		System.out.println("list 서비스 도착");
 		
 //		List<CompanyPosting> jpl = new ArrayList<>();
 //		jpl = jobPostingMapper.JobPostingList();
@@ -30,6 +30,12 @@ public class JobPostingService {
 		//mapper 호출해서 가져온 리스트를 리턴
 		
 		return jpl;
+		
+	}
+
+	public void addJobPosting() throws Exception {
+		System.out.println("add 서비스 도착");
+		jobPostingMapper.AddJobPosting();
 		
 	}
 

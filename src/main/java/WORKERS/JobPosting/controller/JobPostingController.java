@@ -41,8 +41,10 @@ public class JobPostingController {
 	
 	//구인공고 등록
 	@PostMapping("/add")
-	public String JobPostingAdd(@ModelAttribute CompanyPosting companyposting) {
+	public String JobPostingAdd(@ModelAttribute CompanyPosting companyposting) throws Exception {
 		System.out.println("구인공고를 등록");
+		
+		jobpostingservice.addJobPosting();
 		
 		return "redirect:/jobposting/list";
 	}

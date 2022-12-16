@@ -6,7 +6,7 @@
 <mapper namespace="WORKERS.JobPosting.repository.JobPostingMapper">
  
     <resultMap id="jobposting" type="WORKERS.JobPosting.model.CompanyPosting">
-        <result property="cno"  column="cno" /> 
+        <result property="cno"  column="cno"/> 
         <result property="cTitle" column="cTitle"/>   
         <result property="cWriter" column="cWriter"/>      
         <result property="cContent" column="cContent"/>   
@@ -20,6 +20,9 @@
     	select * from CompanyPostingTable order by cDate
     </select>
    
- 	
+ 	<select id="AddJobPosting" resultMap="jobposting">
+ 		insert into CompanyPostingTable (cno,cTitle,cWriter,cContent,cDate,cDueDate,cAddress )
+ 		values (CompanyPostingTable_sequence.nextval,#{cTitle},#{cWriter},#{cContent},sysdate,#{cDueDate},#{cAddress},)
+ 	</select>
 
 </mapper>
