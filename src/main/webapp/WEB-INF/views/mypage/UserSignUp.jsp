@@ -110,8 +110,6 @@ pageEncoding="UTF-8"%>
                 $('.signUpForm').submit;
             }
         });
-
-
         
     </script>
 
