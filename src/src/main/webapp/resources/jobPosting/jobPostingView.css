@@ -1,0 +1,87 @@
+
+@import url(/resources/reset.css);
+
+
+#headerBox{
+    border: skyblue solid 1px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+#headerBox  .headerMenu{
+    width: 100%;
+    display: flex;
+    /* 가로로 배치하겠다  */
+    flex-direction: row;
+    /* 양옆으로 붙어라 */
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+#headerBox  .headerMenu .menuLeft{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: nowrap;
+    flex-grow: 7;
+}
+#headerBox  .headerMenu .menuRight{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: nowrap;
+    flex-grow: 3;
+}
+
+/* 내용 영역 */
+#contentsBox {
+	margin: 0 auto; /* 화면 중앙에 배치 */
+	height: 1000px;
+	background-color: white; 
+	
+}
+#contentsBox .position{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: nowrap;
+}
+
+#contentsBox .container-md{ 
+	background-color: #ffffff; 
+	width: 900px;
+	height: 700px;
+	border: #ECECEC solid 1px ;
+	
+} 
+
+#contentsBox .container-md2{ 
+	background-color: #ffffff; 
+	width: 300px;
+	height: 700px;
+	border: #ECECEC solid 1px ;
+	
+} 
+
+
+h2{
+	font-family: 'Dongle', sans-serif;
+	font-size: 20px;
+	font-weight: 800;
+
+}
+
+a:link{
+	text-decoration: none;
+}
+a:visited{
+	text-decoration: none;
+}
+
+a:active{
+	text-decoration: none;
+}
+a:hover{
+	text-decoration: none;
+}
+
