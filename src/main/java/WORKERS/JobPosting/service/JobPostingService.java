@@ -1,20 +1,31 @@
 package WORKERS.JobPosting.service;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import WORKERS.JobPosting.model.CompanyPosting;
 import WORKERS.JobPosting.repository.JobPostingMapper;
+import lombok.RequiredArgsConstructor;
 
+
+@Service
+@Transactional
+@RequiredArgsConstructor
 public class JobPostingService {
 	
-	JobPostingMapper jobpostingmapper;
+	JobPostingMapper jobPostingMapper;
 
-	public List<CompanyPosting> jobPostingList() throws Exception{
+	public List<CompanyPosting> getJobPostingList() throws Exception{
 		System.out.println("서비스 도착");
 		
-		List<CompanyPosting> jobpostinglist = jobpostingmapper.JobPostingList();
+		List<CompanyPosting> jpl = new ArrayList<>();
+		jpl = jobPostingMapper.JobPostingList();
 		//mapper 호출해서 가져온 리스트를 리턴
-		return jobpostinglist;
+		
+		return jpl;
 		
 	}
 
