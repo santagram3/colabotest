@@ -68,9 +68,11 @@ public class JobPostingController {
 	}
 	
 	
-	@GetMapping("/view")
-	public String JobPostingView(@PathVariable int cno) throws Exception {
-		jobpostingservice.viewJobPosting(cno);
+	@GetMapping("/view/{cno}")
+	public String JobPostingView(@PathVariable int cno, Model model) throws Exception {
+		CompanyPosting cp = jobpostingservice.viewJobPosting(cno);
+		model.addAttribute("cp",cp);
+		System.out.println(cp.toString());
 		
 		return "/jobPosting/jobPostingView";
 	}

@@ -33,7 +33,7 @@
  	
  	<!-- view 페이지 -->
  	<select id="ViewJobPosting" resultMap="jobposting">
- 		select * from CompanyPostingTable
+ 		select * from CompanyPostingTable where cno = #{cno}
  	</select>
 
 </mapper>

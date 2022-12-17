@@ -45,10 +45,13 @@ public class JobPostingService {
 		
 	}
 
-	public void viewJobPosting(int cno) throws Exception {
+	public CompanyPosting viewJobPosting(int cno) throws Exception {
 		System.out.println("view 서비스 도착");
-		jobPostingMapper.ViewJobPosting(cno);
 		
+		CompanyPosting c = new CompanyPosting();
+		c= jobPostingMapper.ViewJobPosting(cno);
+		
+		return c;
 	}
 
 }
