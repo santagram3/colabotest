@@ -87,7 +87,7 @@ public class BoastController {
 		try {	
 
 			System.out.println("\n\n===================A1\n\n");
-			List<BoastDTO> boastlist = boastMapper.getAll();
+			List<BoastDTO> boastlist = boastMapper.getList();
 
 			System.out.println("\n\n===================A2\n\n");
 			m.addAttribute("boastlist",boastlist);

@@ -13,12 +13,10 @@ import WORKERS.Boast.model.Boast;
 @Mapper
 
 public interface BoastMapper {
-
+	public List<BoastDTO> getList() throws Exception;
 	boolean insertBoast(Boast boast) throws Exception;
 	
-	public List<BoastDTO> getAllBoast()	;
 	
-	public List<BoastDTO> getAll()	;
 	
 	
 }

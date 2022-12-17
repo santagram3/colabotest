@@ -2,7 +2,8 @@ select * from BOASTTABLE
 update BoastTable set bWriter = 'jjy' where bNoSP=1
 delete from BoastTable where bWriter = 'jjy'
 COMMIT
-ALTER table BoastImage RENAME COLUMN bImaseSeq TO bImageSeq;
+
+ALTER table BoastImage RENAME COLUMN bImageSeq TO bImageSeq;
 
 insert into BoastTable(bNoSP,bTitle,bContent,bDate,bWriter) values('1','A','A',sysdate,'yoonjjy@hanmail.net');
 insert into userTable(userEmail,userPw,nickName,birthday,userGrade,selfIntroduce) values('yoonjjy@hanmail.net','tlvus20:5','gunit','19931022','1','friendinneedfriendindeed')
