@@ -17,6 +17,8 @@ public interface JobPostingMapper {
 	void DeleteJobPosting(int cno) throws Exception;
 
 	CompanyPosting ViewJobPosting(int cno) throws Exception;
+
+	void ModifyJobPosting(CompanyPosting companyposting) throws Exception;
 	
 
 

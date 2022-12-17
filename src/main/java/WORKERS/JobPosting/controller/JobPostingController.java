@@ -60,6 +60,7 @@ public class JobPostingController {
 		return "redirect:/jobposting/list";
 	}
 	
+	//구인공고 삭제
 	@GetMapping("/delete/{cno}")
 	public String JobPostingDelete(@PathVariable int cno) throws Exception {
 		jobpostingservice.deleteJobPosting(cno);
@@ -67,7 +68,7 @@ public class JobPostingController {
 		return "redirect:/jobposting/list";
 	}
 	
-	
+	//구인공고 상세정보
 	@GetMapping("/view/{cno}")
 	public String JobPostingView(@PathVariable int cno, Model model) throws Exception {
 		CompanyPosting cp = jobpostingservice.viewJobPosting(cno);
@@ -75,6 +76,23 @@ public class JobPostingController {
 		System.out.println(cp.toString());
 		
 		return "/jobPosting/jobPostingView";
+	}
+	
+	//구인공고 수정
+	@GetMapping("/modifyForm/{cno}")
+	public String JobPostingModifyForm(@PathVariable int cno, Model model) throws Exception {
+		CompanyPosting cp = jobpostingservice.viewJobPosting(cno);
+		model.addAttribute("cp",cp);
+		System.out.println(cp.toString());
+		
+		return "/jobPosting/jobPostingModify";
+	}
+	
+	@PostMapping("/modifyForm/modify/{cno}")
+	public String JobPostingModify(@PathVariable int cno, @ModelAttribute CompanyPosting companyposting) throws Exception {
+		jobpostingservice.modifyJobPosting(companyposting);
+		
+		return "redirect:/jobposting/view/"+cno;
 	}
 
 }

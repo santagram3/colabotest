@@ -18,8 +18,8 @@ pageEncoding="UTF-8"%>
 
 
 	<div class="card border-success" mb-3" style="max-width: 60rem;">
-		<form action="/jobposting/modify/${jobs.cno}" method="post" enctype="multipart/form-data">
-
+		<form action="modify/${cp.cno}" method="post" enctype="multipart/form-data">
+<%-- modify/${cp.cno} --%>
 		
 		<div class="p-3 bg-success bg-opacity-10 rounded-end">
 		구인공고 수정 페이지
@@ -29,18 +29,18 @@ pageEncoding="UTF-8"%>
 	 	<div id = "boardForm">
 				<div class="mb-4">
   				<label class="form-label">제목</label>
-  				<input type="text" class="form-control" name="cTitle">
+  				<input type="text" class="form-control" name="cTitle" value="${cp.cTitle}">
 				</div>
 				
 				<div class="mb-4">
   				<label class="form-label">작성자</label>
-  				<input type="text" class="form-control" name="cWriter">
+  				<input type="text" class="form-control" name="cWriter" value="${cp.cWriter}">
 				</div>
 				
 								
 				<div class="mb-4">
   				<label class="form-label">마감일</label>
-  				<input type="date" class="form-control" name="cDueDate">
+  				<input type="date" class="form-control" name="cDueDate" value="${cp.cDueDate}">
 				</div>
 				
 <!-- 				<div class="mb-4">
@@ -51,12 +51,12 @@ pageEncoding="UTF-8"%>
 
 				<div class="mb-4">
   				<label class="form-label">내용</label>
-  				<textarea class="form-control" name="cContent"></textarea>
+  				<textarea class="form-control" name="cContent">${cp.cContent}</textarea>
 				</div>
 
 				<div class="mb-4">
   				<label class="form-label">주소</label>
-  				<input type="text" class="form-control" name="cAddress">
+  				<input type="text" class="form-control" name="cAddress" value="${cp.cAddress}">
 				</div>
 						
 				<button type="submit" class="btn btn-success mt-3 col-md-6 offset-md-3">

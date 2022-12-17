@@ -54,4 +54,10 @@ public class JobPostingService {
 		return c;
 	}
 
+	public void modifyJobPosting(CompanyPosting companyposting) throws Exception {
+		System.out.println("modify 서비스 도착");
+		jobPostingMapper.ModifyJobPosting(companyposting);
+		
+	}
+
 }

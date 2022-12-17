@@ -35,5 +35,11 @@
  	<select id="ViewJobPosting" resultMap="jobposting">
  		select * from CompanyPostingTable where cno = #{cno}
  	</select>
+ 	
+ 	<!-- 수정 -->
+ 	<select id="ModifyJobPosting" resultMap="jobposting">
+ 		update CompanyPostingTable set cTitle=#{cTitle}, cWriter=#{cWriter},cContent=#{cContent},
+ 										 cDueDate=#{cDueDate}, cAddress=#{cAddress} where cno = #{cno}
+ 	</select>
 
 </mapper>
