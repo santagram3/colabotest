@@ -12,7 +12,11 @@ public interface JobPostingMapper {
 	// id = JobPostingList
 	List<CompanyPosting> JobPostingList() throws Exception;
 
-	void AddJobPosting() throws Exception;
+	void AddJobPosting( CompanyPosting companyposting) throws Exception;
+
+	void DeleteJobPosting(int cno) throws Exception;
+
+	void ViewJobPosting(int cno) throws Exception;
 	
 
 

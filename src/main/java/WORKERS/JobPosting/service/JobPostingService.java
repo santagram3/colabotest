@@ -33,9 +33,21 @@ public class JobPostingService {
 		
 	}
 
-	public void addJobPosting() throws Exception {
+	public void addJobPosting(CompanyPosting companyposting) throws Exception {
 		System.out.println("add 서비스 도착");
-		jobPostingMapper.AddJobPosting();
+		jobPostingMapper.AddJobPosting(companyposting);
+		
+	}
+
+	public void deleteJobPosting(int cno) throws Exception {
+		System.out.println("delete 서비스 도착");
+		jobPostingMapper.DeleteJobPosting(cno);
+		
+	}
+
+	public void viewJobPosting(int cno) throws Exception {
+		System.out.println("view 서비스 도착");
+		jobPostingMapper.ViewJobPosting(cno);
 		
 	}
 

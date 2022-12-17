@@ -20,9 +20,20 @@
     	select * from CompanyPostingTable order by cDate
     </select>
    
+    <!-- 추가 -->
  	<select id="AddJobPosting" resultMap="jobposting">
- 		insert into CompanyPostingTable (cno,cTitle,cWriter,cContent,cDate,cDueDate,cAddress )
- 		values (CompanyPostingTable_sequence.nextval,#{cTitle},#{cWriter},#{cContent},sysdate,#{cDueDate},#{cAddress},)
+ 		insert into CompanyPostingTable
+ 		values (CompanyPostingTable_sequence.nextval,#{cTitle},#{cWriter},#{cContent},sysdate,#{cDueDate},#{cAddress})
+ 	</select>
+ 	
+	<!-- 삭제 -->
+ 	<select id="DeleteJobPosting" resultMap="jobposting">
+ 		delete from CompanyPostingTable where cno = #{cno}
+ 	</select>
+ 	
+ 	<!-- view 페이지 -->
+ 	<select id="ViewJobPosting" resultMap="jobposting">
+ 		select * from CompanyPostingTable
  	</select>
 
 </mapper>

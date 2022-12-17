@@ -8,8 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import WORKERS.JobPosting.model.CompanyPosting;
 import WORKERS.JobPosting.service.JobPostingService;
@@ -29,7 +32,6 @@ public class JobPostingController {
 	@GetMapping("/list")
 	public String JobPostingList(Model model) throws Exception {
 		System.out.println("구인공고 리스트");
-//		List<CompanyPosting> jobpostinglist = null;
 		
 		//리스트 뽑아오기 위해 Service 호출
 		List<CompanyPosting> jobpostinglist = jobpostingservice.getJobPostingList();
@@ -39,14 +41,38 @@ public class JobPostingController {
 		return "/jobPosting/jobPostingList";
 	}
 	
+	
 	//구인공고 등록
+	@GetMapping("/addForm")
+	public String JobPostingAddForm() {		
+		return "/jobPosting/jobPostingAdd";
+	}
+	
+
 	@PostMapping("/add")
 	public String JobPostingAdd(@ModelAttribute CompanyPosting companyposting) throws Exception {
 		System.out.println("구인공고를 등록");
+//		companyposting.getcDueDate();
+		jobpostingservice.addJobPosting(companyposting);
+		System.out.println(companyposting.toString());
 		
-		jobpostingservice.addJobPosting();
 		
 		return "redirect:/jobposting/list";
+	}
+	
+	@GetMapping("/delete/{cno}")
+	public String JobPostingDelete(@PathVariable int cno) throws Exception {
+		jobpostingservice.deleteJobPosting(cno);
+		
+		return "redirect:/jobposting/list";
+	}
+	
+	
+	@GetMapping("/view")
+	public String JobPostingView(@PathVariable int cno) throws Exception {
+		jobpostingservice.viewJobPosting(cno);
+		
+		return "/jobPosting/jobPostingView";
 	}
 
 }

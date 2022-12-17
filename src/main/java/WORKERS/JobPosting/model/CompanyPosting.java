@@ -1,6 +1,6 @@
 package WORKERS.JobPosting.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class CompanyPosting {
 	private int cno;
