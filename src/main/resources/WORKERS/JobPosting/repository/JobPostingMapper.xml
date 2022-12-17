@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+     
+<mapper namespace="WORKERS.JobPosting.repository.JobPostingMapper">
+ 
+    <resultMap id="jobposting" type="WORKERS.JobPosting.model.CompanyPosting">
+        <result property="cno"  column="cno"/> 
+        <result property="cTitle" column="cTitle"/>   
+        <result property="cWriter" column="cWriter"/>      
+        <result property="cContent" column="cContent"/>   
+        <result property="cDate" column="cDate"/>   
+        <result property="cDueDate" column="cDueDate"/>  
+        <result property="cAddress" column="cAddress"/>  
+    </resultMap>
+
+    <!-- 구인공고 리스트에 쓸 테이블 가져오기 -->
+    <select id="JobPostingList" resultMap="jobposting">
+    	select * from CompanyPostingTable order by cDate
+    </select>
+   
+ 	<select id="AddJobPosting" resultMap="jobposting">
+ 		insert into CompanyPostingTable (cno,cTitle,cWriter,cContent,cDate,cDueDate,cAddress )
+ 		values (CompanyPostingTable_sequence.nextval,#{cTitle},#{cWriter},#{cContent},sysdate,#{cDueDate},#{cAddress},)
+ 	</select>
+
+</mapper>
