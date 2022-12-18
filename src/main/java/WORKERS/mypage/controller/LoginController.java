@@ -23,7 +23,7 @@ public class LoginController {
 	private final UserService userService;
 
 	@PostMapping("/login")
-	public String loginSuccess(LoginDTO loginDTO, HttpSession session ,Model model) throws Exception {
+	public String loginSuccess(LoginDTO loginDTO, HttpSession session, Model model) throws Exception {
 		
 		System.out.println("loginSuccess in LoginController");
 		
