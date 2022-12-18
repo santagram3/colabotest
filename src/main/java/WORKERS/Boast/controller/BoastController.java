@@ -82,7 +82,9 @@ public class BoastController {
 
 	@GetMapping("/list")
 	public String listBoast(Model m) throws Exception {
-			
+
+		
+		
 	
 		try {	
 
