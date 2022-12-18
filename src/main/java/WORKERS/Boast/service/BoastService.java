@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import WORKERS.Boast.dto.BoastDTO;
-import WORKERS.Boast.mapper.BoastMapper;
 import WORKERS.Boast.model.Boast;
+import WORKERS.Boast.repository.BoastMapper;
 import lombok.RequiredArgsConstructor;
 
 @Service

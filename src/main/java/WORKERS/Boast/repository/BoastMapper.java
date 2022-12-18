@@ -1,4 +1,4 @@
-package WORKERS.Boast.mapper;
+package WORKERS.Boast.repository;
 
 
 import java.util.List;
