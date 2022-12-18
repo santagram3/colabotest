@@ -97,7 +97,7 @@ pageEncoding="UTF-8"%>
     
 <!-- 구인공고 게시글 작성폼  -->
 
-<img src="/resources/jobPosting/img/modify.png" class="img-fluid" alt="...">
+<img src="/resources/jobPosting/img/modify2.png" class="img-fluid" alt="...">
 	<div class="shadow p-3 mb-5 bg-body rounded card border-primary position-absolute top-100 start-50 translate-middle " style="width:800px;">
 		<form action="modify/${cp.cno}" method="post" enctype="multipart/form-data">
 

@@ -180,6 +180,8 @@ create table BoastTable(
    bContent CLOB NOT NULL,--글내용 / 이미지는 BoastImg이미지테이블참조
    bDate DATE default sysdate NOT NULL--글작성일자
    );   
+   insert into BoastTable values(1,'공부자랑1번글','재욱스','자바를 공부했습니다.',sysdate);
+   select * from BoastTable;
    
 create TABLE BoastReport(
    bReportNoS NUMBER NOT NULL,--신고테이블글번호-sequence

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="WORKERS.Boast.mapper.BoastMapper">
+					
+
+	<resultMap id="boastlist" type="WORKERS.Boast.model.Boast">
+		<result property="bNoSP" column="bNoSP"/>
+		<result property="bTitle" column="bTitle"/>
+		<result property="bWriter" column="bWriter"/>
+		<result property="bDate" column="bDate"/>
+		<result property="bContent" column="bContent"/>
+	</resultMap>
+
+    
+    <select id="getBoastList" resultMap="boastlist">
+    	select * from BoastTable order by bDate desc
+    </select>
+    
+    
+</mapper>   
