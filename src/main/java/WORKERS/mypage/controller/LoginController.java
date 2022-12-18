@@ -5,13 +5,13 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
 import WORKERS.mypage.DTO.LoginDTO;
-
+import WORKERS.mypage.model.User;
 import WORKERS.mypage.service.UserService;
 import lombok.RequiredArgsConstructor;
 
@@ -49,6 +49,24 @@ public class LoginController {
 		model.addAttribute(answer,"noId"); 
 		return "redirect:/test/header";
 		}
+	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		
+		// 형변환 해줘야 됨 ! 
+		User user = (User)session.getAttribute("loginUser");
+		 
+		if(user != null) { // 로그인 상태라면 ? 
+			
+			session.removeAttribute("loginUser"); // loginUser 라는 내용을 세션에서 삭제 
+ 			session.invalidate(); //세션 객체 삭제 
+			
+			return "redirect:/test/header";
+		}
+		
+		// 로그인 상태가 아니라면 
+		return "redirect:/test/header";
 	}
 	
 

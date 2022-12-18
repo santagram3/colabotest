@@ -46,7 +46,7 @@ create table userTable(
    selfIntroduce varchar2(200) not null -- 간단한 자기소개 100자로 작성 하시오  
 )
 
-
+delete from userTable where userEmail = 'soslimso@nate.com';
 select * from userTable;
 select count(*) from userTable where userEmail = '123@123';
 

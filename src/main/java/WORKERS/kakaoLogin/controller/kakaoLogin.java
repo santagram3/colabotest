@@ -155,9 +155,9 @@ public class kakaoLogin {
 		// 비밀번호는 이메일 이랑 똑같음
 		kakaoUser.setUserPw(kakaoProfile.getKakao_account().getEmail());
 		// 현재시간 불러옴
-		Date date = new Date(0);
-		System.out.println("date = " + date);
-		kakaoUser.setBirthday(date);
+		//Date date = new Date(0);
+		//System.out.println("date = " + date);
+		kakaoUser.setBirthday(kakaoProfile.getKakao_account().getBirthday());
 		// 카카오에서 가져온 이름
 		kakaoUser.setNickName(kakaoProfile.getKakao_account().getProfile().getNickname());
 		// 자기소개
@@ -166,6 +166,7 @@ public class kakaoLogin {
 		System.out.println("111111111111111");
 		System.out.println(kakaoUser.toString());
 		// 받아온 이메일 kakaoProfile.getKakao_account().getEmail()
+		
 		// 이걸로 아이디 찾기함 !! 카카오 이메일!
 		String kakaoGetEmail = kakaoProfile.getKakao_account().getEmail();
 		System.out.println("2222222222222222");

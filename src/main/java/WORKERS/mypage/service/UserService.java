@@ -38,9 +38,15 @@ public class UserService {
 		//
 		System.out.println("findUserIdService = " + userEmail);
 		// 여기까진 들어왔음 r1241 이걸로 .. 
-		userEmail.trim();
+		String trimEmail = userEmail.trim();
 		
-		String id = userMapper.findUserId(userEmail);
+		if(userEmail.equals(trimEmail)) {
+			System.out.println("Equal email");
+		}else {
+			System.out.println("not Equal email");
+		}
+		
+		String id = userMapper.findUserId(trimEmail);
 		
 		System.out.println("userMapper.findUserId = " + id);
 		return id;

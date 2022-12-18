@@ -15,7 +15,7 @@
     </resultMap>
 
     <!-- 유저 아이디 가져오기! -->
-    <select id="findUserId" resultMap="user">
+    <select id="findUserId" resultType="String">
     	select userEmail from userTable where userEmail = #{userEmail}
     </select>
    
