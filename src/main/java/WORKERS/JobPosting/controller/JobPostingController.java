@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
 import WORKERS.JobPosting.model.CompanyPosting;
@@ -57,11 +58,11 @@ public class JobPostingController {
 	//구인공고 등록
 	@PostMapping("/add")
 	public String JobPostingAdd(@ModelAttribute CompanyPosting companyposting, @ModelAttribute CompanyPostingImg cpi,
-								@RequestParam("file") MultipartFile file) throws Exception {
+								@RequestPart(value="file",required = false) MultipartFile file) throws Exception {
 		System.out.println("구인공고를 등록");
 		File dest = new File(fdir+"/"+file.getOriginalFilename());
 		file.transferTo(dest);
-		cpi.setCompanyImg("/img/"+dest.getName());
+		cpi.setCompanyImg(dest.getName());
 		
 		
 		jobpostingservice.addJobPosting(companyposting);
@@ -112,8 +113,18 @@ public class JobPostingController {
 	
 	//구인공고 수정
 	@PostMapping("/modifyForm/modify/{cno}")
-	public String JobPostingModify(@PathVariable int cno, @ModelAttribute CompanyPosting companyposting) throws Exception {
+	public String JobPostingModify(@PathVariable int cno, @ModelAttribute CompanyPosting companyposting, @ModelAttribute CompanyPostingImg cpi,
+									@RequestParam("newfile") MultipartFile file) throws Exception {
+		System.out.println("구인공고를 수정");
+		
 		jobpostingservice.modifyJobPosting(companyposting);
+		File dest = new File(fdir+"/"+file.getOriginalFilename());
+		file.transferTo(dest);
+		cpi.setCompanyImg(dest.getName());
+		
+		cpi.setCno(cno);
+		System.out.println(cpi.toString());
+		jobpostingservice.modifyJobPostingImg(cpi);
 		
 		return "redirect:/jobposting/view/"+cno;
 	}
