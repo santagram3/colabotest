@@ -26,6 +26,8 @@ public interface JobPostingMapper {
 	int FindCno() throws Exception;
 
 	CompanyPostingImg ViewJobPostingImg(int cno) throws Exception;
+
+	void ModifyJobPostingImg(CompanyPostingImg cpi) throws Exception;
 	
 
 

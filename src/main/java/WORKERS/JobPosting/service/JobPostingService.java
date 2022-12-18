@@ -80,5 +80,10 @@ public class JobPostingService {
 		return c;
 	}
 
+	public void modifyJobPostingImg(CompanyPostingImg cpi) throws Exception {
+		jobPostingMapper.ModifyJobPostingImg(cpi);
+		
+	}
+
 
 }

@@ -1,5 +1,3 @@
-<!-- 12/18 구인공고 추가 / 수정 화면 배경 이미지 링크 변경함,, 위치 resources/jobPosting/bak -->
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -99,7 +97,7 @@ pageEncoding="UTF-8"%>
     
 <!-- 구인공고 게시글 작성폼  -->
 
-<img src="/resources/jobPosting/bak/addBackground.png" class="img-fluid">
+<img src="/resources/jobPosting/img/add.png" class="img-fluid" alt="...">
 	<div class="shadow p-3 mb-5 bg-body rounded card border-primary position-absolute top-100 start-50 translate-middle " style="width:800px;">
 		<form  method="post" action="/jobposting/add" enctype="multipart/form-data">
 

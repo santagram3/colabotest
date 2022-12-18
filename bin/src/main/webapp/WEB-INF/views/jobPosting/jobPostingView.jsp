@@ -105,7 +105,7 @@ pageEncoding="UTF-8"%>
    			<h3>${cp.cTitle}</h3>
   			<hr>
     		<div class="card w-80 mx-auto">
-	    	<img class="card-img-top" src="${cpi.companyImg}" alt="공고 이미지 자리"> 
+	    	<img class="card-img-top" src="/resources/jobPosting/img/${cpi.companyImg}" alt="공고 이미지 자리"> 
 	    	<div class="card-body">
 	    	<p class="card-text">${cp.cContent}</p>
 			<div class="Dday">

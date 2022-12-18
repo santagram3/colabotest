@@ -1,5 +1,3 @@
-<!-- 상세페이지 조금 바꿈 -->
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -108,7 +106,7 @@ pageEncoding="UTF-8"%>
    			<p class="fs-4 ms-auto p-2">${cp.cWriter}</p></span>
   			<hr>
     		<div class="card w-80 mx-auto shadow-sm p-3 mb-5 bg-body rounded">
-	    	<img class="card-img-top" src="${cpi.companyImg}" alt="공고 이미지 자리"> 
+	        <img class="card-img-top" src="/resources/jobPosting/img/${cpi.companyImg}" alt="공고 이미지 자리"> 
 	    	<div class="card-body">
 	    	<p class="card-text">${cp.cContent}</p>
 			<div class="Dday">
@@ -136,6 +134,9 @@ pageEncoding="UTF-8"%>
 			
 		</div>
 	</div>
+
+
+
 	
 
 

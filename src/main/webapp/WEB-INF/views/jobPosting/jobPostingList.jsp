@@ -1,5 +1,3 @@
-<!-- 12/18 구인공고 리스트 플렉스넣음 -->
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -127,6 +125,7 @@ pageEncoding="UTF-8"%>
 						  </button>
 						</div>
 						
+						
 			<div class="JobHostBoard">		
 			<h2 style="margin-top: 30px;">구인공고 게시판</h2>
 			<div class="JobCategoryButton">
@@ -149,17 +148,15 @@ pageEncoding="UTF-8"%>
 					</div>
 			</div>	
 
-
-
-
-		 
+					 
 <hr>
 <br><br>			
 
-<div class="container">
-<!-- 게시판 형태 -->		 
+
+<!-- 게시판 형태 -->	
+<div class="container">	 
 <table class="table caption-top border border-light">
-  <p class="fw-bold fs-5">최근 올라온 구인공고</p>
+  <caption>최근 올라온 구인공고</caption>
   <thead>
     <tr class="fw-bold">
       <th scope="col"></th>
@@ -194,7 +191,8 @@ pageEncoding="UTF-8"%>
 	
 	<a href="/jobposting/addForm" type="button" class="btn btn-primary sticky-bottom">작성하기</a>
 	
-</div>
+	
+		</div>
    
 
 
