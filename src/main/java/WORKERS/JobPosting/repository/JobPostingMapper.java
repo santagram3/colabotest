@@ -10,23 +10,23 @@ import WORKERS.JobPosting.model.CompanyPostingImg;
 @Mapper
 public interface JobPostingMapper {
 	
-	// id = JobPostingList
+//list
 	List<CompanyPosting> JobPostingList() throws Exception;
 
+//add
 	void AddJobPosting( CompanyPosting companyposting) throws Exception;
-
-	void DeleteJobPosting(int cno) throws Exception;
-
-	CompanyPosting ViewJobPosting(int cno) throws Exception;
-
-	void ModifyJobPosting(CompanyPosting companyposting) throws Exception;
-
+	int FindCno() throws Exception;
 	void AddJobPostingImg(CompanyPostingImg cpi);
 
-	int FindCno() throws Exception;
+//delete
+	void DeleteJobPosting(int cno) throws Exception;
 
+//view
+	CompanyPosting ViewJobPosting(int cno) throws Exception;
 	CompanyPostingImg ViewJobPostingImg(int cno) throws Exception;
 
+//modify
+	void ModifyJobPosting(CompanyPosting companyposting) throws Exception;
 	void ModifyJobPostingImg(CompanyPostingImg cpi) throws Exception;
 	
 

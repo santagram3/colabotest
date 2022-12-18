@@ -227,8 +227,8 @@ create TABLE BoastReply (
    bReplyDate DATE default sysdate NOT NULL--댓글 작성일자
 );
 
-ALTER TABLE Reply
-ADD CONSTRAINTS bReply_FK FOREIGN KEY (bReplyNoF)--BoastTable의 bNoSP를 참조하는 foreign key bReplyNoF
+ALTER TABLE BoastReply
+ADD CONSTRAINTS BoastReply_FK FOREIGN KEY (bReplyNoF)--BoastTable의 bNoSP를 참조하는 foreign key bReplyNoF
 REFERENCES BoastTable(bNoSP);
 
 create TABLE BoastReplyReport(

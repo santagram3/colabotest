@@ -60,6 +60,7 @@
  		update CompanyPostingTable set cTitle=#{cTitle}, cWriter=#{cWriter},cContent=#{cContent},
  										 cDueDate=#{cDueDate}, cAddress=#{cAddress} where cno = #{cno}
  	</select>
+ 	
  	<select id="ModifyJobPostingImg" resultMap="jobpostingimg">
  		update CompanyPostingImg set companyImg=#{companyImg} where cno=#{cno}
  	</select>

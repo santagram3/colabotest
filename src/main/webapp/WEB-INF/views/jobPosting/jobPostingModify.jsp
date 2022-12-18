@@ -62,7 +62,7 @@ pageEncoding="UTF-8"%>
 
 				<div class="mb-4">
   				<label class="form-label">내용</label>
-  				<textarea class="form-control" name="cContent">${cp.cContent}></textarea>
+  				<textarea class="form-control" name="cContent">${cp.cContent}</textarea>
 				</div>
 						
 				<button type="submit" class="btn btn-success mt-3 col-md-6 offset-md-3">
