@@ -16,9 +16,10 @@ pageEncoding="UTF-8"%>
 
 <!-- 헤더영역 -->
     <div id="headerBox">
-        <div class="logo"><a href="index.html"><img src="/resources/jobPosting/img/skyblue.png" alt=""></a></div>
+        <div class="logo"><a href="index.html"><img src="img/skyblue.png" alt=""></a></div>
         <div class="headerMenu">
             <div class="menuLeft">
+                <a href="">Q & A</a>
                 <a href="/jobposting/list">구인공고</a>
                 <a href="">공부 자랑하기</a>
                 <a href="">스터디 구하기</a>
@@ -106,13 +107,13 @@ pageEncoding="UTF-8"%>
 						  </div>
 						  <div class="carousel-inner">
 						    <div class="carousel-item active">
-						      <img src="/resources/jobPosting/img/slide/img1.png" class="d-block w-100" alt="...">
+						      <img src="./img/slide/img1.png" class="d-block w-100" alt="...">
 						    </div>
 						    <div class="carousel-item">
-						      <img src="/resources/jobPosting/img/slide/img2.png" class="d-block w-100" alt="...">
+						      <img src="./img/slide/img2.png" class="d-block w-100" alt="...">
 						    </div>
 						    <div class="carousel-item">
-						      <img src="/resources/jobPosting/img/slide/img3.png" class="d-block w-100" alt="...">
+						      <img src="./img/slide/img3.png" class="d-block w-100" alt="...">
 						    </div>
 						  </div>
 						  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -128,66 +129,60 @@ pageEncoding="UTF-8"%>
 						
 				<h3 style="margin-top: 30px;">구인공고 게시판</h3>
 			<div class="JobCategoryButton">
+			<!-- 옵션 버튼 1 (기능을 추가한다면...)-->
+						<div class="btn-group">
+						  <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+						    옵션 1
+						  </button>
+						  <ul class="dropdown-menu">
+						    <li><a class="dropdown-item" href="#">채용중</a></li>
+						    <li><a class="dropdown-item" href="#">채용예정</a></li>
+						    <li><a class="dropdown-item" href="#">마감</a></li>
+						    <!--<li><hr class="dropdown-divider"></li>
+						    <li><a class="dropdown-item" href="#">Separated link</a></li>-->
+						  </ul>
+						</div>
+						
+			<!-- 옵션 버튼 2 (기능을 추가한다면...)-->
+						<div class="btn-group">
+						  <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+						    옵션 2
+						  </button>
+						  <ul class="dropdown-menu">
+						    <li><a class="dropdown-item" href="#">신입공채</a></li>
+						    <li><a class="dropdown-item" href="#">경력</a></li>
+						    <li><a class="dropdown-item" href="#">인턴</a></li>
+						    <!--<li><hr class="dropdown-divider"></li>
+						    <li><a class="dropdown-item" href="#">Separated link</a></li>-->
+						  </ul>
+						</div>
 			</div>
+			<a href="/jobposting/addForm" class="btn btn-primary">공고 등록</a>
 			<hr>
-			<p style="color: #F15F5F;" class="fw-bold">핫한 구인공고 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-heart" viewBox="0 0 16 16">
-  			<path fill-rule="evenodd" d="M2.965 12.695a1 1 0 0 0-.287-.801C1.618 10.83 1 9.468 1 8c0-3.192 3.004-6 7-6s7 2.808 7 6c0 3.193-3.004 6-7 6a8.06 8.06 0 0 1-2.088-.272 1 1 0 0 0-.711.074c-.387.196-1.24.57-2.634.893a10.97 10.97 0 0 0 .398-2Zm-.8 3.108.02-.004c1.83-.363 2.948-.842 3.468-1.105A9.06 9.06 0 0 0 8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6a10.437 10.437 0 0 1-.524 2.318l-.003.011a10.722 10.722 0 0 1-.244.637c-.079.186.074.394.273.362a21.673 21.673 0 0 0 .693-.125ZM8 5.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132Z"/>
-			</svg></p>
-
-					<ol class="list-group">
+			<!-- 구인공고 리스트 제목/내용에 '작성일 12월12일 ~ 마감일 12월13일' 띄울 것 같아요. 뭘 올리지..?  -->
+					<ol class="list-group list-group-numbered">
 					<c:forEach var="jp" items="${jobpostinglist}" varStatus="status">
-					  <li class="list-unstyled list-group-item d-flex justify-content-between align-items-start shadow p-3 mb-5 bg-body rounded" style="width:400px;">
+					  <li class="list-group-item d-flex justify-content-between align-items-start">
 					    <div class="ms-2 me-auto">
-					      <a href = "view/${jp.cno}" style="color: black;"> ${status.count}　　　　${jp.cTitle}<br>　　　　   ${jp.cWriter}</a>
-					      <P style="color:gray;"><br>　　　　<span class="badge bg-primary rounded-pill">　지원기간  |　 ${jp.cDueDate} 까지   　 </span></P>
-						  <a href="delete/${jp.cno}"><span class="badge bg-secondary btn-sm">&times;</span></a>
+					      <a href = "view/${jp.cno}">${status.count}, ${jp.cTitle}, ${jp.cWriter},</a>
+					      ${jp.cDate}, ${jp.cDueDate}
 					    </div>
+					    <a href="delete/${jp.cno}"><span class="badge bg-secondary">&times;</span></a>
+					    <span class="badge bg-primary rounded-pill">채용중</span>
 					  </li>
 					  </c:forEach>
 					 </ol>
-					 
-					 <table>
-					 
-<hr>
-<br><br>			
-
-
-<!-- 게시판 형태 -->		 
-<table class="table caption-top border border-light">
-  <caption>최근 올라온 구인공고</caption>
-  <thead>
-    <tr class="fw-bold">
-      <th scope="col"></th>
-      <th scope="col">제목</th>
-      <th scope="col">작성자</th>
-      <th scope="col">공고 작성일 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-vector-pen" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M10.646.646a.5.5 0 0 1 .708 0l4 4a.5.5 0 0 1 0 .708l-1.902 1.902-.829 3.313a1.5 1.5 0 0 1-1.024 1.073L1.254 14.746 4.358 4.4A1.5 1.5 0 0 1 5.43 3.377l3.313-.828L10.646.646zm-1.8 2.908-3.173.793a.5.5 0 0 0-.358.342l-2.57 8.565 8.567-2.57a.5.5 0 0 0 .34-.357l.794-3.174-3.6-3.6z"/>
-  <path fill-rule="evenodd" d="M2.832 13.228 8 9a1 1 0 1 0-1-1l-4.228 5.168-.026.086.086-.026z"/>
-</svg></th>
-      <th scope="col">공고 마감일 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stopwatch" viewBox="0 0 16 16">
-  <path d="M8.5 5.6a.5.5 0 1 0-1 0v2.9h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5V5.6z"/>
-  <path d="M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64a.715.715 0 0 1 .012-.013l.354-.354-.354-.353a.5.5 0 0 1 .707-.708l1.414 1.415a.5.5 0 1 1-.707.707l-.353-.354-.354.354a.512.512 0 0 1-.013.012A7 7 0 1 1 7 2.071V1.5a.5.5 0 0 1-.5-.5zM8 3a6 6 0 1 0 .001 12A6 6 0 0 0 8 3z"/>
-</svg></th>
-    </tr>
-  </thead>
-  <c:forEach var="jp" items="${jobpostinglist}" varStatus="status">
-  <tbody>
-    <tr>
-      <th scope="row">${status.count}</th>
-      <td><a href = "view/${jp.cno}" style="color: black;">${jp.cTitle}</a></td>
-      <td>${jp.cWriter}</td>
-      <td>${jp.cDate}</td>
-      <td>${jp.cDueDate}</td>
-    </tr>
-    </tbody>
-    </c:forEach>
-    
- 
-  </tbody>
-</table>
 			
 	
-	<a href="/jobposting/addForm" type="button" class="btn btn-primary sticky-bottom">작성하기</a>
+			<!-- 페이지네이션 만들어보기 -->
+						<div class="float-end">
+						<ul class="pagination flex-wrap">
+						<c:forEach begin="${responseDTO.start}" end="${responseDTO.end}" var="num">
+						<li class="page-item"><a class="page-link" href="#">${num}</a></li>
+						</c:forEach>
+						</ul>
+						</div>
+	
 	
 	
 		</div>

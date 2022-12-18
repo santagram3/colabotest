@@ -14,10 +14,14 @@
         <result property="cDueDate" column="cDueDate"/>  
         <result property="cAddress" column="cAddress"/>  
     </resultMap>
+    <resultMap id="jobpostingimg" type="WORKERS.JobPosting.model.CompanyPostingImg">
+        <result property="cno"  column="cno"/> 
+        <result property="companyImg" column="companyImg"/>   
+    </resultMap>
 
     <!-- 구인공고 리스트에 쓸 테이블 가져오기 -->
     <select id="JobPostingList" resultMap="jobposting">
-    	select * from CompanyPostingTable order by cDate
+    	select * from CompanyPostingTable order by cDate desc
     </select>
    
     <!-- 추가 -->
@@ -26,14 +30,29 @@
  		values (CompanyPostingTable_sequence.nextval,#{cTitle},#{cWriter},#{cContent},sysdate,#{cDueDate},#{cAddress})
  	</select>
  	
+ 	<select id="FindCno" resultType="int">
+ 		select max(cno) from CompanyPostingTable		
+ 	</select>
+ 	
+ 	<select id="AddJobPostingImg" resultMap="jobpostingimg">
+ 		insert into CompanyPostingImg
+ 		values (#{cno},#{companyImg})
+ 	</select>
+ 	
+ 	
 	<!-- 삭제 -->
  	<select id="DeleteJobPosting" resultMap="jobposting">
  		delete from CompanyPostingTable where cno = #{cno}
  	</select>
  	
+ 	
  	<!-- view 페이지 -->
  	<select id="ViewJobPosting" resultMap="jobposting">
  		select * from CompanyPostingTable where cno = #{cno}
+ 	</select>
+ 	
+ 	<select id="ViewJobPostingImg" resultMap="jobpostingimg">
+ 		select * from CompanyPostingImg where cno = #{cno}
  	</select>
  	
  	<!-- 수정 -->

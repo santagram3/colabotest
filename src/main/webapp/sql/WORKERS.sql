@@ -154,12 +154,14 @@ create table CompanyPostingTable(
 select * from CompanyPostingTable; --00 
 create sequence CompanyPostingTable_sequence;
 
+
 insert into CompanyPostingTable values (1,'1번구인공고','작성자1','첫번째구인공고입니다.',sysdate,'2022-12-31','서울시');
 
 -- 구인공고 이미지 
 create table CompanyPostingImg (
 	 cno number not null, -- fk 걸꺼임 
-	 companyImg clob not null  -- 회사 사진 
+	 companyImg clob not null,  -- 회사 사진 
+	 foreign key (cno) references CompanyPostingTable(cno) on delete cascade
 )
 select * from CompanyPostingImg ; --00 
 
