@@ -100,12 +100,13 @@ pageEncoding="UTF-8"%>
 		<div class="position">
 			<div class="container-md">
 			<div class="container w-80 mt-5 mx-auto">
-			<span class="badge bg-primary rounded-pill">지원기간</span> ${cp.cDate} ~ ${cp.cDueDate}
-			<H4>${cp.cWriter}</H4>
-   			<h3>${cp.cTitle}</h3>
+			<p><span class=" badge bg-primary rounded-pill fl">지원기간</span> ${cp.cDate} ~ ${cp.cDueDate}</p>
+   			<span class="d-flex badge fl text-body">
+   			<p class="fs-1 d-flex mb-2">${cp.cTitle}</p> 
+   			<p class="fs-4 ms-auto p-2">${cp.cWriter}</p></span>
   			<hr>
-    		<div class="card w-80 mx-auto">
-	    	<img class="card-img-top" src="/resources/jobPosting/img/${cpi.companyImg}" alt="공고 이미지 자리"> 
+    		<div class="card w-80 mx-auto shadow-sm p-3 mb-5 bg-body rounded">
+	        <img class="card-img-top" src="/resources/img/${cpi.companyImg}" alt="공고 이미지 자리"> 
 	    	<div class="card-body">
 	    	<p class="card-text">${cp.cContent}</p>
 			<div class="Dday">
@@ -116,7 +117,7 @@ pageEncoding="UTF-8"%>
 			</div>
 	    </div>
     </div>
-    <hr>
+
 
     <a href="/jobposting/list" class="btn btn-primary">돌아가기</a> 
     <a href="/jobposting/modifyForm/${cp.cno}" class="btn btn-primary">수정하기</a>
@@ -133,6 +134,9 @@ pageEncoding="UTF-8"%>
 			
 		</div>
 	</div>
+
+
+
 	
 
 

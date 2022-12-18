@@ -133,7 +133,7 @@ pageEncoding="UTF-8"%>
 				
 				<div class="mb-4">
   				<label class="form-label">공고 이미지</label>
-  				<input type="file" class="form-control" id="file">
+  				<input type="file" class="form-control" name="newfile">
 				</div>
 
 				<div class="mb-4">

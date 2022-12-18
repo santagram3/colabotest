@@ -58,7 +58,7 @@ public class JobPostingController {
 	//구인공고 등록
 	@PostMapping("/add")
 	public String JobPostingAdd(@ModelAttribute CompanyPosting companyposting, @ModelAttribute CompanyPostingImg cpi,
-								@RequestPart(value="file",required = false) MultipartFile file) throws Exception {
+								@RequestParam("file") MultipartFile file) throws Exception {
 		System.out.println("구인공고를 등록");
 		File dest = new File(fdir+"/"+file.getOriginalFilename());
 		file.transferTo(dest);

@@ -95,7 +95,7 @@ pageEncoding="UTF-8"%>
     
     
 <!-- 구인공고 jobPostList -->
-	<div id="contentsBox">
+	<div class="container">
 		<div class="boardList">
 			<!-- 슬라이드쇼 -->
 						<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
@@ -126,33 +126,35 @@ pageEncoding="UTF-8"%>
 						</div>
 						
 						
-				<h3 style="margin-top: 30px;">구인공고 게시판</h3>
+			<div class="JobHostBoard">		
+			<h2 style="margin-top: 30px;">구인공고 게시판</h2>
 			<div class="JobCategoryButton">
 			</div>
 			<hr>
-			<p style="color: #F15F5F;" class="fw-bold">핫한 구인공고 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-heart" viewBox="0 0 16 16">
+			<p style="color: #F15F5F;" class="fw-bold fs-5">핫한 구인공고 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-heart" viewBox="0 0 16 16">
   			<path fill-rule="evenodd" d="M2.965 12.695a1 1 0 0 0-.287-.801C1.618 10.83 1 9.468 1 8c0-3.192 3.004-6 7-6s7 2.808 7 6c0 3.193-3.004 6-7 6a8.06 8.06 0 0 1-2.088-.272 1 1 0 0 0-.711.074c-.387.196-1.24.57-2.634.893a10.97 10.97 0 0 0 .398-2Zm-.8 3.108.02-.004c1.83-.363 2.948-.842 3.468-1.105A9.06 9.06 0 0 0 8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6a10.437 10.437 0 0 1-.524 2.318l-.003.011a10.722 10.722 0 0 1-.244.637c-.079.186.074.394.273.362a21.673 21.673 0 0 0 .693-.125ZM8 5.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132Z"/>
-			</svg></p>
-
-					<ol class="list-group">
+			</svg></p></br>
+			<ol class="list-group"> <div class="d-flex flex-row justify-content-around flex-wrap">
 					<c:forEach var="jp" items="${jobpostinglist}" varStatus="status">
-					  <li class="list-unstyled list-group-item d-flex justify-content-between align-items-start shadow p-3 mb-5 bg-body rounded" style="width:400px;">
-					    <div class="ms-2 me-auto">
-					      <a href = "view/${jp.cno}" style="color: black;"> ${status.count}　　　　${jp.cTitle}<br>　　　　   ${jp.cWriter}</a>
-					      <P style="color:gray;"><br>　　　　<span class="badge bg-primary rounded-pill">　지원기간  |　 ${jp.cDueDate} 까지   　 </span></P>
+					  <li class="list-unstyled list-group-item shadow p-3 mb-5 bg-body rounded" style="width:300px;">
+					    <div class="ms-4 me-auto">
+					      <a href = "view/${jp.cno}" class="fw-bold fs-5" style="color: black;"> ${status.count}　　　${jp.cTitle}<br>　　　　  <p style="color:gray;" class="fs-6"> ${jp.cWriter} </p></a>
+					      <P style="color:gray;"><span class="badge bg-primary rounded-pill">　지원기간  |　 ${jp.cDueDate} 까지   　 </span></P>
 						  <a href="delete/${jp.cno}"><span class="badge bg-secondary btn-sm">&times;</span></a>
 					    </div>
 					  </li>
 					  </c:forEach>
 					 </ol>
-					 
-					 <table>
+					</div>
+			</div>	
+
 					 
 <hr>
 <br><br>			
 
 
-<!-- 게시판 형태 -->		 
+<!-- 게시판 형태 -->	
+<div class="container">	 
 <table class="table caption-top border border-light">
   <caption>최근 올라온 구인공고</caption>
   <thead>
@@ -191,9 +193,6 @@ pageEncoding="UTF-8"%>
 	
 	
 		</div>
-	</div>
-	
-
    
 
 
