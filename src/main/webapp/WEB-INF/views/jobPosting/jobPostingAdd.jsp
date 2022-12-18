@@ -1,3 +1,5 @@
+<!-- 12/18 구인공고 추가 / 수정 화면 배경 이미지 링크 변경함,, 위치 resources/jobPosting/bak -->
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
