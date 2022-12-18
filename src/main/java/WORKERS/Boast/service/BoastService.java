@@ -26,4 +26,14 @@ public class BoastService {
 		System.out.println("list 서비스 완료");
 		return bl;
 	}
+
+	public Boast viewBoast(int bNoSP) throws Exception {
+		Boast boast = boastMapper.ViewBoast(bNoSP);
+		return boast;
+	}
+
+	public void deleteBoast(int bNoSP) throws Exception {
+		boastMapper.DeleteBoast(bNoSP);
+		
+	}
 }

@@ -15,6 +15,10 @@ public interface BoastMapper {
 	public List<Boast> getBoastList() throws Exception;
 	
 	boolean insertBoast(Boast boast) throws Exception;
+
+	public Boast ViewBoast(int bNoSP) throws Exception;
+
+	public void DeleteBoast(int bNoSP) throws Exception;
 	
 	
 	

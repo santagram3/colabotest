@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -73,83 +74,32 @@ public class BoastController {
 	@GetMapping("/list")
 	public String listBoast(Model m) throws Exception {
 
-			System.out.println("\n\n===================A1\n\n");
 			List<Boast> boastlist = boastService.boastList();
-
-			System.out.println("\n\n===================A2\n\n");
 			m.addAttribute("boastlist",boastlist);
-			
-			System.out.println("\n\n===================A3\n\n");
-		
+					
 		return "/boast/boastList"; //boastList jsp를 의미
 	}
-}
-/*
-	@GetMapping("/getBoast")
-	   public String getBoast(@RequestParam("bNoSP") int bNoSP, Model model, Model model1, Model  model2) {
-		System.out.println("\n\n===================B\n\n");
-		//getBoast?bNoSP=123
-	      BoastDTO b = null;
-	      Comment c = null;
-	      try {
-	    	  //aid값을 조건으로 Boast테이블과 Comment테이블에서 데이터 가져오고 
-	    	  //댓글은 리스트로 forEach 돌려서 띄울거니까 데이터들 List 배열로 담아서 commentlist에 저장
-	         b = dao.getBoast(bNoSP);
-	         c = dao.getComments(bNoSP);
-	         System.out.println("\n\n===================C\n\n");
-	         List<Comment> commentlist = dao.getAllComment(bNoSP);
-	         System.out.println("\n\n===================D\n\n");
-	         model2.addAttribute("commentlist",commentlist);
-	         System.out.println("\n\n===================E\n\n");
-	      } catch (Exception e) {
-	         e.printStackTrace();
-	         
-	      }
-	      System.out.println("\n\n===================F\n\n");
-	      model.addAttribute("boast",b);			//news정보 news에 담음		-> news.title news.img라고 사용가능
-	      System.out.println("\n\n===================G\n\n");
-	      model.addAttribute("comments",c);		//댓글 정보 comments에 담음
-	      System.out.println("\n\n===================H\n\n");
-	      return "boastView";
 
-	   }
+	@GetMapping("/view/{bNoSP}")
+	public String BoastView(@PathVariable int bNoSP, Model model) throws Exception {
+		Boast boast = boastService.viewBoast(bNoSP);
+		model.addAttribute("boast",boast);
+		
+		return "/boast/boastView";
+	}
 	
 	
-		/*getboast 글번호 aid버전
-		 * @GetMapping("/getBoast") public String getBoast(@RequestParam("aid") int aid,
-		 * Model model, Model model1, Model model2) {
-		 * 
-		 * //getNews?aid=123 Boast b = null; Comment c = null; try { //aid값을 조건으로
-		 * News테이블과 Comment테이블에서 데이터 가져오고 //댓글은 리스트로 forEach 돌려서 띄울거니까 데이터들 List 배열로 담아서
-		 * commentlist에 저장 b = dao.getBoast(aid); c = dao.getComments(aid);
-		 * List<Comment> commentlist = dao.getAllComment(aid);
-		 * model2.addAttribute("commentlist",commentlist); } catch (Exception e) {
-		 * e.printStackTrace(); }
-		 * 
-		 * model.addAttribute("boast",b); //news정보 news에 담음 -> news.title news.img라고
-		 * 사용가능 model.addAttribute("comments",c); //댓글 정보 comments에 담음
-		 * 
-		 * return "boastView";
-		 * 
-		 * }
-		 */
+	@GetMapping("/delete/{bNoSP}")
+	public String BoastDelete(@PathVariable int bNoSP) throws Exception {
+		System.out.println("공부자랑 삭제");
+		boastService.deleteBoast(bNoSP);
+		
+		return "redirect:/boast/list";
+	}
 	
+}
 	
 /*
-	@GetMapping("/delete/{bNoSP}")
-	   public String deleteBoast(@PathVariable int bNoSP, Model m) {
-	      // localhost:8989/news/delete/
-		System.out.println("123123");
-	      try {
-	         dao.delBoast(bNoSP);
-	      }catch(SQLException e) {
-	         e.printStackTrace();
-	         logger.warn("글 삭제 과정에서 문제 발생!!");
-	         m.addAttribute("error","글이 정상적으로 삭제되지 않았습니다!!");
-	      }
-	      return "redirect:/boast/list";
-	   }
-	
 	
 	@GetMapping("/modify/{bNoSP}")
 	   public String updatePage(@PathVariable int bNoSP, Model m) throws SQLException {

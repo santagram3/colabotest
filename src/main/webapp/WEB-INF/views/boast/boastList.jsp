@@ -20,8 +20,8 @@
  <hr>
     <ul class="list-group">
 		<c:forEach var="boast" items="${boastlist}" varStatus="status">
-		  <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"><a href="/boast/${boast.bNoSP}" class="text-decoration-none">[${status.count}] ${boast.bTitle}, ${boast.bDate}</a>
-		  <!--  <a href="/news/delete/${news.aid}"><span class="badge bg-secondary">&times;</span></a> -->
+		  <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"><a href="view/${boast.bNoSP}" class="text-decoration-none">[${status.count}] ${boast.bTitle}, ${boast.bDate}</a>
+		  <a href="delete/${boast.bNoSP}"><span class="badge bg-secondary btn-sm">&times;</span></a>
 		  </li>
 		</c:forEach>
 	</ul>

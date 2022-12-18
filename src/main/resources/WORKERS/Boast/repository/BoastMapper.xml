@@ -19,5 +19,12 @@
     	select * from BoastTable order by bDate desc
     </select>
     
+    <select id="ViewBoast" resultMap="boastlist">
+    	select * from BoastTable where bNoSP = #{bNoSP}
+    </select>
+    
+    <select id="DeleteBoast" resultMap="boastlist">
+    	delete from BoastTable where bNoSP = #{bNoSP}
+    </select>    
     
 </mapper>   
