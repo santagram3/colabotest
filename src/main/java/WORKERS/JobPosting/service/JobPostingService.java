@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import WORKERS.JobPosting.model.CompanyPosting;
+import WORKERS.JobPosting.model.CompanyPostingImg;
 import WORKERS.JobPosting.repository.JobPostingMapper;
 import lombok.RequiredArgsConstructor;
 
@@ -33,10 +34,51 @@ public class JobPostingService {
 		
 	}
 
-	public void addJobPosting() throws Exception {
+	public void addJobPosting(CompanyPosting companyposting) throws Exception {
 		System.out.println("add 서비스 도착");
-		jobPostingMapper.AddJobPosting();
+		jobPostingMapper.AddJobPosting(companyposting);
 		
 	}
+	public void addJobPostingImg(CompanyPostingImg cpi) {
+		jobPostingMapper.AddJobPostingImg(cpi);
+		
+	}
+
+	
+	public void deleteJobPosting(int cno) throws Exception {
+		System.out.println("delete 서비스 도착");
+		jobPostingMapper.DeleteJobPosting(cno);
+		
+	}
+
+	
+	public CompanyPosting viewJobPosting(int cno) throws Exception {
+		System.out.println("view 서비스 도착");
+		
+		CompanyPosting c = new CompanyPosting();
+		c= jobPostingMapper.ViewJobPosting(cno);
+		
+		return c;
+	}
+
+	
+	public void modifyJobPosting(CompanyPosting companyposting) throws Exception {
+		System.out.println("modify 서비스 도착");
+		jobPostingMapper.ModifyJobPosting(companyposting);
+		
+	}
+
+	public int findCno() throws Exception {
+		int i = jobPostingMapper.FindCno();
+		return i;
+	}
+
+	public CompanyPostingImg viewJobPostingImg(int cno) throws Exception {
+		System.out.println("view 이미지 서비스 도착");
+		CompanyPostingImg c = new CompanyPostingImg();
+		c= jobPostingMapper.ViewJobPostingImg(cno);
+		return c;
+	}
+
 
 }

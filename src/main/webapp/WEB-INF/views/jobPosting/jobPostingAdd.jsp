@@ -97,9 +97,9 @@ pageEncoding="UTF-8"%>
     
 <!-- 구인공고 게시글 작성폼  -->
 
-<img src="/resources/jobPosting/img/add.png" class="img-fluid" alt="...">
+<img src="/resources/jobPosting/bak/addBackground.png" class="img-fluid">
 	<div class="shadow p-3 mb-5 bg-body rounded card border-primary position-absolute top-100 start-50 translate-middle " style="width:800px;">
-		<form action="/jobposting/add/${jobs.cno}" method="post" enctype="multipart/form-data">
+		<form  method="post" action="/jobposting/add" enctype="multipart/form-data">
 
 		
 		<div class="p-3 bg-primary bg-opacity-10 rounded-end fw-bold">
@@ -112,33 +112,33 @@ pageEncoding="UTF-8"%>
 	 	<div id = "boardForm">
 				<div class="mb-4">
   				<label class="form-label">제목</label>
-  				<input type="text" class="form-control" id="" placeholder="[워커스물산] 2022 하반기 각 부문 신입 및 경력 채용">
+  				<input type="text" class="form-control" name="cTitle">
 				</div>
 				
 				<div class="mb-4">
   				<label class="form-label">작성자</label>
-  				<input type="text" class="form-control" id="" placeholder="김대리">
+  				<input type="text" class="form-control" name="cWriter">
 				</div>
 				
 				<div class="mb-4">
   				<label class="form-label">주소</label>
-  				<input type="text" class="form-control" id="" placeholder="서울특별시 관악구 00동 00건물 00호">
+  				<input type="text" class="form-control" name="cAddress">
 				</div>
 				
 				<div class="mb-4">
   				<label class="form-label">마감일</label>
-  				<input type="date" class="form-control" id="">
+  				<input type="date" class="form-control" name="cDueDate">
 				</div>
 				
 				
 				<div class="mb-4">
   				<label class="form-label">공고 이미지</label>
-  				<input type="file" class="form-control" id="">
+  				<input type="file" class="form-control" name="file">
 				</div>
 
 				<div class="mb-4">
   				<label class="form-label">내용</label>
-  				<textarea class="form-control" id=""></textarea>
+  				<textarea class="form-control" name="cContent"></textarea>
 				</div>
 						
 				<button type="submit" class="btn btn-danger mt-3 col-md-6 offset-md-3">
@@ -152,8 +152,7 @@ pageEncoding="UTF-8"%>
 				<br>
 				
 				</div>
-				</div>
-
+				
 
    
 

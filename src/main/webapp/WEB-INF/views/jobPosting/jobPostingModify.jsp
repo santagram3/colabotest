@@ -97,9 +97,9 @@ pageEncoding="UTF-8"%>
     
 <!-- 구인공고 게시글 작성폼  -->
 
-<img src="/resources/jobPosting/img/modify.png" class="img-fluid" alt="...">
+<img src="/resources/jobPosting/bak/modifyBackground.png" class="img-fluid" alt="...">
 	<div class="shadow p-3 mb-5 bg-body rounded card border-primary position-absolute top-100 start-50 translate-middle " style="width:800px;">
-		<form action="/jobposting/add/${jobs.cno}" method="post" enctype="multipart/form-data">
+		<form action="modify/${cp.cno}" method="post" enctype="multipart/form-data">
 
 		
 		<div class="p-3 bg-primary bg-opacity-10 rounded-end fw-bold">
@@ -112,33 +112,33 @@ pageEncoding="UTF-8"%>
 	 	<div id = "boardForm">
 				<div class="mb-4">
   				<label class="form-label">제목</label>
-  				<input type="text" class="form-control" id="">
+  				<input type="text" class="form-control" name="cTitle" value="${cp.cTitle}">
 				</div>
 				
 				<div class="mb-4">
   				<label class="form-label">작성자</label>
-  				<input type="text" class="form-control" id="">
+  				<input type="text" class="form-control" name="cWriter" value="${cp.cWriter}">
 				</div>
 				
 				<div class="mb-4">
   				<label class="form-label">주소</label>
-  				<input type="text" class="form-control" id="">
+  				<input type="text" class="form-control" name="cAddress" value="${cp.cAddress}">
 				</div>
 				
 				<div class="mb-4">
   				<label class="form-label">마감일</label>
-  				<input type="date" class="form-control" id="">
+  				<input type="date" class="form-control" name="cDueDate" value="${cp.cDueDate}">
 				</div>
 				
 				
 				<div class="mb-4">
   				<label class="form-label">공고 이미지</label>
-  				<input type="file" class="form-control" id="">
+  				<input type="file" class="form-control" id="file">
 				</div>
 
 				<div class="mb-4">
   				<label class="form-label">내용</label>
-  				<textarea class="form-control" id=""></textarea>
+  				<textarea class="form-control" name="cContent">${cp.cContent}></textarea>
 				</div>
 						
 				<button type="submit" class="btn btn-success mt-3 col-md-6 offset-md-3">
