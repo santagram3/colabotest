@@ -26,27 +26,8 @@
 		</c:forEach>
 	</ul>
 	<hr>
-	<button class="btn btn-outline-info mb-3" type="button" 
-	        data-bs-toggle="collapse" 
-	        data-bs-target="#addForm" 
-	        aria-expanded="false" 
-	        aria-controls="addForm">자랑글 등록</button>
-	<div class="collapse" id="addForm">
-	  <div class="card card-body">
-		<form method="post" 
-		      action="/boast/add" 
-		      enctype="multipart/form-data">
-			<label class="form-label">제목</label>
-			<input type="text" name="bTitle" class="form-control">
-			<!-- <input type="hidden" name="bWriter" value="jjy"> -->
-			<label class="form-label">이미지</label>
-			<input type="file" name="file" class="form-control">
-			<label class="form-label">글내용</label>
-			<textarea cols="50" rows="5" name="bContent" class="form-control"></textarea>
-			<button type="submit" class="btn btn-success mt-3">저장</button>
-		</form>
-	  </div>
-	</div>
+
+		<a href="/boast/addForm" type="button" class="btn btn-primary sticky-bottom">작성하기</a>
 	</div>
 </body>
 </html>

@@ -40,6 +40,8 @@ pageEncoding="UTF-8"%>
                 </div>
                 <label for="formGroupExampleInput" class="form-label">selfIntroduce</label>
                 <textarea class="form-control col-sm-5" rows="5" name="selfIntroduce" required></textarea>
+                
+                <input type="hidden" name="oauth" value="">
                 <div class="buttongroup">
                     <button type="button" class="btn btn-success" onclick="backhome()">뒤로 가기</button>
                     <button class="btn btn-info submitButton">회원가입하기</button>

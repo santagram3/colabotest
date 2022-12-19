@@ -19,8 +19,12 @@ public interface BoastMapper {
 	public Boast ViewBoast(int bNoSP) throws Exception;
 
 	public void DeleteBoast(int bNoSP) throws Exception;
-	
-	
-	
-	
+
+	public void ModifyBoast(Boast boast) throws Exception;
+
+	public void ModifyBoastImg(int bNoSP) throws Exception;
+
+	public void ViewBoastImage(int bImageNoF) throws Exception;
+
+
 }

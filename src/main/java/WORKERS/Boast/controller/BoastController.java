@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import WORKERS.Boast.dto.BoastDTO;
 import WORKERS.Boast.model.Boast;
+import WORKERS.Boast.model.BoastImage;
 import WORKERS.Boast.service.BoastService;
 import lombok.RequiredArgsConstructor;
 
@@ -34,6 +33,15 @@ public class BoastController {
 	@Value("${boast.imgdir}")
 	String fdir;
 	
+	@GetMapping("/list")
+	public String listBoast(Model m) throws Exception {
+		
+		List<Boast> boastlist = boastService.boastList();
+		m.addAttribute("boastlist",boastlist);
+		
+		return "/boast/boastList"; //boastList jsp를 의미
+	}
+	
 	@PostMapping("/add")
 	public String addBoast(@ModelAttribute Boast boast , Model m ,@RequestParam("file") MultipartFile file  ) {
 		
@@ -46,17 +54,9 @@ public class BoastController {
 			// 파일 저장 
 			file.transferTo(dest);
 			System.out.println("\n==========2\n");
-			// news /객체에 파일 이름 저장 
-			// 1번 
-			//news.setImg(fdir+dest.getName());
-			// 2번 
+
 		//	boast.setbImage("/img/"+dest.getName()); // 이게 정답 .. 
-			// 3번 
-			//news.setImg("img/"+dest.getName());
-			// 3번 
-			//news.setImg("img/"+dest.getName());
-			
-			//news.setImg(fdir+dest.getName());
+
 			System.out.println("fdir+dest.getName() : "+fdir+dest.getName());
 			System.out.println("dest.getName() : "+ dest.getName());
 		//	boastMapper.BoastMapper(boast);
@@ -70,20 +70,13 @@ public class BoastController {
 		
 	}
 
-
-	@GetMapping("/list")
-	public String listBoast(Model m) throws Exception {
-
-			List<Boast> boastlist = boastService.boastList();
-			m.addAttribute("boastlist",boastlist);
-					
-		return "/boast/boastList"; //boastList jsp를 의미
-	}
-
 	@GetMapping("/view/{bNoSP}")
 	public String BoastView(@PathVariable int bNoSP, Model model) throws Exception {
 		Boast boast = boastService.viewBoast(bNoSP);
+		BoastImage bi = boastService.viewBoastImage(bNoSP);
+		
 		model.addAttribute("boast",boast);
+		model.addAttribute("bi",bi);
 		
 		return "/boast/boastView";
 	}
@@ -97,6 +90,34 @@ public class BoastController {
 		return "redirect:/boast/list";
 	}
 	
+	
+	//공부자랑 수정폼
+	@GetMapping("/modifyForm/{bNoSP}")
+	public String BoastModifyForm(@PathVariable int bNoSP, Model model) throws Exception {
+		
+		Boast boast = boastService.viewBoast(bNoSP);
+		model.addAttribute("boast",boast);
+		
+		return "/boast/boastModify";
+	}
+	
+	//공부자랑 수정
+	@PostMapping("/modifyForm/modify/{bNoSP}")
+	public String JobPostingModify(@PathVariable int bNoSP, @ModelAttribute Boast boast, @ModelAttribute BoastImage boastimage,
+									@RequestParam("newfile") MultipartFile file) throws Exception {
+	
+		boastService.modifyBoast(boast);
+		File dest = new File(fdir+"/"+file.getOriginalFilename());
+		file.transferTo(dest);
+		
+		boastimage.setbImage(dest.getName());		
+		boastimage.setbImageNoF(bNoSP);
+
+		boastService.modifyBoastImg(bNoSP);
+		
+		return "redirect:/boast/view/"+bNoSP;
+	}
+
 }
 	
 /*

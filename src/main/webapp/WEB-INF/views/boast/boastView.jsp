@@ -23,12 +23,13 @@
     <div class="card w-75 mx-auto">
 	    <div class="card-body">
 	    	<h4 class="card-title">Date: ${boast.bDate}</h4>
+	    	<img class="card-img-top" src="/resources/boast/img/${bi.bImage}" alt="공부자랑 이미지 자리">
 	    	<p class="card-text">Content: ${boast.bContent}</p>
 	    </div>
     </div>
     <hr>
-    <a href="javascript:history.back()" class="btn btn-primary"> Back</a>
-    <a href="/boast/modify/${boast.bNoSP}" class="btn btn-primary">수정하기</a>
+    <a href="/boast/list" class="btn btn-primary"> Back</a>
+    <a href="/boast/modifyForm/${boast.bNoSP}" class="btn btn-primary">수정하기</a>
     
     </div>
     </body>

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import WORKERS.Boast.dto.BoastDTO;
 import WORKERS.Boast.model.Boast;
+import WORKERS.Boast.model.BoastImage;
 import WORKERS.Boast.repository.BoastMapper;
 import lombok.RequiredArgsConstructor;
 
@@ -33,7 +34,23 @@ public class BoastService {
 	}
 
 	public void deleteBoast(int bNoSP) throws Exception {
-		boastMapper.DeleteBoast(bNoSP);
-		
+		boastMapper.DeleteBoast(bNoSP);		
 	}
+
+	public void modifyBoast(Boast boast) throws Exception {
+		boastMapper.ModifyBoast(boast);		
+	}
+
+	public void modifyBoastImg(int bNoSP) throws Exception {
+		boastMapper.ModifyBoastImg(bNoSP);		
+	}
+
+	public BoastImage viewBoastImage(int bNoSP) throws Exception {
+		int bImageNoF = bNoSP;
+		boastMapper.ViewBoastImage(bImageNoF);
+		return null;
+	}
+
+
+	
 }

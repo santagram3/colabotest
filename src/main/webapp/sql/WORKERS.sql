@@ -211,8 +211,9 @@ REFERENCES BoastTable(bNoSP);
 CREATE TABLE BoastImage(
    bImageNoF NUMBER NOT NULL,--BoastTable의 글번호-foreign
    bImage CLOB NOT NULL--이미지이름
-   
 )
+update BoastImage set bImage='logo.png' where bImageNoF=1;
+select * from BoastImage;
    
 ALTER TABLE BoastImage
 ADD CONSTRAINTS BoastImg_FK FOREIGN KEY (bImageNoF)--BoastImage의 bNoSP가 foreign키 

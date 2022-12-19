@@ -13,6 +13,10 @@
 		<result property="bDate" column="bDate"/>
 		<result property="bContent" column="bContent"/>
 	</resultMap>
+	<resultMap id="boastimg" type="WORKERS.Boast.model.BoastImage">
+		<result property="bImageNoF" column="bImageNoF"/>
+		<result property="bImage" column="bImage"/>
+	</resultMap>
 
     
     <select id="getBoastList" resultMap="boastlist">
@@ -23,8 +27,20 @@
     	select * from BoastTable where bNoSP = #{bNoSP}
     </select>
     
+    <select id="ViewBoastImage" resultMap="boastimg">
+    	select * from BoastImage where bImageNoF = #{bImageNoF}
+    </select>
+    
     <select id="DeleteBoast" resultMap="boastlist">
     	delete from BoastTable where bNoSP = #{bNoSP}
     </select>    
+    
+    <select id="ModifyBoast" resultMap="boastlist">
+    	update BoastTable set bTitle=#{bTitle}, bWriter=#{bWriter}, bContent=#{bContent} where bNoSP=#{bNoSP}
+    </select>
+    
+    <select id="ModifyBoastImg" resultMap="boastimg">
+    	update BoastImage set bImage = #{bImage} where bImageNoF = #{bImageNoF}
+    </select>
     
 </mapper>   

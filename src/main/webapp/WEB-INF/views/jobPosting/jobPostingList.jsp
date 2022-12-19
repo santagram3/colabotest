@@ -108,18 +108,12 @@ pageEncoding="UTF-8"%>
     </tbody>
     </c:forEach>
     
- 
   </tbody>
 </table>
-			
-	
+				
 	<a href="/jobposting/addForm" type="button" class="btn btn-primary sticky-bottom">작성하기</a>
-	
-	
+		
 		</div>
-   
-
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

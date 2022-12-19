@@ -29,6 +29,7 @@ public class UserService {
       user.setUserPw(user.getUserPw().trim());
       user.setNickName(user.getNickName().trim());
       user.setSelfIntroduce(user.getSelfIntroduce().trim());
+//      user.setOauth(user.getOauth().trim());
       // 맵퍼를 불러서 메소드 사용 !
       userMapper.signUpUser(user);
    }
