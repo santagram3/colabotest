@@ -181,8 +181,9 @@ create table BoastTable(
    bContent CLOB NOT NULL,--글내용 / 이미지는 BoastImg이미지테이블참조
    bDate DATE default sysdate NOT NULL--글작성일자
    );   
-   insert into BoastTable values(1,'공부자랑1번글','재욱스','자바를 공부했습니다.',sysdate);
+   insert into BoastTable values(2,'공부자랑2번글','재욱스','DB를 공부했습니다.',sysdate);
    select * from BoastTable;
+   drop table BoastTable;
    
 create TABLE BoastReport(
    bReportNoS NUMBER NOT NULL,--신고테이블글번호-sequence
@@ -212,7 +213,9 @@ CREATE TABLE BoastImage(
    bImageNoF NUMBER NOT NULL,--BoastTable의 글번호-foreign
    bImage CLOB NOT NULL--이미지이름
 )
-update BoastImage set bImage='logo.png' where bImageNoF=1;
+update BoastImage set bImage='logo.png' where bImageNoF=2;
+insert into BoastImage values (1,'logo.png');
+insert into BoastImage values (2,'/img/logo.png');
 select * from BoastImage;
    
 ALTER TABLE BoastImage
