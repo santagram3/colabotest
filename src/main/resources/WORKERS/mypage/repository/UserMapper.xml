@@ -12,6 +12,7 @@
         <result property="birthday" column="birthday"/>   
         <result property="userGrade" column="userGrade"/>   
         <result property="selfIntroduce" column="selfIntroduce"/>  
+        <result property="oauth" column="oauth"/>  
     </resultMap>
 
     <!-- 유저 아이디 가져오기! -->
@@ -31,8 +32,8 @@
     
  	<!-- 회원가입 시켜줌 -->
     <insert id="signUpUser">
-       insert into userTable(userEmail,userPw,nickName,birthday,selfIntroduce)
-	    values(#{userEmail},#{userPw},#{nickName},#{birthday},#{selfIntroduce})
+       insert into userTable(userEmail,userPw,nickName,birthday,selfIntroduce,oauth)
+	    values(#{userEmail},#{userPw},#{nickName},#{birthday},#{selfIntroduce},#{oauth})
     </insert>
     
     <!-- 이메일주고 비밀번호 가져오는 쿼리 -->

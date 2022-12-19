@@ -1,7 +1,5 @@
 package WORKERS.kakaoLogin.controller;
 
-import java.sql.Date;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpEntity;
@@ -162,6 +160,8 @@ public class kakaoLogin {
 		kakaoUser.setNickName(kakaoProfile.getKakao_account().getProfile().getNickname());
 		// 자기소개
 		kakaoUser.setSelfIntroduce("카카오로그인으로 들어온 가입자");
+		// 카카오 로그인  사용자 인지 확인하는 필드 
+		kakaoUser.setOauth("KAKAO");
 
 		System.out.println("111111111111111");
 		System.out.println(kakaoUser.toString());
@@ -187,8 +187,15 @@ public class kakaoLogin {
 		System.out.println("66666666666666666");
 		userService.loginSessionService(loginDTO, session);
 
+		session.setAttribute("access_token", oauthToken.getAccess_token());
+		
 		System.out.println("777777777777777777");
 		return "redirect:/test/header";
 	}
+	
+	
+
+	
+	
 
 }
