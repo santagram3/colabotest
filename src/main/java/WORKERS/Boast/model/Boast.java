@@ -6,8 +6,8 @@ public class Boast {
 	private int bNoSP;
 	private String bTitle;
 	private String bWriter;
-	private Date bDate;
 	private String bContent;
+	private Date bDate;
 	
 	
 	public int getbNoSP() {

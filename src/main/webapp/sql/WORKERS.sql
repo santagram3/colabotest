@@ -184,6 +184,9 @@ create table BoastTable(
    insert into BoastTable values(2,'공부자랑2번글','재욱스','DB를 공부했습니다.',sysdate);
    select * from BoastTable;
    drop table BoastTable;
+   delete from BoastTable where bNoSP=2;
+   
+   SELECT * FROM    ALL_CONSTRAINTS WHERE    TABLE_NAME = 'BoastTable';
    
 create TABLE BoastReport(
    bReportNoS NUMBER NOT NULL,--신고테이블글번호-sequence
@@ -213,10 +216,11 @@ CREATE TABLE BoastImage(
    bImageNoF NUMBER NOT NULL,--BoastTable의 글번호-foreign
    bImage CLOB NOT NULL--이미지이름
 )
-update BoastImage set bImage='logo.png' where bImageNoF=2;
-insert into BoastImage values (1,'logo.png');
-insert into BoastImage values (2,'/img/logo.png');
+
+drop table BoastImage;
 select * from BoastImage;
+select * from BoastImage where bImageNoF = 7;
+
    
 ALTER TABLE BoastImage
 ADD CONSTRAINTS BoastImg_FK FOREIGN KEY (bImageNoF)--BoastImage의 bNoSP가 foreign키 

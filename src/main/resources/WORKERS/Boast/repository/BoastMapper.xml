@@ -10,10 +10,10 @@
 		<result property="bNoSP" column="bNoSP"/>
 		<result property="bTitle" column="bTitle"/>
 		<result property="bWriter" column="bWriter"/>
-		<result property="bDate" column="bDate"/>
 		<result property="bContent" column="bContent"/>
+		<result property="bDate" column="bDate"/>
 	</resultMap>
-	<resultMap id="boastimg" type="WORKERS.Boast.model.BoastImage">
+	<resultMap id="boastImg" type="WORKERS.Boast.model.BoastImage">
 		<result property="bImageNoF" column="bImageNoF"/>
 		<result property="bImage" column="bImage"/>
 	</resultMap>
@@ -23,11 +23,25 @@
     	select * from BoastTable order by bDate desc
     </select>
     
+    <select id="addBoast" resultMap="boastlist">
+ 		insert into BoastTable
+ 		values (BoastTable_sequence.nextval,#{bTitle},#{bWriter},#{bContent},sysdate)
+ 	</select>
+ 	
+ 	<select id="findbNoSP" resultType="int">
+ 		select max(bNoSP) from BoastTable		
+ 	</select>
+ 	
+ 	<select id="addBoastImg" resultMap="boastImg" >
+ 		insert into BoastImage
+ 		values (#{bImageNoF},#{bImage})
+ 	</select>
+    
     <select id="ViewBoast" resultMap="boastlist">
     	select * from BoastTable where bNoSP = #{bNoSP}
     </select>
     
-    <select id="ViewBoastImage" resultMap="boastimg">
+    <select id="ViewBoastImage" resultMap="boastImg">
     	select * from BoastImage where bImageNoF = #{bImageNoF}
     </select>
     
@@ -35,11 +49,15 @@
     	delete from BoastTable where bNoSP = #{bNoSP}
     </select>    
     
+    <select id="DeleteBoastImg" resultMap="boastImg">
+    	delete from BoastImage where bImageNoF = #{bImageNoF}
+    </select>
+    
     <select id="ModifyBoast" resultMap="boastlist">
     	update BoastTable set bTitle=#{bTitle}, bWriter=#{bWriter}, bContent=#{bContent} where bNoSP=#{bNoSP}
     </select>
     
-    <select id="ModifyBoastImg" resultMap="boastimg">
+    <select id="ModifyBoastImg" resultMap="boastImg">
     	update BoastImage set bImage = #{bImage} where bImageNoF = #{bImageNoF}
     </select>
     

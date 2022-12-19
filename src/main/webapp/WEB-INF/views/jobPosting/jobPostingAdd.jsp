@@ -21,7 +21,7 @@ pageEncoding="UTF-8"%>
   
 <!-- 구인공고 게시글 작성폼  -->
 
-<img src="/resources/jobPosting/img/add.png" class="img-fluid" alt="...">
+<img src="/jobPosting/img/add.png" class="img-fluid" alt="...">
 	<div class="shadow p-3 mb-5 bg-body rounded card border-primary position-absolute top-100 start-50 translate-middle " style="width:800px;">
 		<form  method="post" action="/jobposting/add" enctype="multipart/form-data">
 

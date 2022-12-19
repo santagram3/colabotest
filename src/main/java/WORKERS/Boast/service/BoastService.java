@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import WORKERS.Boast.dto.BoastDTO;
 import WORKERS.Boast.model.Boast;
 import WORKERS.Boast.model.BoastImage;
 import WORKERS.Boast.repository.BoastMapper;
@@ -22,10 +21,22 @@ public class BoastService {
 	private BoastMapper boastMapper;
 
 	public List<Boast> boastList() throws Exception {
-		System.out.println("list 서비스 도착");
 		List<Boast> bl = boastMapper.getBoastList();
-		System.out.println("list 서비스 완료");
 		return bl;
+	}
+	
+	public void addBoast(Boast boast) throws Exception {
+		boastMapper.addBoast(boast);
+	}
+	
+	public int findbNoSP() throws Exception {
+		
+		int i = boastMapper.findbNoSP();
+		return i;
+	}
+	
+	public void addBoastImg(BoastImage boastImg) throws Exception{
+		boastMapper.addBoastImg(boastImg);		
 	}
 
 	public Boast viewBoast(int bNoSP) throws Exception {
@@ -34,21 +45,23 @@ public class BoastService {
 	}
 
 	public void deleteBoast(int bNoSP) throws Exception {
-		boastMapper.DeleteBoast(bNoSP);		
+		int bImageNoF = bNoSP;
+		boastMapper.DeleteBoastImg(bImageNoF);
+		boastMapper.DeleteBoast(bNoSP);
+		
 	}
 
 	public void modifyBoast(Boast boast) throws Exception {
 		boastMapper.ModifyBoast(boast);		
 	}
 
-	public void modifyBoastImg(int bNoSP) throws Exception {
-		boastMapper.ModifyBoastImg(bNoSP);		
+	public void modifyBoastImg(BoastImage boastimage) throws Exception {
+		boastMapper.ModifyBoastImg(boastimage);		
 	}
 
-	public BoastImage viewBoastImage(int bNoSP) throws Exception {
-		int bImageNoF = bNoSP;
-		boastMapper.ViewBoastImage(bImageNoF);
-		return null;
+	public BoastImage viewBoastImage(int bImageNoF) throws Exception {
+		BoastImage b = boastMapper.ViewBoastImage(bImageNoF);
+		return b;
 	}
 
 

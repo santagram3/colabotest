@@ -23,7 +23,7 @@
     <div class="card w-75 mx-auto">
 	    <div class="card-body">
 	    	<h4 class="card-title">Date: ${boast.bDate}</h4>
-	    	<img class="card-img-top" src="/boast/img/${bi.bImage}" alt="공부자랑 이미지 자리">
+	    	<img class="card-img-top" src="/img/boast/${bi.bImage}" alt="공부자랑 이미지 자리">
 	    	<p class="card-text">Content: ${boast.bContent}</p>
 	    </div>
     </div>
