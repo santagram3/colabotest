@@ -23,7 +23,7 @@ public class CompanyController {
 	public String CompanySignUp2() {
 		// api 적용 후 
 		System.out.println("/CompanySignUp2");
-		return "";
+		return "/mypage/CompanySignUp2";
 	}
 
 }

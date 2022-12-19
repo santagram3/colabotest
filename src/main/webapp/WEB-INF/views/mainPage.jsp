@@ -13,9 +13,9 @@
     <Header>
      <%@ include file="/WEB-INF/views/header/header.jsp" %> 
     </Header>
-
+    
     <h1>
-        123123
+       MAINPAGE
     </h1>
 </body>
 </html>

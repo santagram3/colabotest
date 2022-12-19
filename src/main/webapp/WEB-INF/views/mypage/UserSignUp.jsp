@@ -46,7 +46,6 @@ pageEncoding="UTF-8"%>
                     <button class="btn btn-info submitButton">회원가입하기</button>
                 </div>
                 <input type="hidden" name="oauth" value="">
-              
             </form>
         </div>
     </div>
