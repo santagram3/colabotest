@@ -16,6 +16,6 @@ public class MainPageController {
 		
 		System.out.println("---------/main/Page-----------------");
 		
-		return "/mainPage";
+		return "mainPage";
 	}
 }

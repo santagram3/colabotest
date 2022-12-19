@@ -91,7 +91,7 @@ public class MyPageController {
 		model.addAttribute("loginUserInfo",loginUserInfo);
 		
 		
-		return "";
+		return "/mypage/mypageInfo";
 	}
 	
 	

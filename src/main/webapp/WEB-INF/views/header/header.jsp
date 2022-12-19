@@ -41,7 +41,7 @@
             </c:if>
             <c:if test="${loginUser != null}">
                 <div>
-                    <a href="">${loginUser.nickName}님 환영합니다.</a>
+                    <a href="/mypage/info">${loginUser.nickName}님 환영합니다.</a>
                     <a href="/login/logout">로그아웃 하기</a>
                 </div>
             </c:if>
