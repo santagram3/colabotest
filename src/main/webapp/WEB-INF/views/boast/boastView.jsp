@@ -15,9 +15,8 @@
 <%@ include file ="../header/header.jsp" %>
 </header>
    <body>
-  
    
-   <div class="container w-75 mt-5 mx-auto">
+  <div class="container w-75 mt-5 mx-auto">
    <p>공부 자랑하기</p>
    	<div class="card mb-3 border border-primary">
   		<div class="row g-0">
@@ -36,8 +35,11 @@
 
     <hr>
     <a href="javascript:history.back()" class="btn btn-primary btn-sm"> Back</a>
-    <a href="/boast/modify/${boast.bNoSP}" class="btn btn-primary btn-sm">수정하기</a>
+    <a href="/boast/modifyForm/${boast.bNoSP}" class="btn btn-primary btn-sm">수정하기</a>
     
     </div>
+   
+   
+   
     </body>
 </html>

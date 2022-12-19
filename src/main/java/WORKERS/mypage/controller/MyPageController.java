@@ -1,9 +1,12 @@
 package WORKERS.mypage.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +25,7 @@ public class MyPageController {
 	
 	private final UserService userService;
 	
-	
+	// 회원가입창 만들기 
 	@GetMapping("/UserSignUp")
 	public String GetUserSignUp() {	
 		// 정상 작동 
@@ -30,6 +33,7 @@ public class MyPageController {
 		return "/mypage/UserSignUp";
 	}
 	
+	// 회원 가입 정보 폼으로 받고 가져오기 
 	@PostMapping("/UserSignUp")
 	public String PostUserSignUp1(@ModelAttribute User user) throws Exception {
 		// 값이 잘 들어오는지 확인! 
@@ -56,7 +60,7 @@ public class MyPageController {
 		System.out.println("=============");
 		String id = userService.findUserIdService(userEmail);
 		
-		System.out.println( "id = " + id);
+		System.out.println("id = " + id);
 		
 		if(userEmail.equals(id)) {
 			// 아이디가 있다는 뜻  
@@ -68,20 +72,33 @@ public class MyPageController {
 	}
 	
 	
+	// 로그인 유저 정보 !! 
+	@GetMapping("/info")
+	public String myInfo(HttpSession session,Model model) throws Exception{
+		System.out.println("/mypage/info");
+		// 세션에서 받아온 로그인 유저 
+		User sessionLoginUser = (User)session.getAttribute("loginUser");
+		
+		// 세션에서 받아온 로그인에서 이메일 가져옴 
+		String loginUserEmail = sessionLoginUser.getUserEmail();
+		
+		// 그걸 앞 뒤 공백 다 자름 
+		loginUserEmail.trim();
+		
+		// 받아온 이메일로 사람 정보 찾아서 가져옴 ! 
+		User loginUserInfo = userService.findUserService(loginUserEmail);
+		
+		model.addAttribute("loginUserInfo",loginUserInfo);
+		
+		
+		return "/mypage/mypageInfo";
+	}
 	
-	@GetMapping("/CompanySignUp1")
-	public String CompanySignUp1() {
-		// api 적용 전 
-		System.out.println("/CompanySignUp1");
-		return "/mypage/CompanySignUp1";
-	}
-
-	@GetMapping("/CompanySignUp2")
-	public String CompanySignUp2() {
-		// api 적용 후 
-		System.out.println("/CompanySignUp2");
-		return "";
-	}
+	
+	
+	
+	
+	
 	
 
 }

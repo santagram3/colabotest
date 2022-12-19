@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class User {
-
+	
 	private String userEmail;
 	private String userPw;
 	private String nickName;
@@ -14,5 +14,5 @@ public class User {
 	private String userGrade;
 	private String selfIntroduce;
 	private String oauth;
-
+	 
 }

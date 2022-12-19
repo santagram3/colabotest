@@ -56,16 +56,13 @@ pageEncoding="UTF-8"%>
 </div>
  
    
-    </div>
-    
+</div>   
 </div>
-			</div>
+</div>
+
+<hr>
 			
-			<div class="container-md2">
-			</div>
-			<hr>
-			
-		</div>
+</div>
 
 
 

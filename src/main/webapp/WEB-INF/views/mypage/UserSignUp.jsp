@@ -13,6 +13,7 @@ pageEncoding="UTF-8"%>
 </head>
 
 <body>
+
     <div class="signUpcontainer">
         <div class="slogun"> 이번주 금요일에 뭐해? 취준 안해? 가입해서 자소서나 써 .. ;; </div>
         <div class="signupbox">
@@ -44,10 +45,8 @@ pageEncoding="UTF-8"%>
                     <button type="button" class="btn btn-success" onclick="backhome()">뒤로 가기</button>
                     <button class="btn btn-info submitButton">회원가입하기</button>
                 </div>
-                <div>
-                    <button class="aaa">클릭</button>
-
-                </div>
+                <input type="hidden" name="oauth" value="">
+              
             </form>
         </div>
     </div>
@@ -73,7 +72,7 @@ pageEncoding="UTF-8"%>
 
 
             $('.aaa').click(function () {
-                console.log('aaa on');
+
                 // 이메일 중복확인이 여기서 들어가야 한다. 비동기 요청!!
                 fetch('/mypage/eamilcheck?userEmail=' + $inputuserEmail.value)
                     .then(Response => Response.text())
@@ -110,8 +109,6 @@ pageEncoding="UTF-8"%>
                 $('.signUpForm').submit;
             }
         });
-
-
         
     </script>
 

@@ -181,8 +181,12 @@ create table BoastTable(
    bContent CLOB NOT NULL,--글내용 / 이미지는 BoastImg이미지테이블참조
    bDate DATE default sysdate NOT NULL--글작성일자
    );   
-   insert into BoastTable values(1,'공부자랑1번글','재욱스','자바를 공부했습니다.',sysdate);
+   insert into BoastTable values(2,'공부자랑2번글','재욱스','DB를 공부했습니다.',sysdate);
    select * from BoastTable;
+   drop table BoastTable;
+   delete from BoastTable where bNoSP=2;
+   
+   SELECT * FROM    ALL_CONSTRAINTS WHERE    TABLE_NAME = 'BoastTable';
    
 create TABLE BoastReport(
    bReportNoS NUMBER NOT NULL,--신고테이블글번호-sequence
@@ -211,8 +215,12 @@ REFERENCES BoastTable(bNoSP);
 CREATE TABLE BoastImage(
    bImageNoF NUMBER NOT NULL,--BoastTable의 글번호-foreign
    bImage CLOB NOT NULL--이미지이름
-   
 )
+
+drop table BoastImage;
+select * from BoastImage;
+select * from BoastImage where bImageNoF = 7;
+
    
 ALTER TABLE BoastImage
 ADD CONSTRAINTS BoastImg_FK FOREIGN KEY (bImageNoF)--BoastImage의 bNoSP가 foreign키 
