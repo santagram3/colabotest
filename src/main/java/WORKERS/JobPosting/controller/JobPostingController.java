@@ -37,14 +37,10 @@ public class JobPostingController {
 	
 	//구인공고 리스트
 	@GetMapping("/list")
-	public String JobPostingList(Model model) throws Exception {
-		System.out.println("구인공고 리스트");
-		
+	public String JobPostingList(Model model) throws Exception {	
 		//리스트 뽑아오기 위해 Service 호출
 		List<CompanyPosting> jobpostinglist = jobpostingservice.getJobPostingList();
-		System.out.println("1");
 		model.addAttribute("jobpostinglist",jobpostinglist);
-		System.out.println(jobpostinglist.toString());
 		return "/jobPosting/jobPostingList";
 	}
 	
@@ -58,45 +54,36 @@ public class JobPostingController {
 	//구인공고 등록
 	@PostMapping("/add")
 	public String JobPostingAdd(@ModelAttribute CompanyPosting companyposting, @ModelAttribute CompanyPostingImg cpi,
-								@RequestPart(value="file",required = false) MultipartFile file) throws Exception {
-		System.out.println("구인공고를 등록");
+								@RequestParam("file") MultipartFile file) throws Exception {
+		
 		File dest = new File(fdir+"/"+file.getOriginalFilename());
 		file.transferTo(dest);
 		cpi.setCompanyImg(dest.getName());
-		
-		
+			
 		jobpostingservice.addJobPosting(companyposting);
-		int i = jobpostingservice.findCno();
-		System.out.println("i: "+i);
-		
+		int i = jobpostingservice.findCno();		
 		cpi.setCno(i);
-		System.out.println(cpi.getCno());
 		
-		jobpostingservice.addJobPostingImg(cpi);
-		System.out.println(companyposting.toString());
-		
-		
+		jobpostingservice.addJobPostingImg(cpi);	
 		return "redirect:/jobposting/list";
 	}
 	
 	//구인공고 삭제
 	@GetMapping("/delete/{cno}")
 	public String JobPostingDelete(@PathVariable int cno) throws Exception {
-		System.out.println("구인공고를 삭제");
-		jobpostingservice.deleteJobPosting(cno);
-		
+		jobpostingservice.deleteJobPosting(cno);		
 		return "redirect:/jobposting/list";
 	}
 	
 	//구인공고 상세정보
 	@GetMapping("/view/{cno}")
 	public String JobPostingView(@PathVariable int cno, Model model) throws Exception {
+		
 		CompanyPosting cp = jobpostingservice.viewJobPosting(cno);
 		CompanyPostingImg cpi = jobpostingservice.viewJobPostingImg(cno);
+		
 		model.addAttribute("cp",cp);
 		model.addAttribute("cpi",cpi);
-		System.out.println(cp.toString());
-		System.out.println(cpi.getCompanyImg());
 		
 		return "/jobPosting/jobPostingView";
 	}
@@ -104,9 +91,9 @@ public class JobPostingController {
 	//구인공고 수정폼
 	@GetMapping("/modifyForm/{cno}")
 	public String JobPostingModifyForm(@PathVariable int cno, Model model) throws Exception {
+		
 		CompanyPosting cp = jobpostingservice.viewJobPosting(cno);
 		model.addAttribute("cp",cp);
-		System.out.println(cp.toString());
 		
 		return "/jobPosting/jobPostingModify";
 	}
@@ -115,15 +102,14 @@ public class JobPostingController {
 	@PostMapping("/modifyForm/modify/{cno}")
 	public String JobPostingModify(@PathVariable int cno, @ModelAttribute CompanyPosting companyposting, @ModelAttribute CompanyPostingImg cpi,
 									@RequestParam("newfile") MultipartFile file) throws Exception {
-		System.out.println("구인공고를 수정");
-		
+	
 		jobpostingservice.modifyJobPosting(companyposting);
 		File dest = new File(fdir+"/"+file.getOriginalFilename());
 		file.transferTo(dest);
-		cpi.setCompanyImg(dest.getName());
 		
+		cpi.setCompanyImg(dest.getName());		
 		cpi.setCno(cno);
-		System.out.println(cpi.toString());
+
 		jobpostingservice.modifyJobPostingImg(cpi);
 		
 		return "redirect:/jobposting/view/"+cno;

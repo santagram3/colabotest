@@ -21,69 +21,51 @@ public class JobPostingService {
 	@Autowired
 	private JobPostingMapper jobPostingMapper;
 
+//list
 	public List<CompanyPosting> getJobPostingList() throws Exception{
-		System.out.println("list 서비스 도착");
-		
-//		List<CompanyPosting> jpl = new ArrayList<>();
-//		jpl = jobPostingMapper.JobPostingList();
-		
-		List<CompanyPosting> jpl = jobPostingMapper.JobPostingList();
-		//mapper 호출해서 가져온 리스트를 리턴
-		
-		return jpl;
-		
+		List<CompanyPosting> jpl = jobPostingMapper.JobPostingList();		
+		return jpl;		
 	}
-
+	
+//add
 	public void addJobPosting(CompanyPosting companyposting) throws Exception {
-		System.out.println("add 서비스 도착");
-		jobPostingMapper.AddJobPosting(companyposting);
-		
+		jobPostingMapper.AddJobPosting(companyposting);		
 	}
-	public void addJobPostingImg(CompanyPostingImg cpi) {
-		jobPostingMapper.AddJobPostingImg(cpi);
-		
-	}
-
 	
-	public void deleteJobPosting(int cno) throws Exception {
-		System.out.println("delete 서비스 도착");
-		jobPostingMapper.DeleteJobPosting(cno);
-		
-	}
-
-	
-	public CompanyPosting viewJobPosting(int cno) throws Exception {
-		System.out.println("view 서비스 도착");
-		
-		CompanyPosting c = new CompanyPosting();
-		c= jobPostingMapper.ViewJobPosting(cno);
-		
-		return c;
-	}
-
-	
-	public void modifyJobPosting(CompanyPosting companyposting) throws Exception {
-		System.out.println("modify 서비스 도착");
-		jobPostingMapper.ModifyJobPosting(companyposting);
-		
-	}
-
 	public int findCno() throws Exception {
 		int i = jobPostingMapper.FindCno();
 		return i;
 	}
+	
+	public void addJobPostingImg(CompanyPostingImg cpi) {
+		jobPostingMapper.AddJobPostingImg(cpi);		
+	}
+
+//delete	
+	public void deleteJobPosting(int cno) throws Exception {
+		jobPostingMapper.DeleteJobPosting(cno);		
+	}
+
+//view	
+	public CompanyPosting viewJobPosting(int cno) throws Exception {	
+		CompanyPosting c = new CompanyPosting();
+		c= jobPostingMapper.ViewJobPosting(cno);		
+		return c;
+	}
 
 	public CompanyPostingImg viewJobPostingImg(int cno) throws Exception {
-		System.out.println("view 이미지 서비스 도착");
 		CompanyPostingImg c = new CompanyPostingImg();
 		c= jobPostingMapper.ViewJobPostingImg(cno);
 		return c;
 	}
-
-	public void modifyJobPostingImg(CompanyPostingImg cpi) throws Exception {
-		jobPostingMapper.ModifyJobPostingImg(cpi);
-		
+	
+//modify	
+	public void modifyJobPosting(CompanyPosting companyposting) throws Exception {
+		jobPostingMapper.ModifyJobPosting(companyposting);		
 	}
-
+	
+	public void modifyJobPostingImg(CompanyPostingImg cpi) throws Exception {
+		jobPostingMapper.ModifyJobPostingImg(cpi);		
+	}
 
 }
