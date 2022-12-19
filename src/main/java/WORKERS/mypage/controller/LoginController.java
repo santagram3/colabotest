@@ -69,7 +69,7 @@ public class LoginController {
 		System.out.println("===========login/logout===============\n");
 
 		System.out.println("==========kakaologout=========");
-		if (oauth == "KAKAO") {
+		if (oauth =="KAKAO") {
 			RestTemplate rt2 = new RestTemplate();
 
 			System.out.println("2-1");

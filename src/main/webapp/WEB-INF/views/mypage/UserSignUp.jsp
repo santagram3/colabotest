@@ -13,6 +13,7 @@ pageEncoding="UTF-8"%>
 </head>
 
 <body>
+
     <div class="signUpcontainer">
         <div class="slogun"> 이번주 금요일에 뭐해? 취준 안해? 가입해서 자소서나 써 .. ;; </div>
         <div class="signupbox">

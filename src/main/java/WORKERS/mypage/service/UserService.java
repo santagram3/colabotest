@@ -52,7 +52,7 @@ public class UserService {
 		return id;
 	}
 
-	// 아이디 넣으면 그 사람 정보 다 가져옴(세션에 넣을것!)
+	// 로그인 처리 (세션에 넣을것!)
 	public String loginSessionService(LoginDTO loginDTO, HttpSession session) throws Exception {
 
 		System.out.println("=============loginSessionService==========");
@@ -85,5 +85,14 @@ public class UserService {
 		}
 
 	}
+	
+	public User findUserService(String email)throws Exception{
+		
+		User user = userMapper.findUser(email);
+		return user;
+		
+	}
+	
+	
 
 }
