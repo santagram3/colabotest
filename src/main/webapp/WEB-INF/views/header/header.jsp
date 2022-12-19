@@ -18,7 +18,7 @@
 
 <body>
     <div id="headerBox" class="shadow-sm bg-body">
-        <div class="logo"><a href="/test/header"><img src="/resources/header/img/skyblue.png" width="250px" alt="워커스로고"></a></div>
+        <div class="logo"><a href="/main/page"><img src="/resources/header/img/skyblue.png" width="250px" alt="워커스로고"></a></div>
         <div class="headerMenu">
             <div class="menuLeft fw-bold">
                 <a href="" style="color: black;">Q & A</a>
