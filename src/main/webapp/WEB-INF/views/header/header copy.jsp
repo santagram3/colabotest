@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%-- <c:set var="path" value="${pageContext.request.contextPath}"/> --%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,10 +10,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="/resources/header/css/header.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </head>
 
@@ -23,13 +23,13 @@
             <div class="menuLeft">
                 <a href="">Q & A</a>
                 <a href="">구인공고</a>
-                <a href="/boast/list">공부 자랑하기</a>
+                <a href="">공부 자랑하기</a>
                 <a href="">스터디 구하기</a>
             </div>
             <c:if test="${loginUser == null}">
                 <div class="menuRight">
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary loginbutton" data-bs-toggle="modal"
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                         data-bs-target="#staticBackdrop">
                         로그인
                     </button>
@@ -42,7 +42,7 @@
             <c:if test="${loginUser != null}">
                 <div>
                     <a href="">${loginUser.nickName}님 환영합니다.</a>
-                    <a href="/login/logout">로그아웃 하기</a>
+                    <a href="">로그아웃 하기</a>
                 </div>
             </c:if>
         </div>
@@ -114,8 +114,8 @@
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <a href="https://kauth.kakao.com/oauth/authorize?client_id=6078a2a05d3e31937245be4308a040f4&redirect_uri=http://localhost:8898/kakao/login&response_type=code"
-                                class="alink"><img src="/resources/kakao/kakao_login_medium_wide.png" alt=""></a>
+                            <a href="javascript:kakaologin()" class="alink"><img
+                                    src="/resources/kakao/kakao_login_medium_wide.png" alt=""></a>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -129,18 +129,58 @@
     <div class="result">
     </div>
 
+    <!-- 이걸 가져오아야됨 -->
 
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.1.0/kakao.min.js"
+        integrity="sha384-dpu02ieKC6NUeKFoGMOKz6102CLEWi9+5RQjWSV0ikYSFFd8M3Wp2reIcquJOemx" crossorigin="anonymous">
+    </script>
+
+    </script>
+  
     <script>
-        $('.loginbutton').click(function () {
+        function kakaologin() {
+            // 카카오 자바스크립트 키 
+        // 4155a9c84d3748af6cfb8cde5dc9f79b
+         Kakao.init('4155a9c84d3748af6cfb8cde5dc9f79b');
+        // SDK 초기화 여부를 판단합니다. // 여기까지 트루가 나옴 
+         console.log(Kakao.isInitialized());
+
+            Kakao.Auth.authorize({
+                redirectUri: 'http://localhost:8898/test/header',
+            });
+            // After
+            Kakao.API.request({
+                    url: '/v2/user/me',
+                })
+                .then(function (response) {
+                    console.log(Kakao.Auth.getAccessToken());
+                   // alert(response);
+                    //console.log(response);
+                    if (res.status === 'connected') {
+                       document.getElementById('token-result').innerText
+                        = 'login success, token: ' + Kakao.Auth.getAccessToken();
+          }
+                })
+                .catch(function (error) {
+                    alert(error);
+                    console.log(error);
+                });
+        }
+        $('.alink').click(function () {
             console.log("123123123");
         });
     </script>
+
+    <script>
+        //(function () {
+          //  kakaologin();
+       // })();
+    </script>
+
   
 
 
-
-   <!-- 부트스트랩 자바스크립트 !-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

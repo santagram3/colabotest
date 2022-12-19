@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="WORKERS.boast.repository.BoastMapper">
+					
+
+	<resultMap id="boastlist" type="WORKERS.boast.model.Boast">
+		<result property="bNoSP" column="bNoSP"/>
+		<result property="bTitle" column="bTitle"/>
+		<result property="bWriter" column="bWriter"/>
+		<result property="bContent" column="bContent"/>
+		<result property="bDate" column="bDate"/>
+		
+	</resultMap>
+
+
+	<resultMap id="boastImg" type="WORKERS.boast.model.BoastImg">
+		<result property="bImageNoF" column="bImageNoF"/>
+		<result property="bImage" column="bImage"/>
+		
+		
+	</resultMap>
+
+
+    <!-- list -->
+    <select id="getBoastList" resultMap="boastlist">
+    	select * from BoastTable order by bDate desc
+    </select>
+    
+    <!-- add -->
+ 	<select id="addBoast" resultMap="boastlist">
+ 		insert into BoastTable
+ 		values (BoastTable_sequence.nextval,#{bTitle},#{bWriter},#{bContent},sysdate)
+ 	</select>
+ 	
+ 	<select id="findbNoSP" resultType="int">
+ 		select max(bNoSP) from BoastTable		
+ 	</select>
+ 	
+ 	<select id="addBoastImg" resultMap="boastImg" >
+ 		insert into BoastImage
+ 		values (#{bImageNoF},#{bImage})
+ 	</select>
+    
+    
+</mapper>   
