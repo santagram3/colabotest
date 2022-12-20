@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import WORKERS.Boast.model.Boast;
 import WORKERS.Boast.model.BoastImage;
+import WORKERS.Boast.model.Comments;
 import WORKERS.Boast.service.BoastService;
 import lombok.RequiredArgsConstructor;
 
@@ -38,6 +39,7 @@ public class BoastController {
 		
 		List<Boast> boastlist = boastService.boastList();
 		m.addAttribute("boastlist",boastlist);
+		
 		
 		return "/boast/boastList"; //boastList jsp를 의미
 	}
@@ -70,11 +72,14 @@ public class BoastController {
 		
 		Boast boast = boastService.viewBoast(bNoSP);
 		int bImageNoF = bNoSP;
+		int aid = bNoSP;
 		System.out.println("bImageNoF: "+bImageNoF);
 		BoastImage bi = boastService.viewBoastImage(bImageNoF);
+		List<Comments> commentlist = boastService.listComment(aid);
 		
 		model.addAttribute("boast",boast);
 		model.addAttribute("bi",bi);
+		model.addAttribute("commentlist",commentlist);
 		System.out.println(bi.getbImage());
 		
 		return "/boast/boastView";
@@ -115,5 +120,18 @@ public class BoastController {
 		
 		return "redirect:/boast/view/"+bNoSP;
 	}
+	
+	
+	@PostMapping("/addcomment/{bNoSP}")
+	public String AddComment(@PathVariable int bNoSP, @ModelAttribute Comments c) {
+		int aid = bNoSP;
+		c.setAid(aid);
+		System.out.println(c.toString());
+		System.out.println(bNoSP);
+		boastService.addBoastComment(c);
+		
+		return "redirect:/boast/view/"+bNoSP;
+	}
+	
 
 }

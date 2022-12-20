@@ -17,6 +17,14 @@
 		<result property="bImageNoF" column="bImageNoF"/>
 		<result property="bImage" column="bImage"/>
 	</resultMap>
+	<resultMap id="commentAll" type="WORKERS.Boast.model.Comments">
+      <result property="commentAid" column="commentAid"/>
+      <result property="nickname" column="nickname"/>
+      <result property="commentContent" column="commentContent"/>
+      <result property="commentDate" column="commentDate"/>
+      <result property="aid" column="aid"/>
+   </resultMap>
+    
 
     
     <select id="getBoastList" resultMap="boastlist">
@@ -59,6 +67,15 @@
     
     <select id="ModifyBoastImg" resultMap="boastImg">
     	update BoastImage set bImage = #{bImage} where bImageNoF = #{bImageNoF}
+    </select>
+    
+    
+    <select id="ListComment" resultMap="commentAll">
+    	select * from comments where aid=#{aid}
+    </select>
+    <select id="AddBoastComment" resultMap="commentAll">
+    	insert into comments
+    	values (BoastCommentList_sequence.nextval, #{nickname}, #{commentContent}, sysdate, #{aid})
     </select>
     
 </mapper>   

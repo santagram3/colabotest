@@ -188,6 +188,21 @@ create table BoastTable(
    
    SELECT * FROM    ALL_CONSTRAINTS WHERE    TABLE_NAME = 'BoastTable';
    
+   create table comments(
+	commentAid number primary key,
+	nickname VARCHAR2(50) NOT NULL,
+	commentContent VARCHAR2(3000) NOT NULL,
+	commentDate date default sysdate,
+	aid number NOT NULL,
+	foreign key (aid) references BoastTable(bNoSP) on delete cascade
+);
+
+insert into comments values (1,'재욱스', '댓글댓글댓글', sysdate, 5)
+select * from comments
+
+drop table comments;
+create sequence BoastCommentList_sequence; 
+   
 create TABLE BoastReport(
    bReportNoS NUMBER NOT NULL,--신고테이블글번호-sequence
    bReportNoF NUMBER NOT NULL,--게시판글번호-foreign

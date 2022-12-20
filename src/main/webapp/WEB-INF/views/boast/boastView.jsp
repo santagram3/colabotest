@@ -28,6 +28,50 @@
 	    </div>
     </div>
     <hr>
+        <ul class="list-group">
+		<c:forEach var="comments" items="${commentlist}" varStatus="status">
+		  <li><a>[${status.count}] 닉네임: ${comments.nickname}	작성·수정일자: ${comments.commentDate}
+		   <br>내용: ${comments.commentContent} </a>
+	<!-- 댓글 수정하기 collapse -->
+		   <button class="btn-update" type="button" 
+	        data-bs-toggle="collapse" 
+	        data-bs-target="#addForm${comments.commentAid}" 
+	        aria-expanded="false" 
+	        aria-controls="addForm${comments.commentAid}">수정하기</button>
+	<div class="collapse" id="addForm${comments.commentAid}">
+	  <div class="card card-body">
+		<form method="post" 
+		      action="/news/updateComment/${comments.commentAid}" >
+		     <label class="form-label">닉네임</label>
+			<input type="text" name="nickname" class="form-control" value='${comments.nickname}' readonly="readonly">	
+			<textarea cols="50" rows="5" name="commentContent" class="form-control">${comments.commentContent}</textarea>
+			<button type="submit" class="btn btn-success mt-3">등록</button>
+		</form>
+	  </div>
+	</div>
+		  <a href="deleteComment/${comments.commentAid}"><span class="badge bg-secondary">&times;</span></a>
+		  </li>
+		</c:forEach> 
+	</ul>
+    
+        <button class="btn btn-outline-info mb-3" type="button" 
+	        data-bs-toggle="collapse" 
+	        data-bs-target="#addForm" 
+	        aria-expanded="false" 
+	        aria-controls="addForm">댓글 쓰기</button>
+	<div class="collapse" id="addForm">
+	  <div class="card card-body">
+		<form method="post" 
+		      action="/boast/addcomment/${boast.bNoSP}" >
+		     <label class="form-label">닉네임</label>
+			<input type="text" name="nickname" class="form-control">	
+			<textarea cols="50" rows="5" name="commentContent" class="form-control"></textarea>
+			<button type="submit" class="btn btn-success mt-3">등록</button>
+		</form>
+	  </div>
+	</div>
+    
+    <hr>
     <a href="/boast/list" class="btn btn-primary"> Back</a>
     <a href="/boast/modifyForm/${boast.bNoSP}" class="btn btn-primary">수정하기</a>
     
