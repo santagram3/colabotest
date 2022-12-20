@@ -20,7 +20,6 @@ import WORKERS.Boast.model.BoastImage;
 import WORKERS.Boast.service.BoastService;
 import lombok.RequiredArgsConstructor;
 
-
 @Controller
 @RequestMapping("/boast")
 @RequiredArgsConstructor
@@ -29,91 +28,87 @@ public class BoastController {
 	@Autowired
 	private BoastService boastService;
 
-
 	@Value("${boast.imgdir}")
 	String fdir;
-	
+
 	@GetMapping("/list")
 	public String listBoast(Model m) throws Exception {
-		
+
 		List<Boast> boastlist = boastService.boastList();
-		m.addAttribute("boastlist",boastlist);
-		
-		return "/boast/boastList"; //boastList jsp를 의미
+		m.addAttribute("boastlist", boastlist);
+
+		return "/boast/boastList"; // boastList jsp를 의미
 	}
-	
+
 	@GetMapping("/addForm")
-	public String BoastAddForm() {		
+	public String BoastAddForm() {
 		return "/boast/boastAdd";
 	}
-	
-		
+
 	@PostMapping("/add")
-	public String addBoast(@ModelAttribute Boast boast ,@ModelAttribute BoastImage boastImg ,
-						@RequestParam("file") MultipartFile file )throws Exception  {
-		
-			File dest = new File(fdir+"/"+file.getOriginalFilename());
-			file.transferTo(dest);
-			boastImg.setbImage(dest.getName());
-			boastService.addBoast(boast);
-			
-			int i = boastService.findbNoSP();			
-			boastImg.setbImageNoF(i);
-			
-			boastService.addBoastImg(boastImg);	
-			return "redirect:/boast/list";			
+	public String addBoast(@ModelAttribute Boast boast, @ModelAttribute BoastImage boastImg,
+			@RequestParam("file") MultipartFile file) throws Exception {
+
+		File dest = new File(fdir + "/" + file.getOriginalFilename());
+		file.transferTo(dest);
+		boastImg.setbImage(dest.getName());
+		boastService.addBoast(boast);
+
+		int i = boastService.findbNoSP();
+		boastImg.setbImageNoF(i);
+
+		boastService.addBoastImg(boastImg);
+		return "redirect:/boast/list";
 
 	}
 
 	@GetMapping("/view/{bNoSP}")
 	public String BoastView(@PathVariable int bNoSP, Model model) throws Exception {
-		
+
 		Boast boast = boastService.viewBoast(bNoSP);
 		int bImageNoF = bNoSP;
-		System.out.println("bImageNoF: "+bImageNoF);
+		System.out.println("bImageNoF: " + bImageNoF);
 		BoastImage bi = boastService.viewBoastImage(bImageNoF);
-		
-		model.addAttribute("boast",boast);
-		model.addAttribute("bi",bi);
+
+		model.addAttribute("boast", boast);
+		model.addAttribute("bi", bi);
 		System.out.println(bi.getbImage());
-		
+
 		return "/boast/boastView";
 	}
-	
-	
+
 	@GetMapping("/delete/{bNoSP}")
 	public String BoastDelete(@PathVariable int bNoSP) throws Exception {
-		
+
 		System.out.println("공부자랑 삭제");
 		boastService.deleteBoast(bNoSP);
-		
+
 		return "redirect:/boast/list";
 	}
-	
-	
-	//공부자랑 수정폼
+
+	// 공부자랑 수정폼
 	@GetMapping("/modifyForm/{bNoSP}")
 	public String BoastModifyForm(@PathVariable int bNoSP, Model model) throws Exception {
-		
-		Boast boast = boastService.viewBoast(bNoSP);		
-		model.addAttribute("boast",boast);
-		
+
+		Boast boast = boastService.viewBoast(bNoSP);
+		model.addAttribute("boast", boast);
+
 		return "/boast/boastModify";
 	}
-	
-	//공부자랑 수정
+
+	// 공부자랑 수정
 	@PostMapping("/modify/{bNoSP}")
-	public String JobPostingModify(@PathVariable int bNoSP, @ModelAttribute Boast boast, @ModelAttribute BoastImage boastimage,
-									@RequestParam("newfile") MultipartFile file) throws Exception {
+	public String JobPostingModify(@PathVariable int bNoSP, @ModelAttribute Boast boast,
+			@ModelAttribute BoastImage boastimage, @RequestParam("newfile") MultipartFile file) throws Exception {
 
 		boastService.modifyBoast(boast);
-		File dest = new File(fdir+"/"+file.getOriginalFilename());
+		File dest = new File(fdir + "/" + file.getOriginalFilename());
 		file.transferTo(dest);
-		boastimage.setbImage(dest.getName());		
+		boastimage.setbImage(dest.getName());
 		boastimage.setbImageNoF(bNoSP);
 		boastService.modifyBoastImg(boastimage);
-		
-		return "redirect:/boast/view/"+bNoSP;
+
+		return "redirect:/boast/view/" + bNoSP;
 	}
 
 }

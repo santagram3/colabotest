@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 @Transactional
 @RequiredArgsConstructor
 public class BoastService {
-	
+
 	@Autowired
 	private BoastMapper boastMapper;
 
@@ -24,19 +24,19 @@ public class BoastService {
 		List<Boast> bl = boastMapper.getBoastList();
 		return bl;
 	}
-	
+
 	public void addBoast(Boast boast) throws Exception {
 		boastMapper.addBoast(boast);
 	}
-	
+
 	public int findbNoSP() throws Exception {
-		
+
 		int i = boastMapper.findbNoSP();
 		return i;
 	}
-	
-	public void addBoastImg(BoastImage boastImg) throws Exception{
-		boastMapper.addBoastImg(boastImg);		
+
+	public void addBoastImg(BoastImage boastImg) throws Exception {
+		boastMapper.addBoastImg(boastImg);
 	}
 
 	public Boast viewBoast(int bNoSP) throws Exception {
@@ -48,15 +48,15 @@ public class BoastService {
 		int bImageNoF = bNoSP;
 		boastMapper.DeleteBoastImg(bImageNoF);
 		boastMapper.DeleteBoast(bNoSP);
-		
+
 	}
 
 	public void modifyBoast(Boast boast) throws Exception {
-		boastMapper.ModifyBoast(boast);		
+		boastMapper.ModifyBoast(boast);
 	}
 
 	public void modifyBoastImg(BoastImage boastimage) throws Exception {
-		boastMapper.ModifyBoastImg(boastimage);		
+		boastMapper.ModifyBoastImg(boastimage);
 	}
 
 	public BoastImage viewBoastImage(int bImageNoF) throws Exception {
@@ -64,6 +64,4 @@ public class BoastService {
 		return b;
 	}
 
-
-	
 }
