@@ -27,13 +27,13 @@ public interface BoastMapper {
 	public Boast ViewBoast(int bNoSP) throws Exception;
 	public BoastImage ViewBoastImg(int bImageNoF) throws Exception;
 	//comment
-		public Comment viewBoastComment(int aid) throws Exception;
+		public Comment viewBoastComment(int commentAid) throws Exception;
 	
 //delete	
 	public void DeleteBoast(int bNoSP) throws Exception;
 	public void DeleteBoastImg(int bImageNoF) throws Exception;
 	//comment
-		public void deleteBoastComment(int aid) throws Exception;
+		public void deleteBoastComment(int commentAid) throws Exception;
 		
 //modify	
 	public void ModifyBoast(Boast boast) throws Exception;
