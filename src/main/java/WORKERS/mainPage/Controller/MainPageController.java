@@ -14,7 +14,7 @@ public class MainPageController {
 	@GetMapping("/page")
 	public String mainPageLoad()throws Exception{
 		
-		System.out.println("---------/main/Page--------------아무거나---");
+		System.out.println("---------/main/Page--------------아무거나1---");
 		
 		return "mainPage";
 	}
