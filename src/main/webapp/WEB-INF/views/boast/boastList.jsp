@@ -26,10 +26,8 @@
 		</c:forEach>
 	</ul>
 	<hr>
-	<a href="/boast/addForm" type="button" class="btn btn-primary sticky-bottom">작성하기</a>
-		</form>
-	  </div>
-	</div>
+
+		<a href="/boast/addForm" type="button" class="btn btn-primary sticky-bottom">작성하기</a>
 	</div>
 </body>
 </html>

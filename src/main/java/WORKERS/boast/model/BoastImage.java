@@ -1,6 +1,6 @@
 package WORKERS.boast.model;
 
-public class BoastImg {
+public class BoastImage {
 
 	private int bImageNoF;
 	private String bImage;

@@ -23,12 +23,68 @@
     <div class="card w-75 mx-auto">
 	    <div class="card-body">
 	    	<h4 class="card-title">Date: ${boast.bDate}</h4>
+	    	<img class="card-img-top" src="/img/boast/${boastImg.bImage}" alt="공부자랑 이미지 자리">
 	    	<p class="card-text">Content: ${boast.bContent}</p>
 	    </div>
+	    
+	    
+ <h3>댓글</h3>
+    
+    <hr>
+    <ul class="list-group">
+		<c:forEach var="comments" items="${commentlist}" varStatus="status">
+		  <li><a>[${status.count}] 닉네임: ${comments.nickname}	작성·수정일자: ${comments.commentDate}
+		   <br>내용: ${comments.commentContent} </a>
+	<!-- 댓글 수정하기 collapse -->
+		   <button class="btn-update" type="button" 
+	        data-bs-toggle="collapse" 
+	        data-bs-target="#addForm${comments.commentAid}" 
+	        aria-expanded="false" 
+	        aria-controls="addForm${comments.commentAid}">수정하기</button>
+	<div class="collapse" id="addForm${comments.commentAid}">
+	  <div class="card card-body">
+		<form method="post" 
+		      action="/news/updateComment/${comments.commentAid}" >
+		     <label class="form-label">닉네임</label>
+			<input type="text" name="nickname" class="form-control" value='${comments.nickname}' readonly="readonly">	
+			<textarea cols="50" rows="5" name="commentContent" class="form-control">${comments.commentContent}</textarea>
+			<button type="submit" class="btn btn-success mt-3">등록</button>
+		</form>
+	  </div>
+	</div>
+		  <a href="deleteComment/${comments.commentAid}"><span class="badge bg-secondary">&times;</span></a>
+		  </li>
+		</c:forEach> 
+	</ul>
+	<hr>
+    <!-- 댓글 쓰기 collapse -->
+    <button class="btn btn-outline-info mb-3" type="button" 
+	        data-bs-toggle="collapse" 
+	        data-bs-target="#addForm" 
+	        aria-expanded="false" 
+	        aria-controls="addForm">댓글 쓰기</button>
+	<div class="collapse" id="addForm">
+	  <div class="card card-body">
+		<form method="post" 
+		  <!--      action="/news/addcomment/${news.aid}" >  -->
+		    <label class="form-label">닉네임</label>
+			<input type="text" name="nickname" class="form-control">	
+			<textarea cols="50" rows="5" name="commentContent" class="form-control"></textarea>
+			<button type="submit" class="btn btn-success mt-3">등록</button>
+		</form>
+	  </div>
+	</div>
+	
+    <hr>	    
+	    
+	    
+	    
+	    
+	    
     </div>
     <hr>
-    <a href="javascript:history.back()" class="btn btn-primary"> Back</a>
-    <a href="/boast/modify/${boast.bNoSP}" class="btn btn-primary">수정하기</a>
+    <a href="/boast/list" class="btn btn-primary"> Back</a>
+    <a href="/boast/modifyForm/${boast.bNoSP}" class="btn btn-primary">수정하기</a>
     
     </div>
     </body>
