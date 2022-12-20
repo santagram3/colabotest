@@ -81,9 +81,9 @@
         }
 
         function CompanySignUp1() {
-            alert("/mypage/CompanySignUp1 눌렸다");
+            alert("/mypage/CompanySignUp2 눌렸다");
             console.log("=========/mypage/CompanySignUp1===========");
-            location.href = "/company/CompanySignUp1";
+            location.href = "/company/CompanySignUp2";
         }
 
         function MainPage() {

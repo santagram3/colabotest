@@ -8,18 +8,22 @@ pageEncoding="UTF-8"%>
     <meta charset="UTF-8">
     <title>회원가입</title>
     <link rel="stylesheet" href="/resources/mypage/signUp.css">
+    <!--  -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!--제이쿼리  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
     <div class="signUpcontainer">
         <div class="slogun"> 회사 회원 가입 하는 곳! </div>
         <div class="signupbox">
-            <form action="/company/CompanySignUp1" method="post">
+            <form action="/company/CompanySignUp1" method="post" class="companySignupForm">
                 <div class="mb-3">
                     <label for="formGroupExampleInput" class="form-label">companyEmail</label>
-                    <input required type="email" class="form-control" id="formGroupExampleInput"
+                    <input required type="email" class="form-control companyEmail" id="formGroupExampleInput"
                         placeholder="ex: mini@naver.com " name="companyEmail">
+                        <button class="aaa">이메일 중복 확인</button>
                 </div>
                 <div class="mb-3">
                     <label for="formGroupExampleInput" class="form-label">companyPwd</label>
@@ -40,7 +44,7 @@ pageEncoding="UTF-8"%>
                     placeholder="companyName" name="userGrade">
                 <div class="buttongroup">
                     <button type="button" class="btn btn-success" onclick="backhome()">뒤로 가기</button>
-                    <button type="submit" class="btn btn-info">회원가입하기</button>
+                    <button class="btn btn-info submitButton">회원가입하기</button>
                 </div>
             </form>
         </div>
@@ -57,52 +61,48 @@ pageEncoding="UTF-8"%>
     <script>
         $(document).ready(function () {
 
+            const $checkArr = [false];
 
-            const checkEmailArr = [false];
-
-            const $inputuserEmail = document.querySelector(".userEmail");
-
-            console.log('$inputuserEmail = ' + $inputuserEmail);
-            console.log('checkEmailArr = ' + checkEmailArr[0]);
-
+            const $companyEmail = document.querySelector(".companyEmail");
+           
 
             $('.aaa').click(function () {
-
+                console.log("aaaclick");
+                console.log(" $companyEmail.value = " + $companyEmail.value);
                 // 이메일 중복확인이 여기서 들어가야 한다. 비동기 요청!!
-                fetch('/mypage/eamilcheck?userEmail=' + $inputuserEmail.value)
+                fetch('/company/findCompanyEmail?companyEamil=' + $companyEmail.value)
                     .then(Response => Response.text())
                     .then(msg => {
-                        console.log("cccccccccccccccccccccccccc");
-                        if (msg === 'double') {
-                            console.log("double");
+                        console.log("companyEmail");
+                        if (msg === 'yesCompanyEmail') {
+                            console.log("yesCompanyEmail");
                             // 중복 이메일인 경우
-
                             alert('중복된 이메일입니다.');
-                            checkEmailArr[0] = false;
-                        } else if (msg === 'onlyone') {
-                            console.log("onlyone");
-                            $inputuserEmail.readOnly = true;
+                            $checkArr[0] = false;
+                        } else if (msg === 'noCompanyEmail') {
+                            console.log("noCompanyEmail");
+                            $companyEmail.readOnly = true;
                             alert('중복 없는 이메일입니다');
-
-                            checkEmailArr[0] = true;
+                            $checkArr[0] = true;
                         }
                     });
-
             });
         });
+        // 위에까지 성공 !! 
 
 
-
+        // 올바르게 입력 했는지 체크 
         $('.submitButton').click(function () {
+            console.log("submit click ~~~~~~~~~~~~~~~~~~~");
             e.preventdefault();
 
-            if (checkEmailArr[0] == false) {
-                alert("아이디 중복 확인을 해주세요")
-                return;
-            } else if (checkEmailArr[0] == true) {
-
-                $('.signUpForm').submit;
-            }
+            for (let c of $checkArr) {
+                    if (c === false) {
+                        return;
+                    }
+                }
+                $('.companySignupForm').submit;
+            
         });
     </script>
 
