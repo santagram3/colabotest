@@ -98,7 +98,7 @@ pageEncoding="UTF-8"%>
     </tr>
   </thead>
   <tbody>
-  ${fn:length(AllList)}
+
    <c:choose>
                     <c:when test="${fn:length(AllList) > 0}">
                         <c:forEach items="${AllList}" var="list" varStatus="status">

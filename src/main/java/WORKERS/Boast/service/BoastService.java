@@ -2,6 +2,7 @@
 package WORKERS.Boast.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import WORKERS.Boast.model.Boast;
 import WORKERS.Boast.model.BoastImage;
 import WORKERS.Boast.model.Comments;
 import WORKERS.Boast.repository.BoastMapper;
+import WORKERS.JobPosting.model.Pagination;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -75,6 +77,17 @@ public class BoastService {
 		
 	}
 
-
 	
+	
+	public List<Map<String, Object>> SelectAllList() throws Exception {
+        return boastMapper.SelectAllList();
+    }
+ 
+    public List<Map<String, Object>> SelectAllList(Pagination pagination) throws Exception {
+        return boastMapper.SelectAllList(pagination);
+    }
+ 
+    public int testTableCount() throws Exception {
+        return boastMapper.testTableCount();
+    }
 }

@@ -39,6 +39,7 @@ public class JobPostingController {
 	private JobPostingService jobpostingservice;// = new JobPostingService();
 	
 	//구인공고 리스트
+//	@GetMapping("/list")
 	/*
 	 * public String JobPostingList(Model model) throws Exception { //리스트 뽑아오기 위해
 	 * Service 호출 List<CompanyPosting> jobpostinglist =
@@ -47,7 +48,6 @@ public class JobPostingController {
 	 * "/jobPosting/jobPostingList"; }
 	 */
 	@RequestMapping(value = "list")
-//	@GetMapping("/list")
 	public ModelAndView AllListView(
             @RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage,
             @RequestParam(value = "cntPerPage", required = false, defaultValue = "10") int cntPerPage,
