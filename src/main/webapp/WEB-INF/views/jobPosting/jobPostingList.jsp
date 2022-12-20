@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -59,12 +60,12 @@ pageEncoding="UTF-8"%>
   			<path fill-rule="evenodd" d="M2.965 12.695a1 1 0 0 0-.287-.801C1.618 10.83 1 9.468 1 8c0-3.192 3.004-6 7-6s7 2.808 7 6c0 3.193-3.004 6-7 6a8.06 8.06 0 0 1-2.088-.272 1 1 0 0 0-.711.074c-.387.196-1.24.57-2.634.893a10.97 10.97 0 0 0 .398-2Zm-.8 3.108.02-.004c1.83-.363 2.948-.842 3.468-1.105A9.06 9.06 0 0 0 8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6a10.437 10.437 0 0 1-.524 2.318l-.003.011a10.722 10.722 0 0 1-.244.637c-.079.186.074.394.273.362a21.673 21.673 0 0 0 .693-.125ZM8 5.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132Z"/>
 			</svg></p></br>
 			<ol class="list-group"> <div class="d-flex flex-row justify-content-around flex-wrap">
-					<c:forEach var="jp" items="${jobpostinglist}" varStatus="status">
+					<c:forEach var="jp" items="${AllList}" varStatus="status">
 					  <li class="list-unstyled list-group-item shadow p-3 mb-5 bg-body rounded" style="width:300px;">
 					    <div class="ms-4 me-auto">
-					      <a href = "view/${jp.cno}" class="fw-bold fs-5" style="color: black;"> ${status.count}　　　${jp.cTitle}<br>　　　　  <p style="color:gray;" class="fs-6"> ${jp.cWriter} </p></a>
-					      <P style="color:gray;"><span class="badge bg-primary rounded-pill">　지원기간  |　 ${jp.cDueDate} 까지   　 </span></P>
-						  <a href="delete/${jp.cno}"><span class="badge bg-secondary btn-sm">&times;</span></a>
+					      <a href = "view/${jp.CNO}" class="fw-bold fs-5" style="color: black;"> ${status.count}　　　${jp.CTITLE}<br>　　　　  <p style="color:gray;" class="fs-6"> ${jp.CWRITER} </p></a>
+					      <P style="color:gray;"><span class="badge bg-primary rounded-pill">　지원기간  |　 ${jp.CDUEDATE} 까지   　 </span></P>
+						  <a href="delete/${jp.CNO}"><span class="badge bg-secondary btn-sm">&times;</span></a>
 					    </div>
 					  </li>
 					  </c:forEach>
@@ -96,20 +97,74 @@ pageEncoding="UTF-8"%>
 </svg></th>
     </tr>
   </thead>
-  <c:forEach var="jp" items="${jobpostinglist}" varStatus="status">
   <tbody>
-    <tr>
-      <th scope="row">${status.count}</th>
-      <td><a href = "view/${jp.cno}" style="color: black;">${jp.cTitle}</a></td>
-      <td>${jp.cWriter}</td>
-      <td>${jp.cDate}</td>
-      <td>${jp.cDueDate}</td>
-    </tr>
+  ${fn:length(AllList)}
+   <c:choose>
+                    <c:when test="${fn:length(AllList) > 0}">
+                        <c:forEach items="${AllList}" var="list" varStatus="status">
+                            <tr>
+                            	<th scope="row">${list.ROW_NUM}</th>
+                                <td><a href = "view/${list.CNO}" style="color: black;">${list.CTITLE}</a></td>
+                                <td>${list.CWRITER}</td>
+                                <td>${list.CDATE}</td>
+                                <td>${list.CDUEDATE}</td>
+                            </tr>
+                        </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+                        <tr>
+                            <td colspan="4">조회된 결과가 없습니다.</td>
+                        </tr>
+                    </c:otherwise>
+                </c:choose>
+
     </tbody>
-    </c:forEach>
     
   </tbody>
 </table>
+
+    <!--paginate -->
+    <div class="paginate">
+        <div class="paging">
+            <a class="direction prev" href="javascript:void(0);"
+                onclick="movePage(1,${pagination.cntPerPage},${pagination.pageSize});">
+                &lt;&lt; </a> 
+            <a class="direction prev" href="javascript:void(0);"
+                onclick="movePage(${pagination.currentPage}<c:if test="${pagination.hasPreviousPage == true}">-1</c:if>,${pagination.cntPerPage},${pagination.pageSize});">
+                &lt; </a>
+ 
+            <c:forEach begin="${pagination.firstPage}"
+                end="${pagination.lastPage}" var="idx">
+                <a
+                    style="color:<c:out value="${pagination.currentPage == idx ? '#cc0000; font-weight:700; margin-bottom: 2px;' : ''}"/> "
+                    href="javascript:void(0);"
+                    onclick="movePage(${idx},${pagination.cntPerPage},${pagination.pageSize});">
+                    <c:out value="${idx}" />
+                </a>
+            </c:forEach>
+            <a class="direction next" href="javascript:void(0);"
+                onclick="movePage(${pagination.currentPage}<c:if test="${pagination.hasNextPage == true}">+1</c:if>,${pagination.cntPerPage},${pagination.pageSize});">
+                &gt; </a> <a class="direction next" href="javascript:void(0);"
+                onclick="movePage(${pagination.totalRecordCount},${pagination.cntPerPage},${pagination.pageSize});">
+                &gt;&gt; </a>
+        </div>
+    </div>
+    <!-- /paginate -->
+ 
+    <div class="bottom">
+        <div class="bottom-left">
+            <select id="cntSelectBox" name="cntSelectBox"
+                onchange="changeSelectBox(${pagination.currentPage},${pagination.cntPerPage},${pagination.pageSize});"
+                class="form-control" style="width: 100px;">
+                <option value="10"
+                    <c:if test="${pagination.cntPerPage == '10'}">selected</c:if>>10개씩</option>
+                <option value="20"
+                    <c:if test="${pagination.cntPerPage == '20'}">selected</c:if>>20개씩</option>
+                <option value="30"
+                    <c:if test="${pagination.cntPerPage == '30'}">selected</c:if>>30개씩</option>
+            </select>
+        </div>
+    </div>
 				
 	<a href="/jobposting/addForm" type="button" class="btn btn-primary sticky-bottom">작성하기</a>
 		
@@ -117,5 +172,26 @@ pageEncoding="UTF-8"%>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
+<script>
+//10,20,30개씩 selectBox 클릭 이벤트
+function changeSelectBox(currentPage, cntPerPage, pageSize){
+    var selectValue = $("#cntSelectBox").children("option:selected").val();
+    movePage(currentPage, selectValue, pageSize);
+    
+}
+ 
+//페이지 이동
+function movePage(currentPage, cntPerPage, pageSize){
+    
+    var url = "${pageContext.request.contextPath}/jobposting/list";
+    url = url + "?currentPage="+currentPage;
+    url = url + "&cntPerPage="+cntPerPage;
+    url = url + "&pageSize="+pageSize;
+    
+    location.href=url;
+}
+ 
+</script>
 
 </html>

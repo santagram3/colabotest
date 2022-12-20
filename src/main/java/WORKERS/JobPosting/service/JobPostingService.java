@@ -1,7 +1,7 @@
 package WORKERS.JobPosting.service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import WORKERS.JobPosting.model.CompanyPosting;
 import WORKERS.JobPosting.model.CompanyPostingImg;
+import WORKERS.JobPosting.model.Pagination;
 import WORKERS.JobPosting.repository.JobPostingMapper;
 import lombok.RequiredArgsConstructor;
 
@@ -67,5 +68,18 @@ public class JobPostingService {
 	public void modifyJobPostingImg(CompanyPostingImg cpi) throws Exception {
 		jobPostingMapper.ModifyJobPostingImg(cpi);		
 	}
-
+	
+	
+	public List<Map<String, Object>> SelectAllList() throws Exception {
+        return jobPostingMapper.SelectAllList();
+    }
+ 
+    public List<Map<String, Object>> SelectAllList(Pagination pagination) throws Exception {
+        return jobPostingMapper.SelectAllList(pagination);
+    }
+ 
+    public int testTableCount() throws Exception {
+        return jobPostingMapper.testTableCount();
+    }
+    
 }

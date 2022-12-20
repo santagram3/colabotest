@@ -1,11 +1,13 @@
 package WORKERS.JobPosting.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
 import WORKERS.JobPosting.model.CompanyPosting;
 import WORKERS.JobPosting.model.CompanyPostingImg;
+import WORKERS.JobPosting.model.Pagination;
 
 @Mapper
 public interface JobPostingMapper {
@@ -29,6 +31,14 @@ public interface JobPostingMapper {
 	void ModifyJobPosting(CompanyPosting companyposting) throws Exception;
 	void ModifyJobPostingImg(CompanyPostingImg cpi) throws Exception;
 	
+	
+	
+	//select * from Test_Table
+    public List<Map<String, Object>> SelectAllList() throws Exception;    
+    //Paging
+    public List<Map<String, Object>> SelectAllList(Pagination pagination) throws Exception; 
+    //count
+    public int testTableCount() throws Exception;
 
 
 }

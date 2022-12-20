@@ -1,7 +1,9 @@
 package WORKERS.JobPosting.controller;
 
 import java.io.File;
-import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,11 +16,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import WORKERS.JobPosting.model.CompanyPosting;
 import WORKERS.JobPosting.model.CompanyPostingImg;
+import WORKERS.JobPosting.model.Pagination;
 import WORKERS.JobPosting.service.JobPostingService;
 import lombok.RequiredArgsConstructor;
 
@@ -36,14 +39,33 @@ public class JobPostingController {
 	private JobPostingService jobpostingservice;// = new JobPostingService();
 	
 	//구인공고 리스트
-	@GetMapping("/list")
-	public String JobPostingList(Model model) throws Exception {	
-		//리스트 뽑아오기 위해 Service 호출
-		List<CompanyPosting> jobpostinglist = jobpostingservice.getJobPostingList();
-		model.addAttribute("jobpostinglist",jobpostinglist);
-		return "/jobPosting/jobPostingList";
+	/*
+	 * public String JobPostingList(Model model) throws Exception { //리스트 뽑아오기 위해
+	 * Service 호출 List<CompanyPosting> jobpostinglist =
+	 * jobpostingservice.getJobPostingList();
+	 * model.addAttribute("jobpostinglist",jobpostinglist); return
+	 * "/jobPosting/jobPostingList"; }
+	 */
+	@RequestMapping(value = "list")
+//	@GetMapping("/list")
+	public ModelAndView AllListView(
+            @RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage,
+            @RequestParam(value = "cntPerPage", required = false, defaultValue = "10") int cntPerPage,
+            @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
+            Map<String, Object> map, HttpServletRequest request) throws Exception {
+        ModelAndView mav = new ModelAndView();
+        
+        int listCnt = jobpostingservice.testTableCount();
+        Pagination pagination = new Pagination(currentPage, cntPerPage, pageSize);
+        pagination.setTotalRecordCount(listCnt);
+ 
+        mav.addObject("pagination",pagination);
+        mav.addObject("AllList",jobpostingservice.SelectAllList(pagination));
+        mav.setViewName("/jobPosting/jobPostingList");
+        System.out.println(mav.toString());
+        
+        return mav;
 	}
-	
 	
 	//구인공고 등록폼
 	@GetMapping("/addForm")
