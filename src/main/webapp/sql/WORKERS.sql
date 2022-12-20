@@ -132,13 +132,14 @@ REFERENCES qReply(qReplyBno); --00
 alter table qReplyReport drop CONSTRAINTS qReplyReport_FK;
 
 
+drop table companyUser;
 -- 사업자 회원 가입 
 create table companyUser (
 BusinessNumber varchar2(50) primary key not null, -- 사업자 번호 
 companyEmail varchar2(50) not null,	-- 회사 이메일 // 로그인
 companyPwd varchar2(50) not null,  -- 회사 비밀번호 
 companyName varchar2(50) not null , -- 회사이름 
-userGrade varchar2(10) default '2' -- 2번은 회사 계정 
+userGrade varchar2(10)  -- 가입할때 히든 속성으로 COMPANY 로 들어옴 
 )
 select * from companyUser; -- 00
  

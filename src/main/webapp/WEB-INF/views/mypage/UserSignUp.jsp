@@ -50,9 +50,9 @@ pageEncoding="UTF-8"%>
         </div>
     </div>
     <script>
-        function backhome() {
-            console.log("/test/header");
-            location.href = "/test/header";
+       function backhome() {
+            alert("mainPage 로 이동합니다.");
+            location.href = "/main/page";
         }
     </script>
 
