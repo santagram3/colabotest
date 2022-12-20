@@ -15,17 +15,16 @@
 <%@ include file ="../header/header.jsp" %>
 </header>
    <body>
-   
   <div class="container w-75 mt-5 mx-auto">
-   <p>공부 자랑하기</p>
-   	<div class="card mb-3 border border-primary">
+  <p class="fw-bold fs-5"> 공부 자랑하기</p>
+   	<div class="card mb-3 border border-primary border-2">
   		<div class="row g-0">
     	<div class="col-md-4">
      	 <img src="..." class="img-fluid rounded-start" alt="...">
     	</div>
     <div class="col-md-8">
       <div class="card-body">
-        <h2 class="card-title fs-5">${boast.bNoSP}    ${boast.bTitle}</h2>
+        <h2 class="card-title fw-bold fs-4">${boast.bNoSP}    ${boast.bTitle}</h2>
         <p class="card-text fs-5">Content: ${boast.bContent}</p>
         <p class="card-text fs-"><small class="text-muted">Date: ${boast.bDate}</small></p>
       </div>
@@ -38,8 +37,5 @@
     <a href="/boast/modifyForm/${boast.bNoSP}" class="btn btn-primary btn-sm">수정하기</a>
     
     </div>
-   
-   
-   
     </body>
 </html>
