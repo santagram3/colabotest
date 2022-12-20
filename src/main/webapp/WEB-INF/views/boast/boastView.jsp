@@ -41,7 +41,7 @@
 	<div class="collapse" id="addForm${comments.commentAid}">
 	  <div class="card card-body">
 		<form method="post" 
-		      action="/news/updateComment/${comments.commentAid}" >
+		      action="modcomment/${comments.commentAid}" >
 		     <label class="form-label">닉네임</label>
 			<input type="text" name="nickname" class="form-control" value='${comments.nickname}' readonly="readonly">	
 			<textarea cols="50" rows="5" name="commentContent" class="form-control">${comments.commentContent}</textarea>

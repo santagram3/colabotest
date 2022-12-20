@@ -51,6 +51,11 @@ public interface BoastMapper {
     //count
     public int testTableCount() throws Exception;
 
+	public void ModifyBoastComment(Comments c) throws Exception;
+
+	public int FindbNoSP2(int commentAid);
+	public void deleteBoastComment(int commentAid) throws Exception;
+
 
 
 }

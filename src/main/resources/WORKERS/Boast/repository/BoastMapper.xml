@@ -93,5 +93,14 @@
     	insert into comments
     	values (BoastCommentList_sequence.nextval, #{nickname}, #{commentContent}, sysdate, #{aid})
     </select>
+    <select id="ModifyBoastComment" resultMap="commentAll">
+    	update comments set commentContent=#{commentContent} where commentAid=#{commentAid}
+    </select>
+    <select id="FindbNoSP2" resultType="int">
+    	select aid from comments where commentAid=#{commentAid}
+    </select>
+    <select id="deleteBoastComment" resultMap="commentAll">
+    	delete from comments where commentAid = #{commentAid}
+    </select>   
     
 </mapper>   

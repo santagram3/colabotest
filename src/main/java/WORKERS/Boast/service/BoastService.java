@@ -90,4 +90,17 @@ public class BoastService {
     public int testTableCount() throws Exception {
         return boastMapper.testTableCount();
     }
+
+	public void modifyBoastComment(Comments c) throws Exception {
+		boastMapper.ModifyBoastComment(c);	
+	}
+
+	public int findbNoSP2(int commentAid)  throws Exception{
+		int i = boastMapper.FindbNoSP2(commentAid);
+		return i;
+	}
+	
+	public void deleteBoastComment(int commentAid) throws Exception {		
+		boastMapper.deleteBoastComment(commentAid);			
+	}
 }

@@ -39,16 +39,6 @@ public class BoastController {
 	@Value("${boast.imgdir}")
 	String fdir;
 	
-/*	@GetMapping("/list")
-	public String listBoast(Model m) throws Exception {
-		
-		List<Boast> boastlist = boastService.boastList();
-		m.addAttribute("boastlist",boastlist);
-		
-		
-		return "/boast/boastList"; //boastList jsp를 의미
-	}
-*/
 	@RequestMapping(value = "list")
 	public ModelAndView AllListView(
             @RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage,
@@ -158,5 +148,24 @@ public class BoastController {
 		return "redirect:/boast/view/"+bNoSP;
 	}
 	
+	@PostMapping("/view/modcomment/{commentAid}")
+	public String BoastCommentModify(@PathVariable int commentAid, @ModelAttribute Comments c) throws Exception {
+		int bNoSP = boastService.findbNoSP2(commentAid);
+		System.out.println("bNoSP: " +bNoSP);
+		boastService.modifyBoastComment(c);
+		
+		return "redirect:/boast/view/"+bNoSP;
+	}
+	
+	@GetMapping("/view/deleteComment/{commentAid}")
+	public String BoastCommentDelete(@PathVariable int commentAid) throws Exception {
+	int bNoSP=boastService.findbNoSP2(commentAid);
+
+		System.out.println("2");
+		boastService.deleteBoastComment(commentAid);	
+		System.out.println("1");
+		
+		return "redirect:/boast/view/"+bNoSP;
+	}
 
 }

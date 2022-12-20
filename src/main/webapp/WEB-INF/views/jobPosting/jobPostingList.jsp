@@ -2,6 +2,7 @@
 pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,7 +65,7 @@ pageEncoding="UTF-8"%>
 					  <li class="list-unstyled list-group-item shadow p-3 mb-5 bg-body rounded" style="width:300px;">
 					    <div class="ms-4 me-auto">
 					      <a href = "view/${jp.CNO}" class="fw-bold fs-5" style="color: black;"> ${status.count}　　　${jp.CTITLE}<br>　　　　  <p style="color:gray;" class="fs-6"> ${jp.CWRITER} </p></a>
-					      <P style="color:gray;"><span class="badge bg-primary rounded-pill">　지원기간  |　 ${jp.CDUEDATE} 까지   　 </span></P>
+					      <P style="color:gray;"><span class="badge bg-primary rounded-pill">　지원기간  |　 <fmt:formatDate value="${jp.CDUEDATE}" pattern="yyyy-MM-dd"/> 까지   　 </span></P>
 						  <a href="delete/${jp.CNO}"><span class="badge bg-secondary btn-sm">&times;</span></a>
 					    </div>
 					  </li>
@@ -99,6 +100,8 @@ pageEncoding="UTF-8"%>
   </thead>
   <tbody>
 
+   <!-- <.%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+   		<.%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 		이거 맨위에 써야함 -->
    <c:choose>
                     <c:when test="${fn:length(AllList) > 0}">
                         <c:forEach items="${AllList}" var="list" varStatus="status">
@@ -106,8 +109,8 @@ pageEncoding="UTF-8"%>
                             	<th scope="row">${list.ROW_NUM}</th>
                                 <td><a href = "view/${list.CNO}" style="color: black;">${list.CTITLE}</a></td>
                                 <td>${list.CWRITER}</td>
-                                <td>${list.CDATE}</td>
-                                <td>${list.CDUEDATE}</td>
+                                <td><fmt:formatDate value="${list.CDATE}" pattern="yyyy-MM-dd"/></td>
+                                <td><fmt:formatDate value="${list.CDUEDATE}" pattern="yyyy-MM-dd"/></td>
                             </tr>
                         </c:forEach>
                     </c:when>

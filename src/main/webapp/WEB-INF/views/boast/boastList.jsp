@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,7 +33,8 @@
     </tr>
   </thead>
   <tbody>
-
+   <!-- <.%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+   		<.%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 		이거 맨위에 써야함 -->
    <c:choose>
                     <c:when test="${fn:length(AllList) > 0}">
                         <c:forEach items="${AllList}" var="list" varStatus="status">
@@ -41,7 +42,7 @@
                             	<th scope="row">${list.ROW_NUM}</th>
                                 <td><a href = "view/${list.BNOSP}" style="color: black;">${list.BTITLE}</a></td>
                                 <td>${list.BWRITER}</td>
-                                <td>${list.BDATE}</td>
+                                <td><fmt:formatDate value="${list.BDATE}" pattern="yyyy-MM-dd"/></td>
                             </tr>
                         </c:forEach>
                     </c:when>
