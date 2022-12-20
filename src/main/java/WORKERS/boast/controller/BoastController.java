@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import WORKERS.boast.model.Boast;
 import WORKERS.boast.model.BoastImage;
 import WORKERS.boast.service.BoastService;
+import WORKERS.comment.Comment;
 import lombok.RequiredArgsConstructor;
 
 
@@ -39,6 +40,10 @@ public class BoastController {
 		List<Boast> boastlist = boastService.boastList();
 		m.addAttribute("boastlist",boastlist);
 		
+		List<Comment> commentAll = boastService.boastCommentList(); 
+		m.addAttribute("commentAll",commentAll);
+		
+		
 		return "/boast/boastList"; //boastList jsp를 의미
 	}
 	
@@ -50,7 +55,7 @@ public class BoastController {
 		
 	@PostMapping("/add")
 	public String addBoast(@ModelAttribute Boast boast ,@ModelAttribute BoastImage boastImg ,
-						@RequestParam("file") MultipartFile file )throws Exception  {
+			@RequestParam("file") MultipartFile file )throws Exception  {
 		
 			File dest = new File(fdir+"/"+file.getOriginalFilename());
 			file.transferTo(dest);
@@ -59,6 +64,7 @@ public class BoastController {
 			
 			int i = boastService.findbNoSP();			
 			boastImg.setbImageNoF(i);
+		
 			
 			boastService.addBoastImg(boastImg);	
 			return "redirect:/boast/list";			
@@ -66,12 +72,19 @@ public class BoastController {
 	}
 
 	@GetMapping("/view/{bNoSP}")
-	public String BoastView(@PathVariable int bNoSP, Model model) throws Exception {
+	public String BoastView(@PathVariable int bNoSP,@PathVariable int aid, @ModelAttribute Comment comment,
+			Model model) throws Exception {
 		
 		Boast boast = boastService.viewBoast(bNoSP);
 		int bImageNoF = bNoSP;
 		System.out.println("bImageNoF: "+bImageNoF);
 		BoastImage bi = boastService.viewBoastImg(bImageNoF);
+		
+		int aid = bNoSP;
+		Comment commentlist = boastService.viewBoastComment(aid);
+		
+		boastService.addBoastComment(comment);
+		model.addAtrribuSte("commentlist",commentlist);
 		
 		model.addAttribute("boast",boast);
 		model.addAttribute("bi",bi);

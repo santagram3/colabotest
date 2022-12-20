@@ -64,6 +64,9 @@ public class BoastService {
 		return b;
 	}
 	
+	
+	
+	
 	public List<Comment> boastCommentList() throws Exception {
 		List<Comment> cl = boastMapper.getBoastCommentList();
 		return cl;
@@ -73,22 +76,18 @@ public class BoastService {
 		boastMapper.addBoastComment(comment);
 	}
 	
-	
-
 	public Comment viewBoastComment(int commentAid) throws Exception {
 		Comment comment = boastMapper.viewBoastComment(commentAid);
 		return comment;
 	}
 
 	public void deleteBoastComment(int commentAid) throws Exception {
-		int Comment = bNoSP;
-		boastMapper.DeleteBoastImg(bImageNoF);
-		boastMapper.DeleteBoast(bNoSP);
-		
+		int aid = commentAid;
+		boastMapper.deleteBoastComment(aid);	
 	}
 
-	public void modifyBoast(Boast boast) throws Exception {
-		boastMapper.ModifyBoast(boast);		
+	public void modifyBoastComment(Comment comment) throws Exception {
+		boastMapper.modifyBoastComment(comment);		
 	}
 
 }
