@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import WORKERS.boast.model.Boast;
 import WORKERS.boast.model.BoastImage;
-import WORKERS.comment.Comment;
+import WORKERS.boast.Comment;
 
 @Mapper
 public interface BoastMapper {
@@ -21,19 +21,17 @@ public interface BoastMapper {
 	public int findbNoSP() throws Exception;	
 	public void addBoastImg(BoastImage boastImg) throws Exception;
 	//comment
-		public void addBoastComment(Comment comment) throws Exception;
+		public void addBoastComment(Comment comment, int bNoSP) throws Exception;
 		
 //view	
 	public Boast ViewBoast(int bNoSP) throws Exception;
 	public BoastImage ViewBoastImg(int bImageNoF) throws Exception;
-	//comment
-		public Comment viewBoastComment(int commentAid) throws Exception;
 	
 //delete	
 	public void DeleteBoast(int bNoSP) throws Exception;
 	public void DeleteBoastImg(int bImageNoF) throws Exception;
 	//comment
-		public void deleteBoastComment(int commentAid) throws Exception;
+		public void deleteBoastComment(int commentAid, int aid) throws Exception;
 		
 //modify	
 	public void ModifyBoast(Boast boast) throws Exception;

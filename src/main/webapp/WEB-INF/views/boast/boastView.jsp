@@ -32,8 +32,8 @@
     
     <hr>
     <ul class="list-group">
-		<c:forEach var="comments" items="${commentlist}" varStatus="status">
-		  <li><a>[${status.count}] 닉네임: ${comments.nickname}	작성·수정일자: ${comments.commentDate}
+		<c:forEach var="comments" items="${commentAll}" varStatus="status">
+		  <li><a>[${status.count}] 자랑글번호: ${comments.aid}  닉네임: ${comments.nickname}	작성·수정일자: ${comments.commentDate}
 		   <br>내용: ${comments.commentContent} </a>
 	<!-- 댓글 수정하기 collapse -->
 		   <button class="btn-update" type="button" 
@@ -44,11 +44,11 @@
 	<div class="collapse" id="addForm${comments.commentAid}">
 	  <div class="card card-body">
 		<form method="post" 
-		      action="/news/updateComment/${comments.commentAid}" >
+		      action="/boast/modify/${comments.commentAid}" >
 		     <label class="form-label">닉네임</label>
 			<input type="text" name="nickname" class="form-control" value='${comments.nickname}' readonly="readonly">	
 			<textarea cols="50" rows="5" name="commentContent" class="form-control">${comments.commentContent}</textarea>
-			<button type="submit" class="btn btn-success mt-3">등록</button>
+			<button type="submit" class="btn btn-success mt-3">수정완료</button>
 		</form>
 	  </div>
 	</div>
@@ -57,6 +57,8 @@
 		</c:forEach> 
 	</ul>
 	<hr>
+	
+	
     <!-- 댓글 쓰기 collapse -->
     <button class="btn btn-outline-info mb-3" type="button" 
 	        data-bs-toggle="collapse" 
@@ -66,7 +68,7 @@
 	<div class="collapse" id="addForm">
 	  <div class="card card-body">
 		<form method="post" 
-		  <!--      action="/news/addcomment/${news.aid}" >  -->
+		 action="/boast/addComment/${boast.bNoSP}" >
 		    <label class="form-label">닉네임</label>
 			<input type="text" name="nickname" class="form-control">	
 			<textarea cols="50" rows="5" name="commentContent" class="form-control"></textarea>

@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import WORKERS.boast.model.Boast;
 import WORKERS.boast.model.BoastImage;
 import WORKERS.boast.repository.BoastMapper;
-import WORKERS.comment.Comment;
+import WORKERS.boast.Comment;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -72,18 +72,14 @@ public class BoastService {
 		return cl;
 	}
 	
-	public void addBoastComment(Comment comment) throws Exception {
-		boastMapper.addBoastComment(comment);
+	public void addBoastComment(Comment comment, int bNoSP) throws Exception {
+		boastMapper.addBoastComment(comment, bNoSP);
 	}
 	
-	public Comment viewBoastComment(int commentAid) throws Exception {
-		Comment comment = boastMapper.viewBoastComment(commentAid);
-		return comment;
-	}
 
-	public void deleteBoastComment(int commentAid) throws Exception {
-		int aid = commentAid;
-		boastMapper.deleteBoastComment(aid);	
+	public void deleteBoastComment(int commentAid, int aid) throws Exception {
+		int bNoSP = aid;
+		boastMapper.deleteBoastComment(commentAid,aid);	
 	}
 
 	public void modifyBoastComment(Comment comment) throws Exception {

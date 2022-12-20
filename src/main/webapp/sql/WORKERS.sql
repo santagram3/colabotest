@@ -304,5 +304,6 @@ insert into comments(commentAid, nickname, commentContent, commentDate, aid)
 
 
 
-
+insert into comments(commentAid, nickname, commentContent, commentDate, aid)
+			values(1,'c1','cc1',sysdate,44)
 

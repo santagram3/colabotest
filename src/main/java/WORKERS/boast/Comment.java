@@ -1,4 +1,4 @@
-package WORKERS.comment;
+package WORKERS.boast;
 
 public class Comment {
 	private int commentAid;

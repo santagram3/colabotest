@@ -18,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import WORKERS.boast.model.Boast;
 import WORKERS.boast.model.BoastImage;
 import WORKERS.boast.service.BoastService;
-import WORKERS.comment.Comment;
+import WORKERS.boast.Comment;
 import lombok.RequiredArgsConstructor;
 
 
@@ -39,9 +39,7 @@ public class BoastController {
 		
 		List<Boast> boastlist = boastService.boastList();
 		m.addAttribute("boastlist",boastlist);
-		
-		List<Comment> commentAll = boastService.boastCommentList(); 
-		m.addAttribute("commentAll",commentAll);
+	
 		
 		
 		return "/boast/boastList"; //boastList jsp를 의미
@@ -70,9 +68,18 @@ public class BoastController {
 			return "redirect:/boast/list";			
 
 	}
+	
+	@PostMapping("/addComment/{bNoSP}")
+	public String addBoastComment(@ModelAttribute Comment comment, @PathVariable int bNoSP)throws Exception  {
+		System.out.println("comment came");
+			boastService.addBoastComment(comment, bNoSP);
+			System.out.println("comment added");
+			return "redirect:/boast/view";			
+
+	}
 
 	@GetMapping("/view/{bNoSP}")
-	public String BoastView(@PathVariable int bNoSP,@PathVariable int aid, @ModelAttribute Comment comment,
+	public String BoastView(@PathVariable int bNoSP, @ModelAttribute Comment comment,
 			Model model) throws Exception {
 		
 		Boast boast = boastService.viewBoast(bNoSP);
@@ -80,15 +87,16 @@ public class BoastController {
 		System.out.println("bImageNoF: "+bImageNoF);
 		BoastImage bi = boastService.viewBoastImg(bImageNoF);
 		
-		int aid = bNoSP;
-		Comment commentlist = boastService.viewBoastComment(aid);
-		
-		boastService.addBoastComment(comment);
-		model.addAtrribuSte("commentlist",commentlist);
-		
 		model.addAttribute("boast",boast);
 		model.addAttribute("bi",bi);
 		System.out.println(bi.getbImage());
+		
+		//list
+		
+		
+		List<Comment> commentAll = boastService.boastCommentList(); 
+		model.addAttribute("commentAll",commentAll);
+		
 		
 		return "/boast/boastView";
 	}
@@ -102,6 +110,16 @@ public class BoastController {
 		
 		return "redirect:/boast/list";
 	}
+	
+	@GetMapping("/delete/{commentAid}")
+	public String BoastCommentDelete(@PathVariable int aid, @PathVariable int commentAid) throws Exception {
+		
+		int bNoSP= aid;
+		boastService.deleteBoastComment(commentAid,aid);	
+		return "redirect:/boast/view"+bNoSP;
+	}
+	
+	
 	
 	
 	//공부자랑 수정폼
@@ -125,6 +143,9 @@ public class BoastController {
 		boastimage.setbImage(dest.getName());		
 		boastimage.setbImageNoF(bNoSP);
 		boastService.modifyBoastImg(boastimage);
+		
+		
+		
 		
 		return "redirect:/boast/view/"+bNoSP;
 	}
