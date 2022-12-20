@@ -27,12 +27,12 @@
     
     
     <select id= "getBoastCommentList" resultMap="commentAll">
-    	select * from comments order by commentDate desc
+    	select * from comments where aid=#{aid} order by commentDate desc
     </select>
     
     <select id="addBoastComment" resultMap="commentAll">
-    insert into comments
-    	values (BoastCommentList_sequence.nextval,#{nickname),#{commentContent},sysdate,${bNoSP}) 
+    	insert into comments
+    	values (BoastCommentList_sequence.nextval,#{nickname},#{commentContent},sysdate,#{aid}) 
     </select>
   
     <select id="deleteBoastComment" resultMap="commentAll">
@@ -43,7 +43,9 @@
     	update comments set commentContent=#{commentContent}, sysdate, aid=${aid} where commentAid=#{commentAid}
     </select>
     
-    
+    <select id="FindbNoSP2" resultType="int">
+    select aid from comments where commentAid=#{commentAid}
+    </select>
     
     <select id="getBoastList" resultMap="boastlist">
     	select * from BoastTable order by bDate desc

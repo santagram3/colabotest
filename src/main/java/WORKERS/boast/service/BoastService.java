@@ -29,6 +29,8 @@ public class BoastService {
 		boastMapper.addBoast(boast);
 	}
 	
+	
+	
 	public int findbNoSP() throws Exception {
 		
 		int i = boastMapper.findbNoSP();
@@ -67,23 +69,29 @@ public class BoastService {
 	
 	
 	
-	public List<Comment> boastCommentList() throws Exception {
-		List<Comment> cl = boastMapper.getBoastCommentList();
-		return cl;
+	public List<Comment> boastCommentList(int aid) throws Exception {
+		List<Comment> dl = boastMapper.getBoastCommentList(aid);
+		return dl;
 	}
 	
-	public void addBoastComment(Comment comment, int bNoSP) throws Exception {
-		boastMapper.addBoastComment(comment, bNoSP);
+	public void addBoastComment(Comment comment) throws Exception {
+		boastMapper.addBoastComment(comment);
 	}
 	
 
-	public void deleteBoastComment(int commentAid, int aid) throws Exception {
-		int bNoSP = aid;
-		boastMapper.deleteBoastComment(commentAid,aid);	
+	public void deleteBoastComment(int commentAid) throws Exception {
+		
+		boastMapper.deleteBoastComment(commentAid);	
+		
 	}
 
 	public void modifyBoastComment(Comment comment) throws Exception {
 		boastMapper.modifyBoastComment(comment);		
+	}
+
+	public int findbNoSP2(int commentAid) {
+		int i = boastMapper.FindbNoSP2(commentAid);
+		return i;
 	}
 
 }

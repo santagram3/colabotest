@@ -289,7 +289,7 @@ REFERENCES BoastTable(bNoSP)ON DELETE CASCADE;
 
 drop table comments;
 
-select * from news;
+select * from BoastTable;
 select * from comments;
 
 

@@ -35,6 +35,8 @@
 		<c:forEach var="comments" items="${commentAll}" varStatus="status">
 		  <li><a>[${status.count}] 자랑글번호: ${comments.aid}  닉네임: ${comments.nickname}	작성·수정일자: ${comments.commentDate}
 		   <br>내용: ${comments.commentContent} </a>
+	
+	
 	<!-- 댓글 수정하기 collapse -->
 		   <button class="btn-update" type="button" 
 	        data-bs-toggle="collapse" 
@@ -44,7 +46,7 @@
 	<div class="collapse" id="addForm${comments.commentAid}">
 	  <div class="card card-body">
 		<form method="post" 
-		      action="/boast/modify/${comments.commentAid}" >
+		      action="/boast/modifyComment/${comments.commentAid}" >
 		     <label class="form-label">닉네임</label>
 			<input type="text" name="nickname" class="form-control" value='${comments.nickname}' readonly="readonly">	
 			<textarea cols="50" rows="5" name="commentContent" class="form-control">${comments.commentContent}</textarea>
@@ -52,7 +54,7 @@
 		</form>
 	  </div>
 	</div>
-		  <a href="deleteComment/${comments.commentAid}"><span class="badge bg-secondary">&times;</span></a>
+		  <a href="/boast/deleteComment/${comments.commentAid}"><span class="badge bg-secondary">&times;</span></a>
 		  </li>
 		</c:forEach> 
 	</ul>
@@ -68,7 +70,7 @@
 	<div class="collapse" id="addForm">
 	  <div class="card card-body">
 		<form method="post" 
-		 action="/boast/addComment/${boast.bNoSP}" >
+		 action="/boast/addcomment/${boast.bNoSP}" >
 		    <label class="form-label">닉네임</label>
 			<input type="text" name="nickname" class="form-control">	
 			<textarea cols="50" rows="5" name="commentContent" class="form-control"></textarea>

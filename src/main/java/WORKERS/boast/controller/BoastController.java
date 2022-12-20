@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import WORKERS.boast.Comment;
 import WORKERS.boast.model.Boast;
 import WORKERS.boast.model.BoastImage;
 import WORKERS.boast.service.BoastService;
-import WORKERS.boast.Comment;
 import lombok.RequiredArgsConstructor;
 
 
@@ -69,15 +69,34 @@ public class BoastController {
 
 	}
 	
-	@PostMapping("/addComment/{bNoSP}")
+	/**@PostMapping("/addComment/{bNoSP}")
 	public String addBoastComment(@ModelAttribute Comment comment, @PathVariable int bNoSP)throws Exception  {
 		System.out.println("comment came");
-			boastService.addBoastComment(comment, bNoSP);
+		int aid=bNoSP;
+		
+		System.out.println("aid:"+aid);
+		System.out.println("comment:"+comment.toString());
+			boastService.addBoastComment(comment, aid);
+
 			System.out.println("comment added");
-			return "redirect:/boast/view";			
+			return "redirect:/boast/view/"+bNoSP;			
 
+	}**/
+	@PostMapping("/addcomment/{bNoSP}")
+	public String AddComment(@PathVariable int bNoSP, @ModelAttribute Comment comment) throws Exception{
+		int aid = bNoSP;
+		comment.setAid(aid);
+		System.out.println(comment.toString());
+		System.out.println(bNoSP);
+		boastService.addBoastComment(comment);
+		
+		return "redirect:/boast/view/"+bNoSP;
 	}
-
+	
+	
+	
+	
+	
 	@GetMapping("/view/{bNoSP}")
 	public String BoastView(@PathVariable int bNoSP, @ModelAttribute Comment comment,
 			Model model) throws Exception {
@@ -92,9 +111,9 @@ public class BoastController {
 		System.out.println(bi.getbImage());
 		
 		//list
+		int aid=bNoSP;
 		
-		
-		List<Comment> commentAll = boastService.boastCommentList(); 
+		List<Comment> commentAll = boastService.boastCommentList(aid); 
 		model.addAttribute("commentAll",commentAll);
 		
 		
@@ -111,12 +130,15 @@ public class BoastController {
 		return "redirect:/boast/list";
 	}
 	
-	@GetMapping("/delete/{commentAid}")
-	public String BoastCommentDelete(@PathVariable int aid, @PathVariable int commentAid) throws Exception {
+	@GetMapping("/deleteComment/{commentAid}")
+	public String BoastCommentDelete(@PathVariable int commentAid) throws Exception {
+	int bNoSP=boastService.findbNoSP2(commentAid);
+
+		System.out.println("2");
+		boastService.deleteBoastComment(commentAid);	
+		System.out.println("1");
 		
-		int bNoSP= aid;
-		boastService.deleteBoastComment(commentAid,aid);	
-		return "redirect:/boast/view"+bNoSP;
+		return "redirect:/boast/view/"+bNoSP;
 	}
 	
 	
@@ -134,7 +156,7 @@ public class BoastController {
 	
 	//공부자랑 수정
 	@PostMapping("/modify/{bNoSP}")
-	public String JobPostingModify(@PathVariable int bNoSP, @ModelAttribute Boast boast, @ModelAttribute BoastImage boastimage,
+	public String BoastModify(@PathVariable int bNoSP, @ModelAttribute Boast boast, @ModelAttribute BoastImage boastimage,
 									@RequestParam("newfile") MultipartFile file) throws Exception {
 
 		boastService.modifyBoast(boast);
@@ -149,5 +171,28 @@ public class BoastController {
 		
 		return "redirect:/boast/view/"+bNoSP;
 	}
+	
+
+	//공부자랑 수정
+	@PostMapping("/modifyComment/{commentAid}")
+	public String BoastCommentModify(@PathVariable int commentAid, @ModelAttribute Comment comment) throws Exception {
+		int bNoSP=boastService.findbNoSP2(commentAid);
+
+		boastService.modifyBoastComment(comment);
+				
+		return "redirect:/boast/view/"+bNoSP;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
