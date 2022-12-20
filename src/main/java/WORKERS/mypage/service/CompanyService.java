@@ -14,7 +14,9 @@ public class CompanyService {
 	
 	public void companyRegisterService(CompanyUser companyUser) throws Exception{
 		
+
 		System.out.println("CompanyService++++++++++333+++++");
+
 		companyUser.setCompanyEmail(companyUser.getCompanyEmail().trim());
 		companyUser.setCompanyPwd(companyUser.getCompanyPwd().trim());
 		companyUser.setCompanyName(companyUser.getCompanyName().trim());
