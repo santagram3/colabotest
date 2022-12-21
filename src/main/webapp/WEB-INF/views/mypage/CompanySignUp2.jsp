@@ -21,36 +21,38 @@ pageEncoding="UTF-8"%>
 
 <body>
     <div class="signUpcontainer">
-        <div class="slogun"> 회사 회원 가입 하는 곳! </div>
+   	 	<img src="/resources/header/img/skyblue.png" class="rounded mx-auto d-block">
+        <div class="slogun fs-2"> 기업회원 가입하기 <span class="text-muted fs-3">Sign up</span></div>
+        <hr>
         <div class="signupbox">
             <form action="/company/CompanySignUp1" method="post" class="companySignupForm">
                 <div class="mb-3">
-                    <label for="formGroupExampleInput" class="form-label">companyEmail</label>
+                    <label for="formGroupExampleInput" class="form-label">회사 이메일</label>
                     <input required type="email" class="form-control companyEmail" 
                         placeholder="ex: mini@naver.com " name="companyEmail">
-                    <button class="aaa ConfirmButton">이메일 중복 확인</button>
+                    <button class="aaa ConfirmButton btn btn-primary btn-sm mt-1">이메일 중복 확인</button>
                 </div>
                 <div class="mb-3">
-                    <label for="formGroupExampleInput" class="form-label">companyPwd</label>
+                    <label for="formGroupExampleInput" class="form-label">비밀번호</label>
                     <input required type="password" class="form-control" 
                         placeholder="password write" name="companyPwd">
                 </div>
                 <div class="mb-3">
-                    <label for="formGroupExampleInput" class="form-label">BusinessNumber</label>
+                    <label for="formGroupExampleInput" class="form-label">사업자번호</label>
                     <input required type="number" class="form-control BusinessNumber" id="BusinessNumber"
                         placeholder="- 없는 10자리 숫자를 넣으시오" name="BusinessNumber">
-                    <button  class="bbb ConfirmButton">사업자번호 등록 확인</button>
+                    <button  class="bbb ConfirmButton btn btn-primary btn-sm mt-1">사업자번호 등록 확인</button>
                 </div>
                 <div class="mb-3">
-                    <label for="formGroupExampleInput" class="form-label">companyName</label>
+                    <label for="formGroupExampleInput" class="form-label">회사 이름</label>
                     <input required type="text" class="form-control"
                         placeholder="companyName" name="companyName">
                 </div>
                 <input required type="hidden" class="form-control" value="COMPANY"
                     placeholder="companyName" name="userGrade">
                 <div class="buttongroup">
-                    <button type="button" class="btn btn-success" onclick="backhome()">뒤로 가기</button>
-                    <button class="btn btn-info submitButton">회원가입하기</button>
+                    <button type="button" class="btn btn-link m-1" onclick="backhome()">뒤로 가기</button>
+                    <button class="btn btn-secondary m-1 submitButton">회원가입하기</button>
                 </div>
             </form>
         </div>
