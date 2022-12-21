@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,6 +24,7 @@ import WORKERS.JobPosting.model.CompanyPosting;
 import WORKERS.JobPosting.model.CompanyPostingImg;
 import WORKERS.JobPosting.model.Pagination;
 import WORKERS.JobPosting.service.JobPostingService;
+import WORKERS.mypage.model.User;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -69,7 +71,12 @@ public class JobPostingController {
 	
 	//구인공고 등록폼
 	@GetMapping("/addForm")
-	public String JobPostingAddForm() {		
+	public String JobPostingAddForm(HttpSession session, Model model) {		
+		User sessionLoginUser = (User)session.getAttribute("loginUser");
+		System.out.println("sessionLoginUser: "+sessionLoginUser);
+		String loginUsernickName = sessionLoginUser.getNickName();
+		System.out.println("loginUsernickName: "+loginUsernickName);
+		model.addAttribute("loginUsernickName",loginUsernickName);
 		return "/jobPosting/jobPostingAdd";
 	}
 	

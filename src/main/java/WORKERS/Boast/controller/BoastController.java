@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,6 +25,7 @@ import WORKERS.Boast.model.BoastImage;
 import WORKERS.Boast.model.Comments;
 import WORKERS.Boast.service.BoastService;
 import WORKERS.JobPosting.model.Pagination;
+import WORKERS.mypage.model.User;
 import lombok.RequiredArgsConstructor;
 
 
@@ -60,7 +62,12 @@ public class BoastController {
 	}
 	
 	@GetMapping("/addForm")
-	public String BoastAddForm() {		
+	public String BoastAddForm(HttpSession session, Model model) {	
+		User sessionLoginUser = (User)session.getAttribute("loginUser");
+		System.out.println("sessionLoginUser: "+sessionLoginUser);
+		String loginUsernickName = sessionLoginUser.getNickName();
+		System.out.println("loginUsernickName: "+loginUsernickName);
+		model.addAttribute("loginUsernickName",loginUsernickName);
 		return "/boast/boastAdd";
 	}
 	

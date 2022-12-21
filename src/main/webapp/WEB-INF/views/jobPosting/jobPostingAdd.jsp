@@ -41,7 +41,7 @@ pageEncoding="UTF-8"%>
 				
 				<div class="mb-4">
   				<label class="form-label">작성자</label>
-  				<input type="text" class="form-control" name="cWriter">
+  				<input type="text" class="form-control" value="${loginUsernickName}" name="cWriter" readonly="readonly">
 				</div>
 				
 				<div class="mb-4">
