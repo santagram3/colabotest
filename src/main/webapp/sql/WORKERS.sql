@@ -181,13 +181,7 @@ create table BoastTable(
    bContent CLOB NOT NULL,--글내용 / 이미지는 BoastImg이미지테이블참조
    bDate DATE default sysdate NOT NULL--글작성일자
    );   
-   insert into BoastTable values(12,'공부자랑5번글','재욱스','DB를 공부했습니다.',sysdate);
-   insert into BoastTable values(13,'공부자랑6번글','재욱스','DB를 공부했습니다.',sysdate);
-   insert into BoastTable values(15,'공부자랑7번글','재욱스','DB를 공부했습니다.',sysdate);
-   insert into BoastTable values(14,'공부자랑8번글','재욱스','DB를 공부했습니다.',sysdate);
-   insert into BoastTable values(16,'공부자랑9번글','재욱스','DB를 공부했습니다.',sysdate);
-   insert into BoastTable values(17,'공부자랑10번글','재욱스','DB를 공부했습니다.',sysdate);
-   insert into BoastTable values(11),'공부자랑11번글','재욱스','DB를 공부했습니다.',sysdate);
+   insert into BoastTable values(2,'공부자랑2번글','재욱스','DB를 공부했습니다.',sysdate);
    select * from BoastTable;
    drop table BoastTable;
    delete from BoastTable where bNoSP=2;
@@ -227,6 +221,8 @@ CREATE TABLE BoastStar(
    bStarNoF Number NOT NULL,-- BoastTable글번호-foreign
    bStar Number NOT NULL--별점 점수
 )   
+insert into BoastStar values(34,5);
+select * from BOASTSTAR;
 
 ALTER TABLE BoastStar
 ADD CONSTRAINTS BoastStar_FK FOREIGN KEY (bStarNoF)--BoastStar 의 bStarNoF가 BoastTable의 bNoSP가 되어야 함

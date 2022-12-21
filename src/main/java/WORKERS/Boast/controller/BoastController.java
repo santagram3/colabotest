@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import WORKERS.Boast.model.Boast;
 import WORKERS.Boast.model.BoastImage;
+import WORKERS.Boast.model.BoastStar;
 import WORKERS.Boast.model.Comments;
 import WORKERS.Boast.service.BoastService;
 import WORKERS.JobPosting.model.Pagination;
@@ -56,7 +57,6 @@ public class BoastController {
         mav.addObject("pagination",pagination);
         mav.addObject("AllList",boastService.SelectAllList(pagination));
         mav.setViewName("/boast/boastList");
-        System.out.println(mav.toString());
         
         return mav;
 	}
@@ -96,6 +96,10 @@ public class BoastController {
 		System.out.println("bImageNoF: "+bImageNoF);
 		BoastImage bi = boastService.viewBoastImage(bImageNoF);
 		List<Comments> commentlist = boastService.listComment(aid);
+		
+//		int bStarNoF = bNoSP;
+//		int bStar = boastService.findbStar(bStarNoF);
+//		model.addAttribute("bStar",bStar);
 		
 		User sessionLoginUser = (User)session.getAttribute("loginUser");
 		String loginUsernickName = sessionLoginUser.getNickName();
@@ -173,6 +177,13 @@ public class BoastController {
 		System.out.println("2");
 		boastService.deleteBoastComment(commentAid);	
 		System.out.println("1");
+		
+		return "redirect:/boast/view/"+bNoSP;
+	}
+	
+	
+	@PostMapping("/getstarboast/{bNoSP}")
+	public String GetStarBoast(@PathVariable int bNoSP, BoastStar bs) {
 		
 		return "redirect:/boast/view/"+bNoSP;
 	}

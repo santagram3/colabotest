@@ -23,8 +23,16 @@
       <result property="commentContent" column="commentContent"/>
       <result property="commentDate" 	column="commentDate"/>
       <result property="aid" 			column="aid"/>
-   </resultMap>
+    </resultMap>
+   	<resultMap id="boastStar" type="WORKERS.Boast.model.BoastImage">
+		<result property="bStarNoF" 	column="bStarNoF"/>
+		<result property="bStar" 		column="bStar"/>
+	</resultMap>
     
+<!-- 별점 -->    
+    <select id="FindbStar" resultType="int">
+    	select bStar from BoastStar where bStarNoF = #{bStarNoF}
+    </select>
 
     
     <select id="getBoastList" resultMap="boastlist">
@@ -86,6 +94,7 @@
     </select>
     
     
+<!-- 댓글 -->    
     <select id="ListComment" resultMap="commentAll">
     	select * from comments where aid=#{aid}
     </select>

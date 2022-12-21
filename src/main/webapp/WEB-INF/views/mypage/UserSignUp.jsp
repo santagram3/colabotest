@@ -7,30 +7,35 @@ pageEncoding="UTF-8"%>
 <head>
     <meta charset="UTF-8">
     <title>회원가입</title>
+    <!-- css -->
     <link rel="stylesheet" href="/resources/mypage/signUp.css">
+    <!--  -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
+
     <div class="signUpcontainer">
-        <div class="slogun"> 이번주 금요일에 뭐해? 취준 안해? 가입해서 자소서나 써 .. ;; </div>
+    	<img src="/resources/header/img/skyblue.png" class="rounded mx-auto d-block">
+        <div class="slogun fs-2"> 일반유저 가입하기 <span class="text-muted fs-3">Sign up</span></div>
+        <hr>
         <div class="signupbox">
             <form action="/mypage/UserSignUp" method="post" class="signUpForm">
                 <div class="mb-3">
                     <label for="formGroupExampleInput" class="form-label">이메일</label>
                     <input type="email" class="form-control userEmail" id="formGroupExampleInput"
                         placeholder="ex: mini@naver.com " name="userEmail" required="required">
-                    <button class="aaa">중복확인</button>
+                    <button class="aaa btn btn-primary mt-1">중복확인</button>
                 </div>
                 <div class="mb-3">
-                    <label for="formGroupExampleInput" class="form-label">password</label>
+                    <label for="formGroupExampleInput" class="form-label">비밀번호</label>
                     <input type="password" class="form-control" id="formGroupExampleInput" placeholder="password write"
                         required="required" name="userPw">
                 </div>
                 <div class="mb-3">
-                    <label for="formGroupExampleInput" class="form-label">nickName</label>
-                    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="아무거나 막 적어"
+                    <label for="formGroupExampleInput" class="form-label">닉네임</label>
+                    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="낙네임을 입력해주세요"
                         required="required" name="nickName">
                 </div>
                 <div class="mb-3">
@@ -38,25 +43,24 @@ pageEncoding="UTF-8"%>
                     <input type="date" class="form-control" id="formGroupExampleInput"
                         placeholder="Example input placeholder" name="birthday" required="required">
                 </div>
-                <label for="formGroupExampleInput" class="form-label">selfIntroduce</label>
+                <label for="formGroupExampleInput" class="form-label">자기소개</label>
                 <textarea class="form-control col-sm-5" rows="5" name="selfIntroduce" required></textarea>
-                
-                <input type="hidden" name="oauth" value="">
                 <div class="buttongroup">
-                    <button type="button" class="btn btn-success" onclick="backhome()">뒤로 가기</button>
-                    <button class="btn btn-info submitButton">회원가입하기</button>
+                    <button type="button" class="btn btn-link m-1" onclick="backhome()">뒤로 가기</button>
+                    <button class="btn btn-secondary m-1 submitButton">회원가입하기 
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+  					<path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+					</svg>
+                    </button>
                 </div>
-                <div>
-                    <button class="aaa">클릭</button>
-
-                </div>
+                <input type="hidden" name="oauth" value="">
             </form>
         </div>
     </div>
     <script>
-        function backhome() {
-            console.log("/test/header");
-            location.href = "/test/header";
+       function backhome() {
+            alert("mainPage 로 이동합니다.");
+            location.href = "/main/page";
         }
     </script>
 
@@ -75,7 +79,7 @@ pageEncoding="UTF-8"%>
 
 
             $('.aaa').click(function () {
-                console.log('aaa on');
+
                 // 이메일 중복확인이 여기서 들어가야 한다. 비동기 요청!!
                 fetch('/mypage/eamilcheck?userEmail=' + $inputuserEmail.value)
                     .then(Response => Response.text())
@@ -112,8 +116,6 @@ pageEncoding="UTF-8"%>
                 $('.signUpForm').submit;
             }
         });
-
-
         
     </script>
 
