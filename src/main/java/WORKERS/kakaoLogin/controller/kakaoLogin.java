@@ -190,7 +190,7 @@ public class kakaoLogin {
 		session.setAttribute("access_token", oauthToken.getAccess_token());
 		
 		System.out.println("777777777777777777");
-		return "redirect:/test/header";
+		return "redirect:/main/page";
 	}
 	
 	
