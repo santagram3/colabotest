@@ -64,7 +64,7 @@
 		<form method="post" 
 		      action="/boast/addcomment/${boast.bNoSP}" >
 		     <label class="form-label">닉네임</label>
-			<input type="text" name="nickname" class="form-control">	
+			<input type="text" name="nickname" class="form-control" value=${loginUsernickName} readonly="readonly">	
 			<textarea cols="50" rows="5" name="commentContent" class="form-control"></textarea>
 			<button type="submit" class="btn btn-success mt-3">등록</button>
 		</form>

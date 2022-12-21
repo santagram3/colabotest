@@ -41,14 +41,6 @@ public class JobPostingController {
 	private JobPostingService jobpostingservice;// = new JobPostingService();
 	
 	//구인공고 리스트
-//	@GetMapping("/list")
-	/*
-	 * public String JobPostingList(Model model) throws Exception { //리스트 뽑아오기 위해
-	 * Service 호출 List<CompanyPosting> jobpostinglist =
-	 * jobpostingservice.getJobPostingList();
-	 * model.addAttribute("jobpostinglist",jobpostinglist); return
-	 * "/jobPosting/jobPostingList"; }
-	 */
 	@RequestMapping(value = "list")
 	public ModelAndView AllListView(
             @RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage,
@@ -73,9 +65,7 @@ public class JobPostingController {
 	@GetMapping("/addForm")
 	public String JobPostingAddForm(HttpSession session, Model model) {		
 		User sessionLoginUser = (User)session.getAttribute("loginUser");
-		System.out.println("sessionLoginUser: "+sessionLoginUser);
 		String loginUsernickName = sessionLoginUser.getNickName();
-		System.out.println("loginUsernickName: "+loginUsernickName);
 		model.addAttribute("loginUsernickName",loginUsernickName);
 		return "/jobPosting/jobPostingAdd";
 	}

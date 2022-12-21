@@ -64,9 +64,7 @@ public class BoastController {
 	@GetMapping("/addForm")
 	public String BoastAddForm(HttpSession session, Model model) {	
 		User sessionLoginUser = (User)session.getAttribute("loginUser");
-		System.out.println("sessionLoginUser: "+sessionLoginUser);
 		String loginUsernickName = sessionLoginUser.getNickName();
-		System.out.println("loginUsernickName: "+loginUsernickName);
 		model.addAttribute("loginUsernickName",loginUsernickName);
 		return "/boast/boastAdd";
 	}
@@ -90,7 +88,7 @@ public class BoastController {
 	}
 
 	@GetMapping("/view/{bNoSP}")
-	public String BoastView(@PathVariable int bNoSP, Model model) throws Exception {
+	public String BoastView(@PathVariable int bNoSP, Model model, HttpSession session) throws Exception {
 		
 		Boast boast = boastService.viewBoast(bNoSP);
 		int bImageNoF = bNoSP;
@@ -98,6 +96,10 @@ public class BoastController {
 		System.out.println("bImageNoF: "+bImageNoF);
 		BoastImage bi = boastService.viewBoastImage(bImageNoF);
 		List<Comments> commentlist = boastService.listComment(aid);
+		
+		User sessionLoginUser = (User)session.getAttribute("loginUser");
+		String loginUsernickName = sessionLoginUser.getNickName();
+		model.addAttribute("loginUsernickName",loginUsernickName);
 		
 		model.addAttribute("boast",boast);
 		model.addAttribute("bi",bi);
