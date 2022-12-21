@@ -13,6 +13,9 @@ public interface CompanyMapper {
 	// 가입시켜주는 메소드 
 	boolean registerCompany(CompanyUser companyUser) throws Exception;
 	
+	// 비동기 사업자번호 중복 있는지 없는지 사용 
+	String BNboolean(String BusinessNumber) throws Exception;
+	
 	
 	
 }

@@ -58,5 +58,20 @@ public class CompanyController {
 		//yesCompanyEmail or noCompanyEmail
 		return result;
 	}
+	
+	// 사업자 번호가 있는지 확인하는 비동기 메소드
+		@GetMapping("/findBN")
+		@ResponseBody // 비동기
+		public String findfindBN(String BusinessNumber) throws Exception {
+			System.out.println("@ResponseBody BusinessNumber = " + BusinessNumber);
+			String result = companyService.BNbooleanService(BusinessNumber);
+			System.out.println("result = " + result);
+		
+			return result;
+		}
+		
+	
+	
+	
 
 }

@@ -40,4 +40,22 @@ public class CompanyService {
 		}
 	}
 
+	public String BNbooleanService(String BusinessNumber) throws Exception{
+		
+		System.out.println("=======BNbooleanService====");
+		String number = companyMapper.BNboolean(BusinessNumber);
+		
+		if(number == null) {
+			// 사업자 번호가 없으면 > 중복 아님 
+			System.out.println("noBN");
+			return"noBN";
+		}else {
+			//사업자 번호가 있으면 > 중복
+			System.out.println("yesBN");
+			return"yesBN";
+		}
+		
+	}
+	
+	
 }

@@ -23,7 +23,12 @@
     <select id="findCompany" resultMap="company">
       select * from companyUser where companyEmail = #{companyEmail}
     </select>
+ 
     
+    <!-- 사업자 정보 가져옴  -->
+    <select id="BNboolean" resultType="String">
+      select BusinessNumber from companyUser where BusinessNumber = #{BusinessNumber}
+    </select>
     
  	<!-- 회원가입 시켜줌 -->
     <insert id="registerCompany">
