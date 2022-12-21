@@ -7,20 +7,44 @@
 					
 
 	<resultMap id="boastlist" type="WORKERS.Boast.model.Boast">
-		<result property="bNoSP" column="bNoSP"/>
-		<result property="bTitle" column="bTitle"/>
-		<result property="bWriter" column="bWriter"/>
-		<result property="bContent" column="bContent"/>
-		<result property="bDate" column="bDate"/>
+		<result property="bNoSP" 		column="bNoSP"/>
+		<result property="bTitle" 		column="bTitle"/>
+		<result property="bWriter" 		column="bWriter"/>
+		<result property="bContent" 	column="bContent"/>
+		<result property="bDate" 		column="bDate"/>
 	</resultMap>
 	<resultMap id="boastImg" type="WORKERS.Boast.model.BoastImage">
-		<result property="bImageNoF" column="bImageNoF"/>
-		<result property="bImage" column="bImage"/>
+		<result property="bImageNoF" 	column="bImageNoF"/>
+		<result property="bImage" 		column="bImage"/>
 	</resultMap>
+	<resultMap id="commentAll" type="WORKERS.Boast.model.Comments">
+      <result property="commentAid" 	column="commentAid"/>
+      <result property="nickname" 		column="nickname"/>
+      <result property="commentContent" column="commentContent"/>
+      <result property="commentDate" 	column="commentDate"/>
+      <result property="aid" 			column="aid"/>
+   </resultMap>
+    
 
     
     <select id="getBoastList" resultMap="boastlist">
     	select * from BoastTable order by bDate desc
+    </select>
+    
+   	<select id="SelectAllList" resultType="hashmap">
+       SELECT *
+       FROM (
+       SELECT ROW_NUMBER() OVER(ORDER by bNoSP DESC)
+       AS row_num, bNoSP, bTitle, bWriter, bContent, bDate
+       FROM BoastTable)
+       <if test="firstRecordIndex !=null and lastRecordIndex != null">
+           WHERE row_num BETWEEN #{firstRecordIndex}+1 AND
+           #{lastRecordIndex}
+       </if>
+    </select>
+ 
+    <select id="testTableCount" resultType="int">
+        SELECT count(*) FROM BoastTable
     </select>
     
     <select id="addBoast" resultMap="boastlist">
@@ -60,5 +84,23 @@
     <select id="ModifyBoastImg" resultMap="boastImg">
     	update BoastImage set bImage = #{bImage} where bImageNoF = #{bImageNoF}
     </select>
+    
+    
+    <select id="ListComment" resultMap="commentAll">
+    	select * from comments where aid=#{aid}
+    </select>
+    <select id="AddBoastComment" resultMap="commentAll">
+    	insert into comments
+    	values (BoastCommentList_sequence.nextval, #{nickname}, #{commentContent}, sysdate, #{aid})
+    </select>
+    <select id="ModifyBoastComment" resultMap="commentAll">
+    	update comments set commentContent=#{commentContent} where commentAid=#{commentAid}
+    </select>
+    <select id="FindbNoSP2" resultType="int">
+    	select aid from comments where commentAid=#{commentAid}
+    </select>
+    <select id="deleteBoastComment" resultMap="commentAll">
+    	delete from comments where commentAid = #{commentAid}
+    </select>   
     
 </mapper>   

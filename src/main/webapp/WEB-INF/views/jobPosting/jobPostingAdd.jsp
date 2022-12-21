@@ -21,7 +21,7 @@ pageEncoding="UTF-8"%>
   
 <!-- 구인공고 게시글 작성폼  -->
 
-<img src="/jobPosting/background/add.png" class="img-fluid" alt="...">
+<img src="/jobPosting/img/add.png" class="img-fluid" alt="...">
 	<div class="shadow p-3 mb-5 bg-body rounded card border-primary position-absolute top-100 start-50 translate-middle " style="width:800px;">
 		<form  method="post" action="/jobposting/add" enctype="multipart/form-data">
 
@@ -41,7 +41,7 @@ pageEncoding="UTF-8"%>
 				
 				<div class="mb-4">
   				<label class="form-label">작성자</label>
-  				<input type="text" class="form-control" name="cWriter">
+  				<input type="text" class="form-control" value="${loginUsernickName}" name="cWriter" readonly="readonly">
 				</div>
 				
 				<div class="mb-4">

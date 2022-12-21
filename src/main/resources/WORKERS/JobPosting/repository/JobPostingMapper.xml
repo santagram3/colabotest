@@ -64,5 +64,22 @@
  	<select id="ModifyJobPostingImg" resultMap="jobpostingimg">
  		update CompanyPostingImg set companyImg=#{companyImg} where cno=#{cno}
  	</select>
+ 	
+ 	
+ 	<select id="SelectAllList" resultType="hashmap">
+        SELECT *
+        FROM (
+        SELECT ROW_NUMBER() OVER(ORDER by cno DESC)
+        AS row_num, cno, cTitle, cWriter, cContent, cDate, cDueDate, cAddress
+        FROM CompanyPostingTable)
+        <if test="firstRecordIndex !=null and lastRecordIndex != null">
+            WHERE row_num BETWEEN #{firstRecordIndex}+1 AND
+            #{lastRecordIndex}
+        </if>
+    </select>
+ 
+    <select id="testTableCount" resultType="int">
+        SELECT count(*) FROM CompanyPostingTable
+    </select>
 
 </mapper>

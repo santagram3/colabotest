@@ -13,44 +13,43 @@ pageEncoding="UTF-8"%>
 </head>
 
 <body>
-	
-	<div class="signUpcontainerHead text-dark p-3 m-2">
-	<img src="/resources/header/img/skyblue.png">
-	<p class="fw-bold fs-4"><br>워커스에 오신 것을 환영합니다.</p>
-	</div>
-    <div class="signUpcontainer bg-light text-dark p-3 m-2">
-      <!--  <div class="slogun"> 이번주 금요일에 뭐해? 취준 안해? 가입해서 자소서나 써 .. ;; </div> -->
+    <div class="signUpcontainer">
+        <div class="slogun"> 이번주 금요일에 뭐해? 취준 안해? 가입해서 자소서나 써 .. ;; </div>
         <div class="signupbox">
             <form action="/mypage/UserSignUp" method="post" class="signUpForm">
                 <div class="mb-3">
-                    <label for="formGroupExampleInput" class="form-label fw-bold fs-5">이메일</label>
+                    <label for="formGroupExampleInput" class="form-label">이메일</label>
                     <input type="email" class="form-control userEmail" id="formGroupExampleInput"
                         placeholder="ex: mini@naver.com " name="userEmail" required="required">
-                    <button class="aaa btn btn-secondary mt-2">중복확인</button>
+                    <button class="aaa">중복확인</button>
                 </div>
                 <div class="mb-3">
-                    <label for="formGroupExampleInput" class="form-label fw-bold fs-5">비밀번호</label>
+                    <label for="formGroupExampleInput" class="form-label">password</label>
                     <input type="password" class="form-control" id="formGroupExampleInput" placeholder="password write"
                         required="required" name="userPw">
                 </div>
                 <div class="mb-3">
-                    <label for="formGroupExampleInput" class="form-label fw-bold fs-5">닉네임</label>
+                    <label for="formGroupExampleInput" class="form-label">nickName</label>
                     <input type="text" class="form-control" id="formGroupExampleInput" placeholder="아무거나 막 적어"
                         required="required" name="nickName">
                 </div>
                 <div class="mb-3">
-                    <label for="formGroupExampleInput" class="form-label fw-bold fs-5">생년월일</label>
+                    <label for="formGroupExampleInput" class="form-label">생년월일</label>
                     <input type="date" class="form-control" id="formGroupExampleInput"
                         placeholder="Example input placeholder" name="birthday" required="required">
                 </div>
-                <label for="formGroupExampleInput" class="form-label fw-bold fs-5">SelfIntroduce</label>
+                <label for="formGroupExampleInput" class="form-label">selfIntroduce</label>
                 <textarea class="form-control col-sm-5" rows="5" name="selfIntroduce" required></textarea>
-                <div class="buttongroup">
-                    <button type="button" class="btn btn-light" onclick="backhome()">뒤로 가기</button>
-                    <button class="btn btn-primary submitButton">회원가입하기</button>
-                </div>
+                
                 <input type="hidden" name="oauth" value="">
-              
+                <div class="buttongroup">
+                    <button type="button" class="btn btn-success" onclick="backhome()">뒤로 가기</button>
+                    <button class="btn btn-info submitButton">회원가입하기</button>
+                </div>
+                <div>
+                    <button class="aaa">클릭</button>
+
+                </div>
             </form>
         </div>
     </div>
@@ -76,7 +75,7 @@ pageEncoding="UTF-8"%>
 
 
             $('.aaa').click(function () {
-
+                console.log('aaa on');
                 // 이메일 중복확인이 여기서 들어가야 한다. 비동기 요청!!
                 fetch('/mypage/eamilcheck?userEmail=' + $inputuserEmail.value)
                     .then(Response => Response.text())
@@ -113,6 +112,8 @@ pageEncoding="UTF-8"%>
                 $('.signUpForm').submit;
             }
         });
+
+
         
     </script>
 

@@ -2,6 +2,9 @@ package WORKERS.JobPosting.model;
 
 import java.sql.Date;
 
+import lombok.Data;
+
+@Data
 public class CompanyPosting {
 	private int cno;
 	private String cTitle;

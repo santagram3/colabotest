@@ -17,25 +17,25 @@
 </head>
 
 <body>
-    <div id="headerBox" class="shadow-sm bg-body">
-        <div class="logo"><a href="/main/page"><img src="/resources/header/img/skyblue.png" width="250px" alt="워커스로고"></a></div>
+    <div id="headerBox">
+        <div class="logo"><a href="/test/header"><img src="/resources/header/img/skyblue.png" alt=""></a></div>
         <div class="headerMenu">
-            <div class="menuLeft fw-bold">
-                <a href="" style="color: black;">Q & A</a>
-                <a href="/jobposting/list" style="color: black;">구인공고</a>
-                <a href="/boast/list" style="color: black;">공부 자랑하기</a>
-                <a href="" style="color: black;">스터디 구하기</a>
+            <div class="menuLeft">
+                <a href="">Q & A</a>
+                <a href="/jobposting/list">구인공고</a>
+                <a href="/boast/list">공부 자랑하기</a>
+                <a href="">스터디 구하기</a>
             </div>
             <c:if test="${loginUser == null}">
                 <div class="menuRight">
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-outline-dark loginbutton" data-bs-toggle="modal"
+                    <button type="button" class="btn btn-primary loginbutton" data-bs-toggle="modal"
                         data-bs-target="#staticBackdrop">
                         로그인
                     </button>
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        회원가입
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        회원가입 버튼
                     </button>
                 </div>
             </c:if>

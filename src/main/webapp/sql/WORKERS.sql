@@ -181,12 +181,33 @@ create table BoastTable(
    bContent CLOB NOT NULL,--글내용 / 이미지는 BoastImg이미지테이블참조
    bDate DATE default sysdate NOT NULL--글작성일자
    );   
-   insert into BoastTable values(2,'공부자랑2번글','재욱스','DB를 공부했습니다.',sysdate);
+   insert into BoastTable values(12,'공부자랑5번글','재욱스','DB를 공부했습니다.',sysdate);
+   insert into BoastTable values(13,'공부자랑6번글','재욱스','DB를 공부했습니다.',sysdate);
+   insert into BoastTable values(15,'공부자랑7번글','재욱스','DB를 공부했습니다.',sysdate);
+   insert into BoastTable values(14,'공부자랑8번글','재욱스','DB를 공부했습니다.',sysdate);
+   insert into BoastTable values(16,'공부자랑9번글','재욱스','DB를 공부했습니다.',sysdate);
+   insert into BoastTable values(17,'공부자랑10번글','재욱스','DB를 공부했습니다.',sysdate);
+   insert into BoastTable values(11),'공부자랑11번글','재욱스','DB를 공부했습니다.',sysdate);
    select * from BoastTable;
    drop table BoastTable;
    delete from BoastTable where bNoSP=2;
    
    SELECT * FROM    ALL_CONSTRAINTS WHERE    TABLE_NAME = 'BoastTable';
+   
+   create table comments(
+	commentAid number primary key,
+	nickname VARCHAR2(50) NOT NULL,
+	commentContent VARCHAR2(3000) NOT NULL,
+	commentDate date default sysdate,
+	aid number NOT NULL,
+	foreign key (aid) references BoastTable(bNoSP) on delete cascade
+);
+
+insert into comments values (1,'재욱스', '댓글댓글댓글', sysdate, 5)
+select * from comments
+
+drop table comments;
+create sequence BoastCommentList_sequence; 
    
 create TABLE BoastReport(
    bReportNoS NUMBER NOT NULL,--신고테이블글번호-sequence

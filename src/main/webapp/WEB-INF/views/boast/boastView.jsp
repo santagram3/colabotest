@@ -15,26 +15,65 @@
 <%@ include file ="../header/header.jsp" %>
 </header>
    <body>
-  <div class="container w-75 mt-5 mx-auto">
-  <p class="fw-bold fs-5"> 공부 자랑하기</p>
-   	<div class="card mb-3 border border-primary border-2">
-  		<div class="row g-0">
-    	<div class="col-md-4">
-     	 <img src="..." class="img-fluid rounded-start" alt="...">
-    	</div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h2 class="card-title fw-bold fs-4">${boast.bNoSP}    ${boast.bTitle}</h2>
-        <p class="card-text fs-5">Content: ${boast.bContent}</p>
-        <p class="card-text fs-"><small class="text-muted">Date: ${boast.bDate}</small></p>
-      </div>
-    </div>
-  </div>
-</div>
+   <div class="container w-75 mt-5 mx-auto">
+    <h2>글 번호 : ${boast.bNoSP}</h2>
+    <h2>글 제목 : ${boast.bTitle}</h2>
 
     <hr>
-    <a href="javascript:history.back()" class="btn btn-primary btn-sm"> Back</a>
-    <a href="/boast/modifyForm/${boast.bNoSP}" class="btn btn-primary btn-sm">수정하기</a>
+    <div class="card w-75 mx-auto">
+	    <div class="card-body">
+	    	<h4 class="card-title">Date: ${boast.bDate}</h4>
+	    	<img class="card-img-top" src="/img/boast/${bi.bImage}" alt="공부자랑 이미지 자리">
+	    	<p class="card-text">Content: ${boast.bContent}</p>
+	    </div>
+    </div>
+    <hr>
+        <ul class="list-group">
+		<c:forEach var="comments" items="${commentlist}" varStatus="status">
+		  <li><a>[${status.count}] 닉네임: ${comments.nickname}	작성·수정일자: ${comments.commentDate}
+		   <br>내용: ${comments.commentContent} </a>
+	<!-- 댓글 수정하기 collapse -->
+		   <button class="btn-update" type="button" 
+	        data-bs-toggle="collapse" 
+	        data-bs-target="#addForm${comments.commentAid}" 
+	        aria-expanded="false" 
+	        aria-controls="addForm${comments.commentAid}">수정하기</button>
+	<div class="collapse" id="addForm${comments.commentAid}">
+	  <div class="card card-body">
+		<form method="post" 
+		      action="modcomment/${comments.commentAid}" >
+		     <label class="form-label">닉네임</label>
+			<input type="text" name="nickname" class="form-control" value='${comments.nickname}' readonly="readonly">	
+			<textarea cols="50" rows="5" name="commentContent" class="form-control">${comments.commentContent}</textarea>
+			<button type="submit" class="btn btn-success mt-3">등록</button>
+		</form>
+	  </div>
+	</div>
+		  <a href="deleteComment/${comments.commentAid}"><span class="badge bg-secondary">&times;</span></a>
+		  </li>
+		</c:forEach> 
+	</ul>
+    
+        <button class="btn btn-outline-info mb-3" type="button" 
+	        data-bs-toggle="collapse" 
+	        data-bs-target="#addForm" 
+	        aria-expanded="false" 
+	        aria-controls="addForm">댓글 쓰기</button>
+	<div class="collapse" id="addForm">
+	  <div class="card card-body">
+		<form method="post" 
+		      action="/boast/addcomment/${boast.bNoSP}" >
+		     <label class="form-label">닉네임</label>
+			<input type="text" name="nickname" class="form-control">	
+			<textarea cols="50" rows="5" name="commentContent" class="form-control"></textarea>
+			<button type="submit" class="btn btn-success mt-3">등록</button>
+		</form>
+	  </div>
+	</div>
+    
+    <hr>
+    <a href="/boast/list" class="btn btn-primary"> Back</a>
+    <a href="/boast/modifyForm/${boast.bNoSP}" class="btn btn-primary">수정하기</a>
     
     </div>
     </body>
