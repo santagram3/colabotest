@@ -42,7 +42,7 @@
             </div>
             <div class="mb-3">
                 <label for="formGroupExampleInput" class="form-label">nickName</label>
-                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="아무거나 막 적어"
+                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="아무거나 막 적어" value="${loginUserInfo.nickName}"
                     required="required" name="nickName">
             </div>
             <div class="mb-3">
