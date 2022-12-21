@@ -135,7 +135,7 @@ public class LoginController {
 				// 객체 찾아서 넣어준다 !
 				CompanyUser loginCompanyUser = companyService.findCompanyUserSerive(inputEmail);
 
-				session.setAttribute("loginUser", loginCompanyUser);
+				session.setAttribute("loginCompanyUser", loginCompanyUser);
 				session.setMaxInactiveInterval(60*60); // 한시간 
 				return "redirect:/main/page";
 

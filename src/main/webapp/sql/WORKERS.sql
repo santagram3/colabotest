@@ -42,7 +42,7 @@ create table userTable(
    userPw varchar2(50) not null , -- 비밀번호 
    nickName varchar2(50), -- 닉네임 
    birthday date not null, -- 생일 날짜를 받아둬야 몇살인지 알지 ~ 
-   userGrade varchar2(10) default '1', -- 1은 일반유저 2는 구인공고 하는사람 3은 어드민  
+   userGrade varchar2(10) default 'WORKER', -- 1은 일반유저 2는 구인공고 하는사람 3은 어드민  
    selfIntroduce varchar2(200), -- 간단한 자기소개 100자로 작성 하시오 
    oauth varchar2(10)  
 )
@@ -50,8 +50,6 @@ create table userTable(
 delete from userTable where userEmail = 'soslimso@nate.com';
 select * from userTable;
 select count(*) from userTable where userEmail = '123@123';
-
-
 
 -- 프로필 이미지 - 프사 
 create table profileImg (
