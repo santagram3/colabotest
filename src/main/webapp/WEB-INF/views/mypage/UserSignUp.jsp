@@ -7,12 +7,15 @@ pageEncoding="UTF-8"%>
 <head>
     <meta charset="UTF-8">
     <title>회원가입</title>
+    <!-- css -->
     <link rel="stylesheet" href="/resources/mypage/signUp.css">
+    <!--  -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
+
     <div class="signUpcontainer">
         <div class="slogun"> 이번주 금요일에 뭐해? 취준 안해? 가입해서 자소서나 써 .. ;; </div>
         <div class="signupbox">
@@ -40,23 +43,18 @@ pageEncoding="UTF-8"%>
                 </div>
                 <label for="formGroupExampleInput" class="form-label">selfIntroduce</label>
                 <textarea class="form-control col-sm-5" rows="5" name="selfIntroduce" required></textarea>
-                
-                <input type="hidden" name="oauth" value="">
                 <div class="buttongroup">
                     <button type="button" class="btn btn-success" onclick="backhome()">뒤로 가기</button>
                     <button class="btn btn-info submitButton">회원가입하기</button>
                 </div>
-                <div>
-                    <button class="aaa">클릭</button>
-
-                </div>
+                <input type="hidden" name="oauth" value="">
             </form>
         </div>
     </div>
     <script>
-        function backhome() {
-            console.log("/test/header");
-            location.href = "/test/header";
+       function backhome() {
+            alert("mainPage 로 이동합니다.");
+            location.href = "/main/page";
         }
     </script>
 
@@ -75,7 +73,7 @@ pageEncoding="UTF-8"%>
 
 
             $('.aaa').click(function () {
-                console.log('aaa on');
+
                 // 이메일 중복확인이 여기서 들어가야 한다. 비동기 요청!!
                 fetch('/mypage/eamilcheck?userEmail=' + $inputuserEmail.value)
                     .then(Response => Response.text())
@@ -112,8 +110,6 @@ pageEncoding="UTF-8"%>
                 $('.signUpForm').submit;
             }
         });
-
-
         
     </script>
 

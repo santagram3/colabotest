@@ -103,4 +103,8 @@ public class BoastService {
 	public void deleteBoastComment(int commentAid) throws Exception {		
 		boastMapper.deleteBoastComment(commentAid);			
 	}
+
+	public int findbStar(int bStarNoF) {
+		return boastMapper.FindbStar(bStarNoF);
+	}
 }

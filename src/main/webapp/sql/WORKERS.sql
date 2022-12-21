@@ -221,6 +221,8 @@ CREATE TABLE BoastStar(
    bStarNoF Number NOT NULL,-- BoastTable글번호-foreign
    bStar Number NOT NULL--별점 점수
 )   
+insert into BoastStar values(34,5);
+select * from BOASTSTAR;
 
 ALTER TABLE BoastStar
 ADD CONSTRAINTS BoastStar_FK FOREIGN KEY (bStarNoF)--BoastStar 의 bStarNoF가 BoastTable의 bNoSP가 되어야 함

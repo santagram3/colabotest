@@ -56,6 +56,8 @@ public interface BoastMapper {
 	public int FindbNoSP2(int commentAid);
 	public void deleteBoastComment(int commentAid) throws Exception;
 
+	public int FindbStar(int bStarNoF);
+
 
 
 }

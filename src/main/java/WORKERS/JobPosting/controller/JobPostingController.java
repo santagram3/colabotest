@@ -56,7 +56,6 @@ public class JobPostingController {
         mav.addObject("pagination",pagination);
         mav.addObject("AllList",jobpostingservice.SelectAllList(pagination));
         mav.setViewName("/jobPosting/jobPostingList");
-        System.out.println(mav.toString());
         
         return mav;
 	}

@@ -18,7 +18,7 @@
    <div class="container w-75 mt-5 mx-auto">
     <h2>글 번호 : ${boast.bNoSP}</h2>
     <h2>글 제목 : ${boast.bTitle}</h2>
-
+	<h3>좋아요 : ${bStar}</h3>
     <hr>
     <div class="card w-75 mx-auto">
 	    <div class="card-body">
@@ -64,7 +64,7 @@
 		<form method="post" 
 		      action="/boast/addcomment/${boast.bNoSP}" >
 		     <label class="form-label">닉네임</label>
-			<input type="text" name="nickname" class="form-control" value=${loginUsernickName} readonly="readonly">	
+			<input type="text" name="nickname" class="form-control">	
 			<textarea cols="50" rows="5" name="commentContent" class="form-control"></textarea>
 			<button type="submit" class="btn btn-success mt-3">등록</button>
 		</form>

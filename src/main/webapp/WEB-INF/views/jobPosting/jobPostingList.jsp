@@ -81,6 +81,31 @@ pageEncoding="UTF-8"%>
 
 <!-- 게시판 형태 -->	
 <div class="container">	 
+
+    <!-- /paginate -->
+ <div class="d-flex flex-row-reverse flex-wrap">
+    <div class="bottom mt-3">  
+    	<p class="fs-6 p-1">목록 보여주기 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+  		<path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+		</svg></p>
+        <div class="bottom-left">
+            <select id="cntSelectBox" name="cntSelectBox"
+                onchange="changeSelectBox(${pagination.currentPage},${pagination.cntPerPage},${pagination.pageSize}); "
+                class="form-control" style="width: 100px;">
+                <option value="10"
+                    <c:if test="${pagination.cntPerPage == '10'}">selected</c:if>>10개씩</option>
+                <option value="20"
+                    <c:if test="${pagination.cntPerPage == '20'}">selected</c:if>>20개씩</option>
+                <option value="30"
+                    <c:if test="${pagination.cntPerPage == '30'}">selected</c:if>>30개씩</option>
+            </select>
+        </div>
+    </div>
+ </div>
+
+
+
+
 <table class="table caption-top border border-light">
   <caption>최근 올라온 구인공고</caption>
   <thead>
@@ -126,50 +151,46 @@ pageEncoding="UTF-8"%>
   </tbody>
 </table>
 
-    <!--paginate -->
-    <div class="paginate">
-        <div class="paging">
-            <a class="direction prev" href="javascript:void(0);"
+   <!--paginate -->
+    <div class="paginate text-center">
+        <div class="paging p-2">
+            <a class="direction prev text-muted" href="javascript:void(0);"
                 onclick="movePage(1,${pagination.cntPerPage},${pagination.pageSize});">
-                &lt;&lt; </a> 
-            <a class="direction prev" href="javascript:void(0);"
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-left" viewBox="0 0 16 16">
+  				<path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+  				<path fill-rule="evenodd" d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+				</svg> </a> 
+            <a class="direction prev text-muted" href="javascript:void(0);"
                 onclick="movePage(${pagination.currentPage}<c:if test="${pagination.hasPreviousPage == true}">-1</c:if>,${pagination.cntPerPage},${pagination.pageSize});">
-                &lt; </a>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+  				<path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+				</svg></a>
  
             <c:forEach begin="${pagination.firstPage}"
                 end="${pagination.lastPage}" var="idx">
-                <a
+                <a	class="text-muted p-4"
                     style="color:<c:out value="${pagination.currentPage == idx ? '#cc0000; font-weight:700; margin-bottom: 2px;' : ''}"/> "
                     href="javascript:void(0);"
                     onclick="movePage(${idx},${pagination.cntPerPage},${pagination.pageSize});">
                     <c:out value="${idx}" />
                 </a>
             </c:forEach>
-            <a class="direction next" href="javascript:void(0);"
+            <a class="direction next text-muted" href="javascript:void(0);"
                 onclick="movePage(${pagination.currentPage}<c:if test="${pagination.hasNextPage == true}">+1</c:if>,${pagination.cntPerPage},${pagination.pageSize});">
-                &gt; </a> <a class="direction next" href="javascript:void(0);"
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+ 				<path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+				</svg> </a> <a class="direction next text-muted" href="javascript:void(0);"
                 onclick="movePage(${pagination.totalRecordCount},${pagination.cntPerPage},${pagination.pageSize});">
-                &gt;&gt; </a>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+ 				<path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
+  				<path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
+				</svg> </a>
         </div>
     </div>
-    <!-- /paginate -->
- 
-    <div class="bottom">
-        <div class="bottom-left">
-            <select id="cntSelectBox" name="cntSelectBox"
-                onchange="changeSelectBox(${pagination.currentPage},${pagination.cntPerPage},${pagination.pageSize});"
-                class="form-control" style="width: 100px;">
-                <option value="10"
-                    <c:if test="${pagination.cntPerPage == '10'}">selected</c:if>>10개씩</option>
-                <option value="20"
-                    <c:if test="${pagination.cntPerPage == '20'}">selected</c:if>>20개씩</option>
-                <option value="30"
-                    <c:if test="${pagination.cntPerPage == '30'}">selected</c:if>>30개씩</option>
-            </select>
-        </div>
-    </div>
+
+
 				
-	<a href="/jobposting/addForm" type="button" class="btn btn-primary sticky-bottom">작성하기</a>
+	<a href="/jobposting/addForm" type="button" class="btn btn-primary sticky-bottom mt-1 mb-2">작성하기</a>
 		
 		</div>
 

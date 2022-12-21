@@ -1,5 +1,9 @@
 package WORKERS.mypage.repository;
 
+import java.sql.SQLException;
+import java.util.List;
+
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 
 
@@ -15,7 +19,7 @@ public interface UserMapper {
 	// 아이디 넣으면 아이디 가져옴 !
 	String findUserId (String userEmail) throws Exception;
 	
-	// 이메일 넣으면 그 사람 정보 가져옴 
+	// 이메일 넣으면 그 사람 정보 가져옴 //
 	User findUser(String userEmail) throws Exception;
 	
 	// 로그인할때 -- 성공 값 잘나옴 
