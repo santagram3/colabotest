@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 
 import WORKERS.Boast.model.Boast;
 import WORKERS.Boast.model.BoastImage;
+import WORKERS.Boast.model.BoastStar;
 import WORKERS.Boast.model.Comments;
 import WORKERS.JobPosting.model.Pagination;
 
@@ -56,7 +57,12 @@ public interface BoastMapper {
 	public int FindbNoSP2(int commentAid);
 	public void deleteBoastComment(int commentAid) throws Exception;
 
-	public int FindbStar(int bStarNoF);
+
+	public void AddBoastStar(BoastStar bs);
+
+	public BoastStar GetBoastStar(int bStarNoF) throws Exception;
+
+	public void ModifyBoastStar(BoastStar boastStar) throws Exception;
 
 
 

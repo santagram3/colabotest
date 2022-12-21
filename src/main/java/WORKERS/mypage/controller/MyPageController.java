@@ -121,9 +121,7 @@ public class MyPageController {
 		
         session.removeAttribute("loginUser"); // loginUser 라는 내용을 세션에서 삭제
         session.invalidate(); // 세션 객체 삭제
-		
-
-        
+  
 		return "/header/header";
 	}
 	

@@ -18,7 +18,7 @@
    <div class="container w-75 mt-5 mx-auto">
     <h2>글 번호 : ${boast.bNoSP}</h2>
     <h2>글 제목 : ${boast.bTitle}</h2>
-	<h3>좋아요 : ${bStar}</h3>
+    <button type="button" class="btn btn-success" onclick="location='/boast/addboaststar/${boast.bNoSP}';">좋아요 : ${bStar}</button>
     <hr>
     <div class="card w-75 mx-auto">
 	    <div class="card-body">

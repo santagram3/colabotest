@@ -69,6 +69,7 @@
                                 <td><a href = "view/${list.BNOSP}" style="color: black;">${list.BTITLE}</a></td>
                                 <td>${list.BWRITER}</td>
                                 <td><fmt:formatDate value="${list.BDATE}" pattern="yyyy-MM-dd"/></td>
+                                <td><a href="delete/${list.BNOSP}"><span class="badge bg-secondary btn-sm">&times;</span></a></td>
                             </tr>
                         </c:forEach>
                     </c:when>

@@ -24,16 +24,21 @@
       <result property="commentDate" 	column="commentDate"/>
       <result property="aid" 			column="aid"/>
     </resultMap>
-   	<resultMap id="boastStar" type="WORKERS.Boast.model.BoastImage">
+   	<resultMap id="boastStar" type="WORKERS.Boast.model.BoastStar">
 		<result property="bStarNoF" 	column="bStarNoF"/>
 		<result property="bStar" 		column="bStar"/>
 	</resultMap>
     
 <!-- 별점 -->    
-    <select id="FindbStar" resultType="int">
-    	select bStar from BoastStar where bStarNoF = #{bStarNoF}
-    </select>
-
+	<select id="GetBoastStar" resultMap="boastStar">
+		select * from BoastStar where bStarNoF=#{bStarNoF}
+	</select>
+	<select id="AddBoastStar" resultMap="boastStar">
+		insert into BoastStar values (#{bStarNoF},0)
+	</select>
+	<select id="ModifyBoastStar">
+		update BoastStar set bStar=#{bStar} where bStarNoF=#{bStarNoF}
+	</select>
     
     <select id="getBoastList" resultMap="boastlist">
     	select * from BoastTable order by bDate desc

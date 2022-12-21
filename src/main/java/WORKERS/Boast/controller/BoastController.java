@@ -71,7 +71,7 @@ public class BoastController {
 	
 		
 	@PostMapping("/add")
-	public String addBoast(@ModelAttribute Boast boast ,@ModelAttribute BoastImage boastImg ,
+	public String addBoast(@ModelAttribute Boast boast ,@ModelAttribute BoastImage boastImg, @ModelAttribute BoastStar bs,
 						@RequestParam("file") MultipartFile file )throws Exception  {
 		
 			File dest = new File(fdir+"/"+file.getOriginalFilename());
@@ -81,7 +81,9 @@ public class BoastController {
 			
 			int i = boastService.findbNoSP();			
 			boastImg.setbImageNoF(i);
+			bs.setBStarNoF(i);
 			
+			boastService.addBoastStar(bs);
 			boastService.addBoastImg(boastImg);	
 			return "redirect:/boast/list";			
 
@@ -97,9 +99,11 @@ public class BoastController {
 		BoastImage bi = boastService.viewBoastImage(bImageNoF);
 		List<Comments> commentlist = boastService.listComment(aid);
 		
-//		int bStarNoF = bNoSP;
-//		int bStar = boastService.findbStar(bStarNoF);
-//		model.addAttribute("bStar",bStar);
+		int bStarNoF = bNoSP;		
+		BoastStar boaststar = boastService.getBoastStar(bStarNoF);
+		System.out.println("boaststar: " + boaststar.toString());
+		int bStar=boaststar.getBStar();
+		model.addAttribute("bStar",bStar);
 		
 		User sessionLoginUser = (User)session.getAttribute("loginUser");
 		String loginUsernickName = sessionLoginUser.getNickName();
@@ -182,10 +186,19 @@ public class BoastController {
 	}
 	
 	
-	@PostMapping("/getstarboast/{bNoSP}")
-	public String GetStarBoast(@PathVariable int bNoSP, BoastStar bs) {
+	@GetMapping("/addboaststar/{bNoSP}")
+	public String AddStarBoast(@PathVariable int bNoSP, BoastStar boastStar) throws Exception {
+		int bStarNoF = bNoSP;
+		boastStar = boastService.getBoastStar(bStarNoF);
+		int bStar = boastStar.getBStar()+1;
+		
+		boastStar.setBStarNoF(bStarNoF);
+		boastStar.setBStar(bStar);
+		
+		boastService.modifyBoastStar(boastStar);
 		
 		return "redirect:/boast/view/"+bNoSP;
 	}
+	
 
 }

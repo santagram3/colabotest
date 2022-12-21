@@ -184,7 +184,7 @@ create table BoastTable(
    insert into BoastTable values(2,'공부자랑2번글','재욱스','DB를 공부했습니다.',sysdate);
    select * from BoastTable;
    drop table BoastTable;
-   delete from BoastTable where bNoSP=2;
+   delete from BoastTable;
    
    SELECT * FROM    ALL_CONSTRAINTS WHERE    TABLE_NAME = 'BoastTable';
    
@@ -219,10 +219,11 @@ REFERENCES BoastTable(bNoSP);
 -- 별점 
 CREATE TABLE BoastStar(
    bStarNoF Number NOT NULL,-- BoastTable글번호-foreign
-   bStar Number NOT NULL--별점 점수
+   bStar Number default 0--별점 점수
 )   
 insert into BoastStar values(34,5);
 select * from BOASTSTAR;
+drop table BOASTSTAR
 
 ALTER TABLE BoastStar
 ADD CONSTRAINTS BoastStar_FK FOREIGN KEY (bStarNoF)--BoastStar 의 bStarNoF가 BoastTable의 bNoSP가 되어야 함
