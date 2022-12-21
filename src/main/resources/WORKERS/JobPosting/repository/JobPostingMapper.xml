@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+     
+<mapper namespace="WORKERS.JobPosting.repository.JobPostingMapper">
+ 
+    <resultMap id="jobposting" type="WORKERS.JobPosting.model.CompanyPosting">
+        <result property="cno"  column="cno"/> 
+        <result property="cTitle" column="cTitle"/>   
+        <result property="cWriter" column="cWriter"/>      
+        <result property="cContent" column="cContent"/>   
+        <result property="cDate" column="cDate"/>   
+        <result property="cDueDate" column="cDueDate"/>  
+        <result property="cAddress" column="cAddress"/>  
+    </resultMap>
+    <resultMap id="jobpostingimg" type="WORKERS.JobPosting.model.CompanyPostingImg">
+        <result property="cno"  column="cno"/> 
+        <result property="companyImg" column="companyImg"/>   
+    </resultMap>
+
+    <!-- 구인공고 리스트에 쓸 테이블 가져오기 -->
+    <select id="JobPostingList" resultMap="jobposting">
+    	select * from CompanyPostingTable order by cDate desc
+    </select>
+   
+    <!-- 추가 -->
+ 	<select id="AddJobPosting" resultMap="jobposting">
+ 		insert into CompanyPostingTable
+ 		values (CompanyPostingTable_sequence.nextval,#{cTitle},#{cWriter},#{cContent},sysdate,#{cDueDate},#{cAddress})
+ 	</select>
+ 	
+ 	<select id="FindCno" resultType="int">
+ 		select max(cno) from CompanyPostingTable		
+ 	</select>
+ 	
+ 	<select id="AddJobPostingImg" resultMap="jobpostingimg">
+ 		insert into CompanyPostingImg
+ 		values (#{cno},#{companyImg})
+ 	</select>
+ 	
+ 	
+	<!-- 삭제 -->
+ 	<select id="DeleteJobPosting" resultMap="jobposting">
+ 		delete from CompanyPostingTable where cno = #{cno}
+ 	</select>
+ 	
+ 	
+ 	<!-- view 페이지 -->
+ 	<select id="ViewJobPosting" resultMap="jobposting">
+ 		select * from CompanyPostingTable where cno = #{cno}
+ 	</select>
+ 	
+ 	<select id="ViewJobPostingImg" resultMap="jobpostingimg">
+ 		select * from CompanyPostingImg where cno = #{cno}
+ 	</select>
+ 	
+ 	<!-- 수정 -->
+ 	<select id="ModifyJobPosting" resultMap="jobposting">
+ 		update CompanyPostingTable set cTitle=#{cTitle}, cWriter=#{cWriter},cContent=#{cContent},
+ 										 cDueDate=#{cDueDate}, cAddress=#{cAddress} where cno = #{cno}
+ 	</select>
+ 	
+ 	<select id="ModifyJobPostingImg" resultMap="jobpostingimg">
+ 		update CompanyPostingImg set companyImg=#{companyImg} where cno=#{cno}
+ 	</select>
+ 	
+ 	
+ 	<select id="SelectAllList" resultType="hashmap">
+        SELECT *
+        FROM (
+        SELECT ROW_NUMBER() OVER(ORDER by cno DESC)
+        AS row_num, cno, cTitle, cWriter, cContent, cDate, cDueDate, cAddress
+        FROM CompanyPostingTable)
+        <if test="firstRecordIndex !=null and lastRecordIndex != null">
+            WHERE row_num BETWEEN #{firstRecordIndex}+1 AND
+            #{lastRecordIndex}
+        </if>
+    </select>
+ 
+    <select id="testTableCount" resultType="int">
+        SELECT count(*) FROM CompanyPostingTable
+    </select>
+
+</mapper>
