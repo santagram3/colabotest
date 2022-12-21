@@ -136,7 +136,7 @@ public class LoginController {
 				CompanyUser loginCompanyUser = companyService.findCompanyUserSerive(inputEmail);
 
 				session.setAttribute("loginCompanyUser", loginCompanyUser);
-				session.setMaxInactiveInterval(60*60); // 한시간 
+				session.setMaxInactiveInterval(60 * 60); // 한시간
 				return "redirect:/main/page";
 
 			} else {
@@ -150,7 +150,22 @@ public class LoginController {
 			return "redirect:/main/page";
 		}
 
+	}
 
+	@GetMapping("/companyLogout")
+	public String companyLogout(HttpSession session) {
+
+		CompanyUser loginCompanyUser = (CompanyUser) session.getAttribute("loginCompanyUser");
+
+		if (loginCompanyUser != null) { // 로그인 상태라면 ?
+
+			session.removeAttribute("loginCompanyUser"); // loginUser 라는 내용을 세션에서 삭제
+			session.invalidate(); // 세션 객체 삭제
+
+			return "redirect:/main/page";
+		}
+
+		return "redirect:/main/page";
 	}
 
 }

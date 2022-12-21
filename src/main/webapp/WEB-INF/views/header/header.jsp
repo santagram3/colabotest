@@ -26,7 +26,7 @@
                 <a href="">공부 자랑하기</a>
                 <a href="">스터디 구하기</a>
             </div>
-            <c:if test="${loginUser == null}">
+            <c:if test="${loginUser == null && loginCompanyUser == null }">
                 <div class="menuRight">
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-primary loginbutton" data-bs-toggle="modal"
@@ -43,10 +43,16 @@
                     </button>
                 </div>
             </c:if>
-            <c:if test="${loginUser != null}">
+            <c:if test="${loginUser.userGrade == 'WORKER'}">
                 <div>
                     <a href="/mypage/info">${loginUser.nickName}님 환영합니다.</a>
                     <a href="/login/logout">로그아웃 하기</a>
+                </div>
+            </c:if>
+            <c:if test="${loginCompanyUser.userGrade == 'COMPANY'}">
+                <div>
+                    <a href="/mypage/info">${loginCompanyUser.companyEmail}님 환영합니다.</a>
+                    <a href="/login/companyLogout">로그아웃 하기</a>
                 </div>
             </c:if>
         </div>
