@@ -5,7 +5,6 @@
  
 <mapper namespace="WORKERS.Boast.repository.BoastMapper">
 					
-
 	<resultMap id="boastlist" type="WORKERS.Boast.model.Boast">
 		<result property="bNoSP" 		column="bNoSP"/>
 		<result property="bTitle" 		column="bTitle"/>
@@ -117,4 +116,8 @@
     	delete from comments where commentAid = #{commentAid}
     </select>   
     
+    
+<!-- 마이페이지 -->
+
+
 </mapper>   

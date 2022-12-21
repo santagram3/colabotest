@@ -1,8 +1,10 @@
 package WORKERS.mypage.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
-import org.springframework.jdbc.datasource.init.ScriptUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import WORKERS.Boast.model.Boast;
+import WORKERS.Boast.model.BoastImage;
+import WORKERS.Boast.service.BoastService;
+import WORKERS.mypage.DTO.MyPageDTO;
 import WORKERS.mypage.model.User;
 import WORKERS.mypage.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +28,8 @@ import lombok.RequiredArgsConstructor;
 public class MyPageController {
 	
 	private final UserService userService;
+	@Autowired
+	private BoastService boastService;
 	
 	// 회원가입창 만들기 
 	@GetMapping("/UserSignUp")
@@ -90,6 +98,31 @@ public class MyPageController {
 		
 		
 		return "/mypage/mypageInfo";
+	}
+	
+	//내가 쓴 글 페이지
+	@GetMapping("/info2")
+	public String myInfo2(HttpSession session,Model model, Boast boast, BoastImage boastimage, MyPageDTO mpdto) throws Exception{
+		User sessionLoginUser = (User)session.getAttribute("loginUser");
+		String loginUserEmail = sessionLoginUser.getUserEmail();
+		loginUserEmail.trim();
+ 		User loginUserInfo = userService.findUserService(loginUserEmail);
+		
+		System.out.println(loginUserInfo.toString());
+// 이미지 가져오기
+		String bWriter = loginUserInfo.getNickName();
+
+		
+
+		
+//		System.out.println("bslist.toString():"+ bilist.toString());
+//		model.addAttribute("bilist",bilist);
+		
+//Boast 제목 bTitle 가져오기 (bWriter)
+//comments count(*) 세서 가져오기 (nickname)
+//BoastStar 테이블에서 bStar 가져오기(bWriter -> bNoSP,bStarNoF -> bStar)
+						
+		return "/mypage/mypageInfo2";
 	}
 	
 	

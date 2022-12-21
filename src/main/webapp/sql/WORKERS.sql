@@ -186,6 +186,7 @@ create table BoastTable(
    drop table BoastTable;
    delete from BoastTable;
    
+   
    SELECT * FROM    ALL_CONSTRAINTS WHERE    TABLE_NAME = 'BoastTable';
    
    create table comments(
@@ -246,13 +247,13 @@ REFERENCES BoastTable(bNoSP);
    
 
 create TABLE BoastReply (
-
    bReplyNoSP NUMBER primary key , -- 댓글테이블 글번호
    bReplyNoF NUMBER NOT NULL, -- boast테이블 글번호 -BoastTable의 Primarykey를 참조하는 foreignkey 
    bReplyWriter VARCHAR2(30) NOT NULL, -- 댓글 작성자  
    bReplyContent CLOB NOT NULL, -- 댓글 내용 
    bReplyDate DATE default sysdate NOT NULL--댓글 작성일자
 );
+select * from BoastReply;
 
 ALTER TABLE BoastReply
 ADD CONSTRAINTS BoastReply_FK FOREIGN KEY (bReplyNoF)--BoastTable의 bNoSP를 참조하는 foreign key bReplyNoF

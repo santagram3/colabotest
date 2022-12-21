@@ -116,4 +116,11 @@ public class BoastService {
 	public void modifyBoastStar(BoastStar boastStar) throws Exception{
 		boastMapper.ModifyBoastStar(boastStar);		
 	}
+
+	public List<Boast> findBoastList(String bWriter) throws Exception{
+		List<Boast> bslist = boastMapper.FindBoastList(bWriter);
+		return bslist;
+	}
+
+
 }

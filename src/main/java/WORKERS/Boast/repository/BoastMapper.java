@@ -64,6 +64,9 @@ public interface BoastMapper {
 
 	public void ModifyBoastStar(BoastStar boastStar) throws Exception;
 
+	public List<Boast> FindBoastList(String bWriter) throws Exception;
+
+
 
 
 }
