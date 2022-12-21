@@ -166,9 +166,6 @@ public class BoastController {
 		boastimage.setbImageNoF(bNoSP);
 		boastService.modifyBoastImg(boastimage);
 		
-		
-		
-		
 		return "redirect:/boast/view/"+bNoSP;
 	}
 	
@@ -176,11 +173,23 @@ public class BoastController {
 	//공부자랑 수정
 	@PostMapping("/modifyComment/{commentAid}")
 	public String BoastCommentModify(@PathVariable int commentAid, @ModelAttribute Comment comment) throws Exception {
-		int bNoSP=boastService.findbNoSP2(commentAid);
-
-		boastService.modifyBoastComment(comment);
+		
+		System.out.println("commentAid: " + commentAid);
+		System.out.println("comment: " + comment);
+		
+		 
+		  int bNoSP=boastService.findbNoSP2(commentAid);
+		 
+		String nickname = comment.getNickname();
+		String commentContent = comment.getCommentContent();
+		int aid=bNoSP;
+		comment.setAid(aid);
+	//	commentAid
+		 boastService.modifyBoastComment(comment);
+		
 				
 		return "redirect:/boast/view/"+bNoSP;
+		//return null;
 	}
 	
 	

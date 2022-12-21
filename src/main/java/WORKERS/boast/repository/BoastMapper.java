@@ -37,8 +37,8 @@ public interface BoastMapper {
 	public void ModifyBoast(Boast boast) throws Exception;
 	public void ModifyBoastImg(BoastImage boastimage) throws Exception;
 	//comment
-		public void modifyBoastComment(Comment comment) throws Exception;
-		public int FindbNoSP2(int commentAid);
+	public void modifyBoastComment(Comment comment) throws Exception;
+	public int FindbNoSP2(int commentAid);
 
 
 

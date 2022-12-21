@@ -30,18 +30,21 @@
     	select * from comments where aid=#{aid} order by commentDate desc
     </select>
     
-    <select id="addBoastComment" resultMap="commentAll">
+    <insert id="addBoastComment" >
     	insert into comments
     	values (BoastCommentList_sequence.nextval,#{nickname},#{commentContent},sysdate,#{aid}) 
-    </select>
+    </insert>
   
-    <select id="deleteBoastComment" resultMap="commentAll">
+    <delete id="deleteBoastComment">
     	delete from comments where commentAid = #{commentAid}
-    </select>    
+    </delete>   
     
-     <select id="modifyBoastComment" resultMap="commentAll">
-    	update comments set commentContent=#{commentContent}, sysdate, aid=${aid} where commentAid=#{commentAid}
-    </select>
+     <update id="modifyBoastComment" >
+    	update comments set commentContent=#{commentContent}, 
+    	                    commentDate = sysdate, 
+    	                    aid=#{aid} 
+    	where commentAid=#{commentAid}
+    </update>
     
     <select id="FindbNoSP2" resultType="int">
     select aid from comments where commentAid=#{commentAid}
@@ -51,19 +54,19 @@
     	select * from BoastTable order by bDate desc
     </select>
     
-    <select id="addBoast" resultMap="boastlist">
+    <insert id="addBoast" >
  		insert into BoastTable
  		values (BoastTable_sequence.nextval,#{bTitle},#{bWriter},#{bContent},sysdate)
- 	</select>	
+ 	</insert>	
  	
  	<select id="findbNoSP" resultType="int">
  		select max(bNoSP) from BoastTable		
  	</select>
  	
- 	<select id="addBoastImg" resultMap="boastImg" >
+ 	<insert id="addBoastImg" >
  		insert into BoastImage
  		values (#{bImageNoF},#{bImage})
- 	</select>
+ 	</insert>
     
     <select id="ViewBoast" resultMap="boastlist">
     	select * from BoastTable where bNoSP = #{bNoSP}
@@ -73,20 +76,21 @@
     	select * from BoastImage where bImageNoF = #{bImageNoF}
     </select>
     
-    <select id="DeleteBoast" resultMap="boastlist">
+    <delete id="DeleteBoast" >
     	delete from BoastTable where bNoSP = #{bNoSP}
-    </select>    
+    </delete>    
     
-    <select id="DeleteBoastImg" resultMap="boastImg">
+    <delete id="DeleteBoastImg" >
     	delete from BoastImage where bImageNoF = #{bImageNoF}
-    </select>
+    </delete>
     
-    <select id="ModifyBoast" resultMap="boastlist">
+    <update id="ModifyBoast" >
     	update BoastTable set bTitle=#{bTitle}, bWriter=#{bWriter}, bContent=#{bContent} where bNoSP=#{bNoSP}
-    </select>
+    </update>
     
-    <select id="ModifyBoastImg" resultMap="boastImg">
+    <update id="ModifyBoastImg" >
     	update BoastImage set bImage = #{bImage} where bImageNoF = #{bImageNoF}
-    </select>
+    </update>
+   
     
 </mapper>   
