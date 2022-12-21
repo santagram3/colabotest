@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 제이 쿼리 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <input  id='user_id' class='aaa'>
+    <button type="button" onclick="loadArticles()">사업자 정보 가져오기</button>
+
+    <script>
+        const servicekey = 
+            'VkkxTU5irp%2BM4wNeKK8WotKzVDETTw6EJCXoHXW9IFXSMuilgFSDZsgBdku1uyeZicBgxpHSUYroV192JP0aeA%3D%3D'; // 인증받을 서비스키
+        //const companyNumber = document.getElementById('user_id').value; // 인풋값 가져오기 
+      
+        function loadArticles() {
+            var $companyNum = document.querySelector('.aaa').value;
+            var data = {
+                "b_no": [$companyNum] // 사업자번호 "xxxxxxx" 로 조회 시,
+            };
+            $.ajax({
+                url: "https://api.odcloud.kr/api/nts-businessman/v1/status?serviceKey="+servicekey, // serviceKey 값을 xxxxxx에 입력
+                type: "POST",
+                data: JSON.stringify(data), // json 을 string으로 변환하여 전송
+                dataType: "JSON",
+                contentType: "application/json",
+                accept: "application/json",
+                success: function (result) {
+                    
+
+                    console.log('$companyNum = ' + $companyNum);
+                  //  console.log('companyNumber = ' + companyNumber);
+
+
+                    // if(result.data[0].tax_type ==='국세청에 등록되지 않은 사업자등록번호입니다.'){
+                    //     alert('국세청에 등록되지 않은 사업자등록번호입니다.');
+                    // }
+                    console.log(result);
+                    console.log(result.data);
+                    console.log(result.data[0].tax_type);
+                   
+                },
+                error: function (result) {
+                    console.log(result.responseText); //responseText의 에러메세지 확인
+                }
+            });
+        }
+    </script>
+
+</body>
+
+</html>

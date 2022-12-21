@@ -36,17 +36,23 @@ drop table companyUser ;
 drop table qnaReport ;
 drop table qReplyReport ; 
 
-
 -- 사용자 테이블 
 create table userTable(
    userEmail varchar2(50) not null primary key , -- 아이디겸 이메일 
    userPw varchar2(50) not null , -- 비밀번호 
-   nickName varchar2(50) not null, -- 닉네임 
-   birthday date not null , -- 생일 날짜를 받아둬야 몇살인지 알지 ~ 
+   nickName varchar2(50), -- 닉네임 
+   birthday date not null, -- 생일 날짜를 받아둬야 몇살인지 알지 ~ 
    userGrade varchar2(10) default '1', -- 1은 일반유저 2는 구인공고 하는사람 3은 어드민  
-   selfIntroduce varchar2(200) not null -- 간단한 자기소개 100자로 작성 하시오  
+   selfIntroduce varchar2(200), -- 간단한 자기소개 100자로 작성 하시오 
+   oauth varchar2(10)  
 )
+
+delete from userTable where userEmail = 'soslimso@nate.com';
 select * from userTable;
+select count(*) from userTable where userEmail = '123@123';
+
+
+
 -- 프로필 이미지 - 프사 
 create table profileImg (
    userEmail varchar2(30) not null , -- 아이디겸 이메일 
@@ -125,14 +131,15 @@ REFERENCES qReply(qReplyBno); --00
 
 alter table qReplyReport drop CONSTRAINTS qReplyReport_FK;
 
-
+--3210901874
+drop table companyUser;
 -- 사업자 회원 가입 
 create table companyUser (
 BusinessNumber varchar2(50) primary key not null, -- 사업자 번호 
 companyEmail varchar2(50) not null,	-- 회사 이메일 // 로그인
 companyPwd varchar2(50) not null,  -- 회사 비밀번호 
 companyName varchar2(50) not null , -- 회사이름 
-userGrade varchar2(10) default '2' -- 2번은 회사 계정 
+userGrade varchar2(10)  -- 가입할때 히든 속성으로 COMPANY 로 들어옴 
 )
 select * from companyUser; -- 00
  
@@ -206,9 +213,6 @@ ADD CONSTRAINTS BoastImg_FK FOREIGN KEY (bImageNoF)--BoastImage의 bNoSP가 fore
 REFERENCES BoastTable(bNoSP);
    
 
-
-create sequence BoastReply_sequence;   
-   
 create TABLE BoastReply (
 
    bReplyNoSP NUMBER primary key , -- 댓글테이블 글번호
@@ -222,22 +226,18 @@ ALTER TABLE Reply
 ADD CONSTRAINTS bReply_FK FOREIGN KEY (bReplyNoF)--BoastTable의 bNoSP를 참조하는 foreign key bReplyNoF
 REFERENCES BoastTable(bNoSP);
 
-
 create TABLE BoastReplyReport(
-   
    bReplyReportNoS NUMBER NOT NULL,--댓글신고테이블의 글번호 -sequence
    bReplyReportNoF NUMBER NOT NULL,--댓글테이블의 글번호 -foreign
    bReplyNo NUMBER NOT NULL,--댓글번호
    bReplyWriter VARCHAR2(30) NOT NULL,--댓글작성자
    bReplyReportReporter VARCHAR2(30) NOT NULL,--댓글신고 작성자(신고자)
    bReplyReportContent CLOB NOT NULL--댓글신고사유
-
 );
    
 ALTER TABLE BoastReplyReport
 ADD CONSTRAINTS bReplyReport_FK FOREIGN KEY (bReplyReportNoF)--BoastReply의 bReplyNoSP를 참조하는 foreign key bReplyReportNoF
 REFERENCES BoastReply(bReplyNoSP);
-
 
 --drop table BoastTable;
 --drop table BoastReport;

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 
+import WORKERS.mypage.DTO.CompanyLoginDTO;
 import WORKERS.mypage.DTO.LoginDTO;
 import WORKERS.mypage.model.User;
 import WORKERS.mypage.service.UserService;
@@ -69,7 +70,7 @@ public class LoginController {
 		System.out.println("===========login/logout===============\n");
 
 		System.out.println("==========kakaologout=========");
-		if (oauth =="KAKAO") {
+		if (oauth == "KAKAO") {
 			RestTemplate rt2 = new RestTemplate();
 
 			System.out.println("2-1");
@@ -89,11 +90,6 @@ public class LoginController {
 			);
 		}
 
-//		System.out.println("2-6");
-//		System.out.println("response2.getHeaders() = " + response2.getHeaders());
-//		System.out.println("====================");
-//		System.out.println("response2.getBody() = " + response2.getBody());
-//		System.out.println(response2);
 		System.out.println("==========kakaologout=========");
 
 		// 형변환 해줘야 됨 !
@@ -110,5 +106,24 @@ public class LoginController {
 		// 로그인 상태가 아니라면
 		return "redirect:/test/header";
 	}
+	
+	@PostMapping("/companyLogin")
+	public String companyLoginController(CompanyLoginDTO companyLoginDTO) throws Exception{
+		
+		System.out.println("companyLoginController -------");
+		System.out.println("companyLoginDTO = " +companyLoginDTO);
+		
+		
+		
+		
+		
+		
+		return "";
+		
+	}
+	
+	
+	
+	
 
 }

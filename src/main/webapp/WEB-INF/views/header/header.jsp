@@ -136,7 +136,7 @@
      <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static1" data-bs-keyboard="false" tabindex="-1"
      aria-labelledby="staticBackdropLabel" aria-hidden="true">
      <!-- 로그인 폼 태그 -->
-     <form action="/login/company" method="post">
+     <form action="/login/companyLogin" method="post">
          <div class="modal-dialog">
              <div class="modal-content">
                  <div class="modal-header">

@@ -1,5 +1,5 @@
 
-@import url(reset.css);
+@import url(/resources/reset.css);
 
 #headerBox{
     border: skyblue solid 1px;
@@ -37,11 +37,13 @@ a:link{
 a:visited{
 	text-decoration: none;
 }
-
 a:active{
 	text-decoration: none;
 }
 a:hover{
 	text-decoration: none;
 }
-
+.signUpbuttonGroup{
+    display: flex;
+    justify-content: space-between;
+}

@@ -1,0 +1,13 @@
+
+@import url(/resources/reset.css);
+
+.infoContainer{
+
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    
+}
+.infoContainer .loginUserInfo{
+    margin-right: 150px;
+}
