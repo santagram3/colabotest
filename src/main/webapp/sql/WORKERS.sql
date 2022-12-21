@@ -131,7 +131,7 @@ REFERENCES qReply(qReplyBno); --00
 
 alter table qReplyReport drop CONSTRAINTS qReplyReport_FK;
 
-
+--3210901874
 drop table companyUser;
 -- 사업자 회원 가입 
 create table companyUser (

@@ -39,7 +39,7 @@ pageEncoding="UTF-8"%>
                     <label for="formGroupExampleInput" class="form-label">BusinessNumber</label>
                     <input required type="number" class="form-control BusinessNumber" id="BusinessNumber"
                         placeholder="- 없는 10자리 숫자를 넣으시오" name="BusinessNumber">
-                    <button class="bbb ConfirmButton">사업자번호 등록 확인</button>
+                    <button  class="bbb ConfirmButton">사업자번호 등록 확인</button>
                 </div>
                 <div class="mb-3">
                     <label for="formGroupExampleInput" class="form-label">companyName</label>
@@ -85,29 +85,34 @@ pageEncoding="UTF-8"%>
                             alert('중복된 이메일입니다.');
                             checkArr[0] = false;
                             console.log("checkArr[0] = "+checkArr[0]);
+                            alert("checkArr[0] = "+checkArr[0]);
                         } else if (msg === 'noCompanyEmail') {
                             console.log("noCompanyEmail");
                             $companyEmail.readOnly = true;
                             alert('중복 없는 이메일입니다');
                             checkArr[0] = true;
                             console.log("checkArr[0] = "+checkArr[0]);
+                            alert("checkArr[0] = "+checkArr[0]);
                         }
                     });
             });
             // 있는 이메일인지 까지 성공 !!
 
             // -----------------------------------------사업자번호 API--------------------------------------------------
-            $('.bbb').click(function () {
+            $('.bbb').click(function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
                 const servicekey =
                     'VkkxTU5irp%2BM4wNeKK8WotKzVDETTw6EJCXoHXW9IFXSMuilgFSDZsgBdku1uyeZicBgxpHSUYroV192JP0aeA%3D%3D'; // 인증받을 서비스키
                    
+                    const $BusinessNumberInput = document.querySelector('.BusinessNumber');// 인풋값 가져오기
                     const $BusinessNumber = document.getElementById('BusinessNumber').value; // 인풋값 가져오기 
                 var data = {
                     "b_no": [$BusinessNumber] // 사업자번호 "xxxxxxx" 로 조회 시,
                 };
                 $.ajax({
-                    url: "https://api.odcloud.kr/api/nts-businessman/v1/status?serviceKey=" +
-                        servicekey, // serviceKey 값을 xxxxxx에 입력
+                    url: "https://api.odcloud.kr/api/nts-businessman/v1/status?serviceKey=" + servicekey, // serviceKey 값을 xxxxxx에 입력
                     type: "POST",
                     data: JSON.stringify(data), // json 을 string으로 변환하여 전송
                     dataType: "JSON",
@@ -116,14 +121,14 @@ pageEncoding="UTF-8"%>
                     success: function (result) {
                         console.log("$BusinessNumber = " +$BusinessNumber);
                         if (result.data[0].tax_type === '국세청에 등록되지 않은 사업자등록번호입니다.') {
-                            alert('국세청에 등록되지 않은 사업자등록번호입니다.');
                             checkArr[1] = false;
                             console.log("checkArr[1] = " + checkArr[1]);
+                            alert('국세청에 등록되지 않은 사업자등록번호입니다. checkArr[1] = ' + checkArr[1] );
                         } else {
                             checkArr[1] = true;
-                            $BusinessNumberInput.readOnly = true;
-                            console.log("국세청 등록 사업자 번호 ");
+                            alert(" checkArr[1] = " + checkArr[1]);
                             console.log("checkArr[1] = " + checkArr[1]);
+                            $BusinessNumberInput.readOnly = true;
                         }
                     },
                     error: function (result) {
@@ -150,7 +155,7 @@ pageEncoding="UTF-8"%>
                         return;
                     }
                 }
-               // $('.companySignupForm').submit;
+                $('.companySignupForm').submit();
             }); // end sign-up 클릭 이벤트
 
 
