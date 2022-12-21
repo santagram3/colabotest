@@ -79,14 +79,23 @@ public class UserService {
 			// 아이디 없음
 			return "noId";
 		}
-
 	}
 	
-	public User findUserService(String email)throws Exception{
-		
+	public User findUserService(String email)throws Exception{		
 		User user = userMapper.findUser(email);
-		return user;
-		
+		return user;		
+	}
+
+	public void modifyUserInfo(User user) throws Exception {
+		System.out.println("서비스 시작");
+		userMapper.ModifyUserInfo(user);
+		System.out.println("서비스 끝");
+	}
+
+	public void deleteUserInfo(User user) throws Exception{
+		System.out.println("user.getUserEmail(): "+user.getUserEmail());
+		String userEmail = user.getUserEmail();
+		userMapper.DeleteUserInfo(userEmail);		
 	}
 	
 	

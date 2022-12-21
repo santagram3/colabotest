@@ -1,11 +1,6 @@
 package WORKERS.mypage.repository;
 
-import java.sql.SQLException;
-import java.util.List;
-
-import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
-
 
 import WORKERS.mypage.model.User;
 
@@ -27,6 +22,11 @@ public interface UserMapper {
 	
 	// 비밀번호 비교 
 	String findPw(String userPw) throws Exception;
+
+	//일반회원 마이페이지 수정
+	void ModifyUserInfo(User user) throws Exception;
+
+	void DeleteUserInfo(String userEmail) throws Exception;
 	
 	
 	

@@ -2,9 +2,7 @@ package WORKERS.mypage.controller;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.datasource.init.ScriptUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import WORKERS.mypage.model.User;
-import WORKERS.mypage.repository.UserMapper;
 import WORKERS.mypage.service.UserService;
 import lombok.RequiredArgsConstructor;
 
@@ -97,10 +94,37 @@ public class MyPageController {
 	
 	
 	@PostMapping("/modifyinfo/{userEmail}")
-	public String ModifyInfo(@PathVariable String userEmail, @ModelAttribute User user) {
+	public String ModifyInfo(HttpSession session,@PathVariable String userEmail, @ModelAttribute User user, Model model) throws Exception {
 		System.out.println("마이페이지 수정을 시작");
+		System.out.println(user.toString());
+		userService.modifyUserInfo(user);
+
+		User sessionLoginUser = (User)session.getAttribute("loginUser");		
+		String loginUserEmail = sessionLoginUser.getUserEmail();		
+		loginUserEmail.trim();
+
+		User loginUserInfo = userService.findUserService(loginUserEmail);		
+		model.addAttribute("loginUserInfo",loginUserInfo);
 		
 		return "/mypage/mypageInfo";
+	}
+	
+	@PostMapping("/deleteinfo/{userEmail}")
+	public String DeleteInfo(HttpSession session, @PathVariable String userEmail, @ModelAttribute User user) throws Exception{
+		System.out.println("userEmail: "+user.getUserEmail());
+		System.out.println("user: "+user.toString());
+		
+		User sessionLoginUser = (User)session.getAttribute("loginUser");
+		if(user.getUserPw().equals(sessionLoginUser.getUserPw()))
+			userService.deleteUserInfo(user);
+		System.out.println("삭제완료");
+		
+        session.removeAttribute("loginUser"); // loginUser 라는 내용을 세션에서 삭제
+        session.invalidate(); // 세션 객체 삭제
+		
+
+        
+		return "/header/header";
 	}
 	
 	

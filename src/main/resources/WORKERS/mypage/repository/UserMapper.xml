@@ -32,9 +32,18 @@
     
  	<!-- 회원가입 시켜줌 -->
     <insert id="signUpUser">
-       insert into userTable(userEmail,userPw,nickName,birthday,selfIntroduce,oauth)
+       insert into userTable (userEmail,userPw,nickName,birthday,selfIntroduce,oauth)
 	    values(#{userEmail},#{userPw},#{nickName},#{birthday},#{selfIntroduce},#{oauth})
     </insert>
+    <!-- 회원정보 수정 -->
+    <select id="ModifyUserInfo" resultMap="user">
+    	update userTable set userPw= #{userPw}, nickName= #{nickName}, selfIntroduce= #{selfIntroduce}
+    				where userEmail = #{userEmail}
+    </select>
+    <!-- 회원정보 삭제 -->
+    <select id="DeleteUserInfo">
+    	delete from userTable where userEmail = #{userEmail}
+    </select>
     
     <!-- 이메일주고 비밀번호 가져오는 쿼리 -->
     <select id="findPw" resultType="String">

@@ -59,6 +59,29 @@
                 <button class="btn btn-info submitButton">수정하기</button>
             </div>
                 </form>
+                 <button type="button" class="btn btn-primary loginbutton" data-bs-toggle="modal"
+                        data-bs-target="#staticBackdrop">
+                        탈퇴하기
+                 </button>
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static1" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+        <form method="post" action="/mypage/deleteinfo/${loginUserInfo.userEmail}">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5>정말 탈퇴하시려면 비밀번호를 입력하세요</h5>
+                        <input type="password" class="form-control" id="formGroupExampleInput" placeholder="password write"
+                    required="required" name="userPw">
+                    </div>
+                    <div>
+                        <button type="button" class="btn bn-secondary" data-bs-dismiss="modal">뒤로 가기</button>
+                        <button type="submit" class="btn btn-primary">탈퇴하기</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 
         </div>
     </div>
