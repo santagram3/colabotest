@@ -27,7 +27,7 @@ public class CompanyService {
 	}
 
 	// 이메일 찾아주는 메소드
-	public String findCompanyEmail(String companyEmail) throws Exception {
+	public String findCompanyEmailService(String companyEmail) throws Exception {
 		System.out.println("insert companyEmail = " + companyEmail);
 		String email = companyMapper.findCompanyEmail(companyEmail);
 		System.out.println("out companyEmail = " + email);
@@ -40,6 +40,7 @@ public class CompanyService {
 		}
 	}
 
+	// 사업자 번호 있는지 없는지 확인하는 메소드 
 	public String BNbooleanService(String BusinessNumber) throws Exception{
 		
 		System.out.println("=======BNbooleanService====");
@@ -56,6 +57,10 @@ public class CompanyService {
 		}
 		
 	}
+	
+	
+	
+	
 	
 	
 }

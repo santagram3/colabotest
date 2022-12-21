@@ -8,7 +8,13 @@ import WORKERS.mypage.model.CompanyUser;
 public interface CompanyMapper {
 	
 	// 이메일 찾아주는 메소드 
-	String findCompanyEmail (String ComanyEmail) throws Exception;
+	String findCompanyEmail (String companyEmail) throws Exception;
+	
+	// 비밀번호 찾아주는 메소드 
+	String findCompanyPwd (String companyEmail) throws Exception;
+	
+	// 전체 정보 가져오는 메소드 
+	CompanyUser findCompanyUser(String companyEmail) throws Exception;
 	
 	// 가입시켜주는 메소드 
 	boolean registerCompany(CompanyUser companyUser) throws Exception;

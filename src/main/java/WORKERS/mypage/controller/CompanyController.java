@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import WORKERS.mypage.model.CompanyUser;
 import WORKERS.mypage.service.CompanyService;
-import WORKERS.newsExample.News;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -53,7 +52,7 @@ public class CompanyController {
 	@ResponseBody // 비동기
 	public String findCompanyEmail(String companyEmail) throws Exception {
 		System.out.println("@ResponseBody companyEmail = " + companyEmail);
-		String result = companyService.findCompanyEmail(companyEmail);
+		String result = companyService.findCompanyEmailService(companyEmail);
 		System.out.println("result = " + result);
 		//yesCompanyEmail or noCompanyEmail
 		return result;

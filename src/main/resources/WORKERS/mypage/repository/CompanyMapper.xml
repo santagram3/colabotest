@@ -18,14 +18,19 @@
     <select id="findCompanyEmail" resultType="String">
     	select companyEmail from companyUser where companyEmail = #{companyEmail}
     </select>
-   
- 	<!-- 그 회사 정보 가져옴  -->
-    <select id="findCompany" resultMap="company">
-      select * from companyUser where companyEmail = #{companyEmail}
-    </select>
- 
     
-    <!-- 사업자 정보 가져옴  -->
+     <!-- 회사 비밀번호 가져오기! -->
+    <select id="findCompanyPwd" resultType="String">
+    	select companyPwd from companyUser where companyEmail = #{companyEmail}
+    </select>
+    
+     <!-- 회사가입 이메일 가져오기! -->
+    <select id="findCompanyUser" resultMap="company">
+    	select * from companyUser where companyEmail = #{companyEmail}
+    </select>
+   
+    
+    <!-- 사업자 번호 정보 가져옴  -->
     <select id="BNboolean" resultType="String">
       select BusinessNumber from companyUser where BusinessNumber = #{BusinessNumber}
     </select>
