@@ -32,9 +32,11 @@ public class CompanyService {
 		String email = companyMapper.findCompanyEmail(companyEmail);
 		System.out.println("out companyEmail = " + email);
 		if(email !=null) {
+			// 있으면 
 			System.out.println("yesCompanyEmail");
 			return "yesCompanyEmail";
 		}else {
+			// 없으면 
 			System.out.println("noCompanyEmail");
 			return "noCompanyEmail";
 		}
@@ -57,6 +59,33 @@ public class CompanyService {
 		}
 		
 	}
+	
+	// 비밀번호 찾아주는 메소드 
+	public String findCompanyPwdService(String companyEmail)throws Exception{
+		
+		System.out.println("input companyEmail = " +companyEmail);
+		
+	 String findPwd = companyMapper.findCompanyPwd(companyEmail);
+		
+		System.out.println("output findPwd  = " +findPwd);
+		
+		return findPwd;
+	}
+	
+	
+	// companyUser 가져오는 메소드 
+	public CompanyUser findCompanyUserSerive(String companyEmail)throws Exception {
+		
+		System.out.println("input companyEmail  = " +  companyEmail );
+		
+	CompanyUser findCompanyUser = companyMapper.findCompanyUser(companyEmail);
+		
+		System.out.println("output = "+findCompanyUser);
+		
+		return findCompanyUser;
+	}
+	
+	
 	
 	
 	

@@ -15,7 +15,9 @@ import org.springframework.web.client.RestTemplate;
 
 import WORKERS.mypage.DTO.CompanyLoginDTO;
 import WORKERS.mypage.DTO.LoginDTO;
+import WORKERS.mypage.model.CompanyUser;
 import WORKERS.mypage.model.User;
+import WORKERS.mypage.service.CompanyService;
 import WORKERS.mypage.service.UserService;
 import lombok.RequiredArgsConstructor;
 
@@ -25,6 +27,8 @@ import lombok.RequiredArgsConstructor;
 public class LoginController {
 
 	private final UserService userService;
+
+	private final CompanyService companyService;
 
 	@PostMapping("/login")
 	public String loginSuccess(LoginDTO loginDTO, HttpSession session, Model model) throws Exception {
@@ -100,33 +104,53 @@ public class LoginController {
 			session.removeAttribute("loginUser"); // loginUser 라는 내용을 세션에서 삭제
 			session.invalidate(); // 세션 객체 삭제
 
-			return "redirect:/test/header";
+			return "redirect:/main/page";
 		}
 
 		// 로그인 상태가 아니라면
-		return "redirect:/test/header";
+		return "redirect:/main/page";
 	}
-	
+
 	@PostMapping("/companyLogin")
-	public String companyLoginController(CompanyLoginDTO companyLoginDTO) throws Exception{
-		
+	public String companyLoginController(CompanyLoginDTO companyLoginDTO, HttpSession session) throws Exception {
+		// 1. 잘 들어왔는지 확인
 		System.out.println("companyLoginController -------");
-		System.out.println("companyLoginDTO = " +companyLoginDTO);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		return "";
-		
+		System.out.println("companyLoginDTO = " + companyLoginDTO);
+
+		// 2. 잘 들어온놈 분리
+		// 2-1 이메일
+		String inputEmail = companyLoginDTO.getCompanyEmail();
+		// 2-2 비밀번호
+		String inputPwd = companyLoginDTO.getCompanyPwd();
+
+		// 이메일 있는지 없는지 확인
+		String result = companyService.findCompanyEmailService(inputEmail);
+
+		if (result == "yesCompanyEmail") {
+			// 있는 사용자라면 ?
+			System.out.println("DB Have CompanyEmail");
+			if (inputPwd.equals(companyService.findCompanyPwdService(inputEmail).trim())) {
+				// 들어온 비밀번호와 찾은 비밀번호가 같다면
+				System.out.println("equal pwd");
+				// 객체 찾아서 넣어준다 !
+				CompanyUser loginCompanyUser = companyService.findCompanyUserSerive(inputEmail);
+
+				session.setAttribute("loginUser", loginCompanyUser);
+				session.setMaxInactiveInterval(60*60); // 한시간 
+				return "redirect:/main/page";
+
+			} else {
+				// 들어온 비밀번호와 찾은 비밀번호가 다르다면
+				System.out.println("not equal pwd");
+				return "redirect:/main/page";
+			}
+
+		} else {
+			System.out.println("DB don't Have CompanyEmail");
+			return "redirect:/main/page";
+		}
+
+
 	}
-	
-	
-	
-	
 
 }
