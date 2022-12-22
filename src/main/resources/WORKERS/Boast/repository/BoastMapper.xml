@@ -124,7 +124,6 @@
     
     <!-- 좋아요 테이블 만들었음  -->
 	<resultMap id="boastLike" type="WORKERS.Boast.dto.BoastLikeDTO">
-		<result property="bNoSP" 	column="bNoSP"/>
 		<result property="clicker" 		column="clicker"/>
 	</resultMap>
     
@@ -139,11 +138,14 @@
     </delete>
     
     <!-- 글 번호 주고 , 좋아요 누른 이메일 가져오는 메소드 -->
-    <select id="likeList" resultMap="boastLike">
+    <select id="likeList" resultType="String">
   		select clicker from BOASTLIKE where bNoSP = #{bNoSP}
     </select>
     
-    
+    <!-- 글 번호 주면 글에 좋아요 갯수 받음  -->
+    <select id="likeCount" resultType="int">
+    	select count(clicker) from BoastLike where bNoSP = #{bNoSP}
+    </select>
     
     
     

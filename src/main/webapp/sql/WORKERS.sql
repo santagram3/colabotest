@@ -207,6 +207,7 @@ insert into BOASTLIKE values(1,'so3@naver.com');
 
 select clicker from BOASTLIKE where bNoSP = 1;
 
+select count(clicker) from BoastLike where bNoSP = 1;
 
 
 ALTER TABLE BoastStar
@@ -275,5 +276,5 @@ REFERENCES BoastReply(bReplyNoSP);
 
 
 
-
+select clicker from BOASTLIKE where bNoSP = 1;
 

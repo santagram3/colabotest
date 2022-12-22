@@ -74,6 +74,9 @@ public interface BoastMapper {
 	// 게시물 번호 주면 , 게시물에 좋아요 누른 사람들 리스트 불러오는 메소드 
 	List<String> likeList(int bNoSP) throws Exception;
 	
+	// 게시물 번호 주면 게시물 좋아요 수 받는 메소드 
+	int likeCount(int bNoSP) throws Exception;
+	
 	
 	
 }
