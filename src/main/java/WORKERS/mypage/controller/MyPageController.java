@@ -1,5 +1,6 @@
 package WORKERS.mypage.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -18,6 +19,7 @@ import WORKERS.Boast.model.Boast;
 import WORKERS.Boast.model.BoastImage;
 import WORKERS.Boast.service.BoastService;
 import WORKERS.mypage.DTO.MyPageDTO;
+import WORKERS.mypage.DTO.bNoSPListDTO;
 import WORKERS.mypage.model.User;
 import WORKERS.mypage.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -109,19 +111,36 @@ public class MyPageController {
  		User loginUserInfo = userService.findUserService(loginUserEmail);
 		
 		System.out.println(loginUserInfo.toString());
-// 이미지 가져오기
-		String bWriter = loginUserInfo.getNickName();
-
 		
 
+		String bWriter = loginUserInfo.getNickName();	//session 정보에서 따온 거에서 bWriter 뽑음
+		List<bNoSPListDTO> bNoSPListDTOs = boastService.bNoSPList(bWriter);
+		int size = bNoSPListDTOs.size();	//for 문의 사이즈를 정함
 		
-//		System.out.println("bslist.toString():"+ bilist.toString());
-//		model.addAttribute("bilist",bilist);
+		ArrayList<MyPageDTO> MyPageDTOs = new ArrayList<>(); //bNoSP bTitle bImage bStar replyCount
 		
-//Boast 제목 bTitle 가져오기 (bWriter)
-//comments count(*) 세서 가져오기 (nickname)
-//BoastStar 테이블에서 bStar 가져오기(bWriter -> bNoSP,bStarNoF -> bStar)
-						
+		for (int i = 0; i <size; i++) {
+			bNoSPListDTO bnosplistdto = bNoSPListDTOs.get(i);
+			//myPageDTO에 칼럼들을 하나씩 넣어줄거임 -> 마지막에 MyPageDTOs에 한방에 넣음
+			MyPageDTO myPageDTO = new MyPageDTO();
+			List<MyPageDTO> list = new ArrayList<>();
+			
+			int bnosp = bnosplistdto.getBNoSPs();			//bNoSP
+			myPageDTO.setbNoSP(bnosp);
+			
+			myPageDTO.setbTitle(boastService.getbTitleFrom(bnosp));
+			myPageDTO.setbImage(boastService.getbImageFrom(bnosp));
+			myPageDTO.setbStar(boastService.getBoastStarFrom(bnosp));
+			myPageDTO.setReplyCount(boastService.getReplyCountFrom(bnosp));
+			
+			
+			MyPageDTOs.add(myPageDTO);		//for문 안에서 얻은 정보들 한방에 넣음
+			System.out.println("MyPageDTO: "+myPageDTO.toString());
+		}
+		System.out.println("MyPageDTOs: "+MyPageDTOs.toString());
+		model.addAttribute("MyPageDTOs",MyPageDTOs);
+		
+
 		return "/mypage/mypageInfo2";
 	}
 	

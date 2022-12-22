@@ -41,9 +41,18 @@
   <div class="toast-body bg-white">
               <h3>내가 쓴 글</h3>
               
-              <c:forEach var="list" items="${bilist}" varStatus="status">
-              <li><img class="card-img-top" src="/img/boast/${list.bImage}"></li>
+              <c:forEach var="list" items="${MyPageDTOs}" varStatus="i">
+              <li><%-- <img class="card-img-top" src="/img/boast/${dto.bImage}"> --%>
+			<%-- <c:forEach var="list2" items="${list}">
+              제목: ${list.bTitle},좋아요 갯수: ${list.bStar}, 댓글 수: ${list.replyCount}
+			</c:forEach> --%>
+			 ${list.getbTitle()}
+			 <img class="card-img-top" src="/img/boast/${list.getbImage()}">
+			 좋아요 수 :${list.getbStar()}
+			 댓글 수: ${list.getReplyCount()}
               </c:forEach>
+              
+              
               
  		 </div>
 		</div>

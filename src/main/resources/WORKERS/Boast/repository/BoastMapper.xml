@@ -27,7 +27,27 @@
 		<result property="bStarNoF" 	column="bStarNoF"/>
 		<result property="bStar" 		column="bStar"/>
 	</resultMap>
-    
+   	<resultMap id="bnospDTO" type="WORKERS.mypage.DTO.bNoSPListDTO">
+		<result property="bNoSPs" 	column="bNoSP"/>
+	</resultMap>
+	
+<!-- 마이페이지 -->
+	<select id="BNoSPList" resultMap="bnospDTO">
+		select bNoSP from BoastTable where bWriter = #{bWriter}
+	</select>
+	<select id="GetbTitleFrom" resultType="String">
+		select bTitle from BoastTable where bNoSP = #{bnosp}
+	</select>
+	<select id="GetbImageFrom" resultType="String">
+		select bImage from BoastImage where bImageNoF = #{bnosp}
+	</select>
+	<select id="GetBoastStarFrom" resultType="int">
+		select bStar from BoastStar where bStarNoF = #{bnosp}
+	</select>
+	<select id="GetReplyCountFrom" resultType="int">
+		select count(*) from comments where aid = #{bnosp}
+	</select>
+
 <!-- 별점 -->    
 	<select id="GetBoastStar" resultMap="boastStar">
 		select * from BoastStar where bStarNoF=#{bStarNoF}
@@ -117,7 +137,5 @@
     </select>   
     
     
-<!-- 마이페이지 -->
-
 
 </mapper>   

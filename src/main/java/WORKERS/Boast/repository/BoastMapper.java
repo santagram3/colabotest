@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import WORKERS.Boast.model.Boast;
 import WORKERS.Boast.model.BoastImage;
 import WORKERS.Boast.model.BoastStar;
 import WORKERS.Boast.model.Comments;
 import WORKERS.JobPosting.model.Pagination;
+import WORKERS.mypage.DTO.bNoSPListDTO;
 
 
 @Mapper
@@ -65,6 +65,18 @@ public interface BoastMapper {
 	public void ModifyBoastStar(BoastStar boastStar) throws Exception;
 
 	public List<Boast> FindBoastList(String bWriter) throws Exception;
+
+	public List<bNoSPListDTO> BNoSPList(String bWriter) throws Exception;
+	
+	
+//마이페이지
+	public String GetbTitleFrom(int bnosp) throws Exception;
+
+	public String GetbImageFrom(int bnosp) throws Exception;
+
+	public int GetBoastStarFrom(int bnosp) throws Exception;
+
+	public int GetReplyCountFrom(int bnosp) throws Exception;
 
 
 
