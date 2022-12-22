@@ -25,39 +25,48 @@
 <body>
 
 
-    <div class="infoContainer">
+<div class="infoContainer">
     
         <Header>
             <%-- <%@ include file="/WEB-INF/views/header/myPageHeader.jsp" %> --%>
         </Header>
         
  <div class="container">	        
-        <div class="p-3 mb-2 bg-light text-dark" >
+<div class="p-3 mb-2 bg-light text-dark" >
   <div class="toast-header">
     <a href="/test/header"><img src="/resources/header/img/logo.png" class="rounded me-2 mb-2" width="300px"></a>
     <strong class="me-auto fs-2 mt-4">마이페이지 <p class="fs-4">${loginUserInfo.nickName} 님 계정의 모든 사항을 한눈에 관리하세요.</p></strong>
-    <small>워커스 회원정보 수정하기</small>
+    <small>
+    <a href="/mypage/info" style="color: #5E5E5E;">워커스 회원정보 수정하기</a><br> 
+    <a href="#" style="color: #5E5E5E;">내가 작성한 글 보기</a>
+    </small>
   </div>
-  <div class="toast-body bg-white">
-              <h3>내가 쓴 글</h3>
-              
-              <c:forEach var="list" items="${MyPageDTOs}" varStatus="i">
-              <li><%-- <img class="card-img-top" src="/img/boast/${dto.bImage}"> --%>
-			<%-- <c:forEach var="list2" items="${list}">
-              제목: ${list.bTitle},좋아요 갯수: ${list.bStar}, 댓글 수: ${list.replyCount}
-			</c:forEach> --%>
-			 ${list.getbTitle()}
-			 <img class="card-img-top" src="/img/boast/${list.getbImage()}">
-			 좋아요 수 :${list.getbStar()}
-			 댓글 수: ${list.getReplyCount()}
-              </c:forEach>
-              
-              
-              
- 		 </div>
-		</div>
-        </div>
-    </div>
+<div class="toast-body bg-white">
+  <p class="fs-5 fw-bold mt-2">내가 작성한 글 목록</p>
+  <hr>
+ 	<!-- 내가 작성한 글 목록 불러오기 -->    
+	<div class="d-flex justify-content-between flex-wrap">
+		<c:forEach var="list" items="${MyPageDTOs}" varStatus="i">              
+			<div class="card mb-3 shadow-sm" style="width: 20rem;">
+ 				<img src="/img/boast/${list.getbImage()}" height="300px" class="card-img-top p-4" alt="...">
+  				<div class="card-body">
+   		 		<h5 class="card-title">${list.getbTitle()}</h5>
+    			<p class="card-text">
+    			좋아요 수: ${list.getbStar()}　
+				댓글 수:  ${list.getReplyCount()}
+   	 			</p>
+    			<div class="d-flex justify-content-end">
+    			<a href="해당 게시물 링크 걸기" class="btn btn-light">게시글 보기</a>
+    			</div>
+  				</div>
+			</div>
+		</c:forEach>
+	</div>
+ 
+</div>
+</div>
+</div>
+</div>
 </body>
 
 </html>

@@ -36,8 +36,10 @@
   <div class="toast-header">
     <a href="/test/header"><img src="/resources/header/img/logo.png" class="rounded me-2 mb-2" width="300px"></a>
     <strong class="me-auto fs-2 mt-4">마이페이지 <p class="fs-4">${loginUserInfo.nickName} 님 계정의 모든 사항을 한눈에 관리하세요.</p></strong>
-    <small>워커스 회원정보 수정하기</small>
-    <a href="/mypage/info2">내가 쓴 글 보기</a>
+    <small>
+    <a href="#" style="color: #5E5E5E;">워커스 회원정보 수정하기</a><br> 
+    <a href="/mypage/info2" style="color: #5E5E5E;">내가 작성한 글 보기</a>
+    </small>
   </div>
   <div class="toast-body bg-white">
                <form  method="post" action="/mypage/modifyinfo/${loginUserInfo.userEmail}" enctype="multipart/form-data">
