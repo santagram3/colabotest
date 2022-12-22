@@ -27,17 +27,69 @@ public class CompanyService {
 	}
 
 	// 이메일 찾아주는 메소드
-	public String findCompanyEmail(String companyEmail) throws Exception {
+	public String findCompanyEmailService(String companyEmail) throws Exception {
 		System.out.println("insert companyEmail = " + companyEmail);
 		String email = companyMapper.findCompanyEmail(companyEmail);
 		System.out.println("out companyEmail = " + email);
 		if(email !=null) {
+			// 있으면 
 			System.out.println("yesCompanyEmail");
 			return "yesCompanyEmail";
 		}else {
+			// 없으면 
 			System.out.println("noCompanyEmail");
 			return "noCompanyEmail";
 		}
 	}
 
+	// 사업자 번호 있는지 없는지 확인하는 메소드 
+	public String BNbooleanService(String BusinessNumber) throws Exception{
+		
+		System.out.println("=======BNbooleanService====");
+		String number = companyMapper.BNboolean(BusinessNumber);
+		
+		if(number == null) {
+			// 사업자 번호가 없으면 > 중복 아님 
+			System.out.println("noBN");
+			return"noBN";
+		}else {
+			//사업자 번호가 있으면 > 중복
+			System.out.println("yesBN");
+			return"yesBN";
+		}
+		
+	}
+	
+	// 비밀번호 찾아주는 메소드 
+	public String findCompanyPwdService(String companyEmail)throws Exception{
+		
+		System.out.println("input companyEmail = " +companyEmail);
+		
+	 String findPwd = companyMapper.findCompanyPwd(companyEmail);
+		
+		System.out.println("output findPwd  = " +findPwd);
+		
+		return findPwd;
+	}
+	
+	
+	// companyUser 가져오는 메소드 
+	public CompanyUser findCompanyUserSerive(String companyEmail)throws Exception {
+		
+		System.out.println("input companyEmail  = " +  companyEmail );
+		
+	CompanyUser findCompanyUser = companyMapper.findCompanyUser(companyEmail);
+		
+		System.out.println("output = "+findCompanyUser);
+		
+		return findCompanyUser;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 }

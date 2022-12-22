@@ -24,6 +24,7 @@ import WORKERS.JobPosting.model.CompanyPosting;
 import WORKERS.JobPosting.model.CompanyPostingImg;
 import WORKERS.JobPosting.model.Pagination;
 import WORKERS.JobPosting.service.JobPostingService;
+import WORKERS.mypage.model.CompanyUser;
 import WORKERS.mypage.model.User;
 import lombok.RequiredArgsConstructor;
 
@@ -63,9 +64,11 @@ public class JobPostingController {
 	//구인공고 등록폼
 	@GetMapping("/addForm")
 	public String JobPostingAddForm(HttpSession session, Model model) {		
-		User sessionLoginUser = (User)session.getAttribute("loginUser");
-		String loginUsernickName = sessionLoginUser.getNickName();
-		model.addAttribute("loginUsernickName",loginUsernickName);
+		
+		CompanyUser sessionLoginCompanyUser = (CompanyUser)session.getAttribute("loginCompanyUser");
+		String loginCompanyUsernickName = sessionLoginCompanyUser.getCompanyName();
+		System.out.println("loginCompanyUsernickName: "+loginCompanyUsernickName);
+		model.addAttribute("loginCompanyUsernickName",loginCompanyUsernickName);
 		return "/jobPosting/jobPostingAdd";
 	}
 	

@@ -105,10 +105,6 @@ public class BoastController {
 		int bStar=boaststar.getBStar();
 		model.addAttribute("bStar",bStar);
 		
-		User sessionLoginUser = (User)session.getAttribute("loginUser");
-		String loginUsernickName = sessionLoginUser.getNickName();
-		model.addAttribute("loginUsernickName",loginUsernickName);
-		
 		model.addAttribute("boast",boast);
 		model.addAttribute("bi",bi);
 		model.addAttribute("commentlist",commentlist);
