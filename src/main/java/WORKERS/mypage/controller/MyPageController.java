@@ -1,8 +1,11 @@
 package WORKERS.mypage.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
-import org.springframework.jdbc.datasource.init.ScriptUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +15,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import WORKERS.Boast.model.Boast;
+import WORKERS.Boast.model.BoastImage;
+import WORKERS.Boast.service.BoastService;
+import WORKERS.mypage.DTO.MyPageDTO;
+import WORKERS.mypage.DTO.bNoSPListDTO;
 import WORKERS.mypage.model.User;
 import WORKERS.mypage.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +30,8 @@ import lombok.RequiredArgsConstructor;
 public class MyPageController {
 	
 	private final UserService userService;
+	@Autowired
+	private BoastService boastService;
 	
 	// 회원가입창 만들기 
 	@GetMapping("/UserSignUp")
@@ -92,6 +102,48 @@ public class MyPageController {
 		return "/mypage/mypageInfo";
 	}
 	
+	//내가 쓴 글 페이지
+	@GetMapping("/info2")
+	public String myInfo2(HttpSession session,Model model, Boast boast, BoastImage boastimage, MyPageDTO mpdto) throws Exception{
+		User sessionLoginUser = (User)session.getAttribute("loginUser");
+		String loginUserEmail = sessionLoginUser.getUserEmail();
+		loginUserEmail.trim();
+ 		User loginUserInfo = userService.findUserService(loginUserEmail);
+		
+		System.out.println(loginUserInfo.toString());
+		
+
+		String bWriter = loginUserInfo.getNickName();	//session 정보에서 따온 거에서 bWriter 뽑음
+		List<bNoSPListDTO> bNoSPListDTOs = boastService.bNoSPList(bWriter);
+		int size = bNoSPListDTOs.size();	//for 문의 사이즈를 정함
+		
+		ArrayList<MyPageDTO> MyPageDTOs = new ArrayList<>(); //bNoSP bTitle bImage bStar replyCount
+		
+		for (int i = 0; i <size; i++) {
+			bNoSPListDTO bnosplistdto = bNoSPListDTOs.get(i);
+			//myPageDTO에 칼럼들을 하나씩 넣어줄거임 -> 마지막에 MyPageDTOs에 한방에 넣음
+			MyPageDTO myPageDTO = new MyPageDTO();
+			List<MyPageDTO> list = new ArrayList<>();
+			
+			int bnosp = bnosplistdto.getBNoSPs();			//bNoSP
+			myPageDTO.setbNoSP(bnosp);
+			
+			myPageDTO.setbTitle(boastService.getbTitleFrom(bnosp));
+			myPageDTO.setbImage(boastService.getbImageFrom(bnosp));
+			myPageDTO.setbStar(boastService.getBoastStarFrom(bnosp));
+			myPageDTO.setReplyCount(boastService.getReplyCountFrom(bnosp));
+			
+			
+			MyPageDTOs.add(myPageDTO);		//for문 안에서 얻은 정보들 한방에 넣음
+			System.out.println("MyPageDTO: "+myPageDTO.toString());
+		}
+		System.out.println("MyPageDTOs: "+MyPageDTOs.toString());
+		model.addAttribute("MyPageDTOs",MyPageDTOs);
+		
+
+		return "/mypage/mypageInfo2";
+	}
+	
 	
 	@PostMapping("/modifyinfo/{userEmail}")
 	public String ModifyInfo(HttpSession session,@PathVariable String userEmail, @ModelAttribute User user, Model model) throws Exception {
@@ -121,9 +173,7 @@ public class MyPageController {
 		
         session.removeAttribute("loginUser"); // loginUser 라는 내용을 세션에서 삭제
         session.invalidate(); // 세션 객체 삭제
-		
-
-        
+  
 		return "/header/header";
 	}
 	

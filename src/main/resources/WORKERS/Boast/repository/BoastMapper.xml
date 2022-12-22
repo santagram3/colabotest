@@ -5,7 +5,6 @@
  
 <mapper namespace="WORKERS.Boast.repository.BoastMapper">
 					
-
 	<resultMap id="boastlist" type="WORKERS.Boast.model.Boast">
 		<result property="bNoSP" 		column="bNoSP"/>
 		<result property="bTitle" 		column="bTitle"/>
@@ -24,16 +23,41 @@
       <result property="commentDate" 	column="commentDate"/>
       <result property="aid" 			column="aid"/>
     </resultMap>
-   	<resultMap id="boastStar" type="WORKERS.Boast.model.BoastImage">
+   	<resultMap id="boastStar" type="WORKERS.Boast.model.BoastStar">
 		<result property="bStarNoF" 	column="bStarNoF"/>
 		<result property="bStar" 		column="bStar"/>
 	</resultMap>
-    
-<!-- 별점 -->    
-    <select id="FindbStar" resultType="int">
-    	select bStar from BoastStar where bStarNoF = #{bStarNoF}
-    </select>
+   	<resultMap id="bnospDTO" type="WORKERS.mypage.DTO.bNoSPListDTO">
+		<result property="bNoSPs" 	column="bNoSP"/>
+	</resultMap>
+	
+<!-- 마이페이지 -->
+	<select id="BNoSPList" resultMap="bnospDTO">
+		select bNoSP from BoastTable where bWriter = #{bWriter}
+	</select>
+	<select id="GetbTitleFrom" resultType="String">
+		select bTitle from BoastTable where bNoSP = #{bnosp}
+	</select>
+	<select id="GetbImageFrom" resultType="String">
+		select bImage from BoastImage where bImageNoF = #{bnosp}
+	</select>
+	<select id="GetBoastStarFrom" resultType="int">
+		select bStar from BoastStar where bStarNoF = #{bnosp}
+	</select>
+	<select id="GetReplyCountFrom" resultType="int">
+		select count(*) from comments where aid = #{bnosp}
+	</select>
 
+<!-- 별점 -->    
+	<select id="GetBoastStar" resultMap="boastStar">
+		select * from BoastStar where bStarNoF=#{bStarNoF}
+	</select>
+	<select id="AddBoastStar" resultMap="boastStar">
+		insert into BoastStar values (#{bStarNoF},0)
+	</select>
+	<select id="ModifyBoastStar">
+		update BoastStar set bStar=#{bStar} where bStarNoF=#{bStarNoF}
+	</select>
     
     <select id="getBoastList" resultMap="boastlist">
     	select * from BoastTable order by bDate desc
@@ -112,4 +136,6 @@
     	delete from comments where commentAid = #{commentAid}
     </select>   
     
+    
+
 </mapper>   

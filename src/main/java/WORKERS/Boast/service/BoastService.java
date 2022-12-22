@@ -10,9 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import WORKERS.Boast.model.Boast;
 import WORKERS.Boast.model.BoastImage;
+import WORKERS.Boast.model.BoastStar;
 import WORKERS.Boast.model.Comments;
 import WORKERS.Boast.repository.BoastMapper;
 import WORKERS.JobPosting.model.Pagination;
+import WORKERS.mypage.DTO.bNoSPListDTO;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -104,7 +106,45 @@ public class BoastService {
 		boastMapper.deleteBoastComment(commentAid);			
 	}
 
-	public int findbStar(int bStarNoF) {
-		return boastMapper.FindbStar(bStarNoF);
+	public void addBoastStar(BoastStar bs) throws Exception{
+		boastMapper.AddBoastStar(bs);
 	}
+
+	public BoastStar getBoastStar(int bStarNoF) throws Exception{
+		return boastMapper.GetBoastStar(bStarNoF);
+	}
+
+	public void modifyBoastStar(BoastStar boastStar) throws Exception{
+		boastMapper.ModifyBoastStar(boastStar);		
+	}
+
+	public List<Boast> findBoastList(String bWriter) throws Exception{
+		List<Boast> bslist = boastMapper.FindBoastList(bWriter);
+		return bslist;
+	}
+
+	public List<bNoSPListDTO> bNoSPList(String bWriter) throws Exception{
+		List<bNoSPListDTO> b =boastMapper.BNoSPList(bWriter);
+		return b;
+	}
+
+	public String getbTitleFrom(int bnosp) throws Exception{
+		String b = boastMapper.GetbTitleFrom(bnosp);
+		return b;
+	}
+
+	public String getbImageFrom(int bnosp) throws Exception {
+		String b = boastMapper.GetbImageFrom(bnosp);
+		return b;
+	}
+
+	public int getBoastStarFrom(int bnosp) throws Exception{		
+		return boastMapper.GetBoastStarFrom(bnosp);
+	}
+
+	public int getReplyCountFrom(int bnosp) throws Exception{		
+		return boastMapper.GetReplyCountFrom(bnosp);
+	}
+
+
 }
