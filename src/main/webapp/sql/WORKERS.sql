@@ -176,13 +176,13 @@ create table BoastTable(
    bDate DATE default sysdate NOT NULL--글작성일자
    );   
    
+   drop table BoastReport;
 create TABLE BoastReport(
    bReportNoS NUMBER NOT NULL,--신고테이블글번호-sequence
    bReportNoF NUMBER NOT NULL,--게시판글번호-foreign
    bWriter VARCHAR2(30) NOT NULL,--BoastTable글작성자
    bReporter VARCHAR2(30) NOT NULL,--BoastReport테이블의 신고자
    bReportContent CLOB NOT NULL--신고테이블의 신고내용
-
 );
    
 ALTER TABLE BoastReport
@@ -194,6 +194,20 @@ CREATE TABLE BoastStar(
    bStarNoF Number NOT NULL,-- BoastTable글번호-foreign
    bStar Number NOT NULL--별점 점수
 )   
+drop table BoastLike;
+create table BoastLike(
+	 bNoSP Number NOT NULL,-- BoastTable글번호-foreign
+	 clicker varchar2(30) not null  -- BoastTable에 좋아요 누른 사람 ! 
+)
+select * from BoastLike ;
+
+insert into BOASTLIKE values(1,'so1@naver.com');
+insert into BOASTLIKE values(1,'so2@naver.com');
+insert into BOASTLIKE values(1,'so3@naver.com');
+
+select clicker from BOASTLIKE where bNoSP = 1;
+
+
 
 ALTER TABLE BoastStar
 ADD CONSTRAINTS BoastStar_FK FOREIGN KEY (bStarNoF)--BoastStar 의 bStarNoF가 BoastTable의 bNoSP가 되어야 함
@@ -203,22 +217,30 @@ REFERENCES BoastTable(bNoSP);
 CREATE TABLE BoastImage(
    bImageNoF NUMBER NOT NULL,--BoastTable의 글번호-foreign
    bImage CLOB NOT NULL--이미지이름
-   
 )
    
 ALTER TABLE BoastImage
 ADD CONSTRAINTS BoastImg_FK FOREIGN KEY (bImageNoF)--BoastImage의 bNoSP가 foreign키 
 REFERENCES BoastTable(bNoSP);
    
-
+drop table BoastReply;
 create TABLE BoastReply (
-
    bReplyNoSP NUMBER primary key , -- 댓글테이블 글번호
    bReplyNoF NUMBER NOT NULL, -- boast테이블 글번호 -BoastTable의 Primarykey를 참조하는 foreignkey 
    bReplyWriter VARCHAR2(30) NOT NULL, -- 댓글 작성자  
    bReplyContent CLOB NOT NULL, -- 댓글 내용 
    bReplyDate DATE default sysdate NOT NULL--댓글 작성일자
 );
+-- 댓글 이걸로 바꿈
+   create table comments(
+   commentAid number primary key,
+   nickname VARCHAR2(50) NOT NULL,
+   commentContent VARCHAR2(3000) NOT NULL,
+   commentDate date default sysdate,
+   aid number NOT NULL,
+   foreign key (aid) references BoastTable(bNoSP) on delete cascade
+);
+
 
 ALTER TABLE Reply
 ADD CONSTRAINTS bReply_FK FOREIGN KEY (bReplyNoF)--BoastTable의 bNoSP를 참조하는 foreign key bReplyNoF

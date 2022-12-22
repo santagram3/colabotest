@@ -116,4 +116,12 @@ public class BoastService {
 	public void modifyBoastStar(BoastStar boastStar) throws Exception{
 		boastMapper.ModifyBoastStar(boastStar);		
 	}
+	
+	
+	//
+	
+	
+	
+	
+	
 }

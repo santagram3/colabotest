@@ -20,20 +20,20 @@
     <div id="headerBox">
         <div class="logo"><a href="/main/page"><img src="/resources/header/img/skyblue.png" alt=""></a></div>
         <div class="headerMenu">
-            <div class="menuLeft">
-                <a href="">Q & A</a>
-                <a href="">구인공고</a>
-                <a href="">공부 자랑하기</a>
-                <a href="">스터디 구하기</a>
+            <div class="menuLeft fw-bold">
+                <a href="" style="color: #5E5E5E;">Q & A</a>
+                <a href="/jobposting/list" style="color: #5E5E5E;">구인공고</a>
+                <a href="/boast/list" style="color: #5E5E5E;">공부 자랑하기</a>
+                <a href="" style="color: #5E5E5E;">스터디 구하기</a>
             </div>
             <c:if test="${loginUser == null && loginCompanyUser == null }">
                 <div class="menuRight">
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary loginbutton" data-bs-toggle="modal"
+                    <button type="button" class="btn btn-light text-primary text-opacity-75 loginbutton" data-bs-toggle="modal"
                         data-bs-target="#staticBackdrop">
                         구직자 로그인
                     </button>
-                    <button type="button" class="btn btn-primary loginbutton" data-bs-toggle="modal"
+                    <button type="button"  class="btn btn-light text-success text-opacity-75 loginbutton" data-bs-toggle="modal"
                         data-bs-target="#staticBackdrop2">
                         기업 로그인
                     </button>
@@ -44,14 +44,14 @@
                 </div>
             </c:if>
             <c:if test="${loginUser.userGrade == 'WORKER'}">
-                <div>
-                    <a href="/mypage/info">${loginUser.nickName}님 환영합니다.</a>
-                    <a href="/login/logout">로그아웃 하기</a>
+                <div class="d-flex flex-column m-2 p-2">
+                    <a href="/mypage/info" style="color: black;"><small><b>${loginUser.nickName}님</b> 환영합니다.</small></a>
+                        <a href="/login/logout"><small>로그아웃</small></a>
                 </div>
             </c:if>
             <c:if test="${loginCompanyUser.userGrade == 'COMPANY'}">
                 <div>
-                    <a href="/mypage/info">${loginCompanyUser.companyEmail}님 환영합니다.</a>
+                    <a href="/mypage/info" style="color: black;"><small><b>${loginCompanyUser.companyEmail}님</b>환영합니다.</small></a>
                     <a href="/login/companyLogout">로그아웃 하기</a>
                 </div>
             </c:if>

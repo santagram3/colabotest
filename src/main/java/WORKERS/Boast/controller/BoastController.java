@@ -188,7 +188,10 @@ public class BoastController {
 	
 	@GetMapping("/addboaststar/{bNoSP}")
 	public String AddStarBoast(@PathVariable int bNoSP, BoastStar boastStar) throws Exception {
+		// 1 . 글 번호 가져옴 
 		int bStarNoF = bNoSP;
+		// 2. 글 번호로 > 좋아요 목록 가져옴 
+		
 		boastStar = boastService.getBoastStar(bStarNoF);
 		int bStar = boastStar.getBStar()+1;
 		
