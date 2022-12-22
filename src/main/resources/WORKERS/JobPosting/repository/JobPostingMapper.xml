@@ -18,6 +18,23 @@
         <result property="cno"  column="cno"/> 
         <result property="companyImg" column="companyImg"/>   
     </resultMap>
+    <resultMap id="cnolist" type="WORKERS.mypage.DTO.cnoListDTO">
+		<result property="cnos" 	column="cno"/>
+	</resultMap>
+    
+    <!-- 마이페이지 -->
+    <select id="GetcnoList" resultMap="cnolist">
+    	select cno from CompanyPostingTable where cWriter = #{cWriter}
+    </select>
+    <select id="GetcTitleFrom" resultType="String">
+    	select cTitle from CompanyPostingTable where cno = #{cno}
+    </select>
+    <select id="GetcDueDateFrom" resultType="Date" >
+    	select cDueDate from CompanyPostingTable where cno = #{cno}
+    </select>
+    <select id="GetCompanyImgFrom" resultType="String">
+    	select companyImg from CompanyPostingImg where cno = #{cno}
+    </select>
 
     <!-- 구인공고 리스트에 쓸 테이블 가져오기 -->
     <select id="JobPostingList" resultMap="jobposting">
@@ -66,6 +83,7 @@
  	</select>
  	
  	
+ 	<!-- 페이지네이션 -->
  	<select id="SelectAllList" resultType="hashmap">
         SELECT *
         FROM (

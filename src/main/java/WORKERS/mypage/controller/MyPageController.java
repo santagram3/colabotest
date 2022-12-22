@@ -104,7 +104,7 @@ public class MyPageController {
 	
 	//내가 쓴 글 페이지
 	@GetMapping("/info2")
-	public String myInfo2(HttpSession session,Model model, Boast boast, BoastImage boastimage, MyPageDTO mpdto) throws Exception{
+	public String myInfo2(HttpSession session, Model model) throws Exception{
 		User sessionLoginUser = (User)session.getAttribute("loginUser");
 		String loginUserEmail = sessionLoginUser.getUserEmail();
 		loginUserEmail.trim();
@@ -123,7 +123,6 @@ public class MyPageController {
 			bNoSPListDTO bnosplistdto = bNoSPListDTOs.get(i);
 			//myPageDTO에 칼럼들을 하나씩 넣어줄거임 -> 마지막에 MyPageDTOs에 한방에 넣음
 			MyPageDTO myPageDTO = new MyPageDTO();
-			List<MyPageDTO> list = new ArrayList<>();
 			
 			int bnosp = bnosplistdto.getBNoSPs();			//bNoSP
 			myPageDTO.setbNoSP(bnosp);

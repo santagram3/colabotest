@@ -1,5 +1,6 @@
 package WORKERS.JobPosting.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +12,7 @@ import WORKERS.JobPosting.model.CompanyPosting;
 import WORKERS.JobPosting.model.CompanyPostingImg;
 import WORKERS.JobPosting.model.Pagination;
 import WORKERS.JobPosting.repository.JobPostingMapper;
+import WORKERS.mypage.DTO.cnoListDTO;
 import lombok.RequiredArgsConstructor;
 
 
@@ -81,5 +83,21 @@ public class JobPostingService {
     public int testTableCount() throws Exception {
         return jobPostingMapper.testTableCount();
     }
+
+	public List<cnoListDTO> getcnoList(String cWriter) throws Exception{
+		return jobPostingMapper.GetcnoList(cWriter);
+	}
+
+	public String getcTitleFrom(int cno) throws Exception{
+		return jobPostingMapper.GetcTitleFrom(cno);
+	}
+
+	public Date getcDueDateFrom(int cno) throws Exception{
+		return jobPostingMapper.GetcDueDateFrom(cno);
+	}
+
+	public String getCompanyImgFrom(int cno) throws Exception{
+		return jobPostingMapper.GetCompanyImgFrom(cno);
+	}
     
 }

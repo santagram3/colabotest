@@ -7,6 +7,7 @@ public class MyPageDTO {
 	private String bImage;
 	private int bStar;
 	private int replyCount;
+	
 	public int getbNoSP() {
 		return bNoSP;
 	}

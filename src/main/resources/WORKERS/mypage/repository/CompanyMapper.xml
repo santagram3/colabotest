@@ -11,19 +11,28 @@
         <result property="companyName"  column="companyName" />
         <result property="BusinessNumber"  column="BusinessNumber" />
         <result property="userGrade"  column="userGrade" />
-        
     </resultMap>
 
     <!-- 회사가입 이메일 가져오기! -->
     <select id="findCompanyEmail" resultType="String">
     	select companyEmail from companyUser where companyEmail = #{companyEmail}
     </select>
-   
- 	<!-- 그 회사 정보 가져옴  -->
-    <select id="findCompany" resultMap="company">
-      select * from companyUser where companyEmail = #{companyEmail}
+    
+     <!-- 회사 비밀번호 가져오기! -->
+    <select id="findCompanyPwd" resultType="String">
+    	select companyPwd from companyUser where companyEmail = #{companyEmail}
     </select>
     
+     <!-- 회사가입 이메일 가져오기! -->
+    <select id="findCompanyUser" resultMap="company">
+    	select * from companyUser where companyEmail = #{companyEmail}
+    </select>
+   
+    
+    <!-- 사업자 번호 정보 가져옴  -->
+    <select id="BNboolean" resultType="String">
+      select BusinessNumber from companyUser where BusinessNumber = #{BusinessNumber}
+    </select>
     
  	<!-- 회원가입 시켜줌 -->
     <insert id="registerCompany">
@@ -31,10 +40,6 @@
 	    values(#{companyEmail},#{companyPwd},#{companyName},#{BusinessNumber},#{userGrade})
     </insert>
     
-    <!-- 이메일주고 비밀번호 가져오는 쿼리 -->
-    <select id="findCompanyPwd" resultType="String">
-    	select companyPwd from companyUser where companyEmail = #{companyEmail}
-    </select>
     
     
      <!-- 이메일로 검색하면 0 or 1 나옴  -->
