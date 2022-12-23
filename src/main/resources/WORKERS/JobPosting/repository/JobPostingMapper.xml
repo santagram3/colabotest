@@ -39,7 +39,7 @@
     <!-- 임박한 구인공고 list -->
     <select id="JobPostingList" resultMap="jobposting">
     	select * from 
-    				(select * from (select * from CompanyPostingTable where (cDueDate-sysdate) > 0)
+    				(select * from (select * from CompanyPostingTable where (cDueDate-sysdate) > -1)
     	 			order by (cDueDate-sysdate))
     	where 9 > ROWNUM
     </select>

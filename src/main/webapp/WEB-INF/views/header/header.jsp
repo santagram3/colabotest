@@ -44,10 +44,10 @@
                 </div>
             </c:if>
             <c:if test="${loginUser.userGrade == 'WORKER'}">
-                <div class="d-flex flex-column m-2 p-2">
+                
                     <a href="/mypage/info" style="color: black;"><small><b>${loginUser.nickName}님</b> 환영합니다.</small></a>
                         <a href="/login/logout"><small>로그아웃</small></a>
-                </div>
+                
             </c:if>
             <c:if test="${loginCompanyUser.userGrade == 'COMPANY'}">
                 <div>
