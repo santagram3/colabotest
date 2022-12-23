@@ -47,25 +47,34 @@
 		     </c:forEach>
 		 </ol>
 	<hr>			 
-	
+	<p class="fs-4 mt-5 fw-bold">공부 자랑하기</p>
+	<div class="d-flex justify-content-between flex-wrap">
 	<c:choose>
 	     <c:when test="${fn:length(mainBoastList) > 0}">
-          <c:forEach items="${mainBoastList}" var="list" varStatus="status">
-            <tr>
-                <td><img src="/img/boast/${list.getBImage()}" alt=""></td>
-                <td>${list.getBTitle()}</td>
-                <td>${list.getBWriter()}</td>
-                <td>${list.getCount()}</td>
-            </tr>
-          </c:forEach>
+          <c:forEach items="${mainBoastList}" var="list" varStatus="status">        
+			<div class="card mb-3 shadow-sm" style="width: 20rem;">
+ 				<img src="/img/boast/${list.getBImage()}" height="300px" class="card-img-top p-4" alt="...">
+  				<div class="card-body">
+   		 		<h5 class="card-title">${list.getBTitle()}</h5>
+    			<p class="card-text">		
+    			<b>${list.getBWriter()}</b>
+    			<img src="/resources/main/thumb.png" width="15px">
+    			${list.getCount()}
+   	 			</p>
+    			<div class="d-flex justify-content-end">
+    			<a href="해당 게시물 링크 걸기" class="btn btn-light">게시글 보기</a>
+    			</div>
+  				</div>
+			</div>
+         	</c:forEach>
         </c:when>
-        <c:otherwise>
+		<c:otherwise>
           <tr>
             <td colspan="4">조회된 결과가 없습니다.</td>
           </tr>
         </c:otherwise>
-      </c:choose>
-      
+       </c:choose>
 	</div>
+   </div>	
 </body>
 </html>
