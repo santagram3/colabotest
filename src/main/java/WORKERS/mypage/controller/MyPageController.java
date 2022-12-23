@@ -59,7 +59,7 @@ public class MyPageController {
 		userService.trimInfo(user);
 		
 		// 가입 했으니까 돌아가 ! 
-		return "/header/header" ;
+		return "redirect:/main/page" ;
 	}
 	
 	// 이메일 있는지 없는지 비동기로 처리하는 메소드 
@@ -132,7 +132,7 @@ public class MyPageController {
 			
 			myPageDTO.setbTitle(boastService.getbTitleFrom(bnosp));
 			myPageDTO.setbImage(boastService.getbImageFrom(bnosp));
-			myPageDTO.setbStar(boastService.getBoastStarFrom(bnosp));
+			myPageDTO.setbStar(boastService.likeCount(bnosp));
 			myPageDTO.setReplyCount(boastService.getReplyCountFrom(bnosp));
 			
 			

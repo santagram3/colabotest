@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -26,38 +26,53 @@
 <body>
 
 
-    <div class="infoContainer">
+
+<div class="infoContainer">
     
         <Header>
             <%-- <%@ include file="/WEB-INF/views/header/myPageHeader.jsp" %> --%>
         </Header>
         
  <div class="container">	        
-        <div class="p-3 mb-2 bg-light text-dark" >
+<div class="p-3 mb-2 bg-light text-dark" >
   <div class="toast-header">
-    <a href="/test/header"><img src="/resources/header/img/logo.png" class="rounded me-2 mb-2" width="300px"></a>
-    <strong class="me-auto fs-2 mt-4">마이페이지 <p class="fs-4">${loginUserInfo.nickName} 님 계정의 모든 사항을 한눈에 관리하세요.</p></strong>
-    <a href="/companymypage/companyinfo"><small>워커스 회원정보 수정하기</small></a>
+    <a href="/main/page"><img src="/resources/header/img/logo.png" class="rounded me-2 mb-2" width="300px"></a>
+    <strong class="me-auto fs-2 mt-4">기업회원 마이페이지 <p class="fs-4">계정의 모든 사항을 한눈에 관리하세요.</p></strong>
+    <small>
+    <a href="/companymypage/companyinfo" style="color: #5E5E5E;">워커스 기업정보 수정하기</a><br> 
+    <a href="/companymypage/companyinfo2" style="color: #5E5E5E;">우리 기업 공고 보기</a>
+    </small>
   </div>
-  <div class="toast-body bg-white">
-              <h3>내가 쓴 글</h3>
-              
-              <c:forEach var="list" items="${CompanyMyPageDTOs}" varStatus="i">
-              <li><%-- <img class="card-img-top" src="/img/boast/${dto.bImage}"> --%>
-			<%-- <c:forEach var="list2" items="${list}">
-              제목: ${list.bTitle},좋아요 갯수: ${list.bStar}, 댓글 수: ${list.replyCount}
-			</c:forEach> --%>
-			 ${list.getCTitle()}
-			 <img class="card-img-top" src="/img/jobPosting/${list.getCompanyImg()}">
-			 마감일 : <fmt:formatDate value="${list.getCDueDate()}" pattern="yyyy-MM-dd"/>
-              </c:forEach>
-              <fmt:formatDate value="${list.getCDueDate()}" pattern="yyyy-MM-dd"/>
-              
-              
- 		 </div>
-		</div>
-        </div>
-    </div>
+<div class="toast-body bg-white">
+  <p class="fs-5 fw-bold mt-2">작성한 글 목록</p>
+  <hr>
+ 	<!-- 내가 작성한 글 목록 불러오기 -->    
+	<div class="d-flex justify-content-between flex-wrap">
+		<c:forEach var="list" items="${CompanyMyPageDTOs}" varStatus="i">              
+			<div class="card mb-3 shadow-sm" style="width: 20rem;">
+ 				<img src="/img/jobPosting/${list.getCompanyImg()}" height="300px" class="card-img-top p-4" alt="...">
+  				<div class="card-body">
+   		 		<h5 class="card-title">${list.getCTitle()}</h5>
+    			<p class="card-text">
+    			
+    			
+    			마감일 : <fmt:formatDate value="${list.getCDueDate()}" pattern="yyyy-MM-dd"/>
+   	 			</p>
+    			<div class="d-flex justify-content-end">
+    			<a href="해당 게시물 링크 걸기" class="btn btn-light">게시글 보기</a>
+    			</div>
+  				</div>
+			</div>
+		</c:forEach>
+	</div>
+ 
+</div>
+</div>
+</div>
+</div>
+</body>
+
+</html>
 </body>
 
 </html>

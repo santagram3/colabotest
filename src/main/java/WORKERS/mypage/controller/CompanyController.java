@@ -39,13 +39,9 @@ public class CompanyController {
 
 		companyService.companyRegisterService(companyUser);
 
-		return "/mainPage";
+		return "redirect:/main/page";
 	}
 
-	@PostMapping("/CompanySignUp2")
-	public String companyRegister2() {
-		return "";
-	}
 
 	// 이메일 있는지 확인하는 메소드
 	@GetMapping("/findCompanyEmail")

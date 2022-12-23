@@ -100,9 +100,6 @@ public class BoastController {
 		BoastImage bi = boastService.viewBoastImage(bImageNoF);
 		List<Comments> commentlist = boastService.listComment(aid);
 
-		int bStarNoF = bNoSP;
-		BoastStar boaststar = boastService.getBoastStar(bStarNoF);
-		System.out.println("boaststar: " + boaststar.toString());
 
 		User sessionLoginUser = (User) session.getAttribute("loginUser");
 		String loginUsernickName = sessionLoginUser.getNickName();
@@ -116,7 +113,6 @@ public class BoastController {
 		// 좋아요 갯수
 		// bNoSP
 		int likeCount = boastService.likeCount(bNoSP);
-
 		model.addAttribute("likeCount", likeCount);
 
 		return "/boast/boastView";

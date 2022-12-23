@@ -25,13 +25,10 @@ public class MainPageController {
 	public String mainPageLoad(Model model)throws Exception{
 		
 		System.out.println("---------/main/Page-----------------");
-		model.addAttribute("duelist",jobpostingservice.getJobPostingList());
-		
+		model.addAttribute("duelist",jobpostingservice.getJobPostingList());		
 		List<MainBoastDTO> mainBoastList = boastService.mainBoastListService();
-		System.out.println("mainBoastList = " +mainBoastList);
-	
 		model.addAttribute("mainBoastList", mainBoastList);
-		
+		System.out.println("mainBoastList = " +mainBoastList);
 		return "mainPage";
 	}
 }

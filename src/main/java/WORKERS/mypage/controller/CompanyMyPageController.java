@@ -83,7 +83,7 @@ public class CompanyMyPageController {
 			model.addAttribute("loginCompanyInfo",loginCompanyInfo);
 			
 			
-			return "/mypage/CompanyInfo";
+			return "/mypage/CompanymypageInfo";
 		}
 		
 		
@@ -104,7 +104,7 @@ public class CompanyMyPageController {
 			
 			model.addAttribute("duelist",jobpostingservice.getJobPostingList());
 			
-			return "/mypage/CompanyInfo";
+			return "/mypage/CompanymypageInfo";
 		}
 		
 		@PostMapping("/deletecompanyinfo/{companyEmail}")
@@ -122,7 +122,7 @@ public class CompanyMyPageController {
 	        
 	        model.addAttribute("duelist",jobpostingservice.getJobPostingList());
 	  
-			return "/mainPage";
+			return "redirect:/main/page";
 		}
 	
 

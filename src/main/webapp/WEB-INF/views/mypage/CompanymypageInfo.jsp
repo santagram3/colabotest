@@ -36,8 +36,10 @@
   <div class="toast-header">
     <a href="/main/page"><img src="/resources/header/img/logo.png" class="rounded me-2 mb-2" width="300px"></a>
     <strong class="me-auto fs-2 mt-4">기업페이지 <p class="fs-4">${loginCompanyInfo.companyName} 님 계정의 모든 사항을 한눈에 관리하세요.</p></strong>
-    <small>워커스 기업정보 수정하기</small>
-    <a href="/companymypage/companyinfo2">내가 쓴 글 보기</a>
+	<small>
+    <a href="/companymypage/companyinfo" style="color: #5E5E5E;">워커스 기업정보 수정하기</a><br> 
+    <a href="/companymypage/companyinfo2" style="color: #5E5E5E;">우리 기업 공고 보기</a>
+    </small>
   </div>
   <div class="toast-body bg-white">
                <form  method="post" action="/companymypage/modifycompanyinfo/${loginCompanyInfo.companyEmail}" enctype="multipart/form-data">
@@ -58,7 +60,7 @@
                     required="required" name="companyName">
             </div>
             
-                <button type="button" class="btn btn-link mt-3" onclick="backhome()">뒤로 가기</button>
+                <button type="button" class="btn btn-link mt-3" onclick="location='/main/page';">뒤로 가기</button>
                 <button class="btn btn-outline-primary mt-3">수정하기</button>
                 </form>
                 <button type="button" class="btn btn-secondary loginbutton mt-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">탈퇴하기</button>

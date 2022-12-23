@@ -1,6 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -37,8 +36,10 @@
   <div class="toast-header">
     <a href="/test/header"><img src="/resources/header/img/logo.png" class="rounded me-2 mb-2" width="300px"></a>
     <strong class="me-auto fs-2 mt-4">마이페이지 <p class="fs-4">${loginUserInfo.nickName} 님 계정의 모든 사항을 한눈에 관리하세요.</p></strong>
-    <small>워커스 회원정보 수정하기</small>
-    <a href="/mypage/info2">내가 쓴 글 보기</a>
+    <small>
+    <a href="/mypage/info" style="color: #5E5E5E;">워커스 회원정보 수정하기</a><br> 
+    <a href="/mypage/info2" style="color: #5E5E5E;">내가 작성한 글 보기</a>
+    </small>
   </div>
   <div class="toast-body bg-white">
                <form  method="post" action="/mypage/modifyinfo/${loginUserInfo.userEmail}" enctype="multipart/form-data">
@@ -68,7 +69,7 @@
             <textarea class="form-control col-sm-5" rows="5" name="selfIntroduce" required>${loginUserInfo.selfIntroduce}</textarea>
             <div class="buttongroup">
             <input type="hidden" name="oauth" value="">
-                <button type="button" class="btn btn-link mt-3" onclick="backhome()">뒤로 가기</button>
+                <button type="button" class="btn btn-link mt-3" onclick="location='/main/page';">뒤로 가기</button>
                 <button class="btn btn-outline-primary mt-3">수정하기</button>
                 <button type="button" class="btn btn-secondary loginbutton mt-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">탈퇴하기</button>
             </div>
@@ -88,7 +89,7 @@
                     required="required" name="userPw">
                     <div><br>
                         <button type="submit" class="btn btn-secondary m-1">탈퇴하기</button>
-                        <button type="button" class="btn btn-link m-1" data-bs-dismiss="modal" onclick="location='/main/page';">뒤로 가기</button>
+                        <button type="button" class="btn btn-link m-1" data-bs-dismiss="modal">뒤로 가기</button>
                     </div>
                 </div>
             </div>
