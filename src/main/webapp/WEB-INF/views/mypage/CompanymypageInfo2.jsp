@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -53,7 +54,9 @@
   				<div class="card-body">
    		 		<h5 class="card-title">${list.getCTitle()}</h5>
     			<p class="card-text">
-    			마감일 :${list.getCDueDate()}
+    			
+    			
+    			마감일 : <fmt:formatDate value="${list.getCDueDate()}" pattern="yyyy-MM-dd"/>
    	 			</p>
     			<div class="d-flex justify-content-end">
     			<a href="해당 게시물 링크 걸기" class="btn btn-light">게시글 보기</a>

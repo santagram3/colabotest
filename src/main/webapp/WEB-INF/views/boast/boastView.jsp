@@ -27,8 +27,8 @@
 	    	<img class="card-img-top" src="/img/boast/${bi.bImage}" alt="공부자랑 이미지 자리">
 	    	<p class="card-text mt-5">${boast.bContent}</p>
 	    	<div class="d-flex justify-content-center">
-	    	<button type="button" class="btn btn-outline-danger" onclick="location='/boast/addboaststar/${boast.bNoSP}';">
-   			<img src="/resources/boast/h1.png" width="30px"><br>
+	    	<button type="button" class="btn btn-outline-primary" onclick="location='/boast/addboaststar/${boast.bNoSP}';">
+   			<img src="/resources/boast/like.png" width="30px"><br>
    			좋아요 : ${bStar}</button></div>
 	    </div>
     </div>

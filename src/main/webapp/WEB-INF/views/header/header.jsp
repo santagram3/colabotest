@@ -64,12 +64,16 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">회원 가입하기 </h5>
+                    <h5 class="modal-title fs-5 fw-bold" id="exampleModalLabel">워커스 회원가입</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body signUpbuttonGroup">
-                    <button type="button" class="btn btn-outline-success" onclick="UserSignUp()">일반유저 가입하기</button>
-                    <button type="button" class="btn btn-outline-info" onclick="CompanySignUp1()">기업회원 가입하기</button>
+                    <button type="button" class="btn btn-outline-light text-primary text-opacity-75 loginbutton" onclick="UserSignUp()">
+                    <img src="/resources/header/img/worker.png" width="50px">
+                    구직자 가입하기</button>
+                    <button type="button" class="btn btn-outline text-success text-opacity-75 loginbutton" onclick="CompanySignUp1()">
+                    <img src="/resources/header/img/company.png" width="50px">
+                    기업회원 가입하기</button>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
