@@ -2,153 +2,206 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- 
+
 <mapper namespace="WORKERS.Boast.repository.BoastMapper">
-					
+
 
 	<resultMap id="boastlist" type="WORKERS.Boast.model.Boast">
-		<result property="bNoSP" 		column="bNoSP"/>
-		<result property="bTitle" 		column="bTitle"/>
-		<result property="bWriter" 		column="bWriter"/>
-		<result property="bContent" 	column="bContent"/>
-		<result property="bDate" 		column="bDate"/>
+		<result property="bNoSP" column="bNoSP" />
+		<result property="bTitle" column="bTitle" />
+		<result property="bWriter" column="bWriter" />
+		<result property="bContent" column="bContent" />
+		<result property="bDate" column="bDate" />
 	</resultMap>
-	<resultMap id="boastImg" type="WORKERS.Boast.model.BoastImage">
-		<result property="bImageNoF" 	column="bImageNoF"/>
-		<result property="bImage" 		column="bImage"/>
+	<resultMap id="boastImg"
+		type="WORKERS.Boast.model.BoastImage">
+		<result property="bImageNoF" column="bImageNoF" />
+		<result property="bImage" column="bImage" />
 	</resultMap>
-	<resultMap id="commentAll" type="WORKERS.Boast.model.Comments">
-      <result property="commentAid" 	column="commentAid"/>
-      <result property="nickname" 		column="nickname"/>
-      <result property="commentContent" column="commentContent"/>
-      <result property="commentDate" 	column="commentDate"/>
-      <result property="aid" 			column="aid"/>
-    </resultMap>
-   	<resultMap id="boastStar" type="WORKERS.Boast.model.BoastStar">
-		<result property="bStarNoF" 	column="bStarNoF"/>
-		<result property="bStar" 		column="bStar"/>
+	<resultMap id="commentAll"
+		type="WORKERS.Boast.model.Comments">
+		<result property="commentAid" column="commentAid" />
+		<result property="nickname" column="nickname" />
+		<result property="commentContent" column="commentContent" />
+		<result property="commentDate" column="commentDate" />
+		<result property="aid" column="aid" />
 	</resultMap>
-	
-	
-	
-	
-    
-<!-- 별점 -->    
+	<resultMap id="boastStar"
+		type="WORKERS.Boast.model.BoastStar">
+		<result property="bStarNoF" column="bStarNoF" />
+		<result property="bStar" column="bStar" />
+	</resultMap>
+
+
+
+
+
+	<!-- 별점 -->
 	<select id="GetBoastStar" resultMap="boastStar">
-		select * from BoastStar where bStarNoF=#{bStarNoF}
+		select * from BoastStar
+		where bStarNoF=#{bStarNoF}
 	</select>
 	<select id="AddBoastStar" resultMap="boastStar">
-		insert into BoastStar values (#{bStarNoF},0)
+		insert into BoastStar values
+		(#{bStarNoF},0)
 	</select>
 	<select id="ModifyBoastStar">
-		update BoastStar set bStar=#{bStar} where bStarNoF=#{bStarNoF}
+		update BoastStar set bStar=#{bStar} where
+		bStarNoF=#{bStarNoF}
 	</select>
-    
-    <select id="getBoastList" resultMap="boastlist">
-    	select * from BoastTable order by bDate desc
-    </select>
-    
-   	<select id="SelectAllList" resultType="hashmap">
-       SELECT *
-       FROM (
-       SELECT ROW_NUMBER() OVER(ORDER by bNoSP DESC)
-       AS row_num, bNoSP, bTitle, bWriter, bContent, bDate
-       FROM BoastTable)
-       <if test="firstRecordIndex !=null and lastRecordIndex != null">
-           WHERE row_num BETWEEN #{firstRecordIndex}+1 AND
-           #{lastRecordIndex}
-       </if>
-    </select>
- 
-    <select id="testTableCount" resultType="int">
-        SELECT count(*) FROM BoastTable
-    </select>
-    
-    <select id="addBoast" resultMap="boastlist">
- 		insert into BoastTable
- 		values (BoastTable_sequence.nextval,#{bTitle},#{bWriter},#{bContent},sysdate)
- 	</select>
- 	
- 	<select id="findbNoSP" resultType="int">
- 		select max(bNoSP) from BoastTable		
- 	</select>
- 	
- 	<select id="addBoastImg" resultMap="boastImg" >
- 		insert into BoastImage
- 		values (#{bImageNoF},#{bImage})
- 	</select>
-    
-    <select id="ViewBoast" resultMap="boastlist">
-    	select * from BoastTable where bNoSP = #{bNoSP}
-    </select>
-    
-    <select id="ViewBoastImage" resultMap="boastImg">
-    	select * from BoastImage where bImageNoF = #{bImageNoF}
-    </select>
-    
-    <select id="DeleteBoast" resultMap="boastlist">
-    	delete from BoastTable where bNoSP = #{bNoSP}
-    </select>    
-    
-    <select id="DeleteBoastImg" resultMap="boastImg">
-    	delete from BoastImage where bImageNoF = #{bImageNoF}
-    </select>
-    
-    <select id="ModifyBoast" resultMap="boastlist">
-    	update BoastTable set bTitle=#{bTitle}, bWriter=#{bWriter}, bContent=#{bContent} where bNoSP=#{bNoSP}
-    </select>
-    
-    <select id="ModifyBoastImg" resultMap="boastImg">
-    	update BoastImage set bImage = #{bImage} where bImageNoF = #{bImageNoF}
-    </select>
-    
-    
-<!-- 댓글 -->    
-    <select id="ListComment" resultMap="commentAll">
-    	select * from comments where aid=#{aid}
-    </select>
-    <select id="AddBoastComment" resultMap="commentAll">
-    	insert into comments
-    	values (BoastCommentList_sequence.nextval, #{nickname}, #{commentContent}, sysdate, #{aid})
-    </select>
-    <select id="ModifyBoastComment" resultMap="commentAll">
-    	update comments set commentContent=#{commentContent} where commentAid=#{commentAid}
-    </select>
-    <select id="FindbNoSP2" resultType="int">
-    	select aid from comments where commentAid=#{commentAid}
-    </select>
-    <select id="deleteBoastComment" resultMap="commentAll">
-    	delete from comments where commentAid = #{commentAid}
-    </select>   
-    
-    
-    <!-- 좋아요 테이블 만들었음  -->
-	<resultMap id="boastLike" type="WORKERS.Boast.dto.BoastLikeDTO">
-		<result property="clicker" 		column="clicker"/>
+
+	<select id="getBoastList" resultMap="boastlist">
+		select * from BoastTable
+		order by bDate desc
+	</select>
+
+	<select id="SelectAllList" resultType="hashmap">
+		SELECT *
+		FROM (
+		SELECT ROW_NUMBER() OVER(ORDER by bNoSP DESC)
+		AS row_num,
+		bNoSP, bTitle, bWriter, bContent, bDate
+		FROM BoastTable)
+		<if test="firstRecordIndex !=null and lastRecordIndex != null">
+			WHERE row_num BETWEEN #{firstRecordIndex}+1 AND
+			#{lastRecordIndex}
+		</if>
+	</select>
+
+	<select id="testTableCount" resultType="int">
+		SELECT count(*) FROM
+		BoastTable
+	</select>
+
+	<select id="addBoast" resultMap="boastlist">
+		insert into BoastTable
+		values
+		(BoastTable_sequence.nextval,#{bTitle},#{bWriter},#{bContent},sysdate)
+	</select>
+
+	<select id="findbNoSP" resultType="int">
+		select max(bNoSP) from
+		BoastTable
+	</select>
+
+	<select id="addBoastImg" resultMap="boastImg">
+		insert into BoastImage
+		values
+		(#{bImageNoF},#{bImage})
+	</select>
+
+	<select id="ViewBoast" resultMap="boastlist">
+		select * from BoastTable where
+		bNoSP = #{bNoSP}
+	</select>
+
+	<select id="ViewBoastImage" resultMap="boastImg">
+		select * from BoastImage
+		where bImageNoF = #{bImageNoF}
+	</select>
+
+	<select id="DeleteBoast" resultMap="boastlist">
+		delete from BoastTable where
+		bNoSP = #{bNoSP}
+	</select>
+
+	<select id="DeleteBoastImg" resultMap="boastImg">
+		delete from BoastImage
+		where bImageNoF = #{bImageNoF}
+	</select>
+
+	<select id="ModifyBoast" resultMap="boastlist">
+		update BoastTable set
+		bTitle=#{bTitle}, bWriter=#{bWriter},
+		bContent=#{bContent} where
+		bNoSP=#{bNoSP}
+	</select>
+
+	<select id="ModifyBoastImg" resultMap="boastImg">
+		update BoastImage set
+		bImage = #{bImage} where bImageNoF = #{bImageNoF}
+	</select>
+
+
+	<!-- 댓글 -->
+	<select id="ListComment" resultMap="commentAll">
+		select * from comments where
+		aid=#{aid}
+	</select>
+	<select id="AddBoastComment" resultMap="commentAll">
+		insert into comments
+		values (BoastCommentList_sequence.nextval, #{nickname},
+		#{commentContent},
+		sysdate, #{aid})
+	</select>
+	<select id="ModifyBoastComment" resultMap="commentAll">
+		update comments set
+		commentContent=#{commentContent} where
+		commentAid=#{commentAid}
+	</select>
+	<select id="FindbNoSP2" resultType="int">
+		select aid from comments
+		where commentAid=#{commentAid}
+	</select>
+	<select id="deleteBoastComment" resultMap="commentAll">
+		delete from comments
+		where commentAid = #{commentAid}
+	</select>
+
+
+	<!-- 좋아요 테이블 만들었음 -->
+	<resultMap id="boastLike"
+		type="WORKERS.Boast.dto.BoastLikeDTO">
+		<result property="clicker" column="clicker" />
 	</resultMap>
-    
-    <!-- 좋아요 ! -->
-    <insert id="likeUp" >
-    	insert into BOASTLIKE values(#{bNoSP}, #{clicker})
-    </insert>
-    
-    <!-- 좋아요 사라지기  -->
-    <delete id="likeDown">
-    	delete from BOASTLIKE where clicker = #{clicker}
-    </delete>
-    
-    <!-- 글 번호 주고 , 좋아요 누른 이메일 가져오는 메소드 -->
-    <select id="likeList" resultType="String">
-  		select clicker from BOASTLIKE where bNoSP = #{bNoSP}
-    </select>
-    
-    <!-- 글 번호 주면 글에 좋아요 갯수 받음  -->
-    <select id="likeCount" resultType="int">
-    	select count(clicker) from BoastLike where bNoSP = #{bNoSP}
-    </select>
-    
-    
-    
-    
-    
+
+	<!-- 좋아요 ! -->
+	<insert id="likeUp">
+		insert into BOASTLIKE values(#{bNoSP}, #{clicker})
+	</insert>
+
+	<!-- 좋아요 사라지기 -->
+	<delete id="likeDown">
+		delete from BOASTLIKE where clicker = #{clicker}
+	</delete>
+
+	<!-- 글 번호 주고 , 좋아요 누른 이메일 가져오는 메소드 -->
+	<select id="likeList" resultType="String">
+		select clicker from BOASTLIKE
+		where bNoSP = #{bNoSP}
+	</select>
+
+	<!-- 글 번호 주면 글에 좋아요 갯수 받음 -->
+	<select id="likeCount" resultType="int">
+		select count(clicker) from
+		BoastLike where bNoSP = #{bNoSP}
+	</select>
+
+
+	<resultMap id="mainBoastList"
+		type="WORKERS.Boast.dto.MainBoastDTO">
+		<result property="bTitle" column="bTitle" />
+		<result property="bWriter" column="bWriter" />
+		<result property="bImage" column="bImage" />
+		<result property="count" column="count" />
+	</resultMap>
+
+
+	<select id="MainBoastList" resultMap="mainBoastList">
+		select * from (
+		select a.bTitle ,a.bWriter ,c.bImage, b.count
+		from BoastTable a
+		join (select Bnosp, count(clicker) count from BoastLike b group by bnosp)
+		b
+		on a.bNoSP = b.bNoSP
+		join BoastImage c
+		on b.bNoSP = c.bImageNoF
+		order by b.count desc)
+		 <![CDATA[ WHERE ROWNUM <= 8]]>
+	</select>
+
+
+
+
+
 </mapper>   

@@ -168,7 +168,6 @@ create sequence BoastReply_sequence;
 
 -- 공부 자랑 글 테이블 
 create table BoastTable(
-   
    bNoSP NUMBER PRIMARY KEY,--글번호 시퀀스
    bTitle VARCHAR2(100) NOT NULL,--글제목
    bWriter VARCHAR2(30) NOT NULL,--글작성자 -usertable의 userEmail과 같은 값
@@ -194,16 +193,111 @@ CREATE TABLE BoastStar(
    bStarNoF Number NOT NULL,-- BoastTable글번호-foreign
    bStar Number NOT NULL--별점 점수
 )   
+
+-- 공부 자랑 글 테이블 
+create table BoastTable(
+   bNoSP NUMBER PRIMARY KEY,--글번호 시퀀스
+   bTitle VARCHAR2(100) NOT NULL,--글제목
+   bWriter VARCHAR2(30) NOT NULL,--글작성자 -usertable의 userEmail과 같은 값
+   bContent CLOB NOT NULL,--글내용 / 이미지는 BoastImg이미지테이블참조
+   bDate DATE default sysdate NOT NULL--글작성일자
+   );   
+   select * from BoastTable;
+   
+   -- 자랑글 이미지 
+CREATE TABLE BoastImage(
+   bImageNoF NUMBER NOT NULL,--BoastTable의 글번호-foreign
+   bImage CLOB NOT NULL--이미지이름
+)
+--------------이걸 좋아요 순으로 나열해야된다.--테이블 3 개 조인------------------------------
+select a.bTitle ,a.bWriter ,c.bImage, b.count
+from BoastTable a 
+join (select Bnosp, count(clicker) count from BoastLike b group by bnosp) b
+on	a.bNoSP = b.bNoSP
+join BoastImage c
+on  b.bNoSP = c.bImageNoF
+order by b.count desc;
+-- 서브쿼리 
+select Bnosp, count(clicker) count from BoastLike b group by bnosp;
+--SELECT * FROM (SELECT * FROM TABLE_NAME ) WHERE ROWNUM <= 5 ;
+-------------------------------------------------------------------------------
+select * from (
+select a.bTitle ,a.bWriter ,c.bImage, b.count
+from BoastTable a 
+join (select Bnosp, count(clicker) count from BoastLike b group by bnosp) b
+on	a.bNoSP = b.bNoSP
+join BoastImage c
+on  b.bNoSP = c.bImageNoF
+order by b.count desc)
+WHERE ROWNUM <= 8 ;
+-------------------------------------------------------------------------------
+
+select * from boastTable;
+select * from BoastLike;
+
+----------------------------------------------------
+select distinct a.bTitle ,a.bWriter ,a.bDate ,c.bImage
+from BoastTable a 
+join BoastLike b
+on	a.bNoSP = b.bNoSP
+join BoastImage c
+on  b.bNoSP = c.bImageNoF
+group by a.bNoSP;
+----------------------------------------------------
+select a.bTitle ,a.bWriter ,a.bDate ,count(b.clicker) 
+from BoastTable a 
+inner join BoastLike b
+on	a.bNoSP = b.bNoSP
+group by a.bNoSP
+;
+select a.bTitle ,a.bWriter ,a.bDate  
+from BoastTable a 
+inner join BoastLike b
+on	a.bNoSP = b.bNoSP;
+-----------------------------------------------------
+
+
+	
+
 drop table BoastLike;
 create table BoastLike(
 	 bNoSP Number NOT NULL,-- BoastTable글번호-foreign
-	 clicker varchar2(30) not null  -- BoastTable에 좋아요 누른 사람 ! 
+	 clicker varchar2(30) not null  -- BoastTable에 좋아요 누른 사람 ! // 이메일 받아옴 // 스트링타입 
 )
 select * from BoastLike ;
 
 insert into BOASTLIKE values(1,'so1@naver.com');
 insert into BOASTLIKE values(1,'so2@naver.com');
 insert into BOASTLIKE values(1,'so3@naver.com');
+insert into BOASTLIKE values(2,'so1@naver.com');
+insert into BOASTLIKE values(2,'so2@naver.com');
+insert into BOASTLIKE values(2,'so3@naver.com');
+insert into BOASTLIKE values(3,'so1@naver.com');
+insert into BOASTLIKE values(3,'so2@naver.com');
+insert into BOASTLIKE values(3,'so3@naver.com');
+insert into BOASTLIKE values(3,'so4@naver.com');
+insert into BOASTLIKE values(3,'so5@naver.com');
+
+-- 이것도 되는거 
+select bNoSP, count(clicker) count
+  from BoastLike
+  group by bNoSP
+  order by count desc;
+  -- 이거 되는거 
+  select count(clicker) count
+  from BoastLike
+  group by bNoSP
+  order by count desc;
+--  이거 안되는거 
+--  select bNoSP count
+--  from BoastLike
+--  group by clicker
+--  order by count desc;
+
+
+
+
+
 
 select clicker from BOASTLIKE where bNoSP = 1;
 
