@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -27,13 +28,31 @@
 					<c:forEach var="jp" items="${duelist}" varStatus="status">
 					  <li class="list-unstyled list-group-item shadow p-3 mb-5 bg-body rounded" style="width:300px;">
 					    <div class="ms-4 me-auto">
-					      <a href = "../jobposting/view/${jp.cno}" class="fw-bold fs-5" style="color: black;">　${jp.cTitle}<br>　　　　  <p style="color:gray;" class="fs-6"> ${jp.cWriter} </p></a>
+					      <a href = "../jobposting/view/${jp.cno}" class="fw-bold fs-5" style="color: black;">${jp.cTitle}<br>　　　　  <p style="color:gray;" class="fs-6"> ${jp.cWriter} </p></a>
 					      <P style="color:gray;"><span class="badge bg-primary rounded-pill">　지원기간  |　 <fmt:formatDate value="${jp.cDueDate}" pattern="yyyy-MM-dd"/> 까지   　 </span></P>
 						 
 					    </div>
 					  </li>
 					  </c:forEach>
 					 </ol>
+					 
+			 <c:choose>
+        <c:when test="${fn:length(mainBoastList) > 0}">
+          <c:forEach items="${mainBoastList}" var="list" varStatus="status">
+            <tr>
+                <td><img src="/img/boast/${list.getBImage()}" alt=""></td>
+                <td>${list.getBTitle()}</td>
+                <td>${list.getBWriter()}</td>
+                <td>${list.getCount()}</td>
+            </tr>
+          </c:forEach>
+        </c:when>
+        <c:otherwise>
+          <tr>
+            <td colspan="4">조회된 결과가 없습니다.</td>
+          </tr>
+        </c:otherwise>
+      </c:choose>
     
 </body>
 </html>

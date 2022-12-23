@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import WORKERS.Boast.dto.BoastLikeDTO;
+import WORKERS.Boast.dto.MainBoastDTO;
 import WORKERS.Boast.model.Boast;
 import WORKERS.Boast.model.BoastImage;
 import WORKERS.Boast.model.BoastStar;
@@ -91,5 +92,7 @@ public interface BoastMapper {
 	// 게시물 번호 주면 게시물 좋아요 수 받는 메소드 
 	int likeCount(int bNoSP) throws Exception;
 
+	// 메인에 가져갈 정보 리스트 
+	List<MainBoastDTO> MainBoastList()throws Exception; 
 
 }
