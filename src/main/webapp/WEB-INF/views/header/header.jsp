@@ -39,7 +39,7 @@
                     </button>
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        회원가입 버튼
+                        회원가입
                     </button>
                 </div>
             </c:if>
@@ -110,31 +110,28 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">구직자 로그인</h5>
+                        <h5 class="modal-title fs-5 fw-bold" id="staticBackdropLabel">구직자 로그인</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <div class="mb-3 row">
-                            <label for="staticEmail" class="col-sm-2 col-form-label">userEmail</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control-plaintext" id="staticEmail"
-                                    placeholder="workers@workers.com" name="userEmail">
+                        <div class="row p-4 m-1">
+                            <label for="staticEmail" class="col-sm-4 col-form-label fs-5"><img src="/resources/header/img/user.png" width="20px"> 이메일</label>
+                            <div class="col-sm-15">
+                                <input type="text" class="form-control p-3" id="staticEmail" placeholder="workers@workers.com" name="userEmail">
+                            </div>
+                            <label for="staticEmail" class="col-sm-4 col-form-label fs-5"><img src="/resources/header/img/lock.png" width="20px"> 비밀번호</label>
+                            <div class="col-sm-15">
+                                <input type="password" class="form-control p-3" id="inputPassword" name="userPw" placeholder="비밀번호">
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="inputPassword" class="col-sm-2 col-form-label">userPw</label>
-                            <div class="col-sm-10">
-                                <input type="password" class="form-control" id="inputPassword" name="userPw">
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
+                        	<button type="submit" class="btn btn-link"><img src="/resources/kakao/blue_login.png" width="100%"></button>
                             <a href="https://kauth.kakao.com/oauth/authorize?client_id=6078a2a05d3e31937245be4308a040f4&redirect_uri=http://localhost:8898/kakao/login&response_type=code"
-                                class="alink"><img src="/resources/kakao/kakao_login_medium_wide.png" alt=""></a>
+                                class="alink"><img src="/resources/kakao/kakao_login.png" alt="" width="100%"></a>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn bn-secondary" data-bs-dismiss="modal">뒤로 가기</button>
-                        <button type="submit" class="btn btn-primary">로그인 하기</button>
                     </div>
                 </div>
             </div>
@@ -150,27 +147,28 @@
          <div class="modal-dialog">
              <div class="modal-content">
                  <div class="modal-header">
-                     <h5 class="modal-title" id="staticBackdropLabel">기업 로그인</h5>
+                     <h5 class="modal-title fs-5 fw-bold" id="staticBackdropLabel">기업 로그인</h5>
                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                  </div>
                  <div class="modal-body">
-                     <div class="mb-3 row">
-                         <label for="staticEmail" class="col-sm-2 col-form-label">comEmail</label>
-                         <div class="col-sm-10">
-                             <input type="text" class="form-control-plaintext" id="staticEmail"
+                     <div class="row p-4 m-1">
+                        <label for="staticEmail" class="col-sm-6 col-form-label fs-5"><img src="/resources/header/img/user.png" width="20px"> 기업 이메일</label>
+                         <div class="col-sm-15">
+                             <input type="text" class="form-control-plaintext p-3" id="staticEmail"
                                  placeholder="workers@workers.com" name="companyEmail">
+                                 
+                         <label for="staticEmail" class="col-sm-4 col-form-label fs-5"><img src="/resources/header/img/lock.png" width="20px"> 비밀번호</label>
+                         <div class="col-sm-15">
+                             <input type="password" class="form-control p-3" id="inputPassword" name="companyPwd">
                          </div>
                      </div>
+                      </div>
                      <div class="mb-3 row">
-                         <label for="inputPassword" class="col-sm-2 col-form-label">comPwd</label>
-                         <div class="col-sm-10">
-                             <input type="password" class="form-control" id="inputPassword" name="companyPwd">
-                         </div>
-                     </div>
-                 </div>
+                        	<button type="submit" class="btn btn-link"><img src="/resources/kakao/blue_login.png" width="100%"></button>
+                        </div>
                  <div class="modal-footer">
                      <button type="button" class="btn bn-secondary" data-bs-dismiss="modal">뒤로 가기</button>
-                     <button type="submit" class="btn btn-primary">로그인 하기</button>
+                 </div>
                  </div>
              </div>
          </div>
