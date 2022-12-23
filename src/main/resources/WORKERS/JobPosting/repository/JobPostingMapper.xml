@@ -36,9 +36,12 @@
     	select companyImg from CompanyPostingImg where cno = #{cno}
     </select>
 
-    <!-- 구인공고 리스트에 쓸 테이블 가져오기 -->
+    <!-- 임박한 구인공고 list -->
     <select id="JobPostingList" resultMap="jobposting">
-    	select * from CompanyPostingTable order by cDate desc
+    	select * from 
+    				(select * from (select * from CompanyPostingTable where (cDueDate-sysdate) > 0)
+    	 			order by (cDueDate-sysdate))
+    	where 9 > ROWNUM
     </select>
    
     <!-- 추가 -->

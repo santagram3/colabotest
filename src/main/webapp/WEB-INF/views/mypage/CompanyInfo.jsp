@@ -1,6 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -49,9 +48,9 @@
 			</c:forEach> --%>
 			 ${list.getCTitle()}
 			 <img class="card-img-top" src="/img/jobPosting/${list.getCompanyImg()}">
-			 마감일 : <fmt:formatDate value="${list.getCDueDate()}" pattern="yyyy-MM-dd"/>
+			 마감일 :${list.getCDueDate()}
               </c:forEach>
-              <fmt:formatDate value="${list.getCDueDate()}" pattern="yyyy-MM-dd"/>
+              
               
               
  		 </div>

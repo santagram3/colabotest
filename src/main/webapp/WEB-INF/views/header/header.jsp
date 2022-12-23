@@ -51,7 +51,7 @@
             </c:if>
             <c:if test="${loginCompanyUser.userGrade == 'COMPANY'}">
                 <div>
-                    <a href="/companymypage/companyinfo2" style="color: black;"><small><b>${loginCompanyUser.companyEmail}님</b>환영합니다.</small></a>
+                    <a href="/mypage/info" style="color: black;"><small><b>${loginCompanyUser.companyEmail}님</b>환영합니다.</small></a>
                     <a href="/login/companyLogout">로그아웃 하기</a>
                 </div>
             </c:if>

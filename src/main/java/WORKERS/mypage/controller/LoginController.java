@@ -43,18 +43,18 @@ public class LoginController {
 			System.out.println("loginSuccess");
 			// 로그인 성공
 			model.addAttribute(answer, "loginSuccess");
-			return "redirect:/test/header";
+			return "redirect:/main/page";
 		} else if (answer == "pwFail") {
 
 			// 비밀번호 틀림
 			System.out.println("pwFail");
 			model.addAttribute(answer, "pwFail");
-			return "redirect:/test/header";
+			return "redirect:/main/page";
 		} else {
 			// 아이디 없음 !
 			System.out.println("noId");
 			model.addAttribute(answer, "noId");
-			return "redirect:/test/header";
+			return "redirect:/main/page";
 		}
 	}
 

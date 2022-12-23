@@ -24,7 +24,7 @@ public class JobPostingService {
 	@Autowired
 	private JobPostingMapper jobPostingMapper;
 
-//list
+//임박한 구인공고 list
 	public List<CompanyPosting> getJobPostingList() throws Exception{
 		List<CompanyPosting> jpl = jobPostingMapper.JobPostingList();		
 		return jpl;		
@@ -71,7 +71,7 @@ public class JobPostingService {
 		jobPostingMapper.ModifyJobPostingImg(cpi);		
 	}
 	
-	
+	//페이지네이션
 	public List<Map<String, Object>> SelectAllList() throws Exception {
         return jobPostingMapper.SelectAllList();
     }
@@ -84,6 +84,8 @@ public class JobPostingService {
         return jobPostingMapper.testTableCount();
     }
 
+    
+    //마이페이지
 	public List<cnoListDTO> getcnoList(String cWriter) throws Exception{
 		return jobPostingMapper.GetcnoList(cWriter);
 	}

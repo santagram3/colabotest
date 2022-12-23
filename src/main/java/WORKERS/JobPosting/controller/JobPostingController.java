@@ -56,11 +56,17 @@ public class JobPostingController {
  
         mav.addObject("pagination",pagination);
         mav.addObject("AllList",jobpostingservice.SelectAllList(pagination));
+        mav.addObject("duelist",jobpostingservice.getJobPostingList());
         mav.setViewName("/jobPosting/jobPostingList");
         
         return mav;
 	}
-	
+/*	@GetMapping("/list")
+	public String JobPostingDueList(Model model) throws Exception {
+		model.addAttribute("duelist",jobpostingservice.getJobPostingList());
+		return "/jobPosting/jobPostingList";
+	}
+*/	
 	//구인공고 등록폼
 	@GetMapping("/addForm")
 	public String JobPostingAddForm(HttpSession session, Model model) {		

@@ -14,7 +14,7 @@ import WORKERS.mypage.DTO.cnoListDTO;
 @Mapper
 public interface JobPostingMapper {
 	
-//list
+//임박한 구인공고 list
 	List<CompanyPosting> JobPostingList() throws Exception;
 
 //add

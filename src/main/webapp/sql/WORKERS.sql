@@ -226,8 +226,16 @@ insert into BoastStar values(34,5);
 select * from BOASTSTAR;
 drop table BOASTSTAR
 
-ALTER TABLE BoastStar
-ADD CONSTRAINTS BoastStar_FK FOREIGN KEY (bStarNoF)--BoastStar 의 bStarNoF가 BoastTable의 bNoSP가 되어야 함
+
+drop table BoastLike;
+
+create table BoastLike(
+    bNoSP Number NOT NULL,-- BoastTable글번호-foreign
+    clicker varchar2(30) not null  -- BoastTable에 좋아요 누른 사람 ! 
+)
+
+ALTER TABLE BoastLike
+ADD CONSTRAINTS BoastLike_FK FOREIGN KEY (bNoSP)--BoastStar 의 bStarNoF가 BoastTable의 bNoSP가 되어야 함
 REFERENCES BoastTable(bNoSP);
    
 -- 자랑글 이미지 
