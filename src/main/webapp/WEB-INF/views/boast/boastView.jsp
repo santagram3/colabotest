@@ -27,15 +27,16 @@
 	    	<img class="card-img-top" src="/img/boast/${bi.bImage}" alt="공부자랑 이미지 자리">
 	    	<p class="card-text mt-5">${boast.bContent}</p>
 	    	<div class="d-flex justify-content-center">
-	    	<button type="button" class="btn btn-outline-primary" onclick="location='/boast/addboaststar/${boast.bNoSP}';">
+	    	<button type="button" class="btn btn-outline-primary" onclick="location='/boast/like/${boast.bNoSP}';">
    			<img src="/resources/boast/like.png" width="30px"><br>
-   			좋아요 : ${bStar}</button></div>
+   			좋아요 : ${likeCount}</button></div>
+   			
 	    </div>
     </div>
     <hr>
         <ul class="list-group mb-3 p-1">
 		<c:forEach var="comments" items="${commentlist}" varStatus="status">
-		  <li><p class="fs-6 text-muted"><span class="fw-bold fs-5 text-dark">${comments.nickname}</span> 　 ${comments.commentDate}
+		  <li><p class="fs-7 text-muted"><span class="fw-bold fs-5 text-dark">${comments.nickname}</span> 　 ${comments.commentDate}
 		   	<button class="btn btn-light btn-sm m-3" type="button" 
 	        data-bs-toggle="collapse" 
 	        data-bs-target="#addForm${comments.commentAid}" 
@@ -45,7 +46,7 @@
   			<path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
 			</svg></span></a>
 	        <br>
-	        <span class="text-dark fs-5">${comments.commentContent}</span>
+	        <span class="text-dark fs-7">${comments.commentContent}</span>
 		  </p>
 		   
 	<!-- 댓글 수정하기 collapse -->

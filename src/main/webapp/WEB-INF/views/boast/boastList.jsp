@@ -18,18 +18,18 @@
 <body>
 
 
-
+<!-- 아이콘 형태 -->	
 <div class="container">
 
 <p class="fs-2 mt-3">공부 자랑하기</p>
 <hr>
 <p class="fs-5 fw-bold">공부 자랑하기</p>
 </div>
-<div class="container" style="max-width: 800px;" >	 
+<div class="container" style="max-width: 800px;">	 
     <ul class="list-group mt-4"> <div class="d-flex flex-row justify-content-between flex-wrap">
     <c:forEach items="${AllList}" var="list" varStatus="status">
 	<div class="shadow-sm p-1 mb-5 bg-body rounded card border-muted border-1 mb-3">
-  	<div class="card-header"><fmt:formatDate value="${list.BDATE}" pattern="yyyy-MM-dd"/></div>
+  	<div class="card-header"><fmt:formatDate value="${list.BDATE}" pattern="yyyy-MM-dd"/> </div>
   	<div class="card-body" style="width:230px;">
     <a href = "view/${list.BNOSP}"  class="card-text fs-5" style="color:black;">${list.BTITLE}</a>
   	</div>

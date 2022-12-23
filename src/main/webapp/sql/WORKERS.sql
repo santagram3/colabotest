@@ -48,6 +48,20 @@ create table userTable(
    oauth varchar2(10)  
 )
 
+
+create table userTable(
+   userEmail varchar2(50) not null primary key , -- 아이디겸 이메일 
+   userPw varchar2(50) not null , -- 비밀번호 
+   nickName varchar2(50), -- 닉네임 
+   birthday date not null, -- 생일 날짜를 받아둬야 몇살인지 알지 ~ 
+   userGrade varchar2(10) default 'WORKER', -- 1은 일반유저 2는 구인공고 하는사람 3은 어드민  
+   selfIntroduce varchar2(200), -- 간단한 자기소개 100자로 작성 하시오 
+   oauth varchar2(10)  
+)
+
+drop table userTable;
+
+
 select * from userTable;
 select count(*) from userTable where userEmail = '123@123';
 
@@ -226,8 +240,16 @@ insert into BoastStar values(34,5);
 select * from BOASTSTAR;
 drop table BOASTSTAR
 
-ALTER TABLE BoastStar
-ADD CONSTRAINTS BoastStar_FK FOREIGN KEY (bStarNoF)--BoastStar 의 bStarNoF가 BoastTable의 bNoSP가 되어야 함
+
+drop table BoastLike;
+
+create table BoastLike(
+    bNoSP Number NOT NULL,-- BoastTable글번호-foreign
+    clicker varchar2(30) not null  -- BoastTable에 좋아요 누른 사람 ! 
+)
+
+ALTER TABLE BoastLike
+ADD CONSTRAINTS BoastLike_FK FOREIGN KEY (bNoSP)--BoastStar 의 bStarNoF가 BoastTable의 bNoSP가 되어야 함
 REFERENCES BoastTable(bNoSP);
    
 -- 자랑글 이미지 

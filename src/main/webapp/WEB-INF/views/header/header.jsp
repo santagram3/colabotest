@@ -44,15 +44,15 @@
                 </div>
             </c:if>
             <c:if test="${loginUser.userGrade == 'WORKER'}">
-                <div class="d-flex flex-column m-2 p-2">
-                    <a href="/mypage/info" style="color: black;"><small><b>${loginUser.nickName}님</b> 환영합니다.</small></a>
-                        <a href="/login/logout"><small>로그아웃</small></a>
+                <div class="d-flex flex-row m-2 p-2">
+                    <a href="/mypage/info" style="color: black;"><small><b>${loginUser.nickName}님</b> 환영합니다.　</small></a>
+                        <a href="/login/logout"><small>로그아웃　</small></a>
                 </div>
             </c:if>
             <c:if test="${loginCompanyUser.userGrade == 'COMPANY'}">
                 <div>
-                    <a href="/mypage/info" style="color: black;"><small><b>${loginCompanyUser.companyEmail}님</b>환영합니다.</small></a>
-                    <a href="/login/companyLogout">로그아웃 하기</a>
+                    <a href="/companymypage/companyinfo2" style="color: black;"><small><b>${loginCompanyUser.companyEmail}님</b>환영합니다.　</small></a>
+                    <a href="/login/companyLogout">로그아웃　</a>
                 </div>
             </c:if>
         </div>
@@ -91,7 +91,6 @@
         }
 
         function CompanySignUp1() {
-            alert("/mypage/CompanySignUp2 눌렸다");
             console.log("=========/mypage/CompanySignUp1===========");
             location.href = "/company/CompanySignUp2";
         }
@@ -117,7 +116,7 @@
                         <div class="row p-4 m-1">
                             <label for="staticEmail" class="col-sm-4 col-form-label fs-5"><img src="/resources/header/img/user.png" width="20px"> 이메일</label>
                             <div class="col-sm-15">
-                                <input type="text" class="form-control p-3" id="staticEmail" placeholder="workers@workers.com" name="userEmail">
+                                <input type="text" class="form-control is-invalid p-3" id="staticEmail" placeholder="workers@workers.com" name="userEmail">
                             </div>
                             <label for="staticEmail" class="col-sm-4 col-form-label fs-5"><img src="/resources/header/img/lock.png" width="20px"> 비밀번호</label>
                             <div class="col-sm-15">
@@ -154,7 +153,7 @@
                      <div class="row p-4 m-1">
                         <label for="staticEmail" class="col-sm-6 col-form-label fs-5"><img src="/resources/header/img/user.png" width="20px"> 기업 이메일</label>
                          <div class="col-sm-15">
-                             <input type="text" class="form-control-plaintext p-3" id="staticEmail"
+                             <input type="text" class="form-control is-invalid p-3" id="staticEmail"
                                  placeholder="workers@workers.com" name="companyEmail">
                                  
                          <label for="staticEmail" class="col-sm-4 col-form-label fs-5"><img src="/resources/header/img/lock.png" width="20px"> 비밀번호</label>

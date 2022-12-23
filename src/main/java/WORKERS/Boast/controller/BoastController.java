@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import WORKERS.Boast.dto.BoastLikeDTO;
 import WORKERS.Boast.model.Boast;
 import WORKERS.Boast.model.BoastImage;
 import WORKERS.Boast.model.BoastStar;
@@ -91,25 +92,33 @@ public class BoastController {
 
 	@GetMapping("/view/{bNoSP}")
 	public String BoastView(@PathVariable int bNoSP, Model model, HttpSession session) throws Exception {
-		
+
 		Boast boast = boastService.viewBoast(bNoSP);
 		int bImageNoF = bNoSP;
 		int aid = bNoSP;
-		System.out.println("bImageNoF: "+bImageNoF);
+		System.out.println("bImageNoF: " + bImageNoF);
 		BoastImage bi = boastService.viewBoastImage(bImageNoF);
 		List<Comments> commentlist = boastService.listComment(aid);
-		
-		int bStarNoF = bNoSP;		
+
+		int bStarNoF = bNoSP;
 		BoastStar boaststar = boastService.getBoastStar(bStarNoF);
 		System.out.println("boaststar: " + boaststar.toString());
-		int bStar=boaststar.getBStar();
-		model.addAttribute("bStar",bStar);
-		
-		model.addAttribute("boast",boast);
-		model.addAttribute("bi",bi);
-		model.addAttribute("commentlist",commentlist);
+
+		User sessionLoginUser = (User) session.getAttribute("loginUser");
+		String loginUsernickName = sessionLoginUser.getNickName();
+		model.addAttribute("loginUsernickName", loginUsernickName);
+
+		model.addAttribute("boast", boast);
+		model.addAttribute("bi", bi);
+		model.addAttribute("commentlist", commentlist);
 		System.out.println(bi.getbImage());
-		
+
+		// 좋아요 갯수
+		// bNoSP
+		int likeCount = boastService.likeCount(bNoSP);
+
+		model.addAttribute("likeCount", likeCount);
+
 		return "/boast/boastView";
 	}
 	
@@ -184,16 +193,74 @@ public class BoastController {
 	
 	@GetMapping("/addboaststar/{bNoSP}")
 	public String AddStarBoast(@PathVariable int bNoSP, BoastStar boastStar) throws Exception {
+		// 1 . 글 번호 가져옴
 		int bStarNoF = bNoSP;
+		// 2. 글 번호로 > 좋아요 목록 가져옴
+
 		boastStar = boastService.getBoastStar(bStarNoF);
-		int bStar = boastStar.getBStar()+1;
-		
+		int bStar = boastStar.getBStar() + 1;
+
 		boastStar.setBStarNoF(bStarNoF);
 		boastStar.setBStar(bStar);
-		
+
 		boastService.modifyBoastStar(boastStar);
-		
-		return "redirect:/boast/view/"+bNoSP;
+
+		return "redirect:/boast/view/" + bNoSP;
+	}
+
+	// 좋아요
+	@GetMapping("/like/{bNoSP}")
+	public String boastLike(@PathVariable int bNoSP, HttpSession session) throws Exception {
+
+		System.out.println("/like1");
+
+		// 1. @PathVariable로 글 번호 가져옴 bNoSP
+
+		// 2. session 으로 좋아요 누른 사람 정보 가져옴 !
+		User user = (User) session.getAttribute("loginUser");
+		System.out.println("/like2");
+		// 3. 글 번호 bNoSP로 리스트 가져옴
+		List<String> likeList = boastService.likeListService(bNoSP);
+		//System.out.println(likeList==null);
+		//System.out.println(likeList.size());
+		System.out.println("/like3");
+		// 4. 누른 사람 정보 가져온 후 거기서 이메일 정보 가져오고 , 그걸 clicker 로 치환함
+		String clicker = user.getUserEmail();
+		System.out.println("/like4");
+		// 좌우 공백 제거
+		clicker.trim();
+		// 5. BoastLikeDTO 객체 만듬
+		BoastLikeDTO boastLikeDTO = new BoastLikeDTO();
+		System.out.println("/like5");
+		// 번호 세팅
+		boastLikeDTO.setBNoSP(bNoSP);
+		// 이메일 세팅
+		boastLikeDTO.setClicker(clicker);
+		System.out.println("/like6");
+		if (likeList.size() < 1) {
+			System.out.println("likeList ~ Null");
+			// 리스트가 길이가 0 이라면 ? > 좋아요 아무도 안누른 상태니까.. 그냥 좋아요 해주자 
+			boastService.likeUpService(boastLikeDTO);
+		} else {
+			System.out.println("likeList ~ NotNull");
+			// 리스트가 존재한다는건 좋아요가 1 이라도 있는 상태 // 그러니까 판단을 해야됨 
+			for (String email : likeList) {
+				System.out.println("/like7");
+				if (!clicker.equals(email.trim())) {
+					System.out.println("/like8");
+					// 좋아요 안눌렀다면 ? // 좋아요 처리 // 사람을 추가
+					boastService.likeUpService(boastLikeDTO);
+				} else {
+					System.out.println("/like9");
+					// 좋아요 눌렀다면 ? // 다시 숫자 떨어지는 처리 // 사람을 지움
+					boastService.likeDownService(clicker);
+				}
+
+			}
+
+		}
+		System.out.println("/like10");
+		return "redirect:/boast/view/" + bNoSP;
 	}
 	
 
