@@ -43,18 +43,18 @@ public class LoginController {
 			System.out.println("loginSuccess");
 			// 로그인 성공
 			model.addAttribute(answer, "loginSuccess");
-			return "redirect:/main/page";
+			return "redirect:/test/header";
 		} else if (answer == "pwFail") {
 
 			// 비밀번호 틀림
 			System.out.println("pwFail");
 			model.addAttribute(answer, "pwFail");
-			return "redirect:/main/page";
+			return "redirect:/test/header";
 		} else {
 			// 아이디 없음 !
 			System.out.println("noId");
 			model.addAttribute(answer, "noId");
-			return "redirect:/main/page";
+			return "redirect:/test/header";
 		}
 	}
 
@@ -133,7 +133,7 @@ public class LoginController {
 				// 들어온 비밀번호와 찾은 비밀번호가 같다면
 				System.out.println("equal pwd");
 				// 객체 찾아서 넣어준다 !
-				CompanyUser loginCompanyUser = companyService.findCompanyUserSerive(inputEmail);
+				CompanyUser loginCompanyUser = companyService.findCompanyUserService(inputEmail);
 
 				session.setAttribute("loginCompanyUser", loginCompanyUser);
 				session.setMaxInactiveInterval(60 * 60); // 한시간

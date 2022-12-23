@@ -18,7 +18,6 @@ pageEncoding="UTF-8"%>
 <header>
 <%@ include file ="../header/header.jsp" %>
 </header>
-    
 <!--                 구인공고    jobPostingView               -->
 	<div id="contentsBox">
 		<div class="position">
@@ -50,19 +49,12 @@ pageEncoding="UTF-8"%>
     </div>
 			
 
-			</div>
-			
+			</div>		
 			<div class="container-md2">
 			</div>
-			<hr>
-			
+			<hr>	
 		</div>
 	</div>
-
-
-
-	
-
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

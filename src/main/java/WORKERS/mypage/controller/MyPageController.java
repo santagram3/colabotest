@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import WORKERS.Boast.model.Boast;
 import WORKERS.Boast.model.BoastImage;
 import WORKERS.Boast.service.BoastService;
+import WORKERS.JobPosting.service.JobPostingService;
 import WORKERS.mypage.DTO.MyPageDTO;
 import WORKERS.mypage.DTO.bNoSPListDTO;
 import WORKERS.mypage.model.User;
@@ -31,7 +32,9 @@ public class MyPageController {
 	
 	private final UserService userService;
 	@Autowired
-	private BoastService boastService;
+	private BoastService boastService;	
+	@Autowired
+	private JobPostingService jobpostingservice;
 	
 	// 회원가입창 만들기 
 	@GetMapping("/UserSignUp")
@@ -161,7 +164,7 @@ public class MyPageController {
 	}
 	
 	@PostMapping("/deleteinfo/{userEmail}")
-	public String DeleteInfo(HttpSession session, @PathVariable String userEmail, @ModelAttribute User user) throws Exception{
+	public String DeleteInfo(HttpSession session, @PathVariable String userEmail, @ModelAttribute User user, Model model) throws Exception{
 		System.out.println("userEmail: "+user.getUserEmail());
 		System.out.println("user: "+user.toString());
 		
@@ -172,8 +175,10 @@ public class MyPageController {
 		
         session.removeAttribute("loginUser"); // loginUser 라는 내용을 세션에서 삭제
         session.invalidate(); // 세션 객체 삭제
+        
+        model.addAttribute("duelist",jobpostingservice.getJobPostingList());
   
-		return "/header/header";
+		return "redirect:/main/page";
 	}
 	
 	

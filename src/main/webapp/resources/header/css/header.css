@@ -2,7 +2,7 @@
 @import url(/resources/reset.css);
 
 #headerBox{
-    border: skyblue solid 1px;
+    border: #F8FFFF solid 1px;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;

@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -23,11 +23,8 @@
     <title>info</title>
 </head>
 
-<body>
-
-
-
-<div class="infoContainer">
+<body>     
+ <div class="infoContainer">
     
         <Header>
             <%-- <%@ include file="/WEB-INF/views/header/myPageHeader.jsp" %> --%>
@@ -40,7 +37,7 @@
     <strong class="me-auto fs-2 mt-4">기업회원 마이페이지 <p class="fs-4">계정의 모든 사항을 한눈에 관리하세요.</p></strong>
     <small>
     <a href="/mypage/info" style="color: #5E5E5E;">워커스 회원정보 수정하기</a><br> 
-    <a href="#" style="color: #5E5E5E;">내가 작성한 글 보기</a>
+    <a href="#" style="color: #5E5E5E;">작성한 글 보기</a>
     </small>
   </div>
 <div class="toast-body bg-white">
@@ -65,10 +62,6 @@
 			</div>
 		</c:forEach>
 	</div>
- 
-</div>
-</div>
-</div>
-</div>
 </body>
+
 </html>

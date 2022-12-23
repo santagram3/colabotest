@@ -162,5 +162,27 @@
     	select count(clicker) from BoastLike where bNoSP = #{bNoSP}
     </select>
     
+    <!-- 메인페이지에 쓸 좋아요 많은 게시물 -->
+    <resultMap id="mainBoastList"
+		type="WORKERS.Boast.dto.MainBoastDTO">
+		<result property="bTitle" column="bTitle" />
+		<result property="bWriter" column="bWriter" />
+		<result property="bImage" column="bImage" />
+		<result property="count" column="count" />
+	</resultMap>
+    
+    	<select id="MainBoastList" resultMap="mainBoastList">
+		select * from (
+		select a.bTitle ,a.bWriter ,c.bImage, b.count
+		from BoastTable a
+		join (select Bnosp, count(clicker) count from BoastLike b group by bnosp)
+		b
+		on a.bNoSP = b.bNoSP
+		join BoastImage c
+		on b.bNoSP = c.bImageNoF
+		order by b.count desc)
+		 <![CDATA[ WHERE ROWNUM <= 8]]>
+	</select>
+    
 
 </mapper>   

@@ -16,11 +16,8 @@
 <%@ include file ="../header/header.jsp" %>
 </header>
 <body>
-
-
 <!-- 아이콘 형태 -->	
 <div class="container">
-
 <p class="fs-2 mt-3">공부 자랑하기</p>
 <hr>
 <p class="fs-5 fw-bold">공부 자랑하기</p>
@@ -37,7 +34,6 @@
 	</c:forEach>
 	</ul>
 </div>
-
 
 <!-- 게시판 형태 -->	
 <div class="container">	 
@@ -68,7 +64,7 @@
 
 
 
-  <p class="fw-bold fs-5">공부 자랑하기</p>
+  <p class="fw-bold fs-5">최근 올라온 공부 자랑하기</p>
   <thead>
     <tr class="fw-bold">
       <th scope="col"></th>
@@ -144,9 +140,9 @@
 				</svg> </a>
         </div>
     </div>
-
+	<div class="d-flex flex-row-reverse">
 	<a href="/boast/addForm" type="button" class="btn btn-primary sticky-bottom mt-1 mb-2">작성하기</a>
-		
+		</div>
 		</div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

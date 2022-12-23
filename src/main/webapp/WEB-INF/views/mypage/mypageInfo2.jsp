@@ -23,15 +23,13 @@
 </head>
 
 <body>
-
-
-<div class="infoContainer">
+    <div class="infoContainer">
     
         <Header>
             <%-- <%@ include file="/WEB-INF/views/header/myPageHeader.jsp" %> --%>
         </Header>
         
- <div class="container">	        
+  <div class="container">	        
 <div class="p-3 mb-2 bg-light text-dark" >
   <div class="toast-header">
     <a href="/test/header"><img src="/resources/header/img/logo.png" class="rounded me-2 mb-2" width="300px"></a>

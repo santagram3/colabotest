@@ -20,7 +20,6 @@ pageEncoding="UTF-8"%>
 </header>    
     
 <!-- 구인공고 게시글 작성폼  -->
-
 <img src="/img/jobPosting/modify2.png" class="img-fluid" alt="...">
 	<div class="shadow p-3 mb-5 bg-body rounded card border-primary position-absolute top-100 start-50 translate-middle " style="width:800px;">
 		<form action="modify/${cp.cno}" method="post" enctype="multipart/form-data">
@@ -77,10 +76,6 @@ pageEncoding="UTF-8"%>
 				
 				</div>
 				</div>
-
-
-   
-
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

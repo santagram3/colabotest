@@ -17,8 +17,8 @@
 </head>
 
 <body>
-    <div id="headerBox">
-        <div class="logo"><a href="/main/page"><img src="/resources/header/img/skyblue.png" alt=""></a></div>
+    <div id="headerBox" class="shadow-sm mb-2">
+        <div class="logo"><a href="/main/page"><img src="/resources/header/img/skyblue.png" width="250px"></a></div>
         <div class="headerMenu">
             <div class="menuLeft fw-bold">
                 <a href="" style="color: #5E5E5E;">Q & A</a>
@@ -38,7 +38,7 @@
                         기업 로그인
                     </button>
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         회원가입
                     </button>
                 </div>
@@ -76,8 +76,7 @@
                     기업회원 가입하기</button>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                        onclick="MainPage()">뒤로가기</button>
+                    <button type="button" class="btn bn-secondary" data-bs-dismiss="modal">뒤로가기</button>
                 </div>
             </div>
         </div>
@@ -173,13 +172,6 @@
          </div>
      </form>
  </div>
-
-
-
-
-
-
-
 
     <!-- 부트스트랩 자바스크립트 !-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

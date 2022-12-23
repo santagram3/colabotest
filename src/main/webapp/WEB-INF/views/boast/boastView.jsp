@@ -29,14 +29,13 @@
 	    	<div class="d-flex justify-content-center">
 	    	<button type="button" class="btn btn-outline-primary" onclick="location='/boast/like/${boast.bNoSP}';">
    			<img src="/resources/boast/like.png" width="30px"><br>
-   			좋아요 : ${likeCount}</button></div>
-   			
+   			좋아요 : ${likeCount}</button></div>  			
 	    </div>
     </div>
     <hr>
         <ul class="list-group mb-3 p-1">
 		<c:forEach var="comments" items="${commentlist}" varStatus="status">
-		  <li><p class="fs-7 text-muted"><span class="fw-bold fs-5 text-dark">${comments.nickname}</span> 　 ${comments.commentDate}
+		  <li><p class="fs-8 text-muted"><span class="fw-bold fs-6 text-dark">${comments.nickname}</span> 　 ${comments.commentDate}
 		   	<button class="btn btn-light btn-sm m-3" type="button" 
 	        data-bs-toggle="collapse" 
 	        data-bs-target="#addForm${comments.commentAid}" 
@@ -47,8 +46,7 @@
 			</svg></span></a>
 	        <br>
 	        <span class="text-dark fs-7">${comments.commentContent}</span>
-		  </p>
-		   
+		  </p>		   
 	<!-- 댓글 수정하기 collapse -->
 	<div class="collapse" id="addForm${comments.commentAid}">
 	  <div class="card card-body">
@@ -65,7 +63,7 @@
 		  </li>
 		</c:forEach> 
 	</ul>
-    
+ <!-- 댓글 작성 -->   
 	  <div class="card card-body">
 		<form method="post" 
 		      action="/boast/addcomment/${boast.bNoSP}" >
@@ -76,16 +74,9 @@
 			</div>
 		</form>
 	  </div>
-
-    
     <hr>
     <a href="/boast/list" class="btn btn-primary"> Back</a>
     <a href="/boast/modifyForm/${boast.bNoSP}" class="btn btn-primary">수정하기</a>
-    
-    </div>
-    
-    
-    
-    
+    </div>  
     </body>
 </html>

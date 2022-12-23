@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import WORKERS.Boast.dto.BoastLikeDTO;
+import WORKERS.Boast.dto.MainBoastDTO;
 import WORKERS.Boast.model.Boast;
 import WORKERS.Boast.model.BoastImage;
 import WORKERS.Boast.model.BoastStar;
@@ -192,6 +193,17 @@ public class BoastService {
 		System.out.println("=========likeCountService ========");
 	
 		return likeCount;
+	}
+	
+	/////////////mainBoastList//////////////////////////////
+	public List<MainBoastDTO> mainBoastListService()throws Exception{
+		
+		System.out.println("=====in=== mainBoastListService ============");
+		
+		List<MainBoastDTO> mainBoastList = boastMapper.MainBoastList();
+		
+		System.out.println("=====out=== mainBoastListService ============");
+		return mainBoastList;
 	}
 
 }

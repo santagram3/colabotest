@@ -26,7 +26,7 @@ pageEncoding="UTF-8"%>
                     <label for="formGroupExampleInput" class="form-label">이메일</label>
                     <input type="email" class="form-control userEmail" id="formGroupExampleInput"
                         placeholder="ex: mini@naver.com " name="userEmail" required="required">
-                    <button class="aaa btn btn-primary mt-1">중복확인</button>
+                    <button class="aaa btn btn-primary btn-sm mt-1">중복확인</button>
                 </div>
                 <div class="mb-3">
                     <label for="formGroupExampleInput" class="form-label">비밀번호</label>
