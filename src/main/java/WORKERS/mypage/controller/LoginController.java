@@ -133,7 +133,7 @@ public class LoginController {
 				// 들어온 비밀번호와 찾은 비밀번호가 같다면
 				System.out.println("equal pwd");
 				// 객체 찾아서 넣어준다 !
-				CompanyUser loginCompanyUser = companyService.findCompanyUserSerive(inputEmail);
+				CompanyUser loginCompanyUser = companyService.findCompanyUserService(inputEmail);
 
 				session.setAttribute("loginCompanyUser", loginCompanyUser);
 				session.setMaxInactiveInterval(60 * 60); // 한시간

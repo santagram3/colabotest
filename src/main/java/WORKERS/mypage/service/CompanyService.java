@@ -74,7 +74,7 @@ public class CompanyService {
 	
 	
 	// companyUser 가져오는 메소드 
-	public CompanyUser findCompanyUserSerive(String companyEmail)throws Exception {
+	public CompanyUser findCompanyUserService(String companyEmail)throws Exception {
 		
 		System.out.println("input companyEmail  = " +  companyEmail );
 		
@@ -87,6 +87,18 @@ public class CompanyService {
 	
 	
 	
+	//기업 마이페이지
+	public void modifyCompanyInfo(CompanyUser companyuser) throws Exception {
+		System.out.println("서비스 시작");
+		companyMapper.modifyCompanyInfo(companyuser);
+		System.out.println("서비스 끝");
+	}
+
+	public void deleteCompanyUser(CompanyUser companyuser) throws Exception{
+		System.out.println("companyuser.getCompanyEmail(): "+companyuser.getCompanyEmail());
+		String companyEmail = companyuser.getCompanyEmail();
+		companyMapper.deleteCompanyUser(companyEmail);		
+	}
 	
 	
 	

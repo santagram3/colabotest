@@ -41,6 +41,15 @@
     </insert>
     
     
+    <!-- 기업 마이페이지 -->
+    <update id="modifyCompanyInfo">
+	update companyUser set companyPwd= #{companyPwd}, companyName= #{companyName}
+    				where companyEmail = #{companyEmail}
+	</update>
+
+	<delete id="deleteCompanyUser">
+		delete from companyUser where companyEmail=#{companyEmail}	
+	</delete>
     
      <!-- 이메일로 검색하면 0 or 1 나옴  -->
    <!--  <select id="findUserInt" resultType="int">

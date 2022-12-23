@@ -51,7 +51,7 @@ pageEncoding="UTF-8"%>
                 <input required type="hidden" class="form-control" value="COMPANY"
                     placeholder="companyName" name="userGrade">
                 <div class="buttongroup">
-                    <button type="button" class="btn btn-link m-1" onclick="backhome()">뒤로 가기</button>
+                    <button type="button" class="btn btn-link m-1" onclick="location='/main/page';"">뒤로 가기</button>
                     <button class="btn btn-secondary m-1 submitButton">회원가입하기</button>
                 </div>
             </form>

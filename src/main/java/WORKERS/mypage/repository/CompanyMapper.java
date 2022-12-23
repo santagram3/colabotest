@@ -23,5 +23,9 @@ public interface CompanyMapper {
 	String BNboolean(String BusinessNumber) throws Exception;
 	
 	
+	//기업 마이페이지
+	void modifyCompanyInfo(CompanyUser companyuser) throws Exception;
+
+	void deleteCompanyUser(String companyEmail) throws Exception;
 	
 }

@@ -51,7 +51,7 @@
             </c:if>
             <c:if test="${loginCompanyUser.userGrade == 'COMPANY'}">
                 <div>
-                    <a href="/mypage/info" style="color: black;"><small><b>${loginCompanyUser.companyEmail}님</b>환영합니다.</small></a>
+                    <a href="/companymypage/companyinfo" style="color: black;"><small><b>${loginCompanyUser.companyEmail}님</b>환영합니다.</small></a>
                     <a href="/login/companyLogout">로그아웃 하기</a>
                 </div>
             </c:if>
@@ -93,7 +93,7 @@
         }
 
         function MainPage() {
-            location.href = "/test/header";
+            location.href = "/main/page";
         }
     </script>
 
@@ -129,7 +129,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn bn-secondary" data-bs-dismiss="modal">뒤로 가기</button>
+                        <button type="button" class="btn bn-secondary" data-bs-dismiss="modal"  onclick="location='/main/page';">뒤로 가기</button>
                         <button type="submit" class="btn btn-primary">로그인 하기</button>
                     </div>
                 </div>
@@ -165,7 +165,7 @@
                      </div>
                  </div>
                  <div class="modal-footer">
-                     <button type="button" class="btn bn-secondary" data-bs-dismiss="modal">뒤로 가기</button>
+                     <button type="button" class="btn bn-secondary" data-bs-dismiss="modal" onclick="location='/main/page';">뒤로 가기</button>
                      <button type="submit" class="btn btn-primary">로그인 하기</button>
                  </div>
              </div>

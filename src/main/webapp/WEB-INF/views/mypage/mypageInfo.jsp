@@ -88,7 +88,7 @@
                     required="required" name="userPw">
                     <div><br>
                         <button type="submit" class="btn btn-secondary m-1">탈퇴하기</button>
-                        <button type="button" class="btn btn-link m-1" data-bs-dismiss="modal">뒤로 가기</button>
+                        <button type="button" class="btn btn-link m-1" data-bs-dismiss="modal" onclick="location='/main/page';">뒤로 가기</button>
                     </div>
                 </div>
             </div>
